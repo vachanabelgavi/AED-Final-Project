@@ -256,9 +256,9 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "User name already exists");
         }
         else{
-            ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
-            ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee, new CustomerRole());
-            JOptionPane.showMessageDialog(null,"Customer Created");
+            //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
+            //ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee, new CustomerRole());
+            JOptionPane.showMessageDialog(null,"Customer Added.");
         }
 	txtName.setText("");
         txtPhone.setText("");

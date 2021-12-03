@@ -26,7 +26,6 @@ public class Enterprise {
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
     private UserAccountDirectory enterpriseUserAccountDirectory;
-<<<<<<< HEAD
  
     
 //    An enterprise has Orders
@@ -35,13 +34,11 @@ public class Enterprise {
 //    An enterprise has its own payments
 //    An enterprise has its own Enterprise Admins
 //    An enterprise has its own Delivery Agents
-    
-    
-=======
->>>>>>> 7c02951b9d82f2582aae8a2e1ac0ddccd8c56e20
 
 //    An enterprise has its own Enterprise Admins
 //    An enterprise has its own Delivery Agents : create the Delivery agents in user account directory
+    
+    
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
     }
@@ -105,14 +102,6 @@ public class Enterprise {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public UserAccountDirectory getEnterpriseUserAccountDirectory() {
-        return enterpriseUserAccountDirectory;
-    }
-
-    public void setEnterpriseUserAccountDirectory(UserAccountDirectory enterpriseUserAccountDirectory) {
-        this.enterpriseUserAccountDirectory = enterpriseUserAccountDirectory;
     }
 
     public Enterprise(EnterpriseType type, String name, String location) {
