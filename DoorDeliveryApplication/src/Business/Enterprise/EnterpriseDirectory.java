@@ -52,6 +52,7 @@ public class EnterpriseDirectory {
         
         return enterprise;
     }
+
     
     public Enterprise getEnterprise(String name){
         for(Enterprise e : enterpriselist){

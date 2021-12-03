@@ -1,6 +1,17 @@
 package Business;
 
 import Business.Customer.Customer;
+import java.util.ArrayList;
+import Business.Customer.CustomerDirectory;
+import Business.DB4OUtil.DB4OUtil;
+import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
+import Business.Enterprise.EnterpriseDirectory;
+import Business.Network.Network;
+import Business.Orders.Order;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
+import Business.Products.Product;
 import Business.DB4OUtil.DB4OUtil;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
@@ -24,7 +35,6 @@ public class Ecosystem extends Organization {
 
     public static Ecosystem ecosystem;
     private ArrayList<Network> networkList;
-    private UserAccountDirectory userAccountList;
 
     public Network createNetwork() {
         Network network = new Network();
@@ -42,6 +52,10 @@ public class Ecosystem extends Organization {
         return this.networkList;
     }
 
+    public ArrayList<String> getRoleTypes() {
+        return Role.RoleType.allRoles();
+    }
+
     public static Ecosystem getInstance() {
         if (ecosystem == null) {
             return new Ecosystem();
@@ -54,14 +68,6 @@ public class Ecosystem extends Organization {
         ArrayList<Role> roleList = new ArrayList<Role>();
         roleList.add(new SystemAdminRole());
         return roleList;
-    }
-
-    public UserAccountDirectory getUserAccountList() {
-        return userAccountList;
-    }
-
-    public void setUserAccountList(UserAccountDirectory userAccountList) {
-        this.userAccountList = userAccountList;
     }
     
     public Network getNetwork(String name){
@@ -84,31 +90,30 @@ public class Ecosystem extends Organization {
 
         System.out.println("SYSTEM -- " + system.getEmployeeDirectory().getEmployeeList().get(0).getName());
         System.out.println(system.getSupportedRole());
-        
+
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        
+
         System.out.println(system.getNetworks().get(0).getNetworkName());
-        for(Network n: system.getNetworks()) {
+        for (Network n : system.getNetworks()) {
             System.out.println("Network name -- " + n.getNetworkName());
-            
-            for(Customer c: n.getCustomerDirectory().getCustomerList()) {
+
+            for (Customer c : n.getCustomerDirectory().getCustomerList()) {
                 System.out.println(c.getName());
                 System.out.println(c.getOrderlist().get(0).getName());
             }
-            
-            for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()) {
+
+            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
                 System.out.println("Enterprise name -- " + e.getEnterpriseType().toString());
-                
-                for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
+
+                for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
                     System.out.println("Organizations >> " + o.getName());
-                    
-                    for(UserAccount ua: o.getUserAccountDirectory().getUserAccountList()) {
+
+                    for (UserAccount ua : o.getUserAccountDirectory().getUserAccountList()) {
                         System.out.println("USERS :: " + ua.getUsername());
                     }
                 }
-                
             }
-        }
-
+        }        
+      
     }
 }

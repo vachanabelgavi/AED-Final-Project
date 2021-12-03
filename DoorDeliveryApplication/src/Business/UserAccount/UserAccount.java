@@ -9,6 +9,7 @@ import Business.Employee.Employee;
 import Business.Enterprise.Role.EnterpriseRole;
 import Business.Role.Role;
 import Business.WorkQueue.WorkQueue;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +22,7 @@ public class UserAccount {
     private Role role;
     private EnterpriseRole enterpriseRole;
     private WorkQueue workQueue;
-    
+
     public UserAccount() {
         workQueue = new WorkQueue();
     }
@@ -66,6 +67,14 @@ public class UserAccount {
         this.enterpriseRole = enterpriseRole;
     }
 
+    public ArrayList<String> getRoleTypes() {
+        return Role.RoleType.allRoles();
+    }
+
+    public ArrayList<EnterpriseRole.EnterpriseRoleType> getEnterpriseRoleTypes() {
+        return EnterpriseRole.EnterpriseRoleType.allEnterpriseRoles();
+    }
+
     public WorkQueue getWorkQueue() {
         return workQueue;
     }
@@ -73,7 +82,5 @@ public class UserAccount {
     public void setWorkQueue(WorkQueue workQueue) {
         this.workQueue = workQueue;
     }
-    
-    
-    
+
 }

@@ -10,6 +10,8 @@ import Business.Customer.CustomerDirectory;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
+import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
+import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
 import Business.Orders.Order;
 import Business.Organization.Organization;
@@ -43,6 +45,8 @@ public class ConfigureASystem {
         EnterpriseDirectory edir = new EnterpriseDirectory();
         Enterprise e = edir.createEnterprise(Enterprise.EnterpriseType.Pharmaceutical, "Local Pharma Enterprise", "California");
 
+//        create users on enterprise level
+        e.getEnterpriseUserAccountDirectory().createEnterpriseUser("ENTERPRISE ADMIN: local pharma NAME", "ENTERPRISE ADMIN: Local pharma PASSWD", employee, new PharmaceuticalEnterpriseAdminRole() );
         OrganizationDirectory o = e.getOrganizationDirectory();
 
         Organization org = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", "California state", 2120);
@@ -68,6 +72,7 @@ public class ConfigureASystem {
 
 //      TWO ENTERPRISE 
         Enterprise e2 = edir.createEnterprise(Enterprise.EnterpriseType.Vaccination, "Vaccine Enterprise", "California");
+        e2.getEnterpriseUserAccountDirectory().createEnterpriseUser("VACCINE AND IMMUN ENT ADMIN", "passwd", employee, new VaccinationEnterpriseRole());
         OrganizationDirectory o2 = e2.getOrganizationDirectory();
 
 //        create orgs under Vaccine enterprise
@@ -88,7 +93,7 @@ public class ConfigureASystem {
             for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
                 System.out.println(ent.getEnterpriseType());
                 System.out.println(ent.getOrganizationDirectory().getOrganizationList().size());
-
+                System.out.println(ent.getEnterpriseUserAccountDirectory().getUserAccountList().get(0).getUsername());
 //                if (ent.getEnterpriseType().toString().equals("Vaccine and Immunization")) {
 //                    traverse only through this
                     for (Organization or : ent.getOrganizationDirectory().getOrganizationList()) {
