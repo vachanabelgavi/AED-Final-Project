@@ -6,6 +6,7 @@ import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccountDirectory;
 import Business.Organization.Organization;
 import Business.Role.Role;
+import Business.UserAccount.UserAccountDirectory;
 import java.util.ArrayList;
 
 /*
@@ -25,9 +26,19 @@ public class Enterprise {
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
     private UserAccountDirectory enterpriseUserAccountDirectory;
+ 
+    
+//    An enterprise has Orders
+//    An enterprise has its products
+//    A customer gives a prescription to the Pharma and Vaccine Enterprises
+//    An enterprise has its own payments
+//    An enterprise has its own Enterprise Admins
+//    An enterprise has its own Delivery Agents
 
 //    An enterprise has its own Enterprise Admins
 //    An enterprise has its own Delivery Agents : create the Delivery agents in user account directory
+    
+    
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
     }
@@ -80,17 +91,17 @@ public class Enterprise {
     public String getLocation() {
         return location;
     }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
+    
     public UserAccountDirectory getEnterpriseUserAccountDirectory() {
         return enterpriseUserAccountDirectory;
     }
 
     public void setEnterpriseUserAccountDirectory(UserAccountDirectory enterpriseUserAccountDirectory) {
         this.enterpriseUserAccountDirectory = enterpriseUserAccountDirectory;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Enterprise(EnterpriseType type, String name, String location) {
