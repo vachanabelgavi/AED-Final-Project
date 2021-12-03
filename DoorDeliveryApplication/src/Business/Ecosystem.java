@@ -63,6 +63,18 @@ public class Ecosystem extends Organization {
     public void setUserAccountList(UserAccountDirectory userAccountList) {
         this.userAccountList = userAccountList;
     }
+    
+    public Network getNetwork(String name){
+        for(Network n : networkList){
+            if(n.getNetworkName().equalsIgnoreCase(name))
+                return n;
+        }
+        return null;
+    }
+    
+    public void removeNetwork(Network n){
+        networkList.remove(n);
+    }
 
     public static void main(String args[]) {
 //        main function
