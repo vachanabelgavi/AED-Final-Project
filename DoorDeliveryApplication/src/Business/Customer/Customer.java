@@ -1,0 +1,120 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Business.Customer;
+
+import Business.Orders.Order;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Nidhi Raghavendra
+ */
+public class Customer {
+    private String name;
+    private String email;
+    private String location;
+    private String address;
+    private int phoneNumber;
+    private int zipcode;
+    private String username;
+    private String password;
+    private String type;
+    
+    ArrayList<Order> orderlist;
+    
+    
+    public ArrayList<Order> getOrderlist() {
+        return orderlist;
+    }
+
+//    Create orders for customer
+    public void setOrderlist(ArrayList<Order> orderlist) {
+        this.orderlist = orderlist;
+    }
+    
+//    add customer orders to this
+    public void addOrder(Order o) {
+        this.orderlist.add(o);
+    }
+
+    public Customer() {
+        this.name = "";
+        this.orderlist = new ArrayList<Order>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+}
