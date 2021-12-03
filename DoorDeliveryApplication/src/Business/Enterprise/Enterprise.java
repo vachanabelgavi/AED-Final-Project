@@ -3,6 +3,7 @@ package Business.Enterprise;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Role.Role;
+import Business.UserAccount.UserAccountDirectory;
 import java.util.ArrayList;
 
 /*
@@ -20,6 +21,7 @@ public class Enterprise {
     private String location;
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
+    private UserAccountDirectory enterpriseUserAccountDirectory;
  
     
 //    An enterprise has Orders
@@ -66,6 +68,14 @@ public class Enterprise {
 
     public String getLocation() {
         return location;
+    }
+    
+    public UserAccountDirectory getEnterpriseUserAccountDirectory() {
+        return enterpriseUserAccountDirectory;
+    }
+
+    public void setEnterpriseUserAccountDirectory(UserAccountDirectory enterpriseUserAccountDirectory) {
+        this.enterpriseUserAccountDirectory = enterpriseUserAccountDirectory;
     }
 
     public Enterprise(EnterpriseType type, String name, String location){

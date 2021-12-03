@@ -24,7 +24,6 @@ public class Ecosystem extends Organization {
 
     public static Ecosystem ecosystem;
     private ArrayList<Network> networkList;
-    private UserAccountDirectory userAccountList;
 
     public Network createNetwork() {
         Network network = new Network();
@@ -54,14 +53,6 @@ public class Ecosystem extends Organization {
         ArrayList<Role> roleList = new ArrayList<Role>();
         roleList.add(new SystemAdminRole());
         return roleList;
-    }
-
-    public UserAccountDirectory getUserAccountList() {
-        return userAccountList;
-    }
-
-    public void setUserAccountList(UserAccountDirectory userAccountList) {
-        this.userAccountList = userAccountList;
     }
     
     public Network getNetwork(String name){
