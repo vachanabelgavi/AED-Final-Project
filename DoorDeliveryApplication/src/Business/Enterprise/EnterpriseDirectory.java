@@ -52,5 +52,19 @@ public class EnterpriseDirectory {
         
         return enterprise;
     }
+
+    
+    public Enterprise getEnterprise(String name){
+        for(Enterprise e : enterpriselist){
+            if(e.getName().equalsIgnoreCase(name)){
+                return e;
+            }
+        }
+        return null;
+    }
+    
+    public void removeEnterprise(Enterprise e){
+        enterpriselist.remove(e);
+    }
             
 }

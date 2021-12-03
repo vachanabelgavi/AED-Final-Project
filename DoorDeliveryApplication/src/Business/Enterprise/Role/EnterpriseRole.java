@@ -37,9 +37,7 @@ public abstract class EnterpriseRole {
         public String toString() {
             return value;
         }
-        
-        
-        
+
         public static ArrayList<EnterpriseRoleType> allEnterpriseRoles() {
             ArrayList<EnterpriseRoleType> al = new ArrayList<>();
             al.add(EnterpriseRoleType.DiagnosticsAdmin);
@@ -50,7 +48,7 @@ public abstract class EnterpriseRole {
             
             return al;
         }
-    }
+   }
     
     public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem system);
 }

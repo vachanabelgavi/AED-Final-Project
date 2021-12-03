@@ -1,6 +1,7 @@
 package Business;
 
 import Business.Customer.Customer;
+import java.util.ArrayList;
 import Business.Customer.CustomerDirectory;
 import Business.DB4OUtil.DB4OUtil;
 import Business.Employee.Employee;
@@ -11,6 +12,10 @@ import Business.Orders.Order;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Products.Product;
+import Business.DB4OUtil.DB4OUtil;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
+import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
@@ -64,6 +69,18 @@ public class Ecosystem extends Organization {
         roleList.add(new SystemAdminRole());
         return roleList;
     }
+    
+    public Network getNetwork(String name){
+        for(Network n : networkList){
+            if(n.getNetworkName().equalsIgnoreCase(name))
+                return n;
+        }
+        return null;
+    }
+    
+    public void removeNetwork(Network n){
+        networkList.remove(n);
+    }
 
     public static void main(String args[]) {
 //        main function
@@ -95,9 +112,8 @@ public class Ecosystem extends Organization {
                         System.out.println("USERS :: " + ua.getUsername());
                     }
                 }
-
             }
-        }
-
+        }        
+      
     }
 }

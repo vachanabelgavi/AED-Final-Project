@@ -16,7 +16,6 @@ import java.util.ArrayList;
  * @author Nidhi Raghavendra
  */
 public class UserAccount {
-
     private String username;
     private String password;
     private Employee employee;

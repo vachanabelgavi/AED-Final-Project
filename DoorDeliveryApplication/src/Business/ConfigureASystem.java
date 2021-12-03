@@ -47,7 +47,6 @@ public class ConfigureASystem {
 
 //        create users on enterprise level
         e.getEnterpriseUserAccountDirectory().createEnterpriseUser("ENTERPRISE ADMIN: local pharma NAME", "ENTERPRISE ADMIN: Local pharma PASSWD", employee, new PharmaceuticalEnterpriseAdminRole() );
-        
         OrganizationDirectory o = e.getOrganizationDirectory();
 
         Organization org = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", "California state", 2120);

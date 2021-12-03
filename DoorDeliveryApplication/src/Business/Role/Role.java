@@ -43,7 +43,7 @@ public abstract class Role {
         public String toString() {
             return value;
         }
-        
+
         public static ArrayList<String> allRoles() {
             ArrayList<String> al = new ArrayList<>();
             al.add(RoleType.Admin.getValue());
