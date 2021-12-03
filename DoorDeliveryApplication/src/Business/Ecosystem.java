@@ -47,6 +47,10 @@ public class Ecosystem extends Organization {
         return this.networkList;
     }
 
+    public ArrayList<String> getRoleTypes() {
+        return Role.RoleType.allRoles();
+    }
+
     public static Ecosystem getInstance() {
         if (ecosystem == null) {
             return new Ecosystem();
@@ -69,29 +73,29 @@ public class Ecosystem extends Organization {
 
         System.out.println("SYSTEM -- " + system.getEmployeeDirectory().getEmployeeList().get(0).getName());
         System.out.println(system.getSupportedRole());
-        
+
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-        
+
         System.out.println(system.getNetworks().get(0).getNetworkName());
-        for(Network n: system.getNetworks()) {
+        for (Network n : system.getNetworks()) {
             System.out.println("Network name -- " + n.getNetworkName());
-            
-            for(Customer c: n.getCustomerDirectory().getCustomerList()) {
+
+            for (Customer c : n.getCustomerDirectory().getCustomerList()) {
                 System.out.println(c.getName());
                 System.out.println(c.getOrderlist().get(0).getName());
             }
-            
-            for(Enterprise e: n.getEnterpriseDirectory().getEnterpriseList()) {
+
+            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
                 System.out.println("Enterprise name -- " + e.getEnterpriseType().toString());
-                
-                for(Organization o: e.getOrganizationDirectory().getOrganizationList()) {
+
+                for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
                     System.out.println("Organizations >> " + o.getName());
-                    
-                    for(UserAccount ua: o.getUserAccountDirectory().getUserAccountList()) {
+
+                    for (UserAccount ua : o.getUserAccountDirectory().getUserAccountList()) {
                         System.out.println("USERS :: " + ua.getUsername());
                     }
                 }
-                
+
             }
         }
 

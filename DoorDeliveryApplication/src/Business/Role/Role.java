@@ -9,6 +9,7 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -41,6 +42,23 @@ public abstract class Role {
         @Override 
         public String toString() {
             return value;
+        }
+        
+        public static ArrayList<String> allRoles() {
+            ArrayList<String> al = new ArrayList<>();
+            al.add(RoleType.Admin.getValue());
+            al.add(RoleType.DeliveryAgent.getValue());
+            al.add(RoleType.Doctor.getValue());
+            al.add(RoleType.EquipmentManager.getValue());
+            al.add(RoleType.LabAssistant.getValue());
+            al.add(RoleType.LabTester.getValue());
+            al.add(RoleType.MarketManager.getValue());
+            al.add(RoleType.PharmaOrgAdmin.getValue());
+            al.add(RoleType.Pharmacist.getValue());
+            al.add(RoleType.Prescriber.getValue());
+            
+            return al;
+            
         }
     }
     
