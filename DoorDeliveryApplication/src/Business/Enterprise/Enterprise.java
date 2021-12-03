@@ -1,6 +1,9 @@
 package Business.Enterprise;
 
+import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import Business.Role.Role;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -42,10 +45,11 @@ public class Enterprise {
         public String getValue() {
             return value;
         }
+        
         @Override
         public String toString(){
         return value;
-    }
+        }
     }
 
     public EnterpriseType getEnterpriseType() {
@@ -56,10 +60,16 @@ public class Enterprise {
         this.enterpriseType = enterpriseType;
     }
 
-   
+    public String getName() {
+        return name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
 
     public Enterprise(EnterpriseType type, String name, String location){
-
+        
         this.enterpriseType = type;
         this.name = name;
         this.location = location;

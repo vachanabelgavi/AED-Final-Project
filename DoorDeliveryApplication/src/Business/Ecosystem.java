@@ -1,16 +1,10 @@
 package Business;
 
 import Business.Customer.Customer;
-import Business.Customer.CustomerDirectory;
 import Business.DB4OUtil.DB4OUtil;
-import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
-import Business.Enterprise.EnterpriseDirectory;
 import Business.Network.Network;
-import Business.Orders.Order;
 import Business.Organization.Organization;
-import Business.Organization.OrganizationDirectory;
-import Business.Products.Product;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
@@ -30,6 +24,7 @@ public class Ecosystem extends Organization {
 
     public static Ecosystem ecosystem;
     private ArrayList<Network> networkList;
+    private UserAccountDirectory userAccountList;
 
     public Network createNetwork() {
         Network network = new Network();
@@ -59,6 +54,14 @@ public class Ecosystem extends Organization {
         ArrayList<Role> roleList = new ArrayList<Role>();
         roleList.add(new SystemAdminRole());
         return roleList;
+    }
+
+    public UserAccountDirectory getUserAccountList() {
+        return userAccountList;
+    }
+
+    public void setUserAccountList(UserAccountDirectory userAccountList) {
+        this.userAccountList = userAccountList;
     }
 
     public static void main(String args[]) {
