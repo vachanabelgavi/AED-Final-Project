@@ -9,6 +9,7 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -36,7 +37,18 @@ public abstract class EnterpriseRole {
         public String toString() {
             return value;
         }
-    }
+
+        public static ArrayList<EnterpriseRoleType> allEnterpriseRoles() {
+            ArrayList<EnterpriseRoleType> al = new ArrayList<>();
+            al.add(EnterpriseRoleType.DiagnosticsAdmin);
+            al.add(EnterpriseRoleType.EnterpriseAdmin);
+            al.add(EnterpriseRoleType.Pharmacies);
+            al.add(EnterpriseRoleType.VaccinationAdmin);
+            al.add(EnterpriseRoleType.EquipmentsAdmin);
+            
+            return al;
+        }
+   }
     
     public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem system);
 }
