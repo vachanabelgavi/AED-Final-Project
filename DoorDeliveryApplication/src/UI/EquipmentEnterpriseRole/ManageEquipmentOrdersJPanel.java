@@ -5,6 +5,9 @@
  */
 package UI.EquipmentEnterpriseRole;
 
+import Business.Ecosystem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author pannaga
@@ -16,6 +19,10 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
      */
     public ManageEquipmentOrdersJPanel() {
         initComponents();
+    }
+
+    ManageEquipmentOrdersJPanel(JPanel userProcessContainer, Ecosystem ecosystem) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

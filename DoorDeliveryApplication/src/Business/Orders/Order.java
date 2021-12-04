@@ -6,7 +6,7 @@
 package Business.Orders;
 
 import Business.DeliveryAgent.DeliveryAgent;
-import Business.Payment.Payment;
+import Business.Payment;
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -23,6 +23,7 @@ public class Order {
     private static int count = 0;
     private String organizationname;
     private String enterprisename;
+    
     
     
     private ArrayList<OrderItem> itemsOrdered;
