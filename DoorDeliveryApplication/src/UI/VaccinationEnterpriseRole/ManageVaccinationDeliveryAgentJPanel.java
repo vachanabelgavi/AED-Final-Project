@@ -5,6 +5,11 @@
  */
 package UI.VaccinationEnterpriseRole;
 
+
+import Business.Ecosystem;
+import javax.swing.JPanel;
+
+
 /**
  *
  * @author pannaga
@@ -16,6 +21,11 @@ public class ManageVaccinationDeliveryAgentJPanel extends javax.swing.JPanel {
      */
     public ManageVaccinationDeliveryAgentJPanel() {
         initComponents();
+    }
+
+
+    ManageVaccinationDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

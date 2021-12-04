@@ -99,7 +99,6 @@ public class Ecosystem extends Organization {
 
             for (Customer c : n.getCustomerDirectory().getCustomerList()) {
                 System.out.println(c.getName());
-                System.out.println(c.getOrderlist().get(0).getName());
             }
 
             for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {

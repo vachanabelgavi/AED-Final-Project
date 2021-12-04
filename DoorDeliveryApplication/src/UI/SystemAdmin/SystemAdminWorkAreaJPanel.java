@@ -25,13 +25,14 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form SystemAdminWorkAreaJPanel
      */
     JPanel userProcessContainer;
-    Ecosystem ecosystem;
+    Ecosystem business;
     
-    public SystemAdminWorkAreaJPanel() {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, Ecosystem business) {
         initComponents();
         
-        this.userProcessContainer=userProcessContainer;
-        this.ecosystem=ecosystem;
+        this.userProcessContainer = userProcessContainer;
+        this.business = business;
+        
         populateTree();
     }
 
@@ -45,7 +46,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTree2 = new javax.swing.JTree();
+        jTreeValues = new javax.swing.JTree();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -56,12 +57,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         lblSelectedNode = new javax.swing.JLabel();
 
-        jTree2.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+        jTreeValues.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                jTree2ValueChanged(evt);
+                jTreeValuesValueChanged(evt);
             }
         });
-        jScrollPane3.setViewportView(jTree2);
+        jScrollPane3.setViewportView(jTreeValues);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -96,6 +97,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnEnterprise.setText("Manage Enterprises");
+        btnEnterprise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnterpriseActionPerformed(evt);
+            }
+        });
 
         btnNetwork.setText("Manage Networks");
         btnNetwork.addActionListener(new java.awt.event.ActionListener() {
@@ -170,35 +176,52 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTree2ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree2ValueChanged
+    private void jTreeValuesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValuesValueChanged
 
-        DefaultMutableTreeNode selectedNode= (DefaultMutableTreeNode)jTree.getLastSelectedPathComponent();
+        DefaultMutableTreeNode selectedNode= (DefaultMutableTreeNode)jTreeValues.getLastSelectedPathComponent();
         if(selectedNode!=null){
             lblSelectedNode.setText(selectedNode.toString());
         }
-    }//GEN-LAST:event_jTree2ValueChanged
+    }//GEN-LAST:event_jTreeValuesValueChanged
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         // TODO add your handling code here:
+        
+        ManageCustomersJPanel manageCustomerJPanel = new ManageCustomersJPanel(userProcessContainer, business);
+        userProcessContainer.add("manageCustomerJPanel",manageCustomerJPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnEnterpriseAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterpriseAdminActionPerformed
         // TODO add your handling code here:
         
-        ManageEnterprisesJPanel manageNetworkJPanel=new ManageEnterprisesJPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("manageNetworkJPanel",manageNetworkJPanel);
+        ManageEnterpriseAdminsJPanel manageNetworkJPanel=new ManageEnterpriseAdminsJPanel(userProcessContainer, business);
+        userProcessContainer.add("manageEnterpriseAdminsJPanel",manageNetworkJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_btnEnterpriseAdminActionPerformed
 
     private void btnNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNetworkActionPerformed
         // TODO add your handling code here:
         
-        ManageNetworksJPanel manageNetworkJPanel=new ManageNetworksJPanel(userProcessContainer, ecosystem);
+        ManageNetworksJPanel manageNetworkJPanel=new ManageNetworksJPanel(userProcessContainer, business);
         userProcessContainer.add("manageNetworkJPanel",manageNetworkJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_btnNetworkActionPerformed
+
+    private void btnEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterpriseActionPerformed
+        // TODO add your handling code here:
+        
+        ManageEnterprisesJPanel manageNetworkJPanel=new ManageEnterprisesJPanel(userProcessContainer, business);
+        userProcessContainer.add("manageEnterpriseJPanel",manageNetworkJPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnEnterpriseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -210,18 +233,15 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTree jTree;
-    private javax.swing.JTree jTree1;
-    private javax.swing.JTree jTree2;
+    private javax.swing.JTree jTreeValues;
     private javax.swing.JLabel lblSelectedNode;
     // End of variables declaration//GEN-END:variables
 
     public void populateTree(){
-        DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
-        ArrayList<Network> networkList=ecosystem.getNetworks();
+        DefaultTreeModel model = (DefaultTreeModel) jTreeValues.getModel();
+        
+        ArrayList<Network> networkList = business.getNetworks();
         ArrayList<Enterprise> enterpriseList;
         ArrayList<Organization> organizationList;
         
@@ -239,7 +259,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         DefaultMutableTreeNode organizationNode;
         
         int i = 0;
-        for(Network n : ecosystem.getNetworks()){
+        for(Network n : business.getNetworks()){
             networkNode = new DefaultMutableTreeNode(n.getNetworkName());
             networks.insert(networkNode, i);
             i++;

@@ -5,7 +5,9 @@
  */
 package Business.Customer;
 
+import Business.Orders.Cart;
 import Business.Orders.Order;
+import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +26,9 @@ public class Customer {
     private String type;
     
     ArrayList<Order> orderlist;
+    Cart customerCart;
     
+    private WorkQueue workQueue;
     
     public ArrayList<Order> getOrderlist() {
         return orderlist;
@@ -43,6 +47,8 @@ public class Customer {
     public Customer() {
         this.name = "";
         this.orderlist = new ArrayList<Order>();
+        this.customerCart = new Cart();
+        this.workQueue = new WorkQueue();
     }
 
     public String getName() {
@@ -116,5 +122,22 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Cart getCustomerCart() {
+        return customerCart;
+    }
+
+    public void setCustomerCart(Cart customerCart) {
+        this.customerCart = customerCart;
+    }
+
+    public WorkQueue getWorkQueue() {
+        return workQueue;
+    }
+
+    public void setWorkQueue(WorkQueue workQueue) {
+        this.workQueue = workQueue;
+    }
+    
     
 }
