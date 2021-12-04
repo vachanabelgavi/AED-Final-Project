@@ -5,16 +5,13 @@
  */
 package UI.Customer;
 
-import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.Ecosystem;
 import Business.Employee.Employee;
 import Business.Network.Network;
-import Business.Role.CustomerRole;
 import UI.SystemAdmin.ManageCustomersJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
-import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -32,7 +29,7 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
     private Employee employee;
     private CustomerDirectory customerdirectory;
     
-    public AddCustomerJPanel(JPanel userProcessContainer, Ecosystem business, CustomerDirectory customerdirectory) {
+    public AddCustomerJPanel(JPanel userProcessContainer, Ecosystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -256,7 +253,16 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "User name already exists");
         }
         else{
-            //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
+            for(Network n : business.getNetworks()){
+                
+                n.getCustomerDirectory().createCustomer(name, email, username, password, zip, location, streetaddress, phone);
+                
+                for(int i=0; i < n.getEnterpriseDirectory().getEnterpriseList().size(); i++){
+                    
+                    //ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee, new CustomerRole());
+                }
+            }
+            
             //ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee, new CustomerRole());
             JOptionPane.showMessageDialog(null,"Customer Added.");
         }

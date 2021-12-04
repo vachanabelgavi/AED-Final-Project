@@ -8,12 +8,10 @@ package UI.SystemAdmin;
 import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.Ecosystem;
-import static Business.Ecosystem.ecosystem;
 import Business.Network.Network;
 import UI.Customer.AddCustomerJPanel;
 import UI.Customer.ViewCustomerJPanel;
 import java.awt.CardLayout;
-import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -175,7 +173,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
-        AddCustomerJPanel createCustomer = new AddCustomerJPanel(userProcessContainer, business, customerDirectory);
+        AddCustomerJPanel createCustomer = new AddCustomerJPanel(userProcessContainer, business);
         userProcessContainer.add("CreateCustomersJPanel",createCustomer);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -190,7 +188,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
             return;
         }
         Customer customer = (Customer)customerJTable.getValueAt(selectedRow,0);
-        ViewCustomerJPanel modifyCustomer = new ViewCustomerJPanel(userProcessContainer, ecosystem, customerDirectory, customer);
+        ViewCustomerJPanel modifyCustomer = new ViewCustomerJPanel(userProcessContainer, business, customerDirectory, customer);
         userProcessContainer.add("ModifyCustomersJPanel",modifyCustomer);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
