@@ -115,7 +115,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 100, -1));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 530, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 750, 460));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

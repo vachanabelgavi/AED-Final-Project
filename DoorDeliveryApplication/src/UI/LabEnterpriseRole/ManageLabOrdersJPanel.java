@@ -31,7 +31,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
     private CustomerDirectory customerDirectory;
     public ManageLabOrdersJPanel(JPanel userProcessContainer, Ecosystem business) {
         initComponents();
-        initComponents();
+       
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         

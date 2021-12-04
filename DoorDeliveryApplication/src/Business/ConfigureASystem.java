@@ -152,6 +152,7 @@ public class ConfigureASystem {
         }
 
         n.setEnterpriseDirectory(edir);
+
         
         
         for (Network net : system.getNetworks()) {
