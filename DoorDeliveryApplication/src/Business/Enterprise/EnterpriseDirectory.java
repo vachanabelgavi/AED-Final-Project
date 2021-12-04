@@ -55,7 +55,7 @@ public class EnterpriseDirectory {
 
     
     public Enterprise getEnterprise(String name){
-        for(Enterprise e : enterpriselist){
+        for(Enterprise e : this.enterpriselist){
             if(e.getName().equalsIgnoreCase(name)){
                 return e;
             }

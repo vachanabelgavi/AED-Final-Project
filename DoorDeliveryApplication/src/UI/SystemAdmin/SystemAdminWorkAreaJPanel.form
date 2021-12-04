@@ -45,9 +45,9 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTree" name="jTree2">
+        <Component class="javax.swing.JTree" name="jTreeValues">
           <Events>
-            <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="jTree2ValueChanged"/>
+            <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="jTreeValuesValueChanged"/>
           </Events>
         </Component>
       </SubComponents>
@@ -148,6 +148,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Enterprises"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnterpriseActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNetwork">
           <Properties>
