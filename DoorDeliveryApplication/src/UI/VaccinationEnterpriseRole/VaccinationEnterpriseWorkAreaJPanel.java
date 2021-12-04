@@ -158,7 +158,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         ManageVaccinationOrdersJPanel manageVacOrdersJPanel=new ManageVaccinationOrdersJPanel(userProcessContainer, ecosystem);
-        userProcessContainer.add("manageMEOrdersJPanel",manageVacOrdersJPanel);
+        userProcessContainer.add("manageVacOrdersJPanel",manageVacOrdersJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnmanageordersActionPerformed
