@@ -9,6 +9,7 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.PharmacyEnterpriseRole.PharmaceuticalEnterpriseJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
 public class PharmaceuticalEnterpriseAdminRole extends EnterpriseRole {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem business) {
-//        return new DoctorWorkAreaJPanel(userProcessContainer, account, (DoctorOrganization)organization, enterprise); 
-        return null;
+   //  return new PharmaceuticalEnterpriseJPanel(userProcessContainer, account, organization, enterprise); 
+    return null;
     }
 }
