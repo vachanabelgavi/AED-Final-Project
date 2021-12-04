@@ -105,9 +105,11 @@ public abstract class Organization {
         return this.productList;
     }
     
-    public void addProduct(String name) {
+    public void addProduct(String name, Double price, int stock) {
         Product prod = new Product();
         prod.setName(name);
+        prod.setPrice(price);
+        prod.setStockunits(stock);
         this.productList.add(prod);
     }
 }

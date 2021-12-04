@@ -1,5 +1,6 @@
 package Business.Enterprise;
 
+import Business.DeliveryAgent.DeliveryAgent;
 import Business.Enterprise.Role.EnterpriseAdminRole;
 import Business.Enterprise.Role.EnterpriseRole;
 import Business.Organization.OrganizationDirectory;
@@ -26,7 +27,7 @@ public class Enterprise {
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
     private UserAccountDirectory enterpriseUserAccountDirectory;
- 
+    private ArrayList<DeliveryAgent> deliveryAgentsInEnterpiselist;
     
 //    An enterprise has Orders
 //    An enterprise has its products
@@ -104,6 +105,16 @@ public class Enterprise {
         this.location = location;
     }
 
+    public ArrayList<DeliveryAgent> getDeliveryAgentsInEnterpiselist() {
+        return deliveryAgentsInEnterpiselist;
+    }
+
+    public void setDeliveryAgentsInEnterpiselist(ArrayList<DeliveryAgent> deliveryAgentsInEnterpiselist) {
+        this.deliveryAgentsInEnterpiselist = deliveryAgentsInEnterpiselist;
+    }
+    
+    
+
     public Enterprise(EnterpriseType type, String name, String location) {
 
         this.enterpriseType = type;
@@ -111,6 +122,7 @@ public class Enterprise {
         this.location = location;
         this.organizationDirectory = new OrganizationDirectory();
         this.enterpriseUserAccountDirectory = new UserAccountDirectory();
+        this.deliveryAgentsInEnterpiselist = new ArrayList<>();
 
     }
 }
