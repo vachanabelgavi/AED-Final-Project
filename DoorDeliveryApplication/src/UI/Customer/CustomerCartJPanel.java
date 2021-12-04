@@ -48,6 +48,8 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -86,6 +88,12 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("<value>");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
+
+        jButton2.setText("PLACE ORDER");
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, -1, -1));
+
+        jButton3.setText("EDIT CART");
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     public void populateTable() {
@@ -110,6 +118,8 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable cartTable;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

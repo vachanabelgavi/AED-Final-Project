@@ -152,44 +152,6 @@ public class ConfigureASystem {
         }
 
         n.setEnterpriseDirectory(edir);
-
-      //Creating 2nd network
-        
-        Network n2 = system.createNetwork();
-        n2.setNetworkName("Massachusettes");
-        
-        
-        CustomerDirectory cdri2 = n2.getCustomerDirectory();
-        Customer myCustomernet2 = cdri2.createCustomer("customer 1 in network2", "cus1", "cus123", "hjj", 0, "Boston addr", "addd", 23);
-        
-        //  ONE ENTERPRISE
-        EnterpriseDirectory edirnetwork2 = new EnterpriseDirectory();
-        Enterprise enet2 = edirnetwork2.createEnterprise(Enterprise.EnterpriseType.Pharmaceutical, "Local Pharma Enterprise", "Massachusettes");
-       // System.out.println(edirnetwork2.getEnterpriseList());
-        
-        
-        OrganizationDirectory onet2 = enet2.getOrganizationDirectory();
-
-        Organization net2org1 = onet2.createOrganization(Organization.Type.Doctor, "Doctor Associate", "Massachusettes state", 2120);
-        Organization net2org2 = onet2.createOrganization(Organization.Type.Pharmacist, "Pharmacy Org in Pharmaceuitical", "Boston city", 0);
-
-       // System.out.println("network 2 ----> "+net2org1.getSupportedRole());
-        ArrayList<Organization> orgListnet2 = onet2.getOrganizationList();
-//        System.out.println("ORG LIST SIZE " + orgList.size());
-
-        ArrayList<Enterprise> eListnet2 = edirnetwork2.getEnterpriseList();
-        edirnetwork2.setEnterpriseList(eListnet2);
-
-        Employee empnet2 = net2org1.getEmployeeDirectory().createEmployee("Doctor Namratha");
-
-        net2org1.getUserAccountDirectory().createUserAccount("Namu", "Namu", empnet2, net2org1.getSupportedRole().get(0));
-        net2org1.addProduct("Prescription 1 from network 2\n");
-
-        net2org2.getUserAccountDirectory().createUserAccount("Pharmacist Prerana", "prerana", empnet2, net2org2.getSupportedRole().get(0));
-        net2org2.addProduct("Drug 1 from network 2\n");
-
-        n2.setEnterpriseDirectory(edirnetwork2);
-
         
         
         for (Network net : system.getNetworks()) {
