@@ -241,9 +241,18 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(txtUsername, "User name already exists");
         }
         else{
-            Employee employee = enterprise.get().createEmployee(name);
-            UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new AdminRole());
-                JOptionPane.showMessageDialog(txtName, "Enterprise Admin Added Successfully");
+            for(Network n : business.getNetworks()){
+                
+                for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+                    
+                    for(int i=0; i < e.getOrganizationDirectory().getOrganizationList().size(); i++){
+                        
+                        Employee employee = e.getOrganizationDirectory().getOrganizationList().get(i).getEmployeeDirectory().createEmployee(name);
+                        //UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new AdminRole());
+                        JOptionPane.showMessageDialog(txtName, "Enterprise Admin Added Successfully");
+                    }
+                }
+            }
             populateTable();
         }
 	
