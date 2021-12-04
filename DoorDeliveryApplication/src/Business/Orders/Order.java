@@ -5,10 +5,11 @@
  */
 package Business.Orders;
 
+import Business.Payment.Payment;
 import Business.DeliveryAgent.DeliveryAgent;
-import Business.Payment;
 import java.awt.Image;
 import java.util.ArrayList;
+import Business.Payment.*;
 
 /**
  *
