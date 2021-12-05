@@ -6,12 +6,15 @@
 package UI.PharmacyEnterpriseRole;
 
 import Business.Customer.CustomerDirectory;
+import Business.DB4OUtil.DB4OUtil;
 import Business.Ecosystem;
 import static Business.Ecosystem.ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
  
 /**
@@ -26,15 +29,25 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
      Ecosystem ecosystem;
-     
+     UserAccount account;
+     UserAccountDirectory useraccountdirectory;
+     Enterprise enterprise;
      
     public PharmaceuticalEnterpriseJPanel(JPanel userProcessContainer, UserAccount account,Enterprise enterprise, Ecosystem ecosystem) {
         initComponents();
         
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
+        this.account = account;
+        this.enterprise = enterprise;
         
+        System.out.println("HAS TO CIome  in phharma e ");
         
+        if(this.ecosystem == null) {
+            JOptionPane.showMessageDialog(null, "Something went wrong");
+        } else {
+            System.out.println("this.ecosystem for pharma is not null");
+        }
         
         
        // populateTree();
@@ -158,7 +171,7 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
 
     private void btndeliveryagentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeliveryagentsActionPerformed
         // TODO add your handling code here:
-        ManageDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageDeliveryAgentJPanel(userProcessContainer, ecosystem);
+        ManageDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageDeliveryAgentJPanel(userProcessContainer, ecosystem, account,useraccountdirectory,enterprise);
         userProcessContainer.add("manageDeliveryAgentJPanel",manageDeliveryAgentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -8,6 +8,7 @@ package UI;
 import Business.DB4OUtil.DB4OUtil;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -31,9 +32,10 @@ public class MainJFrame extends javax.swing.JFrame {
     
     public MainJFrame() {
         initComponents();
-        
-        business = dB4OUtil.retrieveSystem();
+        this.business = dB4OUtil.retrieveSystem();
         this.setSize(800, 600);
+        
+        System.out.println("CAME HERE -- "+ this.business.getName());
     }
 
     /**
@@ -173,6 +175,7 @@ public class MainJFrame extends javax.swing.JFrame {
         //Step1: Check in the system admin user account directory if you have the user
         UserAccount userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
 
+        System.out.println("CAME ttothe auth-- ");
         Enterprise inEnterprise = null;
         Organization inOrganization = null;
 
@@ -227,13 +230,15 @@ public class MainJFrame extends javax.swing.JFrame {
             //container.remove(jPanel1);
             //container.remove(jPanel2);
             CardLayout layout=(CardLayout)container.getLayout();
-            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, business));
+            container.add("workArea",userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, this.business));
             layout.next(container);
+            //   e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmaEnterprise", "pharmaEnterprise", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
+
             
             JFrame newFrame = new JFrame();
             //newFrame.setLayout(new AbsoluteLayout());
             newFrame.getContentPane().add(container);
-            newFrame.setSize(800, 600);
+            newFrame.setSize(900, 800);
             newFrame.setVisible(true);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             //new NextContainerJFrame(userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, business)).setVisible(true);

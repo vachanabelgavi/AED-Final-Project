@@ -15,6 +15,7 @@ import Business.Enterprise.Role.EnterpriseAdminRole;
 import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
 import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
+import Business.Orders.Order;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Role.DeliveryAgentRole;
@@ -23,6 +24,7 @@ import Business.Role.PharmacistRole;
 import Business.Role.SystemAdminRole;
 import Business.Role.VaccinatorRole;
 import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.util.ArrayList;
 
 /**
@@ -65,7 +67,7 @@ public class ConfigureASystem {
         e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmaEnterprise", "pharmaEnterprise", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
         
 //        create delivery agents in enterprise
-        ArrayList<DeliveryAgent> delList = new ArrayList<>();
+        ArrayList<DeliveryAgent> delList = e.getDeliveryAgentsInEnterpiselist();
         ArrayList<Integer> z1 = new ArrayList<>();
         ArrayList<Integer> z2 = new ArrayList<>();
         for (int j = 1; j < 10; j++) {
@@ -84,7 +86,8 @@ public class ConfigureASystem {
                 d.setZipcodes(z1);
                 d.setEnterprisename(e);
                 d.setActive(true);
-                d.setDeliveryList(delList);
+                delList.add(d);
+                e.setDeliveryAgentsInEnterpiselist(delList);
 
             } else {
                 z2.add(2120 + j);
@@ -98,9 +101,13 @@ public class ConfigureASystem {
                 d.setZipcodes(z2);
                 d.setEnterprisename(e);
                 d.setActive(true);
-                d.setDeliveryList(delList);
+                delList.add(d);
+                e.setDeliveryAgentsInEnterpiselist(delList);
             }
         }
+        
+        
+       // System.out.println(""+delList);
 
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();

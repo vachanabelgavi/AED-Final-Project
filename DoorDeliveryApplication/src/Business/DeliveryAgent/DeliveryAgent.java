@@ -20,13 +20,14 @@ public class DeliveryAgent {
     private boolean active;
     private ArrayList<Integer> zipcodes;
     UserAccount useraccount;
-    ArrayList<DeliveryAgent> deliverylist = new ArrayList<DeliveryAgent>();
+    ArrayList<DeliveryAgent> deliverylist;
 
     public DeliveryAgent() {
         this.deliveryboyId = this.count++;
         this.active = true;
         this.useraccount = new UserAccount();
         this.zipcodes = new ArrayList<>();
+        this.deliverylist = new ArrayList<DeliveryAgent>();
        
     }
     
@@ -39,9 +40,8 @@ public class DeliveryAgent {
     }
     
     
-     public ArrayList<DeliveryAgent> getDeliveryList() {
-       
-        return deliverylist;
+     public ArrayList<DeliveryAgent> getDeliveryList() { 
+        return this.deliverylist;
     }
 
     public void setDeliveryList(ArrayList<DeliveryAgent> deliverylist) {
@@ -58,6 +58,10 @@ public class DeliveryAgent {
 
     public void setEnterprisename(Enterprise enterprisename) {
         this.enterprisename = enterprisename;
+    }
+    
+    public void removeDeliveryAgent(DeliveryAgent dm){
+        deliverylist.remove(dm);
     }
 
     public static int getCount() {

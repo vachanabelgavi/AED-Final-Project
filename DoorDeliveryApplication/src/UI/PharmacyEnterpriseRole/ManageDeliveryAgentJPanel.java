@@ -4,16 +4,20 @@
  * and open the template in the editor.
  */
 package UI.PharmacyEnterpriseRole;
+import Business.Customer.Customer;
 import Business.DeliveryAgent.DeliveryAgent;
 import Business.Employee.Employee;
 import Business.Customer.CustomerDirectory;
+import Business.DB4OUtil.DB4OUtil;
 import Business.Ecosystem;
 import static Business.Ecosystem.ecosystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.EnterpriseDirectory;
 import javax.swing.JPanel;
 import Business.Network.Network;
 import Business.Role.DeliveryAgentRole;
 import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -25,18 +29,48 @@ import javax.swing.table.DefaultTableModel;
  * @author pannaga
  */
 public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
-    private JPanel userProcessContainer;
-    private Ecosystem business;
+    JPanel userProcessContainer;
+    Ecosystem business;
+    UserAccountDirectory userdir;
+    UserAccount ua;
     DeliveryAgent dlvrymn;
+    Enterprise enterprise;
+    DefaultTableModel dtm;
     /**
      * Creates new form ManageDeliveryAgentJPanel
      */
-    public ManageDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem) {
+    public ManageDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.business = business;
+        this.business = ecosystem;
+        this.ua = ua;
+        this.userdir = userdir;
+        this.enterprise = enterprise;
+        
+        System.out.println("CAME INTO DELIVERY AGENT PANEL");
+        dtm = (DefaultTableModel) deliveryjTable.getModel();
+        
+//        if(this.business == null) {
+//            JOptionPane.showMessageDialog(null, "Something went wrong");
+//        } else {
+//            System.out.println("this.ecosystem for pharma is not null");
+//        }
+       
+        System.out.println("Going inside populate table"); 
+        populateTable();
+       
         
         
+        if(this.business.getUserAccountDirectory() == null) {
+            this.userdir = new UserAccountDirectory();
+            business.setUserAccountDirectory(userdir);
+        } else {
+            this.userdir = business.getUserAccountDirectory();
+            
+        }
+        
+        
+       
     }
 
    
@@ -62,7 +96,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        btnAdd1 = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         deliveryjTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -128,8 +162,13 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         });
         add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 100, -1));
 
-        btnAdd1.setText("Update");
-        add(btnAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
+        btndelete.setText("Delete");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
+        add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 470, -1, -1));
 
         deliveryjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,12 +224,28 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-
+        
+        
+        Employee em = new Employee();
+        DeliveryAgent d = new DeliveryAgent();
+        UserAccount u = d.getUseraccount();
+        
         String name = txtName.getText();
         int zip = Integer.parseInt(txtZipcode.getText());
         String username = txtUsername.getText();
         String password = txtPassword.getText();
-
+        boolean available;
+        if(jcheckyes.isSelected() == true){
+       available = true;
+        }
+        else if(jcheckno.isSelected() == true)
+    {
+       available = true;
+    }else{
+       available = false;
+    }
+        
+        
         if(name.isEmpty() || 
             txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty() || txtZipcode.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warining", JOptionPane.WARNING_MESSAGE);
@@ -200,17 +255,43 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Zip code must be 5 or 6 digits", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        System.out.println("Inside loop");
         boolean flag = business.getUserAccountDirectory().checkIfUsernameIsUnique(username);
         if(flag == false){
             JOptionPane.showMessageDialog(null, "User name already exists");
         }
+        
         else{
             //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
+            System.out.println("Inside else statement");
             Employee employee = business.getEmployeeDirectory().createEmployee(name);
-            ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
+            business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
+      
+        ArrayList<Integer> zipcodes = new ArrayList<Integer>();
+        zipcodes.add(zip);
+         ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
+                u.setUsername(username);
+                u.setPassword(password);
+                u.setRole(new DeliveryAgentRole());
+                u.setEmployee(em);
+                d.setUseraccount(u);
+                d.setZipcodes(zipcodes);
+                d.setEnterprisename(enterprise);
+                
+                if(available == true){
+                     d.setActive(true);
+                }else{
+                    d.setActive(false);
+                }
+                delList.add(d);
+                enterprise.setDeliveryAgentsInEnterpiselist(delList);
+         
             JOptionPane.showMessageDialog(null,"Delivery agent Added.");
-        }
+            populateTable();
+       }
+        
+        
+        
         txtName.setText("");
         txtZipcode.setText("");
         txtUsername.setText("");
@@ -231,31 +312,81 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jchecknoActionPerformed
 
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        // TODO add your handling code here:
+        int selectrow = deliveryjTable.getSelectedRow();
+        String name = deliveryjTable.getValueAt(selectrow, 0).toString();
+
+        if(selectrow < 0) {
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
+      
+        
+        ArrayList<UserAccount> usrl = userdir.getUserAccountList();
+        ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
+        String deliveryman = dtm.getValueAt(selectrow,0).toString();
+//        ArrayList<Integer> z1 = new ArrayList<>();
+//        z1.add((Integer) dtm.getValueAt(selectrow,1));
+       // String zipcodes = dtm.getValueAt(selectrow,1).toString();
+      //  String available = dtm.getValueAt(selectrow, 2).toString();
+        String uname = dtm.getValueAt(selectrow,3).toString();
+        String passwd = dtm.getValueAt(selectrow,4).toString();
+        int dialogueb = JOptionPane.YES_NO_OPTION;
+        int dialoguer = JOptionPane.showConfirmDialog(this, "Delete this data","Delete", dialogueb);
+        if(dialoguer == 0){
+            
+            try{
+            for(DeliveryAgent dm: delList){
+                if(dm.getUseraccount().getEmployee().getName().equals(deliveryman) && dm.getUseraccount().getUsername().equals(uname)){
+                    delList.remove(dm);
+                   System.out.println("Removed delivery man");
+                }
+            }
+            }
+            catch(Exception ex){
+                System.out.println("Exception caught");
+            }
+
+            for(UserAccount ua:usrl ){
+                if(ua.getUsername().equals(uname) || ua.getPassword().equals(passwd)){
+                   // usrl.remove(uname);
+                    usrl.remove(dtm.getValueAt(selectrow,3));
+                    usrl.remove(dtm.getValueAt(selectrow,4));
+                  //  usrl.remove(ua.getPassword().equals(passwd));
+                  
+                    System.out.println("Removed username and password");
+                }
+            }
+            
+             this.dtm.removeRow(selectrow);
+      }
+	
+       
+        
+        populateTable();
+    }//GEN-LAST:event_btndeleteActionPerformed
+
     public void populateTable(){
         
-        DefaultTableModel dtm = (DefaultTableModel) deliveryjTable.getModel();
+        System.out.println("Inside populate Table");
         dtm.setRowCount(0);
-       Employee em = new Employee();
-       DeliveryAgent d = new DeliveryAgent();
-       UserAccount u = d.getUseraccount();
-        dtm.setRowCount(0);  
-         u.setEmployee(em);
-         d.setUseraccount(u);
-         ArrayList<UserAccount> userAccount=business.getUserAccountDirectory().getUserAccountList();
-        ArrayList<DeliveryAgent> delList = new ArrayList<>();
-        d.setDeliveryList(delList);
-       
-       for(Employee ent: business.getEmployeeDirectory().getEmployeeList()){ 
-        for(DeliveryAgent dm: d.getDeliveryList() ){
-            System.out.println(""+ent.getName());
-            System.out.println(""+dm.getUseraccount().getUsername());
-            System.out.println(""+dm.getUseraccount().getPassword());
-            System.out.println(""+dm.getZipcodes());
-            System.out.println(""+dm.getActive());
-            Object[] inrow = {ent.getName(),dm.getUseraccount().getUsername(), dm.getUseraccount().getPassword(), dm.getZipcodes(),dm.getActive()};
-            dtm.insertRow(dtm.getRowCount(),inrow);
-        }
-      }
+        ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
+        for(DeliveryAgent dm: delList){
+           System.out.println(" \n"+dm.getUseraccount().getEmployee().getName());
+            System.out.println(" \n"+dm.getUseraccount().getUsername());
+            System.out.println(" \n"+dm.getUseraccount().getPassword());
+            System.out.println(" \n"+dm.getZipcodes());
+            System.out.println(" \n"+dm.getActive());
+            Object[] inrow = {dm.getUseraccount().getEmployee().getName(),dm.getZipcodes(),dm.getActive(),dm.getUseraccount().getUsername(), dm.getUseraccount().getPassword()};
+            dtm.insertRow(dtm.getRowCount(),inrow); 
+            
+  }
+        
+        
+        
  }
  
    
@@ -298,8 +429,8 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnAdd1;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btndelete;
     private javax.swing.JTable deliveryjTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

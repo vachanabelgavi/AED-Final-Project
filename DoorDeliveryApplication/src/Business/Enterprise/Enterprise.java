@@ -97,6 +97,8 @@ public class Enterprise {
     public void setEnterpriseUserAccountDirectory(UserAccountDirectory enterpriseUserAccountDirectory) {
         this.enterpriseUserAccountDirectory = enterpriseUserAccountDirectory;
     }
+    
+    
 
     public void setLocation(String location) {
         this.location = location;
@@ -108,6 +110,9 @@ public class Enterprise {
 
     public void setDeliveryAgentsInEnterpiselist(ArrayList<DeliveryAgent> deliveryAgentsInEnterpiselist) {
         this.deliveryAgentsInEnterpiselist = deliveryAgentsInEnterpiselist;
+    }
+     public void deleteDeliveryAgentsInEnterpiselist(DeliveryAgent d){
+        deliveryAgentsInEnterpiselist.remove(d);
     }
     
     
