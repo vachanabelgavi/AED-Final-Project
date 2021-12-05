@@ -10,7 +10,10 @@ import Business.DB4OUtil.DB4OUtil;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.OrganizationAdminPanels.orgadminMainJFrame;
+import UI.OrganizationPanels.OrdersJPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
@@ -104,7 +107,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem8);
 
-        jMenuItem1.setText("REGISTER");
+        jMenuItem1.setText("PHARMA ORG ADMIN");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -121,6 +124,11 @@ public class CustomerJFrame extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("LOGOUT");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuItem4.setText("MY CART");
@@ -132,6 +140,11 @@ public class CustomerJFrame extends javax.swing.JFrame {
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("MY ORDERS");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setText("MY PRESCRIPTIONS");
@@ -160,6 +173,8 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
+       
+//        new orgadminMainJFrame(this.system, o, e);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -182,6 +197,19 @@ public class CustomerJFrame extends javax.swing.JFrame {
         pane.setRightComponent(null);
         pane.setRightComponent(new CustomerWorkAreaJPanel(this.system, this.network, this.customer));
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        pane.setLeftComponent(null);
+        pane.setRightComponent(null);
+        pane.setRightComponent(new OrdersJPanel(this.system, this.customer));
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        Enterprise e = network.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
+        new orgadminMainJFrame(system, network, e).setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments

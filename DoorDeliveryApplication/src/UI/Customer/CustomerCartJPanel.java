@@ -26,6 +26,8 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
      */
     Customer customer;
     DefaultTableModel tableModel;
+    Ecosystem ecosystem;
+    Network network;
     Alert alert;
     Order order;
 
@@ -33,6 +35,8 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         initComponents();
 
         this.customer = customer;
+        this.ecosystem = system;
+        this.network = network;
         this.tableModel = (DefaultTableModel) cartTable.getModel();
         this.order = new Order();
         this.alert = new Alert();
@@ -124,7 +128,8 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         Cart custoemrcart = this.customer.getCustomerCart();
 
         ArrayList<OrderItem> customerCartItems = this.customer.getCustomerCart().getCartItems();
-
+        Boolean prescriptionReqd =  false;
+        
         try {
             for (int i = 0; i < rows; i++) {
                 if ((Boolean) tableModel.getValueAt(i, 4)) {
@@ -139,6 +144,11 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
 
                 } else {
                     for (OrderItem oi : customerCartItems) {
+                        
+                        if(oi.getOrganizationname().equals("Pharmacy") || oi.getOrganizationname().equals("Supermarket")) {
+                            prescriptionReqd = true;
+                        }
+                        
                         if (oi.getProductName().equals(String.valueOf((String) tableModel.getValueAt(i, 1)))) {
                             oi.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
                         }
@@ -149,6 +159,14 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
 //            Set all items ordered to the order 
             this.order.setItemsOrdered(customerCartItems);
             this.order.calcOrderTotal();
+                                
+            
+            if(prescriptionReqd) {
+                this.order.setStatus("Required Prescription");
+            } else {
+                this.order.setStatus("In Progress");
+            }
+            
             labelTotal.setText("$ " + String.valueOf(this.order.getPrice()));
 
         } catch (Exception e) {

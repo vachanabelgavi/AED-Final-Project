@@ -10,6 +10,7 @@ import Business.DeliveryAgent.DeliveryAgent;
 import java.awt.Image;
 import java.util.ArrayList;
 import Business.Payment.*;
+import java.io.File;
 
 /**
  *
@@ -19,7 +20,7 @@ public class Order {
     private String name;
     private String status;
     private double price;
-    private Image prescription;
+    private File prescription;
     private int orderId;
     private static int count = 0;
     private String organizationname;
@@ -60,11 +61,11 @@ public class Order {
         this.price = price;
     }
 
-    public Image getPrescription() {
+    public File getPrescription() {
         return prescription;
     }
 
-    public void setPrescription(Image prescription) {
+    public void setPrescription(File prescription) {
         this.prescription = prescription;
     }
 

@@ -120,7 +120,7 @@ public class ConfigureASystem {
 //        THE DOCTOR ORG DOES NOT HAVE PRODUCTS
 
         Employee emp1 = org.getEmployeeDirectory().createEmployee("Pannaga Veeramohan");
-        org2.getUserAccountDirectory().createUserAccount("pannaga ", "pannaga", emp1, new PharmacistRole());
+        org2.getUserAccountDirectory().createUserAccount("pannaga", "pannaga", emp1, new PharmacistRole());
         
         String[] drugs = { "Brufen", "Paracetamol", "Pan D", "Crocin" };
         for(String s1: drugs) {

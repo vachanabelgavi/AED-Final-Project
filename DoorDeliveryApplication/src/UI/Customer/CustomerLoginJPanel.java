@@ -105,7 +105,7 @@ public class CustomerLoginJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "successful!");
                     this.network = n;
                     System.out.println(" NETWORK NAME :: " +  n.getNetworkName());
-                    new CustomerJFrame(this.system, this.network, c).setVisible(true);
+                    new CustomerJFrame(this.system, n, c).setVisible(true);
                 }
             }
         }
