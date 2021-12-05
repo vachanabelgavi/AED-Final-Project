@@ -50,5 +50,5 @@ public abstract class EnterpriseRole {
         }
    }
     
-    public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem system);
+    public abstract JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Ecosystem system);
 }

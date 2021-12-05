@@ -85,6 +85,7 @@ public class ConfigureASystem {
                 d.setUseraccount(u);
                 d.setZipcodes(z1);
                 d.setEnterprisename(e);
+                d.setDeliveryList(delList);
 
             } else {
                 z2.add(2120 + j);
@@ -97,6 +98,7 @@ public class ConfigureASystem {
                 u.setEmployee(em);
                 d.setZipcodes(z2);
                 d.setEnterprisename(e);
+                d.setDeliveryList(delList);
             }
         }
 

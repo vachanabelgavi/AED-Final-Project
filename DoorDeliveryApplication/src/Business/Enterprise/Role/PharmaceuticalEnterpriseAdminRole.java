@@ -18,8 +18,8 @@ import javax.swing.JPanel;
  */
 public class PharmaceuticalEnterpriseAdminRole extends EnterpriseRole {
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem business) {
-   //  return new PharmaceuticalEnterpriseJPanel(userProcessContainer, account, organization, enterprise); 
-    return null;
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, Ecosystem business) {
+    return new PharmaceuticalEnterpriseJPanel(userProcessContainer, account, enterprise, business); 
+    
     }
 }

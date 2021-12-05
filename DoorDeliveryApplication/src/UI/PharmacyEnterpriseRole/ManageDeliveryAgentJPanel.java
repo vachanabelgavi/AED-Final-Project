@@ -4,12 +4,18 @@
  * and open the template in the editor.
  */
 package UI.PharmacyEnterpriseRole;
+import Business.DeliveryAgent.DeliveryAgent;
+import Business.Employee.Employee;
 import Business.Customer.CustomerDirectory;
 import Business.Ecosystem;
+import static Business.Ecosystem.ecosystem;
+import Business.Enterprise.Enterprise;
 import javax.swing.JPanel;
 import Business.Network.Network;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Ecosystem business;
-    
+    DeliveryAgent dlvrymn;
     /**
      * Creates new form ManageDeliveryAgentJPanel
      */
@@ -28,6 +34,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
+        
         
     }
 
@@ -46,14 +53,10 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtLocation = new javax.swing.JTextField();
         txtZipcode = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
@@ -79,7 +82,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBack)
@@ -100,26 +103,18 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jLabel2.setText("Name");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 155, -1, -1));
 
-        jLabel3.setText("Email Address");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 199, -1, -1));
-
-        jLabel4.setText("Location");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 243, -1, -1));
-
         jLabel7.setText("Zipcode");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(75, 298, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         jLabel8.setText("Username");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 341, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         jLabel9.setText("Password");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 380, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
         add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 150, 194, -1));
-        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 194, 194, -1));
-        add(txtLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 238, 194, -1));
-        add(txtZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 293, 194, -1));
-        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 336, 194, -1));
-        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 380, 194, -1));
+        add(txtZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 194, -1));
+        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 194, -1));
+        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 194, -1));
 
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -127,20 +122,20 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 434, 100, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 100, -1));
 
         btnAdd1.setText("Update");
-        add(btnAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 434, -1, -1));
+        add(btnAdd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
 
         deliveryjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Email", "Location", "Zipcode", "Username", "Password"
+                "Name", "Zipcode", "Username", "Password"
             }
         ));
         jScrollPane1.setViewportView(deliveryjTable);
@@ -170,12 +165,10 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
         String name = txtName.getText();
         int zip = Integer.parseInt(txtZipcode.getText());
-        String email = txtEmail.getText();
-        String location = txtLocation.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
-        if(name.isEmpty() || email.isEmpty() || location.isEmpty() ||
+        if(name.isEmpty() || 
             txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
@@ -183,23 +176,6 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         if(txtZipcode.getText().length() < 5 || txtZipcode.getText().length() > 6){
             JOptionPane.showMessageDialog(null, "Zip code must be 5 or 6 digits", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
-        }
-
-        boolean flag1;
-        flag1 = email.matches("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+$");
-
-        if(!flag1) {
-            JOptionPane.showMessageDialog(null, "Email Address must be in format of username@email.com");
-            return;
-        }
-
-        for(Network n : business.getNetworks()){
-            for(int i=0; i < n.getCustomerDirectory().getCustomerList().size(); i++){
-
-                if(n.getCustomerDirectory().getCustomerList().get(i).getEmail().equals(email)) {
-                    JOptionPane.showMessageDialog(null, "Email Address already exists");
-                }
-            }
         }
 
         boolean flag = business.getUserAccountDirectory().checkIfUsernameIsUnique(username);
@@ -212,8 +188,6 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Delivery agent Added.");
         }
         txtName.setText("");
-        txtEmail.setText("");
-        txtLocation.setText("");
         txtZipcode.setText("");
         txtUsername.setText("");
         txtPassword.setText("");
@@ -223,24 +197,62 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         
         DefaultTableModel dtm = (DefaultTableModel) deliveryjTable.getModel();
         dtm.setRowCount(0);
-        
-        for(Network n : business.getNetworks()){
-            
-            for(int i=0; i < n.getCustomerDirectory().getCustomerList().size(); i++){
-                
-                Object [] row = new Object[9];
-                row[0] = n.getCustomerDirectory().getCustomerList().get(i).getName();
-                row[1] = n.getCustomerDirectory().getCustomerList().get(i).getEmail();
-                row[2] = n.getCustomerDirectory().getCustomerList().get(i).getLocation();
-                row[3] = n.getCustomerDirectory().getCustomerList().get(i).getAddress();
-                row[4] = n.getCustomerDirectory().getCustomerList().get(i).getPhoneNumber();
-                row[5] = n.getCustomerDirectory().getCustomerList().get(i).getZipcode();
-                row[6] = n.getCustomerDirectory().getCustomerList().get(i).getUsername();
-                row[7] = n.getCustomerDirectory().getCustomerList().get(i).getPassword();
-                
-                dtm.addRow(row);
-            }
+       Employee em = new Employee();
+       DeliveryAgent d = new DeliveryAgent();
+       UserAccount u = d.getUseraccount();
+        dtm.setRowCount(0);
+         u.setEmployee(em);
+         d.setUseraccount(u);
+         ArrayList<UserAccount> userAccount=business.getUserAccountDirectory().getUserAccountList();
+        ArrayList<DeliveryAgent> delList = new ArrayList<>();
+        d.setDeliveryList(delList);
+       for(Network network:business.getNetworks()){
+                //Step 2.a: check against each enterprise
+       for(int i=0; i < network.getEnterpriseDirectory().getEnterpriseList().size(); i++){
+        for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+       for(Employee ent: business.getEmployeeDirectory().getEmployeeList()){ 
+        for(DeliveryAgent dm: d.getDeliveryList() ){
+            Object[] inrow = {dm.getDeliveryboyId(),ent.getName(),dm.getUseraccount().getUsername(), dm.getUseraccount().getPassword(), dm.getZipcodes(),dm.getActive()};
+            dtm.insertRow(dtm.getRowCount(),inrow);
         }
+        }
+       }
+       }
+       }
+        
+//        for(Network n : business.getNetworks()){
+//            
+//            for(int i=0; i < n.; i++){
+//                
+//                Object [] row = new Object[3];
+//                row[0] = n.getCustomerDirectory().getCustomerList().get(i).getName();
+//                row[1] = n.getCustomerDirectory().getCustomerList().get(i).getEmail();
+//                row[2] = n.getCustomerDirectory().getCustomerList().get(i).getLocation();
+//                row[3] = n.getCustomerDirectory().getCustomerList().get(i).getAddress();
+//                row[4] = n.getCustomerDirectory().getCustomerList().get(i).getPhoneNumber();
+//                row[5] = n.getCustomerDirectory().getCustomerList().get(i).getZipcode();
+//                row[6] = n.getCustomerDirectory().getCustomerList().get(i).getUsername();
+//                row[7] = n.getCustomerDirectory().getCustomerList().get(i).getPassword();
+//                
+//                dtm.addRow(row);
+//            }
+//        }
+
+//    for(Employee ent: business.getEmployeeDirectory().getEmployeeList()){
+//        
+//    }
+      
+//    for(Network network:business.getNetworks()){
+//                //Step 2.a: check against each enterprise
+//                for(int i=0; i < network.getEnterpriseDirectory().getEnterpriseList().size(); i++){
+//                    for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+//                      
+//                    }
+//                    }
+//    }
+
+
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,15 +262,11 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     private javax.swing.JTable deliveryjTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
