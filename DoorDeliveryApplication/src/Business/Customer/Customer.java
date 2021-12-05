@@ -148,5 +148,8 @@ public class Customer {
         this.workQueue = workQueue;
     }
     
-    
+    @Override
+    public String toString(){
+        return name;
+    }
 }

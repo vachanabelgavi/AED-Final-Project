@@ -129,7 +129,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 427, 170, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 190, -1));
 
         btnView.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/auditor.png")); // NOI18N
         btnView.setText("View Customer");
@@ -138,7 +138,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnViewActionPerformed(evt);
             }
         });
-        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(306, 427, 170, -1));
+        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 190, -1));
 
         btnSearch.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/icons8-search-client-64.png")); // NOI18N
         btnSearch.setText("Search Customer");
@@ -147,8 +147,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 427, -1, -1));
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 156, 810, 440));
+        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 190, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 156, 790, 440));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -169,10 +169,12 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
             return;
         }
         Customer customer = (Customer)customerJTable.getValueAt(selectedRow,0);
+        
         ViewCustomerJPanel modifyCustomer = new ViewCustomerJPanel(userProcessContainer, business, customerDirectory, customer);
         userProcessContainer.add("ModifyCustomersJPanel",modifyCustomer);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed

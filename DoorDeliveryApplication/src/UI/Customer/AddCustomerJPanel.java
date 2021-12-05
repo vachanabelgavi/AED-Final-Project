@@ -34,7 +34,6 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         
         this.userProcessContainer = userProcessContainer;
         this.business = business;
-        this.customerdirectory = customerdirectory;
     }
 
     /**

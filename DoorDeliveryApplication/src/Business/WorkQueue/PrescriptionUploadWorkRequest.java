@@ -8,7 +8,6 @@ package Business.WorkQueue;
 import Business.Orders.OrderItem;
 import java.io.File;
 import java.util.ArrayList;
-import javax.print.attribute.standard.PresentationDirection;
 
 /**
  *
@@ -68,8 +67,6 @@ public class PrescriptionUploadWorkRequest extends WorkRequest {
 
     public void setPrescribedOrderItems(ArrayList<OrderItem> prescribedOrderItems) {
         this.prescribedOrderItems = prescribedOrderItems;
-    }
-    
-    
+    }  
     
 }

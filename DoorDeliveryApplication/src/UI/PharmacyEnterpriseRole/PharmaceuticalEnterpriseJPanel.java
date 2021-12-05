@@ -5,9 +5,10 @@
  */
 package UI.PharmacyEnterpriseRole;
 
-import Business.Customer.CustomerDirectory;
 import Business.Ecosystem;
-import static Business.Ecosystem.ecosystem;
+import Business.Enterprise.Enterprise;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
  
@@ -22,17 +23,20 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
      */
     
     JPanel userProcessContainer;
-     Ecosystem ecosystem;
+    Ecosystem ecosystem;
+    UserAccount account;
+    Organization organization;
+    Enterprise enterprise;
      
-    public PharmaceuticalEnterpriseJPanel() {
+    public PharmaceuticalEnterpriseJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem ecosystem) {
         initComponents();
         
         this.userProcessContainer=userProcessContainer;
-        this.ecosystem=ecosystem;
-        
-        
-        
-        
+        this.account = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.ecosystem = ecosystem;
+         
        // populateTree();
     }
 
