@@ -11,8 +11,11 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import UI.SystemAdmin.NextContainerJFrame;
 import java.awt.CardLayout;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -30,6 +33,7 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
         
         business = dB4OUtil.retrieveSystem();
+        this.setSize(800, 600);
     }
 
     /**
@@ -49,7 +53,6 @@ public class MainJFrame extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
@@ -64,45 +67,40 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Username");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
-        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 200, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, -1));
+        jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 200, -1));
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Password");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
-        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 200, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
+        jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 200, -1));
 
         btnLogin.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogin.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/login btn.png")); // NOI18N
+        btnLogin.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/login btn.png")); // NOI18N
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 137, -1));
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 137, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Downloads/icons8-user-50.png")); // NOI18N
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/icons8-user-50.png")); // NOI18N
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 50, 40));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Downloads/icons8-password-50.png")); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
-
-        jLabel8.setBackground(new java.awt.Color(11, 47, 41));
-        jLabel8.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Downloads/WhatsApp Image 2021-12-03 at 11.34.34 PM.jpeg")); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 510));
+        jLabel6.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/icons8-password-50.png")); // NOI18N
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 50, 40));
 
         jPanel2.setBackground(new java.awt.Color(63, 130, 117));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setBackground(new java.awt.Color(63, 130, 117));
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Login");
+        jLabel1.setText("                          Login");
 
         btnExit.setBackground(new java.awt.Color(255, 255, 255));
         btnExit.setForeground(new java.awt.Color(255, 255, 255));
-        btnExit.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Downloads/icons8-exit-sign-64.png")); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/icons8-exit-sign-64.png")); // NOI18N
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -110,7 +108,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Downloads/Hnet.com-image (1).jpg")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/Hnet.com-image (1).jpg")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -119,20 +117,18 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 40, Short.MAX_VALUE))
         );
 
         container.setBackground(new java.awt.Color(255, 255, 255));
@@ -143,24 +139,24 @@ public class MainJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(794, Short.MAX_VALUE)))
+                    .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 800, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(151, Short.MAX_VALUE)
-                    .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                    .addGap(0, 150, Short.MAX_VALUE)
+                    .addComponent(container, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -175,31 +171,34 @@ public class MainJFrame extends javax.swing.JFrame {
         String password = String.valueOf(passwordCharArray);
 
         //Step1: Check in the system admin user account directory if you have the user
-        UserAccount userAccount=business.getUserAccountDirectory().authenticateUser(userName, password);
+        UserAccount userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
 
         Enterprise inEnterprise = null;
         Organization inOrganization = null;
 
         if(userAccount==null){
             //Step 2: Go inside each network and check each enterprise
-            for(Network network:business.getNetworks()){
+            for(Network network : business.getNetworks()){
                 //Step 2.a: check against each enterprise
                 for(int i=0; i < network.getEnterpriseDirectory().getEnterpriseList().size(); i++){
-                    for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+                    
+                    for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                        
                         userAccount = enterprise.getEnterpriseUserAccountDirectory().authenticateUser(userName, password);
                         if(userAccount==null){
                             //Step 3:check against each organization for each enterprise
-                            for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+                            for(Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                                
                                 userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
                                 if(userAccount!=null){
-                                    inEnterprise=enterprise;
-                                    inOrganization=organization;
+                                    inEnterprise = enterprise;
+                                    inOrganization = organization;
                                     break;
                                 }
                             }
                         }
                         else{
-                            inEnterprise=enterprise;
+                            inEnterprise = enterprise;
                             break;
                         }
                         if(inOrganization!=null){
@@ -219,11 +218,27 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         else{
             jPanel1.setVisible(false);
-            jPanel2.setVisible(true);
+            jPanel1.removeAll();
+            jPanel2.setVisible(false);
             container.setVisible(true);
+            //this.removeAll();
+            //this.add(container);
+            //container.removeAll();
+            //container.remove(jPanel1);
+            //container.remove(jPanel2);
             CardLayout layout=(CardLayout)container.getLayout();
             container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, business));
             layout.next(container);
+            
+            JFrame newFrame = new JFrame();
+            //newFrame.setLayout(new AbsoluteLayout());
+            newFrame.getContentPane().add(container);
+            newFrame.setSize(800, 600);
+            newFrame.setVisible(true);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //new NextContainerJFrame(userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, business)).setVisible(true);
+            //this.setVisible(false);
+            
         }
 
         btnLogin.setEnabled(true);
@@ -290,7 +305,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField txtPassword;
