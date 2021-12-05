@@ -19,7 +19,7 @@ public class Customer {
     private String email;
     private String location;
     private String address;
-    private long phoneNumber;
+    private int phoneNumber;
     private int zipcode;
     private String username;
     private String password;
@@ -83,11 +83,11 @@ public class Customer {
         this.address = address;
     }
 
-    public long getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -139,5 +139,8 @@ public class Customer {
         this.workQueue = workQueue;
     }
     
-    
+    @Override
+    public String toString(){
+        return name;
+    }
 }

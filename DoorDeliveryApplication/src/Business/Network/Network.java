@@ -33,8 +33,6 @@ public class Network {
         this.customerDirectory = customerDirectory;
     }
     
-    
-    
     public String getNetworkName() {
         return networkName;
     }
@@ -62,8 +60,7 @@ public class Network {
     
     @Override
     public String toString() {
-        return networkName;
-                
+        return networkName;        
     }
     
 }

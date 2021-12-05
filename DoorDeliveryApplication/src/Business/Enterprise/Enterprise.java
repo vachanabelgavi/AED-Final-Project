@@ -109,8 +109,6 @@ public class Enterprise {
     public void setDeliveryAgentsInEnterpiselist(ArrayList<DeliveryAgent> deliveryAgentsInEnterpiselist) {
         this.deliveryAgentsInEnterpiselist = deliveryAgentsInEnterpiselist;
     }
-    
-    
 
     public Enterprise(EnterpriseType type, String name, String location) {
 
@@ -120,7 +118,7 @@ public class Enterprise {
         this.organizationDirectory = new OrganizationDirectory();
         this.enterpriseUserAccountDirectory = new UserAccountDirectory();
         this.deliveryAgentsInEnterpiselist = new ArrayList<>();
-
+        
     }
     
     @Override
