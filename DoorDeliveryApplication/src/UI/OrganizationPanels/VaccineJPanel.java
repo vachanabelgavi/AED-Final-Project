@@ -13,6 +13,7 @@ import Business.Orders.Cart;
 import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Products.Product;
+import UI.Alert;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +28,9 @@ public class VaccineJPanel extends javax.swing.JPanel {
     private Customer customer;
     DefaultTableModel tableModel;
     private Enterprise enterprise;
-    private  Organization organization;
+    private Organization organization;
+
+    Alert alert;
 
     /**
      * Creates new form VaccineJPanel
@@ -38,8 +41,9 @@ public class VaccineJPanel extends javax.swing.JPanel {
         this.ecosystem = system;
         this.network = network;
         this.customer = customer;
+        this.alert = new Alert();
         this.tableModel = (DefaultTableModel) prodTable.getModel();
-        
+
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Immunization & Vaccination");
         this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Immunization");
 
@@ -110,28 +114,54 @@ public class VaccineJPanel extends javax.swing.JPanel {
         int rows = tableModel.getRowCount();
         Cart custoemrcart = this.customer.getCustomerCart();
 
-        ArrayList<OrderItem> customerCartItems = this.customer.getCustomerCart().getCartItems();
+        ArrayList<OrderItem> customerCartItems = custoemrcart.getCartItems();
 
         try {
             for (int i = 0; i < rows; i++) {
                 if ((Boolean) tableModel.getValueAt(i, 4)) {
 
-                    System.out.println(custoemrcart.getCartId() + " :: THIS IS HIS CART ID");
-                    OrderItem o = new OrderItem();
-                    o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
-                    o.setProductName((String) tableModel.getValueAt(i, 1));
-                    o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
-                    o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
-                    o.setOrganizationname("Immunization");
-                    customerCartItems.add(o);
+                    Boolean found = false;
+                    if (customerCartItems.size() > 0) {
+                        System.out.println("IN  VACCINE CART > 0 ");
+                        for (OrderItem item : customerCartItems) {
+                            System.out.println(item + " ************** Item in vaccine");
+                            if (item.getProductName().equals(String.valueOf(tableModel.getValueAt(i, 1)))) {
+                                this.alert.ShowAlert("Chosen item" + item.getProductName() + " already in cart!");
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            OrderItem o1 = new OrderItem();
+                            o1.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                            o1.setProductName((String) tableModel.getValueAt(i, 1));
+                            o1.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                            o1.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                            o1.setOrganizationname("Immunization");
+                            customerCartItems.add(o1);
+                            this.alert.ShowAlert("Added " + o1.getProductName() + " to cart!");
+                        }
+                    } else {
+                        System.out.println("ULIKELY IN VACCINE");
+                        System.out.println(custoemrcart.getCartId() + " :: THIS IS HIS CART ID");
+                        OrderItem o1 = new OrderItem();
+                        o1.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                        o1.setProductName((String) tableModel.getValueAt(i, 1));
+                        o1.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                        o1.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                        o1.setOrganizationname("Immunization");
+                        customerCartItems.add(o1);
+                        this.alert.ShowAlert("Added " + o1.getProductName() + " to cart!");
+                    }
                 }
             }
+
         } catch (Exception e) {
             System.out.println(e + " CART PROBLEM IN VACCINE");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
     public void populateTable() {
         tableModel.setRowCount(0);
 
@@ -142,7 +172,7 @@ public class VaccineJPanel extends javax.swing.JPanel {
                     p.getProductId(),
                     p.getName(),
                     p.getPrice(),
-                    0,
+                    1,
                     false
                 });
             }

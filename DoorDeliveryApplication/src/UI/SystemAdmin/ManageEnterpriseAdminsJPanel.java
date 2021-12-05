@@ -270,6 +270,9 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                                 
                         }
                         //UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new EnterpriseAdminRole());
+
+//                        UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, eRole)UserAccount(username, password, employee, new EnterpriseAdminRole());
+
                         JOptionPane.showMessageDialog(txtName, "Enterprise Admin Added Successfully");
                     }
                 }

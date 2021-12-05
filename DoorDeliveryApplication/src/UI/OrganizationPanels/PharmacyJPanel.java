@@ -13,6 +13,7 @@ import Business.Orders.Cart;
 import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Products.Product;
+import UI.Alert;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +33,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     Organization organization;
     Customer customer;
     DefaultTableModel tableModel;
+    Alert alert;
 
     public PharmacyJPanel(Ecosystem system, Network network, Customer c) {
         initComponents();
@@ -39,7 +41,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         this.ecosystem = system;
         this.network = network;
         this.customer = c;
-        
+        this.alert = new Alert();
         this.tableModel = (DefaultTableModel) prodTable.getModel();
 
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
@@ -123,24 +125,55 @@ public class PharmacyJPanel extends javax.swing.JPanel {
 
         int rows = tableModel.getRowCount();
         Cart custoemrcart = this.customer.getCustomerCart();
-        
+
         ArrayList<OrderItem> customerCartItems = this.customer.getCustomerCart().getCartItems();
-        
+
         try {
-            for(int i = 0; i < rows; i++) {
-                if((Boolean) tableModel.getValueAt(i, 4)) {
-                    
-                    System.out.println( custoemrcart.getCartId() + " :: THIS IS HIS CART ID" );
-                    OrderItem o = new OrderItem();
-                    o.setProductId( Integer.valueOf((Integer) tableModel.getValueAt(i, 0)) );
-                    o.setProductName((String) tableModel.getValueAt(i, 1));
-                    o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
-                    o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
-                    o.setOrganizationname("Pharmacy");
-                    customerCartItems.add(o);
+            for (int i = 0; i < rows; i++) {
+                if ((Boolean) tableModel.getValueAt(i, 4)) {
+
+                    System.out.println(custoemrcart.getCartId() + " :: THIS IS HIS CART ID");
+//                    Look for an already existing order in the cart
+                    if (customerCartItems.size() > 0) {
+                        System.out.println("CART IS > 0 ");
+                        Boolean found = false;
+                        for (OrderItem item : customerCartItems) {
+                            System.out.println(item.getProductName() + " ******** item");
+                            if (item.getProductName().equals(String.valueOf( tableModel.getValueAt(i, 1) )) ) {
+                                System.out.println(item.getProductName() + " ******** item exists");
+                                this.alert.ShowAlert("Chosen item" + item.getProductName() + " already in cart!");
+                                found = true;
+                                break;
+                            } 
+                        }
+                        
+                        if(!found) {
+                                OrderItem o = new OrderItem();
+                                o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                                o.setProductName((String) tableModel.getValueAt(i, 1));
+                                o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                                o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                                o.setOrganizationname("Pharmacy");
+                                customerCartItems.add(o);
+                                this.alert.ShowAlert("Added " + o.getProductName() + " to cart!");
+                            }
+                    } else {
+                        System.out.println("NEW ITEMS ADDED ");
+                        OrderItem o = new OrderItem();
+                        o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                        o.setProductName((String) tableModel.getValueAt(i, 1));
+                        o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                        o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                        o.setOrganizationname("Pharmacy");
+                        customerCartItems.add(o);
+                        this.alert.ShowAlert("Added " + o.getProductName() + " to cart!");
+                    }
+                } else {
                 }
+
             }
-        } catch(Exception e) {
+           
+        } catch (Exception e) {
             System.out.println(e + " CART PROBLEM ");
         }
 
@@ -157,7 +190,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                     p.getProductId(),
                     p.getName(),
                     p.getPrice(),
-                    0,
+                    1,
                     false
                 });
             }

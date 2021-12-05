@@ -6,6 +6,7 @@
 package Business.Organization;
 
 import Business.Employee.EmployeeDirectory;
+import Business.Orders.Order;
 import Business.Products.Product;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
@@ -104,6 +105,31 @@ public abstract class Organization {
     public ArrayList<Product> getOrganizationProducts() {
         return this.productList;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(int zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public ArrayList<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(ArrayList<Product> productList) {
+        this.productList = productList;
+    }
+    
     
     public void addProduct(String name, Double price, int stock) {
         Product prod = new Product();

@@ -1,3 +1,5 @@
+package Business.Payment;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,6 +16,7 @@ public class Payment {
     private int paymentID;
     private double amount;
     private Date paymentDate;
+    private String status;
     private static int count = 0;
     
     public Payment() {
@@ -21,7 +24,7 @@ public class Payment {
         this.amount = 0.0;
         this.count++;
         this.paymentID = this.count;
-        
+        this.status = "NOT PAID";
     }
     
     public int getPaymentID() {
@@ -38,6 +41,22 @@ public class Payment {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public Date getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
     

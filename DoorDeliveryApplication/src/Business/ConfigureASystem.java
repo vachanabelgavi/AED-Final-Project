@@ -33,11 +33,12 @@ public class ConfigureASystem {
 
     public static Ecosystem configure() {
 
+        System.out.println("CAME HERE");
         Ecosystem system = Ecosystem.getInstance();
 
         Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
 
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
+//        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
 
         Network n = system.createNetwork();
         n.setNetworkName("California");
@@ -118,7 +119,7 @@ public class ConfigureASystem {
 //        THE DOCTOR ORG DOES NOT HAVE PRODUCTS
 
         Employee emp1 = org.getEmployeeDirectory().createEmployee("Pannaga Veeramohan");
-        org2.getUserAccountDirectory().createUserAccount("pannaga ", "pannaga", emp1, new PharmacistRole());
+        org2.getUserAccountDirectory().createUserAccount("pannaga", "pannaga", emp1, new PharmacistRole());
         
         String[] drugs = { "Brufen", "Paracetamol", "Pan D", "Crocin" };
         for(String s1: drugs) {
