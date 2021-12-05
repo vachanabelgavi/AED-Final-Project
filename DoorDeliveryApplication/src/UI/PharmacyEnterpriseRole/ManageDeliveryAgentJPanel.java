@@ -12,6 +12,7 @@ import static Business.Ecosystem.ecosystem;
 import Business.Enterprise.Enterprise;
 import javax.swing.JPanel;
 import Business.Network.Network;
+import Business.Role.DeliveryAgentRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -64,6 +65,9 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         btnAdd1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         deliveryjTable = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jcheckyes = new javax.swing.JCheckBox();
+        jcheckno = new javax.swing.JCheckBox();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -82,7 +86,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1006, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBack)
@@ -107,14 +111,14 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         jLabel8.setText("Username");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
 
         jLabel9.setText("Password");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
         add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 150, 194, -1));
         add(txtZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 194, -1));
-        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 194, -1));
-        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, 194, -1));
+        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 194, -1));
+        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 194, -1));
 
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -129,18 +133,37 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
         deliveryjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Zipcode", "Username", "Password"
+                "Name", "Zipcode", "Active", "Username", "Password"
             }
         ));
         jScrollPane1.setViewportView(deliveryjTable);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(485, 138, 477, 323));
+
+        jLabel3.setText("Active");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
+
+        jcheckyes.setText("yes");
+        jcheckyes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcheckyesActionPerformed(evt);
+            }
+        });
+        add(jcheckyes, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, -1, -1));
+
+        jcheckno.setText("no");
+        jcheckno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jchecknoActionPerformed(evt);
+            }
+        });
+        add(jcheckno, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -169,7 +192,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         String password = txtPassword.getText();
 
         if(name.isEmpty() || 
-            txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty()){
+            txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty() || txtZipcode.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -184,14 +207,29 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         }
         else{
             //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
-            //ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee, new CustomerRole());
+            Employee employee = business.getEmployeeDirectory().createEmployee(name);
+            ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
             JOptionPane.showMessageDialog(null,"Delivery agent Added.");
         }
         txtName.setText("");
         txtZipcode.setText("");
         txtUsername.setText("");
         txtPassword.setText("");
+        jcheckyes.setSelected(false);
+        jcheckno.setSelected(false);
+        
+        
+        
+        
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void jcheckyesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcheckyesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcheckyesActionPerformed
+
+    private void jchecknoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchecknoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jchecknoActionPerformed
 
     public void populateTable(){
         
@@ -200,25 +238,28 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
        Employee em = new Employee();
        DeliveryAgent d = new DeliveryAgent();
        UserAccount u = d.getUseraccount();
-        dtm.setRowCount(0);
+        dtm.setRowCount(0);  
          u.setEmployee(em);
          d.setUseraccount(u);
          ArrayList<UserAccount> userAccount=business.getUserAccountDirectory().getUserAccountList();
         ArrayList<DeliveryAgent> delList = new ArrayList<>();
         d.setDeliveryList(delList);
-       for(Network network:business.getNetworks()){
-                //Step 2.a: check against each enterprise
-       for(int i=0; i < network.getEnterpriseDirectory().getEnterpriseList().size(); i++){
-        for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+       
        for(Employee ent: business.getEmployeeDirectory().getEmployeeList()){ 
         for(DeliveryAgent dm: d.getDeliveryList() ){
-            Object[] inrow = {dm.getDeliveryboyId(),ent.getName(),dm.getUseraccount().getUsername(), dm.getUseraccount().getPassword(), dm.getZipcodes(),dm.getActive()};
+            System.out.println(""+ent.getName());
+            System.out.println(""+dm.getUseraccount().getUsername());
+            System.out.println(""+dm.getUseraccount().getPassword());
+            System.out.println(""+dm.getZipcodes());
+            System.out.println(""+dm.getActive());
+            Object[] inrow = {ent.getName(),dm.getUseraccount().getUsername(), dm.getUseraccount().getPassword(), dm.getZipcodes(),dm.getActive()};
             dtm.insertRow(dtm.getRowCount(),inrow);
         }
-        }
-       }
-       }
-       }
+      }
+ }
+ 
+   
+       
         
 //        for(Network n : business.getNetworks()){
 //            
@@ -253,7 +294,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
 
 
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -262,11 +303,14 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     private javax.swing.JTable deliveryjTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JCheckBox jcheckno;
+    private javax.swing.JCheckBox jcheckyes;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;

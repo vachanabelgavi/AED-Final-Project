@@ -85,6 +85,7 @@ public class ConfigureASystem {
                 d.setUseraccount(u);
                 d.setZipcodes(z1);
                 d.setEnterprisename(e);
+                d.setActive(true);
                 d.setDeliveryList(delList);
 
             } else {
@@ -98,6 +99,7 @@ public class ConfigureASystem {
                 u.setEmployee(em);
                 d.setZipcodes(z2);
                 d.setEnterprisename(e);
+                d.setActive(true);
                 d.setDeliveryList(delList);
             }
         }
