@@ -8,6 +8,7 @@ package UI.SystemAdmin;
 import Business.Ecosystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.Role.EnterpriseAdminRole;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -248,7 +249,7 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                     for(int i=0; i < e.getOrganizationDirectory().getOrganizationList().size(); i++){
                         
                         Employee employee = e.getOrganizationDirectory().getOrganizationList().get(i).getEmployeeDirectory().createEmployee(name);
-                        //UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new AdminRole());
+                        UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new EnterpriseAdminRole());
                         JOptionPane.showMessageDialog(txtName, "Enterprise Admin Added Successfully");
                     }
                 }
