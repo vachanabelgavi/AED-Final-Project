@@ -34,7 +34,6 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         
         this.userProcessContainer = userProcessContainer;
         this.business = business;
-        this.customerdirectory = customerdirectory;
     }
 
     /**
@@ -209,7 +208,7 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         String name = txtName.getText();
-        int phone = Integer.parseInt(txtPhone.getText());
+        long phone = Long.parseLong(txtPhone.getText());
         int zip = Integer.parseInt(txtZipcode.getText());
         String streetaddress = txtAddress.getText();
         String email = txtEmail.getText();

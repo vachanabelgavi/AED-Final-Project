@@ -88,10 +88,10 @@ public class VaccineJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(prodTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, 260));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, -1, 260));
 
         jLabel1.setText("Vaccine & Immunization");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 38, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, -1, -1));
 
         jButton1.setText("ADD TO CART");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -99,10 +99,10 @@ public class VaccineJPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, -1, -1));
 
         jButton2.setText("REFRESH");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 100, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

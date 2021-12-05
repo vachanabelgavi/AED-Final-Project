@@ -122,4 +122,9 @@ public class Enterprise {
         this.deliveryAgentsInEnterpiselist = new ArrayList<>();
 
     }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
 }

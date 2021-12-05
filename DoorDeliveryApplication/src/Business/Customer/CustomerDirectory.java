@@ -26,7 +26,7 @@ public class CustomerDirectory {
         return this.customerlist;
     }
     
-    public Customer createCustomer(String name, String email, String username, String password, int zipcode, String location, String address, int phoneNumber) {
+    public Customer createCustomer(String name, String email, String username, String password, int zipcode, String location, String address, long phoneNumber) {
         Customer customer = new Customer();
         customer.setAddress(address);
         customer.setEmail(email);
