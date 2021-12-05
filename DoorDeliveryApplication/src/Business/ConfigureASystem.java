@@ -15,7 +15,6 @@ import Business.Enterprise.Role.EnterpriseAdminRole;
 import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
 import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
-import Business.Orders.Order;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Role.DeliveryAgentRole;
@@ -24,7 +23,6 @@ import Business.Role.PharmacistRole;
 import Business.Role.SystemAdminRole;
 import Business.Role.VaccinatorRole;
 import Business.UserAccount.UserAccount;
-import Business.UserAccount.UserAccountDirectory;
 import java.util.ArrayList;
 
 /**
@@ -35,11 +33,12 @@ public class ConfigureASystem {
 
     public static Ecosystem configure() {
 
+        System.out.println("CAME HERE");
         Ecosystem system = Ecosystem.getInstance();
 
         Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
 
-        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
+//        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
 
         Network n = system.createNetwork();
         n.setNetworkName("California");

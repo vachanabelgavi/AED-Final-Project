@@ -87,7 +87,7 @@ public class DB4OUtil {
         conn.close();
         return system;
         } catch (Exception e) {
-            
+            System.out.println(e);
         }
         return null;
     }
