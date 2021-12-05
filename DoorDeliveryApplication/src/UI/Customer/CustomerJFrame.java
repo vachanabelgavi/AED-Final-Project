@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.Customer;
+package UI.Customer;
 
 import Business.Customer.Customer;
 import Business.DB4OUtil.DB4OUtil;
@@ -48,7 +48,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         this.customer = c;
         pane.setLeftComponent(null);
         System.out.println("PASSED IN CJFRAME :: "+ network.getNetworkName() + network.getEnterpriseDirectory().getEnterpriseList());
-        pane.setRightComponent(new CustomerWorkAreaJPanel(this.system, this.network, c));
+        //pane.setRightComponent(new CustomerWorkAreaJPanel(this.system, this.network, c));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,11 +80,11 @@ public class CustomerJFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 771, Short.MAX_VALUE)
+            .addGap(0, 676, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
+            .addGap(0, 536, Short.MAX_VALUE)
         );
 
         pane.setRightComponent(jPanel1);
@@ -148,7 +148,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pane, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(pane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,9 +164,9 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-       pane.setLeftComponent(null);
+        pane.setLeftComponent(null);
         pane.setRightComponent(null);
-        pane.setRightComponent(new CustomerLoginJPanel(this.system));
+        //pane.setRightComponent(new CustomerLoginJPanel(this.system));
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -180,7 +180,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         pane.setLeftComponent(null);
         pane.setRightComponent(null);
-        pane.setRightComponent(new CustomerWorkAreaJPanel(this.system, this.network, this.customer));
+        //pane.setRightComponent(new CustomerWorkAreaJPanel(this.system, this.network, this.customer));
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
