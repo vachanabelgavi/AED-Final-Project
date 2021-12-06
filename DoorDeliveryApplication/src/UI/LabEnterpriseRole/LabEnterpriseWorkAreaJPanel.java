@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 package UI.LabEnterpriseRole;
+import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.Ecosystem;
 import static Business.Ecosystem.ecosystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 /**
@@ -21,12 +24,26 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form LabEnterpriseWorkAreaJPanel
      */
+   
     JPanel userProcessContainer;
      Ecosystem ecosystem;
-    public LabEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise) {
+     UserAccount account;
+     UserAccountDirectory useraccountdirectory;
+     Enterprise enterprise;
+     Customer customer;
+     Organization organization;
+     Network network;
+    
+    
+    public LabEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
+         this.account = account;
+        this.enterprise = enterprise;
+        this.organization = organization;
+        this.network = new Network();
+        this.customer = new Customer();
         
         
     }
@@ -148,7 +165,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btndeliveryagentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeliveryagentsActionPerformed
         // TODO add your handling code here:
-        ManageLabDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageLabDeliveryAgentJPanel(userProcessContainer, ecosystem);
+        ManageLabDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageLabDeliveryAgentJPanel(userProcessContainer,ecosystem, account,useraccountdirectory,enterprise);
         userProcessContainer.add("manageDeliveryAgentJPanel",manageDeliveryAgentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

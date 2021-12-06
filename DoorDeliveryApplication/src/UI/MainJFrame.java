@@ -240,6 +240,7 @@ public class MainJFrame extends javax.swing.JFrame {
             //new NextContainerJFrame(userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, business)).setVisible(true);
             //this.setVisible(false);
             
+            
         }
 
         btnLogin.setEnabled(true);

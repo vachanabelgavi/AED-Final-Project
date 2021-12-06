@@ -48,25 +48,28 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     private Order order;
     private ArrayList<Order> orderplaced = new ArrayList<Order>();
     Organization organization;
+    Network network;
      
-    public ManagePharmaOrdersJPanel(JPanel userProcessContainer, Ecosystem business,Organization organization,UserAccountDirectory userdir, Enterprise enterprise) {
+    public ManagePharmaOrdersJPanel(JPanel userProcessContainer, Ecosystem business,Network network,UserAccountDirectory userdir, Enterprise enterprise, Customer customer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.userdir = userdir;
         this.enterprise = enterprise;
-        this.organization = organization;
+        this.customer = customer;
+        this.network = network;
+        
         
         System.out.println("CAME INTO PHARMA ORDER PANEL");
         dtm = (DefaultTableModel) pharmaOrderTable.getModel();
         
-        if (order.getItemsOrdered() != null){
-               
-            }
-            else{
-//                this.itemsdir = new ItemsDirectory();
-//                enterprise.setItemsDirectory(itemsdir);
-            }
+//        if (order.getItemsOrdered() != null){
+//               
+//            }
+//            else{
+////                this.itemsdir = new ItemsDirectory();
+////                enterprise.setItemsDirectory(itemsdir);
+//            }
             
        
         displaycombobox();
@@ -96,7 +99,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order ID", "Product ID", "Name", "Location", "Zipcode", "Price", "Delivery agent"
+                "Order ID", "Product Name", "Name", "Location", "Zipcode", "Price", "Delivery agent"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -169,11 +172,29 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         
     }
 
+    @SuppressWarnings("empty-statement")
     private void populateTable() {
-        
-        
-        
-        
-        
+        System.out.println("Inside populate Table");
+        dtm.setRowCount(0);
+         ArrayList<Order> customerOrder = this.customer.getOrderlist();
+         ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
+      for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
+          for (Order o : customerOrder) { 
+              System.out.println("" + o.getOrderId());
+               System.out.println("" + customer.getCustomerCart().getCartId());
+                System.out.println("" + customer.getName() ); 
+                System.out.println("" + customer.getLocation());
+                 System.out.println("" + customer.getZipcode());
+                  System.out.println("" + o.getOrderPayment().getAmount());   
+          Object[] inrow = {o.getOrderId(),customer.getCustomerCart().getCartId(),customer.getName(),customer.getLocation(),customer.getZipcode(), o.getOrderPayment().getAmount(), null};
+            dtm.insertRow(dtm.getRowCount(),inrow); 
+            System.out.println("done");
+            }
+      }
+       System.out.println("done with populate Table"); 
     }
 }
+        
+        
+        
+    
