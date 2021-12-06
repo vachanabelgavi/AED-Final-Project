@@ -193,6 +193,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                 inEnterprise = enterprise;
 
                                 JOptionPane.showMessageDialog(null, "login successful!");
+
                                 jSplitPane1.setLeftComponent(null);
                                 jSplitPane1.setRightComponent(null);
                                 container.removeAll();
