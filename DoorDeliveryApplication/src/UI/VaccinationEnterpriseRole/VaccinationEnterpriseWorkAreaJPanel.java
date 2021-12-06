@@ -6,7 +6,7 @@
 package UI.VaccinationEnterpriseRole;
 
 import Business.Ecosystem;
-import static Business.Ecosystem.ecosystem;
+//import static Business.Ecosystem.ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -25,13 +25,13 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form VaccinationEnterpriseWorkAreaJPanel
      */
     JPanel userProcessContainer;
-     Ecosystem ecosystem;
+    Ecosystem ecosystem;
     
-    public VaccinationEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise) {
+    public VaccinationEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem ecosystem) {
         initComponents();
         
         this.userProcessContainer=userProcessContainer;
-        this.ecosystem=ecosystem;
+        this.ecosystem = ecosystem;
         
     }
 
