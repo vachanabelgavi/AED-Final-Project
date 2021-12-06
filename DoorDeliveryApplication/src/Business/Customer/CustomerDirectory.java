@@ -42,9 +42,9 @@ public class CustomerDirectory {
         return customer;
     }
     
-    public Customer authenticateCustomer(String username) {
+    public Customer authenticateCustomer(String username, String password) {
         for(Customer c: customerlist) {
-            if(c.getUsername().equals(username)) {
+            if(c.getUsername().equals(username) && c.getPassword().equals(password)) {
                 return c;
             }
         }

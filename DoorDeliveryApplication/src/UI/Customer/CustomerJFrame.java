@@ -15,6 +15,7 @@ import Business.UserAccount.UserAccount;
 import UI.OrganizationAdminPanels.orgadminMainJFrame;
 import UI.OrganizationPanels.OrdersJPanel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 /**
@@ -51,7 +52,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         this.customer = c;
         pane.setLeftComponent(null);
         System.out.println("PASSED IN CJFRAME :: "+ network.getNetworkName() + network.getEnterpriseDirectory().getEnterpriseList());
-        pane.setRightComponent(new CustomerWorkAreaJPanel(this.system, this.network, c));
+        pane.setRightComponent(new CustomerWorkAreaJPanel(new JPanel(), this.system, this.network, c));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,7 +196,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         pane.setLeftComponent(null);
         pane.setRightComponent(null);
-        pane.setRightComponent(new CustomerWorkAreaJPanel(this.system, this.network, this.customer));
+        pane.setRightComponent(new CustomerWorkAreaJPanel(new JPanel(), this.system, this.network, this.customer));
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -207,8 +208,10 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        Enterprise e = network.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
-        new orgadminMainJFrame(system, network, e).setVisible(true);
+//        Enterprise e = network.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
+//        new orgadminMainJFrame(system, network, e).setVisible(true);
+
+        
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

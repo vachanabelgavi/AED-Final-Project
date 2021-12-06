@@ -7,14 +7,18 @@ package UI.OrganizationAdminPanels;
 
 import Business.Customer.Customer;
 import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Orders.Order;
 import Business.Organization.Organization;
+import Business.Organization.PharmacyOrganization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.PrescriptionUploadWorkRequest;
 import Business.WorkQueue.WorkQueue;
 import Business.WorkQueue.WorkRequest;
+import UI.Alert;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,21 +37,25 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
     private int orderid;
     private Order currentOrder;
     private Customer currentCustomer;
-
+    private final Enterprise enterprise;
+    Alert alerts;
     /**
      * Creates new form PharmacyAdminJPanel
      */
-    public PharmacyAdminJPanel(Ecosystem system, UserAccount ua, Network network, Organization organization) {
+    public PharmacyAdminJPanel(Ecosystem system, UserAccount ua, Network network, Organization organization, Enterprise enterprise) {
         initComponents();
 
         this.ecosystem = system;
         this.network = network;
         this.user = ua;
         this.organization = organization;
+        this.enterprise = enterprise;
         this.tableModel = (DefaultTableModel) tableOrder.getModel();
-
+        this.alerts = new Alert();
+        
         populatePharmacyOrders();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,7 +70,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         tableOrder = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSendPrescription = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
@@ -120,13 +128,13 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, -1, -1));
 
-        jButton3.setText("SEND PRESCRIPTION");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnSendPrescription.setText("SEND PRESCRIPTION");
+        btnSendPrescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnSendPrescriptionActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, -1, -1));
+        add(btnSendPrescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, -1, -1));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -135,7 +143,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 310, -1));
 
         jLabel1.setText("DOCTOR'S COMMENTS");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, -1, -1));
 
         jLabel2.setText("DOCTOR SIGNATURE");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
@@ -152,7 +160,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         int row = source.rowAtPoint(evt.getPoint());
         int column = source.columnAtPoint(evt.getPoint());
 
-        this.orderid = (int) source.getModel().getValueAt(row, column);
+        this.orderid = Integer.valueOf((Integer) source.getModel().getValueAt(row, column));
         fetchOrderObject();
 
     }//GEN-LAST:event_tableOrderMouseClicked
@@ -166,6 +174,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
                 }
             }
         }
+        populatePharmacyOrders();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -177,38 +186,49 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
                 }
             }
         }
+        populatePharmacyOrders();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnSendPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendPrescriptionActionPerformed
         // TODO add your handling code here:
-        
+
         WorkQueue queue = this.user.getWorkQueue();
         ArrayList<WorkRequest> workrequests = queue.getWorkRequestList();
-        
+
+        UserAccount doctorUser = this.enterprise.getOrganizationDirectory().getOrganizationByName("Doctor").getUserAccountDirectory().findUser("nidhi");
+
         PrescriptionUploadWorkRequest pu = new PrescriptionUploadWorkRequest();
         pu.setOrderId(this.orderid);
         pu.setSender(user);
         pu.setCustomer(this.currentCustomer);
-        pu.setReceiver(this.organization.getUserAccountDirectory().findUser("nidhi"));
+        pu.setReceiver(doctorUser);
         pu.setPresecription(this.currentOrder.getPrescription());
         pu.generateRequestId();
         pu.setPrescribedOrderItems(this.currentOrder.getItemsOrdered());
-        
+
         workrequests.add(pu);
+
+//        GET DOCTOR's WORKREQUEST
+//        created a new work request between organization admin and the doctor
+        doctorUser.getWorkQueue().getWorkRequestList().add(pu);
         this.currentOrder.setStatus("APPROVAL NEEDED");
-    }//GEN-LAST:event_jButton3ActionPerformed
+        
+        this.alerts.ShowAlert("SENT PRESCRIPTION FOR APPROVAL!");
+        populatePharmacyOrders();
+
+    }//GEN-LAST:event_btnSendPrescriptionActionPerformed
 
     public void fetchOrderObject() {
         for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
-                for (Order o : customer.getOrderlist()) {
-                    if(o.getOrderId() == this.orderid) {
-                        this.currentOrder = o;
-                        this.currentCustomer = customer;
-                    }
+            for (Order o : customer.getOrderlist()) {
+                if (o.getOrderId() == this.orderid) {
+                    this.currentOrder = o;
+                    this.currentCustomer = customer;
                 }
+            }
         }
     }
-    
+
     public void populatePharmacyOrders() {
 
         tableModel.setRowCount(0);
@@ -216,7 +236,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         try {
             for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
                 for (Order o : customer.getOrderlist()) {
-                    if (o.getOrganizationname().equals("Pharmacy")) {
+                    if (o.getOrganizationname().equalsIgnoreCase("pharmacy")) {
                         tableModel.insertRow(tableModel.getRowCount(), new Object[]{
                             o.getOrderId(),
                             customer.getName(),
@@ -226,15 +246,15 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
                 }
             }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSendPrescription;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
