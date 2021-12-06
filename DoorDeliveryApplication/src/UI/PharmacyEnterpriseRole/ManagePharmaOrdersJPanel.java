@@ -5,12 +5,21 @@
  */
 package UI.PharmacyEnterpriseRole;
 
+import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
+import Business.DeliveryAgent.DeliveryAgent;
 import Business.Ecosystem;
+import Business.Enterprise.Enterprise;
 import javax.swing.JPanel;
 import Business.Network.Network;
+import Business.Orders.Order;
+import Business.Orders.OrderItem;
+import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -25,21 +34,43 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
      * Creates new form ManagePharmaOrdersJPanel
      */
     
-     private JPanel userProcessContainer;
+    private JPanel userProcessContainer;
     private Ecosystem business;
     private CustomerDirectory customerDirectory;
+    UserAccount ua;
+    DeliveryAgent dlvrymn;
+    Enterprise enterprise;
+    DefaultTableModel dtm;
+    ArrayList<DeliveryAgent> d;
+    UserAccountDirectory userdir;
+    Customer customer;
+    private OrderItem itemsdir;
+    private Order order;
+    private ArrayList<Order> orderplaced = new ArrayList<Order>();
+    Organization organization;
      
-    public ManagePharmaOrdersJPanel(JPanel userProcessContainer, Ecosystem business) {
+    public ManagePharmaOrdersJPanel(JPanel userProcessContainer, Ecosystem business,Organization organization,UserAccountDirectory userdir, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
+        this.userdir = userdir;
+        this.enterprise = enterprise;
+        this.organization = organization;
         
-        for(Network n : business.getNetworks()){
-            this.customerDirectory = n.getCustomerDirectory();
-        }
+        System.out.println("CAME INTO PHARMA ORDER PANEL");
+        dtm = (DefaultTableModel) pharmaOrderTable.getModel();
         
+        if (order.getItemsOrdered() != null){
+               
+            }
+            else{
+//                this.itemsdir = new ItemsDirectory();
+//                enterprise.setItemsDirectory(itemsdir);
+            }
+            
+       
         displaycombobox();
-        populateCustomerOrderTable();
+        populateTable();
     }
 
     /**
@@ -52,29 +83,33 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        customerJTable = new javax.swing.JTable();
+        pharmaOrderTable = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
-        comboDeliveryAgent = new javax.swing.JComboBox<>();
+        deliverycmb = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        customerJTable.setModel(new javax.swing.table.DefaultTableModel(
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pharmaOrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Email", "Location", "Address", "Phone", "Zipcode", "Delivery agent"
+                "Order ID", "Product ID", "Name", "Location", "Zipcode", "Price", "Delivery agent"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                true, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(customerJTable);
+        jScrollPane1.setViewportView(pharmaOrderTable);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 803, 186));
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -82,57 +117,20 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 54, -1, -1));
 
-        comboDeliveryAgent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboDeliveryAgent.addActionListener(new java.awt.event.ActionListener() {
+        deliverycmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboDeliveryAgentActionPerformed(evt);
+                deliverycmbActionPerformed(evt);
             }
         });
+        add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, 148, -1));
 
         jLabel1.setText("Assign Delivery agent");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, -1, -1));
 
         jButton1.setText("Assign");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBack)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
-                        .addGap(30, 30, 30))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(55, 55, 55)
-                .addComponent(comboDeliveryAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(297, 297, 297))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(359, 359, 359)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(btnBack)
-                .addGap(67, 67, 67)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboDeliveryAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(196, Short.MAX_VALUE))
-        );
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 105, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -143,28 +141,38 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void comboDeliveryAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboDeliveryAgentActionPerformed
+    private void deliverycmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliverycmbActionPerformed
         // TODO add your handling code here:
 
         
         
-    }//GEN-LAST:event_comboDeliveryAgentActionPerformed
+    }//GEN-LAST:event_deliverycmbActionPerformed
 
-    private void populateCustomerOrderTable() {
-        
-    }
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JComboBox<String> comboDeliveryAgent;
-    private javax.swing.JTable customerJTable;
+    private javax.swing.JComboBox<String> deliverycmb;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable pharmaOrderTable;
     // End of variables declaration//GEN-END:variables
 
     private void displaycombobox() {
+      
+      d = enterprise.getDeliveryAgentsInEnterpiselist();
+        for(DeliveryAgent dd : d ){
+            deliverycmb.addItem(dd.getUseraccount().getEmployee().getName());
+        
+        }  
+        
+    }
+
+    private void populateTable() {
+        
+        
+        
         
         
     }

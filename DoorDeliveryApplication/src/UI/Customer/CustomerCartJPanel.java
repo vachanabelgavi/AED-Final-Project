@@ -30,6 +30,10 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
     Network network;
     Alert alert;
     Order order;
+    private final Order pharmacyOrder;
+    private final Order supermarketOrder;
+    private final Order vaccineOrder;
+    private final Order equipmentOrder;
 
     public CustomerCartJPanel(Ecosystem system, Network network, Customer customer) {
         initComponents();
@@ -38,7 +42,11 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         this.ecosystem = system;
         this.network = network;
         this.tableModel = (DefaultTableModel) cartTable.getModel();
-        this.order = new Order();
+        this.pharmacyOrder = new Order();
+        this.supermarketOrder = new Order();
+        this.vaccineOrder = new Order();
+        this.equipmentOrder = new Order();
+
         this.alert = new Alert();
         this.setVisible(true);
         populateTable();
@@ -56,8 +64,6 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         cartTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        labelTotal = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -88,7 +94,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(cartTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, 133));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, 160));
 
         jButton1.setText("FETCH CART");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -97,12 +103,6 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, -1, -1));
-
-        jLabel1.setText("ORDER TOTAL:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, -1, -1));
-
-        labelTotal.setText("<value>");
-        add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
 
         jButton2.setText("PLACE ORDER");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +118,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, -1, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -128,8 +128,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         Cart custoemrcart = this.customer.getCustomerCart();
 
         ArrayList<OrderItem> customerCartItems = this.customer.getCustomerCart().getCartItems();
-        Boolean prescriptionReqd =  false;
-        
+
         try {
             for (int i = 0; i < rows; i++) {
                 if ((Boolean) tableModel.getValueAt(i, 4)) {
@@ -144,11 +143,6 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
 
                 } else {
                     for (OrderItem oi : customerCartItems) {
-                        
-                        if(oi.getOrganizationname().equals("Pharmacy") || oi.getOrganizationname().equals("Supermarket")) {
-                            prescriptionReqd = true;
-                        }
-                        
                         if (oi.getProductName().equals(String.valueOf((String) tableModel.getValueAt(i, 1)))) {
                             oi.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
                         }
@@ -156,19 +150,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
                 }
             }
 
-//            Set all items ordered to the order 
-            this.order.setItemsOrdered(customerCartItems);
-            this.order.calcOrderTotal();
-                                
-            
-            if(prescriptionReqd) {
-                this.order.setStatus("Required Prescription");
-            } else {
-                this.order.setStatus("In Progress");
-            }
-            
-            labelTotal.setText("$ " + String.valueOf(this.order.getPrice()));
-
+            populateTable();
         } catch (Exception e) {
             System.out.println(e + " CART PROBLEM IN VACCINE");
         }
@@ -183,10 +165,62 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        Boolean prescriptionReqd = false;
+        ArrayList<OrderItem> pharmacyItems = this.pharmacyOrder.getItemsOrdered();
+        ArrayList<OrderItem> equipmentItems = this.equipmentOrder.getItemsOrdered();
+        ArrayList<OrderItem> supermarketItems = this.supermarketOrder.getItemsOrdered();
+        ArrayList<OrderItem> vaccineItems = this.vaccineOrder.getItemsOrdered();
+
+        for (OrderItem oi : this.customer.getCustomerCart().getCartItems()) {
+            if (oi.getOrganizationname().equalsIgnoreCase("pharmacy")) {
+                pharmacyItems.add(oi);
+            } else if (oi.getOrganizationname().equalsIgnoreCase("equipments")) {
+                equipmentItems.add(oi);
+            } else if (oi.getOrganizationname().equalsIgnoreCase("immunization")) {
+                vaccineItems.add(oi);
+            } else if (oi.getOrganizationname().equalsIgnoreCase("supermarket")) {
+                supermarketItems.add(oi);
+            }
+        }
 
         ArrayList<Order> customerOrder = this.customer.getOrderlist();
-        customerOrder.add(order);
-        
+        if (pharmacyItems.size() > 0) {
+            this.pharmacyOrder.setItemsOrdered(pharmacyItems);
+            this.pharmacyOrder.setOrganizationname("Pharmacy");
+            this.pharmacyOrder.setEnterprisename("Pharmaceutical");
+            this.pharmacyOrder.setStatus("PRESCRIPTION REQUIRED");
+            this.pharmacyOrder.calcOrderTotal();
+            customerOrder.add(pharmacyOrder);
+
+        }
+
+        if (vaccineItems.size() > 0) {
+            this.vaccineOrder.setItemsOrdered(vaccineItems);
+            this.vaccineOrder.setOrganizationname("Immunization");
+            this.vaccineOrder.setEnterprisename("Immunization & Vaccination");
+            this.vaccineOrder.setStatus("IN PROGRESS");
+            this.vaccineOrder.calcOrderTotal();
+            customerOrder.add(vaccineOrder);
+        }
+
+        if (equipmentItems.size() > 0) {
+            this.equipmentOrder.setItemsOrdered(equipmentItems);
+            this.equipmentOrder.setOrganizationname("Equipments");
+            this.equipmentOrder.setEnterprisename("Medical Equipment");
+            this.equipmentOrder.setStatus("IN PROGRESS");
+            this.equipmentOrder.calcOrderTotal();
+            customerOrder.add(equipmentOrder);
+        }
+
+        if (supermarketItems.size() > 0) {
+            this.supermarketOrder.setItemsOrdered(supermarketItems);
+            this.supermarketOrder.setOrganizationname("Supermarket");
+            this.supermarketOrder.setEnterprisename("Pharmaceutical");
+            this.supermarketOrder.setStatus("PRESCRIPTION REQUIRED");
+            this.supermarketOrder.calcOrderTotal();
+            customerOrder.add(supermarketOrder);
+        }
+
         this.alert.ShowAlert("Order placed successfully!");
         this.customer.getCustomerCart().setCartItems(new ArrayList<OrderItem>());
         populateTable();
@@ -216,8 +250,6 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelTotal;
     // End of variables declaration//GEN-END:variables
 }
