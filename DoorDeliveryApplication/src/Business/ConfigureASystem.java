@@ -38,7 +38,7 @@ public class ConfigureASystem {
 
         Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
 
-//        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
+        UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
 
         Network n = system.createNetwork();
         n.setNetworkName("California");
@@ -66,7 +66,7 @@ public class ConfigureASystem {
         e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmaEnterprise", "pharmaEnterprise", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
         
 //        create delivery agents in enterprise
-        ArrayList<DeliveryAgent> delList = new ArrayList<>();
+        ArrayList<DeliveryAgent> delList = e.getDeliveryAgentsInEnterpiselist();
         ArrayList<Integer> z1 = new ArrayList<>();
         ArrayList<Integer> z2 = new ArrayList<>();
         for (int j = 1; j < 10; j++) {
@@ -98,7 +98,7 @@ public class ConfigureASystem {
                 d.setEnterprisename(e);
             }
         }
-
+        e.setDeliveryAgentsInEnterpiselist(delList);
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();
 
@@ -125,7 +125,7 @@ public class ConfigureASystem {
         for(String s1: drugs) {
             org2.addProduct(s1, 7.5, 500);
         }
-
+        
         n.setEnterpriseDirectory(edir);
 
 //      TWO ENTERPRISE 
@@ -149,7 +149,7 @@ public class ConfigureASystem {
             org1.addProduct(s, 10.0, 200);
             
         }
-
+        e2.setDeliveryAgentsInEnterpiselist(delList);
         n.setEnterpriseDirectory(edir);
         
         
