@@ -33,6 +33,7 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
         
         this.userProcessContainer = userProcessContainer;
         this.business = business;
+        this.customerdirectory = customerDirectory;
         this.customer = customer;
         
         txtName.setText(customer.getName());
@@ -248,6 +249,7 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
         sysAdminwjp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
+        
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -261,6 +263,7 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
         txtPhone.setEditable(true);
         txtZipcode.setEditable(true);
         btnSave.setEnabled(true);
+        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 

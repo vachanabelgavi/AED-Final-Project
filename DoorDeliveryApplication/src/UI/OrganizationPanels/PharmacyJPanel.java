@@ -13,6 +13,7 @@ import Business.Orders.Cart;
 import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Products.Product;
+import UI.Alert;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +33,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     Organization organization;
     Customer customer;
     DefaultTableModel tableModel;
+    Alert alert;
 
     public PharmacyJPanel(Ecosystem system, Network network, Customer c) {
         initComponents();
@@ -39,7 +41,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         this.ecosystem = system;
         this.network = network;
         this.customer = c;
-        
+        this.alert = new Alert();
         this.tableModel = (DefaultTableModel) prodTable.getModel();
 
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
@@ -57,17 +59,17 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         prodTable = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel1.setText("PRODUCTS");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, -1));
 
         prodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,10 +96,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(prodTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, 260));
-
-        jLabel1.setText("PRODUCTS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 48, -1, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, 260));
 
         jButton1.setText("ADD TO CART");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +104,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 420, -1, -1));
 
         jButton2.setText("REFRESH");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -113,9 +112,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 100, -1));
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 750, 460));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -128,24 +125,55 @@ public class PharmacyJPanel extends javax.swing.JPanel {
 
         int rows = tableModel.getRowCount();
         Cart custoemrcart = this.customer.getCustomerCart();
-        
+
         ArrayList<OrderItem> customerCartItems = this.customer.getCustomerCart().getCartItems();
-        
+
         try {
-            for(int i = 0; i < rows; i++) {
-                if((Boolean) tableModel.getValueAt(i, 4)) {
-                    
-                    System.out.println( custoemrcart.getCartId() + " :: THIS IS HIS CART ID" );
-                    OrderItem o = new OrderItem();
-                    o.setProductId( Integer.valueOf((Integer) tableModel.getValueAt(i, 0)) );
-                    o.setProductName((String) tableModel.getValueAt(i, 1));
-                    o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
-                    o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
-                    o.setOrganizationname("Pharmacy");
-                    customerCartItems.add(o);
+            for (int i = 0; i < rows; i++) {
+                if ((Boolean) tableModel.getValueAt(i, 4)) {
+
+                    System.out.println(custoemrcart.getCartId() + " :: THIS IS HIS CART ID");
+//                    Look for an already existing order in the cart
+                    if (customerCartItems.size() > 0) {
+                        System.out.println("CART IS > 0 ");
+                        Boolean found = false;
+                        for (OrderItem item : customerCartItems) {
+                            System.out.println(item.getProductName() + " ******** item");
+                            if (item.getProductName().equals(String.valueOf( tableModel.getValueAt(i, 1) )) ) {
+                                System.out.println(item.getProductName() + " ******** item exists");
+                                this.alert.ShowAlert("Chosen item" + item.getProductName() + " already in cart!");
+                                found = true;
+                                break;
+                            } 
+                        }
+                        
+                        if(!found) {
+                                OrderItem o = new OrderItem();
+                                o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                                o.setProductName((String) tableModel.getValueAt(i, 1));
+                                o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                                o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                                o.setOrganizationname("Pharmacy");
+                                customerCartItems.add(o);
+                                this.alert.ShowAlert("Added " + o.getProductName() + " to cart!");
+                            }
+                    } else {
+                        System.out.println("NEW ITEMS ADDED ");
+                        OrderItem o = new OrderItem();
+                        o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                        o.setProductName((String) tableModel.getValueAt(i, 1));
+                        o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                        o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                        o.setOrganizationname("Pharmacy");
+                        customerCartItems.add(o);
+                        this.alert.ShowAlert("Added " + o.getProductName() + " to cart!");
+                    }
+                } else {
                 }
+
             }
-        } catch(Exception e) {
+           
+        } catch (Exception e) {
             System.out.println(e + " CART PROBLEM ");
         }
 
@@ -162,7 +190,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                     p.getProductId(),
                     p.getName(),
                     p.getPrice(),
-                    0,
+                    1,
                     false
                 });
             }
@@ -176,7 +204,6 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable prodTable;
     // End of variables declaration//GEN-END:variables

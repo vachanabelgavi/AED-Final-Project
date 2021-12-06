@@ -8,7 +8,6 @@ package UI.SystemAdmin;
 import Business.Ecosystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
-import Business.Enterprise.Role.EnterpriseAdminRole;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -233,11 +232,12 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         Enterprise enterprise = (Enterprise) comboEnterprise.getSelectedItem();
-        String username = txtName.getText();
-        String password = String.valueOf(txtPassword.getText());
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
         String name = txtName.getText();
-//        Organization organization = (Organization) organizationJComboBox.getSelectedItem();
+
         boolean flag = enterprise.getEnterpriseUserAccountDirectory().checkIfUsernameIsUnique(username);
+        
         if(flag == false){
             JOptionPane.showMessageDialog(txtUsername, "User name already exists");
         }
@@ -249,7 +249,30 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                     for(int i=0; i < e.getOrganizationDirectory().getOrganizationList().size(); i++){
                         
                         Employee employee = e.getOrganizationDirectory().getOrganizationList().get(i).getEmployeeDirectory().createEmployee(name);
-                        UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new EnterpriseAdminRole());
+                        
+                        switch(String.valueOf(enterprise)){
+                            
+                            case "PharmacyEnterpriseAdminRole":
+                                //UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new PharmaceuticalEnterpriseAdminRole());
+                                break;
+                                
+                            case "EquipmentEnterpriseRole":
+                                
+                                break;
+                                
+                            case "VaccinationEnterpriseRole":
+                                
+                                break;
+                                
+                            case "LabEnterprise":
+                                
+                                break;
+                                
+                        }
+                        //UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new EnterpriseAdminRole());
+
+//                        UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, eRole)UserAccount(username, password, employee, new EnterpriseAdminRole());
+
                         JOptionPane.showMessageDialog(txtName, "Enterprise Admin Added Successfully");
                     }
                 }

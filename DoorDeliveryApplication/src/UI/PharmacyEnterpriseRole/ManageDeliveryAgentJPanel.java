@@ -270,6 +270,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         ArrayList<Integer> zipcodes = new ArrayList<Integer>();
         zipcodes.add(zip);
          ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
+                em.setName(name);
                 u.setUsername(username);
                 u.setPassword(password);
                 u.setRole(new DeliveryAgentRole());

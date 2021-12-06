@@ -53,13 +53,13 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        comboNetwork = new javax.swing.JComboBox<>();
-        comboEnterprise = new javax.swing.JComboBox<>();
         txtName = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtLocation = new javax.swing.JTextField();
+        networkJComboBox = new javax.swing.JComboBox();
+        enterpriseJComboBox1 = new javax.swing.JComboBox();
 
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,15 +119,6 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Name");
 
-        comboNetwork.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboNetwork.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboNetworkActionPerformed(evt);
-            }
-        });
-
-        comboEnterprise.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,6 +134,26 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         });
 
         jLabel7.setText("Location");
+
+        networkJComboBox.setBackground(new java.awt.Color(0, 102, 204));
+        networkJComboBox.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        networkJComboBox.setForeground(new java.awt.Color(255, 255, 255));
+        networkJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        networkJComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                networkJComboBoxActionPerformed(evt);
+            }
+        });
+
+        enterpriseJComboBox1.setBackground(new java.awt.Color(0, 102, 204));
+        enterpriseJComboBox1.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        enterpriseJComboBox1.setForeground(new java.awt.Color(255, 255, 255));
+        enterpriseJComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        enterpriseJComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterpriseJComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -164,10 +175,10 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel7))
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(txtLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(networkJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(enterpriseJComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -187,12 +198,12 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(comboNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete))
+                    .addComponent(btnDelete)
+                    .addComponent(networkJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(comboEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(enterpriseJComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -213,8 +224,8 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
-        Network network = (Network) comboNetwork.getSelectedItem();
-        Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) comboEnterprise.getSelectedItem();
+        Network network = (Network) networkJComboBox.getSelectedItem();
+        Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) enterpriseJComboBox1.getSelectedItem();
 
         if (network == null || type == null) {
             JOptionPane.showMessageDialog(null, "Invalid Input!");
@@ -243,23 +254,17 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         int selectedrow = enterpriseJTable.getSelectedRow();
-        String name = enterpriseJTable.getValueAt(selectedrow, 0).toString();
         
-        for (Network n : business.getNetworks()){
-            Enterprise e = n.getEnterpriseDirectory().getEnterprise(name);
-            n.getEnterpriseDirectory().removeEnterprise(e);
-        }
+        
+        System.out.print(enterpriseJTable.getValueAt(selectedrow, 0).toString());
+//        String name = "knjk";
+//        
+//        for (Network n : business.getNetworks()){
+//            Enterprise e = n.getEnterpriseDirectory().getEnterprise(name);
+//            n.getEnterpriseDirectory().removeEnterprise(e);
+//        }
         populateTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void comboNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNetworkActionPerformed
-        // TODO add your handling code here:
-        
-        Network network = (Network) comboNetwork.getSelectedItem();
-        if (network != null){
-            populateEnterpriseComboBox(network);
-        }
-    }//GEN-LAST:event_comboNetworkActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -269,13 +274,25 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void networkJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkJComboBoxActionPerformed
+
+        Network network = (Network) networkJComboBox.getSelectedItem();
+        if (network != null){
+            populateEnterpriseComboBox(network);
+        }
+
+    }//GEN-LAST:event_networkJComboBoxActionPerformed
+
+    private void enterpriseJComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterpriseJComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enterpriseJComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JComboBox<String> comboEnterprise;
-    private javax.swing.JComboBox<String> comboNetwork;
+    private javax.swing.JComboBox enterpriseJComboBox1;
     private javax.swing.JTable enterpriseJTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -284,6 +301,7 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox networkJComboBox;
     private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
@@ -307,21 +325,21 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
             }
         }
     }
-        
+
     public void populateNetworkComboBox(){
             
-        comboNetwork.removeAllItems();
+        networkJComboBox.removeAllItems();
         
         for (Network network : business.getNetworks()){
-            comboNetwork.addItem(String.valueOf(network));
+            networkJComboBox.addItem(String.valueOf(network));
         }
     }
     
     private void populateEnterpriseComboBox(Network network){
-        comboEnterprise.removeAllItems();
+        enterpriseJComboBox1.removeAllItems();
         
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            comboEnterprise.addItem(String.valueOf(enterprise));
+            enterpriseJComboBox1.addItem(String.valueOf(enterprise));
         }
         
     }

@@ -44,6 +44,15 @@ public class Customer {
         this.orderlist.add(o);
     }
 
+    public Order findOrderById(int id) {
+        for(Order o: orderlist) {
+            if(o.getOrderId() == id) {
+                return o;
+            }
+        } 
+        return null;
+    }
+    
     public Customer() {
         this.name = "";
         this.orderlist = new ArrayList<Order>();
@@ -139,5 +148,8 @@ public class Customer {
         this.workQueue = workQueue;
     }
     
-    
+    @Override
+    public String toString(){
+        return name;
+    }
 }

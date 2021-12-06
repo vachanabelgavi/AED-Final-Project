@@ -15,7 +15,6 @@ import Business.Enterprise.Role.EnterpriseAdminRole;
 import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
 import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
-import Business.Orders.Order;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Role.DeliveryAgentRole;
@@ -24,7 +23,6 @@ import Business.Role.PharmacistRole;
 import Business.Role.SystemAdminRole;
 import Business.Role.VaccinatorRole;
 import Business.UserAccount.UserAccount;
-import Business.UserAccount.UserAccountDirectory;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +33,7 @@ public class ConfigureASystem {
 
     public static Ecosystem configure() {
 
+        System.out.println("CAME HERE");
         Ecosystem system = Ecosystem.getInstance();
 
         Employee employee = system.getEmployeeDirectory().createEmployee("sysadmin");
@@ -85,7 +84,6 @@ public class ConfigureASystem {
                 d.setUseraccount(u);
                 d.setZipcodes(z1);
                 d.setEnterprisename(e);
-                d.setActive(true);
                 delList.add(d);
                 e.setDeliveryAgentsInEnterpiselist(delList);
 
@@ -100,14 +98,9 @@ public class ConfigureASystem {
                 u.setEmployee(em);
                 d.setZipcodes(z2);
                 d.setEnterprisename(e);
-                d.setActive(true);
                 delList.add(d);
-                e.setDeliveryAgentsInEnterpiselist(delList);
             }
         }
-        
-        
-       // System.out.println(""+delList);
 
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();
@@ -129,7 +122,7 @@ public class ConfigureASystem {
 //        THE DOCTOR ORG DOES NOT HAVE PRODUCTS
 
         Employee emp1 = org.getEmployeeDirectory().createEmployee("Pannaga Veeramohan");
-        org2.getUserAccountDirectory().createUserAccount("pannaga ", "pannaga", emp1, new PharmacistRole());
+        org2.getUserAccountDirectory().createUserAccount("pannaga", "pannaga", emp1, new PharmacistRole());
         
         String[] drugs = { "Brufen", "Paracetamol", "Pan D", "Crocin" };
         for(String s1: drugs) {
@@ -161,7 +154,6 @@ public class ConfigureASystem {
         }
 
         n.setEnterpriseDirectory(edir);
-
         
         
         for (Network net : system.getNetworks()) {
@@ -172,7 +164,6 @@ public class ConfigureASystem {
 
 //                if (ent.getEnterpriseType().toString().equals("Vaccine and Immunization")) {
 //                    traverse only through this
-
 
                 for (Organization or : ent.getOrganizationDirectory().getOrganizationList()) {
                     System.out.println(or.getName() + " *** ");

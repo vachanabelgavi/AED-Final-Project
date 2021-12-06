@@ -5,6 +5,7 @@
  */
 package UI.PharmacyEnterpriseRole;
 
+import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.DB4OUtil.DB4OUtil;
 import Business.Ecosystem;
@@ -32,14 +33,18 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
      UserAccount account;
      UserAccountDirectory useraccountdirectory;
      Enterprise enterprise;
+     Customer customer;
+     Organization organization;
      
-    public PharmaceuticalEnterpriseJPanel(JPanel userProcessContainer, UserAccount account,Enterprise enterprise, Ecosystem ecosystem) {
+    public PharmaceuticalEnterpriseJPanel(JPanel userProcessContainer, UserAccount account,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
         
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         this.account = account;
         this.enterprise = enterprise;
+        this.organization = organization;
+        
         
         System.out.println("HAS TO CIome  in phharma e ");
         
@@ -181,7 +186,7 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
     private void btnmanageordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmanageordersActionPerformed
         // TODO add your handling code here:
 
-        ManagePharmaOrdersJPanel managePharmaOrdersJPanel=new ManagePharmaOrdersJPanel(userProcessContainer, ecosystem);
+        ManagePharmaOrdersJPanel managePharmaOrdersJPanel=new ManagePharmaOrdersJPanel(userProcessContainer, ecosystem, organization,useraccountdirectory,enterprise);
         userProcessContainer.add("managePharmaOrdersJPanel",managePharmaOrdersJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

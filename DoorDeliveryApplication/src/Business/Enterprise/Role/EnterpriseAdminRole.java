@@ -16,10 +16,8 @@ import javax.swing.JPanel;
  * @author Nidhi Raghavendra
  */
 public class EnterpriseAdminRole extends EnterpriseRole {
-
-   
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,Organization organization, Enterprise enterprise, Ecosystem business) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem business) {
 //        return new DoctorWorkAreaJPanel(userProcessContainer, account, (DoctorOrganization)organization, enterprise); 
         return null;
     }
