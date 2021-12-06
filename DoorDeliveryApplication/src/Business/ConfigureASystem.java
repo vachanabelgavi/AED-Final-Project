@@ -101,7 +101,7 @@ public class ConfigureASystem {
                 delList.add(d);
             }
         }
-
+        e.setDeliveryAgentsInEnterpiselist(delList);
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();
 
@@ -128,7 +128,7 @@ public class ConfigureASystem {
         for(String s1: drugs) {
             org2.addProduct(s1, 7.5, 500);
         }
-
+        
         n.setEnterpriseDirectory(edir);
 
 //      TWO ENTERPRISE 
@@ -152,31 +152,23 @@ public class ConfigureASystem {
             org1.addProduct(s, 10.0, 200);
             
         }
-
+        e2.setDeliveryAgentsInEnterpiselist(delList);
         n.setEnterpriseDirectory(edir);
         
         
         for (Network net : system.getNetworks()) {
-           // System.out.println(system.getNetworks());
             for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
                 System.out.println(ent.getEnterpriseType());
                 System.out.println(ent.getOrganizationDirectory().getOrganizationList().size());
-
-//                if (ent.getEnterpriseType().toString().equals("Vaccine and Immunization")) {
-//                    traverse only through this
 
                 for (Organization or : ent.getOrganizationDirectory().getOrganizationList()) {
                     System.out.println(or.getName() + " *** ");
 
                 }
 
-//                }
 
             }
         }
-
-        
-//        PRINT CUSTOMER ORDERS for that enterprise
 
 
         return system;
