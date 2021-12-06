@@ -15,6 +15,8 @@ import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
 import UI.SystemAdmin.NextContainerJFrame;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
@@ -30,12 +32,14 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     Ecosystem business;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
-    
+
     public MainJFrame() {
         initComponents();
-        
-        business = dB4OUtil.retrieveSystem();
-        this.setSize(800, 600);
+
+        this.business = dB4OUtil.retrieveSystem();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        jSplitPane1.setSize(screenSize);
     }
 
     /**
@@ -55,8 +59,8 @@ public class MainJFrame extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         container = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
@@ -95,28 +99,28 @@ public class MainJFrame extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 137, -1));
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 50, 40));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 50, 40));
 
         container.setBackground(new java.awt.Color(255, 255, 255));
         container.setOpaque(false);
         container.setLayout(new java.awt.CardLayout());
         jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 640));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1250, 650));
 
         jSplitPane1.setRightComponent(jPanel1);
 
-        getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1270, 640));
+        getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1270, 650));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("BACK");
+        jButton1.setText("EXIT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(904, 11, -1, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 40));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,11 +135,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         //Step1: Check in the system admin user account directory if you have the user
         UserAccount userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
-        
+
         Enterprise inEnterprise = null;
         Organization inOrganization = null;
         Network inNetwork = null;
-        
+
         if (userAccount == null) {
             //Step 2: Go inside each network and check each enterprise
             for (Network network : business.getNetworks()) {
@@ -145,67 +149,77 @@ public class MainJFrame extends javax.swing.JFrame {
 //                   create a customerworkareajpanel
                     jSplitPane1.setLeftComponent(null);
                     jSplitPane1.setRightComponent(null);
-//                    jPanel1.setVisible(false);
-//                    container.setVisible(true);
-//                    CardLayout layout = (CardLayout) container.getLayout();
-//                    container.setSize(2000, 1000);
-//                    container.add("customer work", new CustomerRole().createWorkArea(container, business, network, c));
-//                    layout.next(container);
                     container.setVisible(true);
                     container = new CustomerRole().createWorkArea(container, business, network, c);
                     jSplitPane1.setRightComponent(container);
                     break;
-                    
-                }
 
-                //Step 2.a: check against each enterprise
-                for (int i = 0; i < network.getEnterpriseDirectory().getEnterpriseList().size(); i++) {
-                    
-                    for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
-                        
-                        userAccount = enterprise.getEnterpriseUserAccountDirectory().authenticateUser(userName, password);
-                        if (userAccount == null) {
-                            //Step 3:check against each organization for each enterprise
-                            for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
-                                
-                                userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
-                                if (userAccount != null) {
-                                    inEnterprise = enterprise;
-                                    inOrganization = organization;
-                                    inNetwork = network;
-                                    break;
+                } else {
+
+                    //Step 2.a: check against each enterprise
+                    for (int i = 0; i < network.getEnterpriseDirectory().getEnterpriseList().size(); i++) {
+
+                        for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
+
+                            userAccount = enterprise.getEnterpriseUserAccountDirectory().authenticateUser(userName, password);
+                            if (userAccount == null) {
+                                //Step 3:check against each organization for each enterprise
+                                for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+
+                                    userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
+                                    if (userAccount != null) {
+                                        inEnterprise = enterprise;
+                                        inOrganization = organization;
+                                        inNetwork = network;
+
+                                        jSplitPane1.setLeftComponent(null);
+                                        jSplitPane1.setRightComponent(null);
+                                        container.removeAll();
+                                        container.setVisible(true);
+
+                                        container = userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                                        jSplitPane1.setRightComponent(container);
+                                        break;
+                                    } else {
+
+                                    }
                                 }
+                            } else {
+                                inNetwork = network;
+                                inEnterprise = enterprise;
+
+                                jSplitPane1.setLeftComponent(null);
+                                jSplitPane1.setRightComponent(null);
+                                container.removeAll();
+                                container.setVisible(true);
+
+                                container = userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                                jSplitPane1.setRightComponent(container);
+                                break;
                             }
-                        } else {
-                            inEnterprise = enterprise;
-                            break;
-                        }
-                        if (inOrganization != null) {
-                            break;
+                            if (inOrganization != null) {
+                                break;
+                            }
                         }
                     }
                 }
-                if (inEnterprise != null) {
-                    break;
-                }
+
             }
-        }
-        
-        if (userAccount == null) {
-            JOptionPane.showMessageDialog(null, "Invalid credentials");
-            return;
         } else {
-            jSplitPane1.setLeftComponent(null);
-            jSplitPane1.setRightComponent(null);
-            container.removeAll();
-            container.setVisible(true);
+            if (userAccount != null) {
+                jSplitPane1.setLeftComponent(null);
+                jSplitPane1.setRightComponent(null);
+                container.removeAll();
+                container.setVisible(true);
 
-            container = userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
-            jSplitPane1.setRightComponent(container);
-
+                container = userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                jSplitPane1.setRightComponent(container);
+            } else {
+                JOptionPane.showMessageDialog(null, "User does not exist!");
+            }
 
         }
-        
+
         btnLogin.setEnabled(true);
 //        btnExit.setEnabled(true);
         jPanel1.setVisible(false);
