@@ -148,6 +148,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 Customer c = network.getCustomerDirectory().authenticateCustomer(userName, password);
                 if (c != null) {
 //                   create a customerworkareajpanel
+                    JOptionPane.showMessageDialog(null, "login successful!");
                     jSplitPane1.setLeftComponent(null);
                     jSplitPane1.setRightComponent(null);
                     container.setVisible(true);
@@ -172,36 +173,38 @@ public class MainJFrame extends javax.swing.JFrame {
                                         inEnterprise = enterprise;
                                         inOrganization = organization;
                                         inNetwork = network;
-
+                                        JOptionPane.showMessageDialog(null, "login successful!");
                                         jSplitPane1.setLeftComponent(null);
                                         jSplitPane1.setRightComponent(null);
                                         container.removeAll();
                                         container.setVisible(true);
-
-                                        container = userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                                        CardLayout layout = (CardLayout) container.getLayout();
+                                        container.setSize(1500, 1000);
+                                        container.add("org area", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
+                                        layout.next(container);
                                         jSplitPane1.setRightComponent(container);
                                         break;
                                     } else {
-
+                                        JOptionPane.showMessageDialog(null, "Organization access denied!");
                                     }
                                 }
                             } else {
                                 inNetwork = network;
                                 inEnterprise = enterprise;
 
+                                JOptionPane.showMessageDialog(null, "login successful!");
                                 jSplitPane1.setLeftComponent(null);
                                 jSplitPane1.setRightComponent(null);
                                 container.removeAll();
                                 container.setVisible(true);
                                 CardLayout layout = (CardLayout) container.getLayout();
-                                container = userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                                container.setSize(1500, 1000);
+                                container.add("enterprise area", userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
                                 layout.next(container);
                                 jSplitPane1.setRightComponent(container);
                                 break;
                             }
-                            if (inOrganization != null) {
-                                break;
-                            }
+
                         }
                     }
                 }
