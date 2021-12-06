@@ -154,26 +154,18 @@ public class ConfigureASystem {
         
         
         for (Network net : system.getNetworks()) {
-           // System.out.println(system.getNetworks());
             for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
                 System.out.println(ent.getEnterpriseType());
                 System.out.println(ent.getOrganizationDirectory().getOrganizationList().size());
-
-//                if (ent.getEnterpriseType().toString().equals("Vaccine and Immunization")) {
-//                    traverse only through this
 
                 for (Organization or : ent.getOrganizationDirectory().getOrganizationList()) {
                     System.out.println(or.getName() + " *** ");
 
                 }
 
-//                }
 
             }
         }
-
-        
-//        PRINT CUSTOMER ORDERS for that enterprise
 
 
         return system;
