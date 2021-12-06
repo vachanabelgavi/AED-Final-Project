@@ -51,6 +51,7 @@ public class OrdersJPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jSplitPane1.setDividerLocation(350);
 
@@ -61,14 +62,14 @@ public class OrdersJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ORDER ID", "ORDER STATUS", "PAYMENT STATUS"
+                "ORDER ID", "ORDER STATUS", "PAYMENT STATUS", "ORDER TOTAL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -81,7 +82,7 @@ public class OrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 100, 440, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 100, 450, 180));
 
         jLabel1.setText("ORDER HISTORY");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, -1, -1));
@@ -89,19 +90,32 @@ public class OrdersJPanel extends javax.swing.JPanel {
         jButton1.setText("MAKE PAYMENT");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, -1, -1));
 
+        jButton2.setText("REFRESH");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, -1, -1));
+
         jSplitPane1.setLeftComponent(jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        populateOrders();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void populateOrders() {
         tableModel.setRowCount(0);
@@ -112,7 +126,8 @@ public class OrdersJPanel extends javax.swing.JPanel {
                     tableModel.insertRow(tableModel.getRowCount(), new Object[]{
                         o.getOrderId(),
                         o.getStatus(),
-                        o.getOrderPayment().getStatus(),                        
+                        o.getOrderPayment().getStatus(),
+                        o.getPrice()
                     });
 
                 
@@ -127,6 +142,7 @@ public class OrdersJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
