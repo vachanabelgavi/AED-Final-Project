@@ -184,6 +184,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private void browseBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBtn1ActionPerformed
         // TODO add your handling code here:
         pane.setRightComponent(null);
+        pane.setLeftComponent(null);
+        pane.removeAll();
         pane.setRightComponent(new CustomerWorkAreaJPanel(this.userProcessContainer, this.system, this.network, this.customer));
     }//GEN-LAST:event_browseBtn1ActionPerformed
 

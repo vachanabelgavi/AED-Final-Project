@@ -37,7 +37,8 @@ public class MainJFrame extends javax.swing.JFrame {
         initComponents();
 
         this.business = dB4OUtil.retrieveSystem();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setSize(1500, 1000);
+//        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         jSplitPane1.setSize(screenSize);
     }
@@ -192,8 +193,9 @@ public class MainJFrame extends javax.swing.JFrame {
                                 jSplitPane1.setRightComponent(null);
                                 container.removeAll();
                                 container.setVisible(true);
-
+                                CardLayout layout = (CardLayout) container.getLayout();
                                 container = userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                                layout.next(container);
                                 jSplitPane1.setRightComponent(container);
                                 break;
                             }
@@ -211,8 +213,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 jSplitPane1.setRightComponent(null);
                 container.removeAll();
                 container.setVisible(true);
-
-                container = userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                CardLayout layout = (CardLayout) container.getLayout();
+                container.setSize(1500, 1000);
+                container.add("work rea", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
+                layout.next(container);
                 jSplitPane1.setRightComponent(container);
             } else {
                 JOptionPane.showMessageDialog(null, "User does not exist!");
