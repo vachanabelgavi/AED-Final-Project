@@ -32,8 +32,6 @@ public class orgadminMainJFrame extends javax.swing.JFrame {
         this.network = network;
         this.enterprise = enterprise;
 
-        
-
         this.setVisible(true);
     }
 

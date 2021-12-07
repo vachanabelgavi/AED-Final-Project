@@ -143,10 +143,10 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 310, -1));
 
         jLabel1.setText("DOCTOR'S COMMENTS");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, -1, -1));
 
         jLabel2.setText("DOCTOR SIGNATURE");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
 
         jScrollPane3.setViewportView(jTextPane1);
 
