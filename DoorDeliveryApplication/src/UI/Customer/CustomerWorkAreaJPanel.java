@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.Customer;
+package UI.Customer;
 
 import Business.Customer.Customer;
 import Business.Ecosystem;
@@ -15,8 +15,8 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import ui.OrganizationPanels.PharmacyJPanel;
-import ui.OrganizationPanels.VaccineJPanel;
+import UI.OrganizationPanels.PharmacyJPanel;
+import UI.OrganizationPanels.VaccineJPanel;
 
 /**
  *
