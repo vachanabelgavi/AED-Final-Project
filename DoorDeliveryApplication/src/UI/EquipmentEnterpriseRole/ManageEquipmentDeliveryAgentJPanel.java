@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -47,21 +48,21 @@ JPanel userProcessContainer;
         this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
-        
+
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
-        
-        System.out.println("Going inside populate table"); 
+
+        System.out.println("Going inside populate table");
         populateTable();
         displaycombo();
-        
-        
+
+
         if(this.business.getUserAccountDirectory() == null) {
             this.userdir = new UserAccountDirectory();
             business.setUserAccountDirectory(userdir);
         } else {
             this.userdir = business.getUserAccountDirectory();
-            
+
         }
     }
 
@@ -402,7 +403,7 @@ JPanel userProcessContainer;
             System.out.println(" \n"+dm.getZipcodes());
             System.out.println(" \n"+dm.getActive());
             Object[] inrow = {dm.getUseraccount().getEmployee().getName(),dm.getZipcodes(),dm.getActive(),dm.getUseraccount().getUsername(), dm.getUseraccount().getPassword()};
-            dtm.insertRow(dtm.getRowCount(),inrow); 
+            dtm.insertRow(dtm.getRowCount(),inrow);
             System.out.println("done");
     }
 }
@@ -411,7 +412,7 @@ JPanel userProcessContainer;
          del = enterprise.getDeliveryAgentsInEnterpiselist();
         for(DeliveryAgent dd : del ){
             cmbzipcode.addItem(dd.getZipcodes().toString());
-        
-        }  
+
+        }
     }
 }

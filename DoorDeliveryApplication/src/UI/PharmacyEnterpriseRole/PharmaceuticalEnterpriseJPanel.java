@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,7 +19,7 @@ import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
- 
+
 /**
  *
  * @author pannaga
@@ -28,7 +29,7 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
     /**
      * Creates new form PharmaceuticalEnterpriseJPanel
      */
-    
+
     JPanel userProcessContainer;
      Ecosystem ecosystem;
      UserAccount account;
@@ -37,10 +38,10 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
      Customer customer;
      Organization organization;
      Network network;
-     
+
     public PharmaceuticalEnterpriseJPanel(JPanel userProcessContainer, UserAccount account,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
-        
+
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         this.account = account;
@@ -48,20 +49,20 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.network = new Network();
         this.customer = new Customer();
-        
+
         System.out.println("HAS TO CIome  in phharma e ");
-        
+
         if(this.ecosystem == null) {
             JOptionPane.showMessageDialog(null, "Something went wrong");
         } else {
             System.out.println("this.ecosystem for pharma is not null");
         }
-        
-        
+
+
        // populateTree();
     }
 
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -183,7 +184,7 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
         userProcessContainer.add("manageDeliveryAgentJPanel",manageDeliveryAgentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-        
+
     }//GEN-LAST:event_btndeliveryagentsActionPerformed
 
     private void btnmanageordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmanageordersActionPerformed
@@ -193,7 +194,7 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
         userProcessContainer.add("managePharmaOrdersJPanel",managePharmaOrdersJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-        
+
     }//GEN-LAST:event_btnmanageordersActionPerformed
 
 

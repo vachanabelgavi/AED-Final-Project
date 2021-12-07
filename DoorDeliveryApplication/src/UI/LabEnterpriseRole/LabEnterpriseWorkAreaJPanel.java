@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -24,7 +25,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form LabEnterpriseWorkAreaJPanel
      */
-   
+
     JPanel userProcessContainer;
      Ecosystem ecosystem;
      UserAccount account;
@@ -33,8 +34,8 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
      Customer customer;
      Organization organization;
      Network network;
-    
-    
+
+
     public LabEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
@@ -44,8 +45,8 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.network = new Network();
         this.customer = new Customer();
-        
-        
+
+
     }
 
     /**

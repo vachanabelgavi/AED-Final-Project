@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -51,31 +52,31 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         this.z = new ArrayList<>();
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
-        
+
 //        if(this.business == null) {
 //            JOptionPane.showMessageDialog(null, "Something went wrong");
 //        } else {
 //            System.out.println("this.ecosystem for pharma is not null");
 //        }
-       
-        System.out.println("Going inside populate table"); 
+
+        System.out.println("Going inside populate table");
         populateTable();
         displaycombo();
-        
-        
+
+
         if(this.business.getUserAccountDirectory() == null) {
             this.userdir = new UserAccountDirectory();
             business.setUserAccountDirectory(userdir);
         } else {
             this.userdir = business.getUserAccountDirectory();
-            
+
         }
-        
-        
-       
+
+
+
     }
 
-   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -228,8 +229,8 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
       Employee em = new Employee();
         DeliveryAgent d = new DeliveryAgent();
         UserAccount u = d.getUseraccount();
@@ -300,10 +301,10 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         txtPassword.setText("");
         jcheckyes.setSelected(false);
         jcheckno.setSelected(false);
-        
-        
-        
-        
+
+
+
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void jcheckyesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcheckyesActionPerformed
@@ -323,10 +324,10 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        
-      
-        
+
+
+
+
         ArrayList<UserAccount> usrl = userdir.getUserAccountList();
         ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
         String deliveryman = dtm.getValueAt(selectrow,0).toString();
@@ -339,7 +340,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         int dialogueb = JOptionPane.YES_NO_OPTION;
         int dialoguer = JOptionPane.showConfirmDialog(this, "Delete this data","Delete", dialogueb);
         if(dialoguer == 0){
-            
+
             try{
             for(DeliveryAgent dm: delList){
                 if(dm.getUseraccount().getEmployee().getName().equals(deliveryman) && dm.getUseraccount().getUsername().equals(uname)){
@@ -358,21 +359,21 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
                     usrl.remove(dtm.getValueAt(selectrow,3));
                     usrl.remove(dtm.getValueAt(selectrow,4));
                   //  usrl.remove(ua.getPassword().equals(passwd));
-                  
+
                     System.out.println("Removed username and password");
                 }
             }
-            
+
              this.dtm.removeRow(selectrow);
       }
-	
-       
-        
+
+
+
         populateTable();
     }//GEN-LAST:event_btndeleteActionPerformed
 
     public void populateTable(){
-        
+
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);
         ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
@@ -383,18 +384,18 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
             System.out.println(" \n"+dm.getZipcodes());
             System.out.println(" \n"+dm.getActive());
             Object[] inrow = {dm.getUseraccount().getEmployee().getName(),dm.getZipcodes(),dm.getActive(),dm.getUseraccount().getUsername(), dm.getUseraccount().getPassword()};
-            dtm.insertRow(dtm.getRowCount(),inrow); 
+            dtm.insertRow(dtm.getRowCount(),inrow);
             System.out.println("done");
   }
-   
+
  }
-    
-    
+
+
     private void displaycombo() {
-       
+
          del = enterprise.getDeliveryAgentsInEnterpiselist();
-         
-        
+
+
         for(DeliveryAgent dd : del ){
          //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
            // z.add(dd.getZipcodes().get(j));
@@ -402,17 +403,17 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
               for(int i =0; i< dd.getZipcodes().size(); i++){
               cmbzipcode.addItem(z.get(i).toString());
               }
-             }  
+             }
 //    }
     }
- 
-   
-       
-        
+
+
+
+
 //        for(Network n : business.getNetworks()){
-//            
+//
 //            for(int i=0; i < n.; i++){
-//                
+//
 //                Object [] row = new Object[3];
 //                row[0] = n.getCustomerDirectory().getCustomerList().get(i).getName();
 //                row[1] = n.getCustomerDirectory().getCustomerList().get(i).getEmail();
@@ -422,27 +423,27 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 //                row[5] = n.getCustomerDirectory().getCustomerList().get(i).getZipcode();
 //                row[6] = n.getCustomerDirectory().getCustomerList().get(i).getUsername();
 //                row[7] = n.getCustomerDirectory().getCustomerList().get(i).getPassword();
-//                
+//
 //                dtm.addRow(row);
 //            }
 //        }
 
 //    for(Employee ent: business.getEmployeeDirectory().getEmployeeList()){
-//        
+//
 //    }
-      
+
 //    for(Network network:business.getNetworks()){
 //                //Step 2.a: check against each enterprise
 //                for(int i=0; i < network.getEnterpriseDirectory().getEnterpriseList().size(); i++){
 //                    for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
-//                      
+//
 //                    }
 //                    }
 //    }
 
 
 
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;

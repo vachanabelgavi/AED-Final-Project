@@ -45,37 +45,37 @@ JPanel userProcessContainer;
      */
     public ManageVaccinationDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
         initComponents();
-        
+
              this.userProcessContainer = userProcessContainer;
         this.business = ecosystem;
         this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
-        
+
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
-        
+
 //        if(this.business == null) {
 //            JOptionPane.showMessageDialog(null, "Something went wrong");
 //        } else {
 //            System.out.println("this.ecosystem for pharma is not null");
 //        }
-       
-        System.out.println("Going inside populate table"); 
+
+        System.out.println("Going inside populate table");
         populateTable();
-       
-        
-        
+
+
+
         if(this.business.getUserAccountDirectory() == null) {
             this.userdir = new UserAccountDirectory();
             business.setUserAccountDirectory(userdir);
         } else {
             this.userdir = business.getUserAccountDirectory();
-            
+
         }
     }
 
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -210,7 +210,7 @@ JPanel userProcessContainer;
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
+
             .addGap(0, 1069, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -226,13 +226,7 @@ JPanel userProcessContainer;
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
-=======
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
->>>>>>> 858a7bde21c318c7e338640809a8e833c114f448
+
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -412,7 +406,7 @@ JPanel userProcessContainer;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
-        
+
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);
         ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
@@ -423,7 +417,7 @@ JPanel userProcessContainer;
             System.out.println(" \n"+dm.getZipcodes());
             System.out.println(" \n"+dm.getActive());
             Object[] inrow = {dm.getUseraccount().getEmployee().getName(),dm.getZipcodes(),dm.getActive(),dm.getUseraccount().getUsername(), dm.getUseraccount().getPassword()};
-            dtm.insertRow(dtm.getRowCount(),inrow); 
+            dtm.insertRow(dtm.getRowCount(),inrow);
             System.out.println("done");
   }
    }

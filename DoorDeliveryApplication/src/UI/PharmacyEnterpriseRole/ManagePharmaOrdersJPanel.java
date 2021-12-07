@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,7 +34,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManagePharmaOrdersJPanel
      */
-    
+
     private JPanel userProcessContainer;
     private Ecosystem business;
     private CustomerDirectory customerDirectory;
@@ -49,7 +50,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     private ArrayList<Order> orderplaced = new ArrayList<Order>();
     Organization organization;
     Network network;
-     
+
     public ManagePharmaOrdersJPanel(JPanel userProcessContainer, Ecosystem business,Network network,UserAccountDirectory userdir, Enterprise enterprise, Customer customer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -58,20 +59,20 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.customer = customer;
         this.network = network;
-        
-        
+
+
         System.out.println("CAME INTO PHARMA ORDER PANEL");
         dtm = (DefaultTableModel) pharmaOrderTable.getModel();
-        
+
 //        if (order.getItemsOrdered() != null){
-//               
+//
 //            }
 //            else{
 ////                this.itemsdir = new ItemsDirectory();
 ////                enterprise.setItemsDirectory(itemsdir);
 //            }
-            
-       
+
+
         displaycombobox();
         populateTable();
     }
@@ -147,11 +148,11 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     private void deliverycmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliverycmbActionPerformed
         // TODO add your handling code here:
 
-        
-        
+
+
     }//GEN-LAST:event_deliverycmbActionPerformed
 
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -163,13 +164,13 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void displaycombobox() {
-      
+
       d = enterprise.getDeliveryAgentsInEnterpiselist();
         for(DeliveryAgent dd : d ){
             deliverycmb.addItem(dd.getUseraccount().getEmployee().getName());
-        
-        }  
-        
+
+        }
+
     }
 
     @SuppressWarnings("empty-statement")
@@ -179,23 +180,19 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
          ArrayList<Order> customerOrder = this.customer.getOrderlist();
          ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
       for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
-          for (Order o : customerOrder) { 
-             
+          for (Order o : customerOrder) {
+
               System.out.println("" + o.getOrderId());
                System.out.println("" + customer.getCustomerCart().getCartId());
-                System.out.println("" + customer.getName() ); 
+                System.out.println("" + customer.getName() );
                 System.out.println("" + customer.getLocation());
                  System.out.println("" + customer.getZipcode());
-                  System.out.println("" + o.getOrderPayment().getAmount());   
+                  System.out.println("" + o.getOrderPayment().getAmount());
           Object[] inrow = {o.getOrderId(),customer.getCustomerCart().getCartId(),customer.getName(),customer.getLocation(),customer.getZipcode(), o.getOrderPayment().getAmount(), null};
-            dtm.insertRow(dtm.getRowCount(),inrow); 
+            dtm.insertRow(dtm.getRowCount(),inrow);
             System.out.println("done");
             }
       }
-       System.out.println("done with populate Table"); 
+       System.out.println("done with populate Table");
     }
 }
-        
-        
-        
-    
