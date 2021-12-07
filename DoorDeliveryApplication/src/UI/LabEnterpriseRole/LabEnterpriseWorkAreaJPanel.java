@@ -13,6 +13,7 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
+import UI.LabCenters.ManageLabCentersJPanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 /**
@@ -106,7 +107,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         lblSelectedNode.setForeground(new java.awt.Color(102, 102, 255));
         lblSelectedNode.setText("<View_selected_node>");
 
-        btnlabassistants.setText("Manage Lab Assistants");
+        btnlabassistants.setText("Manage Lab Centers");
         btnlabassistants.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnlabassistantsActionPerformed(evt);
@@ -196,6 +197,10 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
     private void btnlabassistantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlabassistantsActionPerformed
         // TODO add your handling code here:
         
+        ManageLabCentersJPanel managelabs = new ManageLabCentersJPanel(userProcessContainer, account, organization, enterprise, ecosystem);
+        userProcessContainer.add("manageLabOrdersJPanel",managelabs);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
         
     }//GEN-LAST:event_btnlabassistantsActionPerformed
 
