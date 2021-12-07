@@ -25,18 +25,19 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form LabEnterpriseWorkAreaJPanel
      */
 
-    JPanel userProcessContainer;
-     Ecosystem ecosystem;
-     UserAccount account;
-     UserAccountDirectory useraccountdirectory;
-     Enterprise enterprise;
-     Customer customer;
-     Organization organization;
-     Network network;
+    private JPanel userProcessContainer;
+    private Ecosystem ecosystem;
+    private UserAccount account;
+    private UserAccountDirectory useraccountdirectory;
+    private Enterprise enterprise;
+    private Customer customer;
+    private Organization organization;
+    private Network network;
 
 
     public LabEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
+        
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         this.account = account;
@@ -44,7 +45,6 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.network = new Network();
         this.customer = new Customer();
-
 
     }
 
@@ -195,6 +195,8 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnlabassistantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlabassistantsActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_btnlabassistantsActionPerformed
 
 
