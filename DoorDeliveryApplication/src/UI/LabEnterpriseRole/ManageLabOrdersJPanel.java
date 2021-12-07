@@ -25,20 +25,20 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageLabOrdersJPanel
      */
-    
+
      private JPanel userProcessContainer;
     private Ecosystem business;
     private CustomerDirectory customerDirectory;
     public ManageLabOrdersJPanel(JPanel userProcessContainer, Ecosystem business) {
         initComponents();
-        initComponents();
+        //initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
-        
+
         for(Network n : business.getNetworks()){
             this.customerDirectory = n.getCustomerDirectory();
         }
-        
+
         displaycombobox();
         populateCustomerOrderTable();
     }
@@ -159,10 +159,10 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void displaycombobox() {
-        
+
     }
 
     private void populateCustomerOrderTable() {
-       
+
     }
 }

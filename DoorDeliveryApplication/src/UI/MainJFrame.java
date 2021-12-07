@@ -237,6 +237,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "User does not exist!");
             }
 
+
         }
 
         btnLogin.setEnabled(true);
