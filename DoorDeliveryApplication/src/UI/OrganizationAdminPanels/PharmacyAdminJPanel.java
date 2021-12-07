@@ -12,6 +12,7 @@ import Business.Network.Network;
 import Business.Orders.Order;
 import Business.Organization.Organization;
 import Business.Organization.PharmacyOrganization;
+import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.PrescriptionUploadWorkRequest;
 import Business.WorkQueue.WorkQueue;
@@ -208,8 +209,15 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
         ArrayList<PrescriptionUploadWorkRequest> workrequests = this.ecosystem.getPrescriptionWorkList();
 
-        UserAccount doctorUser = this.enterprise.getOrganizationDirectory().getOrganizationByName("Doctor Associate").getUserAccountDirectory().findUser("nidhi");
+        ArrayList<UserAccount> users = this.enterprise.getOrganizationDirectory().getOrganizationByName("Doctor Associate").getUserAccountDirectory().getUserAccountList();
 
+        UserAccount doctorUser = null;
+        for(UserAccount u: users) {
+            if(u.getRole().equals(Role.RoleType.Doctor)) {
+                doctorUser = u;
+            }
+        }
+        
         PrescriptionUploadWorkRequest pu = new PrescriptionUploadWorkRequest();
         pu.setOrderId(this.orderid);
         pu.setSender(user);
@@ -223,7 +231,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
 //        GET DOCTOR's WORKREQUEST
 //        created a new work request between organization admin and the doctor
-        doctorUser.getWorkQueue().getWorkRequestList().add(pu);
+//        doctorUser.getWorkQueue().getWorkRequestList().add(pu);
 //        add the prescription to customer workqueue as well
         this.currentCustomer.getWorkQueue().getWorkRequestList().add(pu);
         this.currentOrder.setStatus("APPROVAL NEEDED");

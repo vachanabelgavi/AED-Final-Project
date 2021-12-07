@@ -43,7 +43,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private Order currentOrder;
 
     private Customer currentCustomer;
-    
+
     PrescriptionUploadWorkRequest currentRequest;
 
     /**
@@ -63,7 +63,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         this.tableModel = (DefaultTableModel) itemTable.getModel();
 
         populateOrderDropdown();
-        
+
         populateZipcodes();
         populateNetworks();
     }
@@ -329,7 +329,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "jpg", "jpeg");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "jpg", "jpeg", "pdf");
         chooser.addChoosableFileFilter(filter);
         this.chosenFile = chooser.getSelectedFile();
 
@@ -350,36 +350,39 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
 //        GET ORDER BUTTON
-
-        for (PrescriptionUploadWorkRequest work : this.workRequest) {
-            if (work.getOrderId() == Integer.valueOf((int) orderComboBox.getSelectedItem())) {
+        try {
+            for (PrescriptionUploadWorkRequest work : this.workRequest) {
+                if (work.getOrderId() == Integer.valueOf((int) orderComboBox.getSelectedItem())) {
 //            once order is found in the request
 //      Get customer info
-                this.currentRequest = work;
-                labelCustomer.setText(work.getCustomer().getName());
-                Order o = work.getCustomer().findOrderById(work.getOrderId());
+                    this.currentRequest = work;
+                    labelCustomer.setText(work.getCustomer().getName());
+                    Order o = work.getCustomer().findOrderById(work.getOrderId());
 
-                this.currentOrder = o;
+                    this.currentOrder = o;
 
-                tableModel.setRowCount(0);
+                    tableModel.setRowCount(0);
 
-                for (OrderItem oi : o.getItemsOrdered()) {
-                    tableModel.insertRow(tableModel.getRowCount(), new Object[]{
-                        oi.getProductId(),
-                        oi.getProductName(),
-                        oi.getQty()
-                    });
+                    for (OrderItem oi : o.getItemsOrdered()) {
+                        tableModel.insertRow(tableModel.getRowCount(), new Object[]{
+                            oi.getProductId(),
+                            oi.getProductName(),
+                            oi.getQty()
+                        });
+                    }
+
+                    fieldComment.setText(work.getComments());
+                    fieldSign.setText(work.getSignature());
+                    jLabel15.setText(o.getStatus());
+
+                    ImageIcon ii = new ImageIcon(work.getPresecription().getAbsolutePath());
+                    jLabel1.setIcon(ii);
+
+                    break;
                 }
-
-                fieldComment.setText(work.getComments());
-                fieldSign.setText(work.getSignature());
-                jLabel15.setText(o.getStatus());
-
-                ImageIcon ii = new ImageIcon(work.getPresecription().getAbsolutePath());
-                jLabel1.setIcon(ii);
-
-                break;
             }
+        } catch (Exception e) {
+
         }
 
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -392,7 +395,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             this.currentOrder.setStatus("PRESCRIPTION APPROVED");
             this.currentRequest.setStatus("PRESCRIPTION APPROVED");
 
-            JOptionPane.showConfirmDialog(null, "Your request is closed!");
+            JOptionPane.showMessageDialog(null, "Your request is closed!");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -405,7 +408,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             this.currentOrder.setStatus("PRESCRIPTION REJECTED");
             this.currentRequest.setStatus("PRESCRIPTION REJECTED");
 
-            JOptionPane.showConfirmDialog(null, "Your request is closed!");
+            JOptionPane.showMessageDialog(null, "Your request is closed!");
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -422,6 +425,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
             Customer customer = new Customer();
 
+//            CROSS NETWORK REQUEST
             for (Network network : this.ecosystem.getNetworks()) {
                 customer = this.network.getCustomerDirectory().searchCustomer(jTextField1.getText());
                 if (customer != null) {
@@ -430,42 +434,43 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                     fieldPhone.setText(String.valueOf(customer.getPhoneNumber()));
                     fieldAddress.setText(customer.getAddress());
                     networkCombo.setSelectedItem(this.network);
-                    zipcodeCombo.setSelectedItem(String.valueOf(customer.getZipcode()));
+                    zipcodeCombo.setSelectedItem(customer.getZipcode());
                     this.currentCustomer = customer;
                     JOptionPane.showMessageDialog(null, "Done!");
                     break;
                 } else {
-                    
+
                 }
             }
-            
-            if(customer == null) {
+
+            if (customer == null) {
                 JOptionPane.showMessageDialog(null, "This customer does not exist with us!");
             }
-         
+
         }
 
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     public void populateZipcodes() {
-        for(Network n: this.ecosystem.getNetworks()) {
-            if(n.equals(networkCombo.getSelectedItem())) {
-                for(Integer i: n.getZipcodes()) {
+        for (Network n : this.ecosystem.getNetworks()) {
+            Network nSelected = (Network) networkCombo.getSelectedItem();
+            if (n.getNetworkName().equals(nSelected.getNetworkName())) {
+                for (Integer i : n.getZipcodes()) {
                     zipcodeCombo.addItem(i);
                 }
             }
         }
     }
-    
+
     public void populateNetworks() {
-        
-        for(Network n: this.ecosystem.getNetworks()) {
+
+        for (Network n : this.ecosystem.getNetworks()) {
             networkCombo.addItem(n);
         }
-        
+
     }
-    
+
     public void populateOrderDropdown() {
         for (PrescriptionUploadWorkRequest work : this.workRequest) {
             if (work != null) {
