@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.Customer;
+package UI.Customer;
 
 import Business.Customer.Customer;
 import Business.Ecosystem;

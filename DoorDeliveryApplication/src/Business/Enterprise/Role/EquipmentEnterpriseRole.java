@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,6 +14,7 @@ import Business.Role.DoctorRole;
 import Business.Role.PrescriberRole;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import UI.EquipmentEnterpriseRole.EquipmentEnterpriseWorkAreaJPanel;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -23,7 +25,6 @@ import javax.swing.JPanel;
 public class EquipmentEnterpriseRole extends EnterpriseRole {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Network network, Organization organization, Enterprise enterprise, Ecosystem business) {
-//        return new DoctorWorkAreaJPanel(userProcessContainer, account, (EnterpriseProvidersOrganization)organization, enterprise); 
-        return null;
+      return new EquipmentEnterpriseWorkAreaJPanel(userProcessContainer, account, organization, enterprise, business); 
     }
 }

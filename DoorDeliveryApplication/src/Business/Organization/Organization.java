@@ -10,6 +10,7 @@ import Business.Orders.Order;
 import Business.Products.Product;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
+import Business.WorkQueue.PrescriptionUploadWorkRequest;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,6 +31,10 @@ public abstract class Organization {
     private UserAccountDirectory userAccountDirectory;
     private ArrayList<Product> productList;
 
+//    WorkRequest Arraylist 
+    private ArrayList<PrescriptionUploadWorkRequest> prescriptionWorkList;
+            
+            
     public enum Type {
         Admin("Organization Administrator"),
         Doctor("Doctor"),
@@ -61,6 +66,7 @@ public abstract class Organization {
         this.userAccountDirectory = new UserAccountDirectory();
         this.organizationID = randomIdGenerator();
         this.productList = new ArrayList<Product>();
+        this.prescriptionWorkList = new ArrayList<PrescriptionUploadWorkRequest>();
     }
 
     public int randomIdGenerator() {
@@ -138,4 +144,14 @@ public abstract class Organization {
         prod.setStockunits(stock);
         this.productList.add(prod);
     }
+
+    public ArrayList<PrescriptionUploadWorkRequest> getPrescriptionWorkList() {
+        return prescriptionWorkList;
+    }
+
+    public void setPrescriptionWorkList(ArrayList<PrescriptionUploadWorkRequest> prescriptionWorkList) {
+        this.prescriptionWorkList = prescriptionWorkList;
+    }
+    
+    
 }

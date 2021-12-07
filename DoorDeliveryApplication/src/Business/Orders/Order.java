@@ -26,7 +26,15 @@ public class Order {
     private static int count = 0;
     private String organizationname;
     private String enterprisename;
-    
+    private double totalPrice;
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
     
     
     private ArrayList<OrderItem> itemsOrdered;
@@ -38,7 +46,6 @@ public class Order {
     public Order() {
         this.name = "";
         this.price = 0.0;
-        this.prescription = null;
         this.orderPayment = new Payment();
         this.count++;
         this.orderId = this.count;
@@ -67,6 +74,7 @@ public class Order {
     }
 
     public void setPrescription(File prescription) {
+        System.out.println("CAME TO SET PRESCRIPTION "+ prescription.getAbsolutePath());
         this.prescription = prescription;
     }
 
