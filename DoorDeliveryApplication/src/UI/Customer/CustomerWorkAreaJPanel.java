@@ -10,9 +10,11 @@ import Business.Ecosystem;
 import Business.Network.Network;
 import UI.OrganizationPanels.CustomerPrescriptionJPanel;
 import UI.OrganizationPanels.OrdersJPanel;
+import UI.OrganizationPanels.PrescriptionHistoryJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import ui.OrganizationPanels.PharmacyJPanel;
 import ui.OrganizationPanels.VaccineJPanel;
 
@@ -66,7 +68,10 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         cartBtn1 = new javax.swing.JButton();
         orderBtn1 = new javax.swing.JButton();
         paymentBTn1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
+        setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(1500, 900));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,9 +155,17 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         paymentBTn1.setText("MY PAYMENTS");
         leftPane.add(paymentBTn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 150, 40));
 
+        jButton2.setText("PRESCRIPTION HISTORY");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        leftPane.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 150, 40));
+
         pane.setLeftComponent(leftPane);
 
-        add(pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 5, 1040, 700));
+        add(pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 5, 1210, 700));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
@@ -222,11 +235,18 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        pane.setRightComponent(null);
+        pane.setRightComponent(new PrescriptionHistoryJPanel(this.system, this.customer));
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseBtn1;
     private javax.swing.JButton cartBtn1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

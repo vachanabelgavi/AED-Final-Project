@@ -64,12 +64,22 @@ public class MainJFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DOOR TO DOOR DELIVERY");
+        setBackground(new java.awt.Color(255, 153, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setResizable(false);
+        setType(java.awt.Window.Type.POPUP);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jSplitPane1.setDividerLocation(0);
         jSplitPane1.setDividerSize(1);
+        jSplitPane1.setAutoscrolls(true);
+        jSplitPane1.setMaximumSize(new java.awt.Dimension(1500, 1000));
+        jSplitPane1.setMinimumSize(new java.awt.Dimension(1500, 1000));
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(1500, 1000));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1500, 1000));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
@@ -102,13 +112,14 @@ public class MainJFrame extends javax.swing.JFrame {
         container.setBackground(new java.awt.Color(255, 255, 255));
         container.setOpaque(false);
         container.setLayout(new java.awt.CardLayout());
-        jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 640));
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1250, 650));
+        jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 640));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 100));
 
         jSplitPane1.setRightComponent(jPanel1);
 
-        getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1270, 650));
+        getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1270, 720));
 
+        jPanel2.setMinimumSize(new java.awt.Dimension(1500, 1000));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("EXIT");
@@ -122,6 +133,7 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 40));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -146,6 +158,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 Customer c = network.getCustomerDirectory().authenticateCustomer(userName, password);
                 if (c != null) {
 //                   create a customerworkareajpanel
+                    JOptionPane.showMessageDialog(null, "login successful!");
                     jSplitPane1.setLeftComponent(null);
                     jSplitPane1.setRightComponent(null);
                     container.setVisible(true);
@@ -170,36 +183,40 @@ public class MainJFrame extends javax.swing.JFrame {
                                         inEnterprise = enterprise;
                                         inOrganization = organization;
                                         inNetwork = network;
-
+                                        JOptionPane.showMessageDialog(null, "login successful!");
                                         jSplitPane1.setLeftComponent(null);
                                         jSplitPane1.setRightComponent(null);
                                         container.removeAll();
                                         container.setVisible(true);
-
-                                        container = userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                                        container.setLayout(new CardLayout());
+                                        CardLayout layout = (CardLayout) container.getLayout();
+                                        container.setSize(1500, 1000);
+                                        container.add("org area", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
+                                        layout.next(container);
                                         jSplitPane1.setRightComponent(container);
                                         break;
                                     } else {
-
+                                        
                                     }
                                 }
                             } else {
                                 inNetwork = network;
                                 inEnterprise = enterprise;
 
+                                JOptionPane.showMessageDialog(null, "login successful!");
+
                                 jSplitPane1.setLeftComponent(null);
                                 jSplitPane1.setRightComponent(null);
                                 container.removeAll();
                                 container.setVisible(true);
                                 CardLayout layout = (CardLayout) container.getLayout();
-                                container = userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business);
+                                container.setSize(1500, 1000);
+                                container.add("enterprise area", userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
                                 layout.next(container);
                                 jSplitPane1.setRightComponent(container);
                                 break;
                             }
-                            if (inOrganization != null) {
-                                break;
-                            }
+
                         }
                     }
                 }
