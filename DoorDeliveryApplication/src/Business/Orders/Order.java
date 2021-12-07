@@ -39,7 +39,6 @@ public class Order {
     public Order() {
         this.name = "";
         this.price = 0.0;
-        this.prescription = null;
         this.orderPayment = new Payment();
         this.count++;
         this.orderId = this.count;
@@ -68,6 +67,7 @@ public class Order {
     }
 
     public void setPrescription(File prescription) {
+        System.out.println("CAME TO SET PRESCRIPTION "+ prescription.getAbsolutePath());
         this.prescription = prescription;
     }
 

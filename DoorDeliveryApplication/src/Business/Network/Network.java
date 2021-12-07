@@ -3,6 +3,7 @@ package Business.Network;
 import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.Enterprise.EnterpriseDirectory;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,11 +17,13 @@ import Business.Enterprise.EnterpriseDirectory;
  */
 public class Network {
     private String networkName;
+    private ArrayList<Integer> zipcodes;
 //    Customers 
     private CustomerDirectory customerDirectory;
     private EnterpriseDirectory enterpriseDirectory;
     
     public Network() {
+        this.zipcodes = new ArrayList<>();
         this.enterpriseDirectory = new EnterpriseDirectory();
         this.customerDirectory = new CustomerDirectory();
     }
@@ -57,6 +60,16 @@ public class Network {
         }
         return null;
     }
+
+    public ArrayList<Integer> getZipcodes() {
+        return zipcodes;
+    }
+
+    public void setZipcodes(ArrayList<Integer> zipcodes) {
+        this.zipcodes = zipcodes;
+    }
+    
+    
     
     @Override
     public String toString() {

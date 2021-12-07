@@ -24,12 +24,14 @@ public class OrdersJPanel extends javax.swing.JPanel {
     private Customer customer;
     private Ecosystem ecosystem;
     DefaultTableModel tableModel;
+    DefaultTableModel delTableModel;
 
     public OrdersJPanel(Ecosystem system, Customer customer) {
         initComponents();
         this.ecosystem = system;
         this.customer = customer;
-        this.tableModel = (DefaultTableModel) jTable1.getModel();
+        this.tableModel = (DefaultTableModel) orderhistoryTable.getModel();
+        this.delTableModel = (DefaultTableModel) jTable1.getModel();
 
         populateOrders();
     }
@@ -50,7 +52,7 @@ public class OrdersJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        orderhistoryTable = new javax.swing.JTable();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -95,12 +97,12 @@ public class OrdersJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 140, -1));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        orderhistoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ORDER ID", "ORDER STATUS", "PAYMENT STATUS", "ORDER TOTAL"
+                "ORDER ID", "ORDER STATUS", "PAYMENT STATUS", "ORDER PRICE"
             }
         ) {
             Class[] types = new Class [] {
@@ -118,10 +120,7 @@ public class OrdersJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(3).setHeaderValue("");
-        }
+        jScrollPane2.setViewportView(orderhistoryTable);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 740, 180));
 
@@ -151,22 +150,40 @@ public class OrdersJPanel extends javax.swing.JPanel {
         try {
             for (Order o : this.customer.getOrderlist()) {
                 //                populate items
-               
-                    tableModel.insertRow(tableModel.getRowCount(), new Object[]{
-                        o.getOrderId(),
-                        o.getStatus(),
-                        o.getOrderPayment().getStatus(),
-                        o.getPrice()
-                    });
 
-                
-                
+                tableModel.insertRow(tableModel.getRowCount(), new Object[]{
+                    o.getOrderId(),
+                    o.getStatus(),
+                    o.getOrderPayment().getStatus(),
+                    o.getPrice()
+                });
+
             }
 
         } catch (Exception e) {
 
         }
 
+    }
+
+    public void populateOrderDelivery() {
+        delTableModel.setRowCount(0);
+        try {
+            for (Order o : this.customer.getOrderlist()) {
+                //                populate items
+                if (o.getStatus().equalsIgnoreCase("out for delivery")) {
+                    delTableModel.insertRow(delTableModel.getRowCount(), new Object[]{
+                        o.getOrderId(),
+                        o.getStatus(),
+                        o.getOrderPayment().getStatus(),
+                        o.getPrice()
+                    });
+                }
+            }
+
+        } catch (Exception e) {
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -177,6 +194,6 @@ public class OrdersJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable orderhistoryTable;
     // End of variables declaration//GEN-END:variables
 }

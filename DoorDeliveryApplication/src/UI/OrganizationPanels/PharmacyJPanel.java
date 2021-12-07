@@ -48,6 +48,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Pharmacy");
 
         populateTable();
+        populateStockList();
     }
 
     /**
@@ -64,6 +65,9 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         prodTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        stockList = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -113,6 +117,18 @@ public class PharmacyJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 450, 100, -1));
+
+        stockList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = {  };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(stockList);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 150, 160, 260));
+
+        jLabel2.setText("OUT OF STOCK :(");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 120, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -139,24 +155,24 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                         Boolean found = false;
                         for (OrderItem item : customerCartItems) {
                             System.out.println(item.getProductName() + " ******** item");
-                            if (item.getProductName().equals(String.valueOf( tableModel.getValueAt(i, 1) )) ) {
+                            if (item.getProductName().equals(String.valueOf(tableModel.getValueAt(i, 1)))) {
                                 System.out.println(item.getProductName() + " ******** item exists");
                                 this.alert.ShowAlert("Chosen item" + item.getProductName() + " already in cart!");
                                 found = true;
                                 break;
-                            } 
-                        }
-                        
-                        if(!found) {
-                                OrderItem o = new OrderItem();
-                                o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
-                                o.setProductName((String) tableModel.getValueAt(i, 1));
-                                o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
-                                o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
-                                o.setOrganizationname("Pharmacy");
-                                customerCartItems.add(o);
-                                this.alert.ShowAlert("Added " + o.getProductName() + " to cart!");
                             }
+                        }
+
+                        if (!found) {
+                            OrderItem o = new OrderItem();
+                            o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                            o.setProductName((String) tableModel.getValueAt(i, 1));
+                            o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                            o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                            o.setOrganizationname("Pharmacy");
+                            customerCartItems.add(o);
+                            this.alert.ShowAlert("Added " + o.getProductName() + " to cart!");
+                        }
                     } else {
                         System.out.println("NEW ITEMS ADDED ");
                         OrderItem o = new OrderItem();
@@ -172,7 +188,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                 }
 
             }
-           
+
         } catch (Exception e) {
             System.out.println(e + " CART PROBLEM ");
         }
@@ -200,11 +216,29 @@ public class PharmacyJPanel extends javax.swing.JPanel {
 
     }
 
+    public void populateStockList() {
+        ArrayList<Product> products = this.organization.getOrganizationProducts();
+        try {
+            String[] names = new String[100];
+            int counter = 0;
+            for (Product p : products) {
+                if (p.getStockunits() ==  0) {
+                    names[counter] = p.getName();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable prodTable;
+    private javax.swing.JList<String> stockList;
     // End of variables declaration//GEN-END:variables
 }

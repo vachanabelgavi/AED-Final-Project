@@ -144,6 +144,11 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
 
         comboNetwork.setBackground(new java.awt.Color(0, 204, 153));
         comboNetwork.setModel(new javax.swing.DefaultComboBoxModel<>());
+        comboNetwork.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboNetworkActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -293,6 +298,10 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void comboNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNetworkActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboNetworkActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
