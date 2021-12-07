@@ -5,12 +5,16 @@
  */
 package UI.VaccinationEnterpriseRole;
 
+import Business.Customer.Customer;
 import Business.Ecosystem;
 //import static Business.Ecosystem.ecosystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -24,14 +28,35 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form VaccinationEnterpriseWorkAreaJPanel
      */
+      
     JPanel userProcessContainer;
-    Ecosystem ecosystem;
+     Ecosystem ecosystem;
+     UserAccount account;
+     UserAccountDirectory useraccountdirectory;
+     Enterprise enterprise;
+     Customer customer;
+     Organization organization;
+     Network network;
     
-    public VaccinationEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem ecosystem) {
+    public VaccinationEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
         
         this.userProcessContainer=userProcessContainer;
-        this.ecosystem = ecosystem;
+        this.ecosystem=ecosystem;
+         this.account = account;
+        this.enterprise = enterprise;
+        this.organization = organization;
+        this.network = new Network();
+        this.customer = new Customer();
+        
+        System.out.println("Inside Vaccination Enterprise");
+        
+        if(this.ecosystem == null) {
+            JOptionPane.showMessageDialog(null, "Something went wrong");
+        } else {
+            System.out.println("this.ecosystem for pharma is not null");
+        }
+
         
     }
 
@@ -148,7 +173,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btndeliveryagentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeliveryagentsActionPerformed
         // TODO add your handling code here:
-        ManageVaccinationDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageVaccinationDeliveryAgentJPanel(userProcessContainer, ecosystem);
+        ManageVaccinationDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageVaccinationDeliveryAgentJPanel(userProcessContainer, ecosystem, account,useraccountdirectory,enterprise);
         userProcessContainer.add("manageDeliveryAgentJPanel",manageDeliveryAgentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

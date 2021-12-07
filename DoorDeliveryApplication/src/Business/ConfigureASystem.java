@@ -78,7 +78,7 @@ public class ConfigureASystem {
         ArrayList<Integer> z2 = new ArrayList<>();
         for (int j = 1; j < 10; j++) {
             DeliveryAgent d = new DeliveryAgent();
-            z1.add(2120 + j);
+            z1.add(90011 + j);
 
             if (j < 5) {
                 Employee em = new Employee();
@@ -95,7 +95,7 @@ public class ConfigureASystem {
                 e.setDeliveryAgentsInEnterpiselist(delList);
 
             } else {
-                z2.add(2120 + j);
+                z2.add(91311 + j);
                 Employee em = new Employee();
                 em.setName("Delivery Man " + String.valueOf(j));
                 UserAccount u = d.getUseraccount();
@@ -106,6 +106,7 @@ public class ConfigureASystem {
                 d.setZipcodes(z2);
                 d.setEnterprisename(e);
                 delList.add(d);
+                e.setDeliveryAgentsInEnterpiselist(delList);
             }
         }
         e.setDeliveryAgentsInEnterpiselist(delList);
@@ -114,7 +115,7 @@ public class ConfigureASystem {
 
         Organization org = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", "California state", 2120);
 //        orgList.add(o.createOrganization(Type.Pharmacist, "Pharmacy Org in Pharmaceuitical", "California city", 0));
-        Organization org2 = o.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "California city", 0);
+        Organization org2 = o.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "LA", 0);
 
         System.out.println(org.getSupportedRole());
         ArrayList<Organization> orgList = o.getOrganizationList();
