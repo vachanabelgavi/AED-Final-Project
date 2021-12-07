@@ -39,7 +39,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
-         this.account = account;
+        this.account = account;
         this.enterprise = enterprise;
         this.organization = organization;
         this.network = new Network();

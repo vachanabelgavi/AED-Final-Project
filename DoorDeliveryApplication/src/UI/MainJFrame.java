@@ -227,7 +227,7 @@ public class MainJFrame extends javax.swing.JFrame {
             //container.remove(jPanel1);
             //container.remove(jPanel2);
             CardLayout layout=(CardLayout)container.getLayout();
-            //container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, business));
+           // container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, business));
             container.add("workArea",userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, business));
             layout.next(container);
             

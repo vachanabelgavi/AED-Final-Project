@@ -44,7 +44,7 @@ JPanel userProcessContainer;
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
-         this.ua = ua;
+        this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
         

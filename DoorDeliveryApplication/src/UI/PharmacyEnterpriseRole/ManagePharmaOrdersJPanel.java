@@ -180,6 +180,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
          ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
       for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
           for (Order o : customerOrder) { 
+             
               System.out.println("" + o.getOrderId());
                System.out.println("" + customer.getCustomerCart().getCartId());
                 System.out.println("" + customer.getName() ); 

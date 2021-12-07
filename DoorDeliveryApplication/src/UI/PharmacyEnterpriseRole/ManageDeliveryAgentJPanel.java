@@ -36,6 +36,8 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     DeliveryAgent dlvrymn;
     Enterprise enterprise;
     DefaultTableModel dtm;
+    ArrayList<DeliveryAgent> del;
+    ArrayList<Integer> z;
     /**
      * Creates new form ManageDeliveryAgentJPanel
      */
@@ -46,7 +48,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
-        
+        this.z = new ArrayList<>();
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
         
@@ -58,7 +60,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
        
         System.out.println("Going inside populate table"); 
         populateTable();
-       
+        displaycombo();
         
         
         if(this.business.getUserAccountDirectory() == null) {
@@ -92,7 +94,6 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtZipcode = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
@@ -102,6 +103,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jcheckyes = new javax.swing.JCheckBox();
         jcheckno = new javax.swing.JCheckBox();
+        cmbzipcode = new javax.swing.JComboBox<>();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -150,7 +152,6 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jLabel9.setText("Password");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
         add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 150, 194, -1));
-        add(txtZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 194, -1));
         add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 194, -1));
         add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 194, -1));
 
@@ -160,7 +161,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 100, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 100, -1));
 
         btndelete.setText("Delete");
         btndelete.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +204,9 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
             }
         });
         add(jcheckno, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
+
+        cmbzipcode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        add(cmbzipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -226,75 +230,72 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         
-        Employee em = new Employee();
+      Employee em = new Employee();
         DeliveryAgent d = new DeliveryAgent();
         UserAccount u = d.getUseraccount();
-        
+
         String name = txtName.getText();
-        int zip = Integer.parseInt(txtZipcode.getText());
+        int zip = Integer.parseInt((String) cmbzipcode.getSelectedItem());
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         boolean available;
         if(jcheckyes.isSelected() == true){
-       available = true;
+            available = true;
         }
         else if(jcheckno.isSelected() == true)
-    {
-       available = true;
-    }else{
-       available = false;
-    }
-        
-        
-        if(name.isEmpty() || 
-            txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty() || txtZipcode.getText().isEmpty()){
+        {
+            available = true;
+        }else{
+            available = false;
+        }
+
+        if(name.isEmpty() ||
+            txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty() || cmbzipcode.getSelectedItem().toString().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(txtZipcode.getText().length() < 5 || txtZipcode.getText().length() > 6){
-            JOptionPane.showMessageDialog(null, "Zip code must be 5 or 6 digits", "Warining", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+//        if(txtZipcode.getText().length() < 5 || txtZipcode.getText().length() > 6){
+//            JOptionPane.showMessageDialog(null, "Zip code must be 5 or 6 digits", "Warining", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        }
         System.out.println("Inside loop");
         boolean flag = business.getUserAccountDirectory().checkIfUsernameIsUnique(username);
         if(flag == false){
             JOptionPane.showMessageDialog(null, "User name already exists");
         }
-        
+
         else{
             //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
             System.out.println("Inside else statement");
             Employee employee = business.getEmployeeDirectory().createEmployee(name);
             business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
-      
-        ArrayList<Integer> zipcodes = new ArrayList<Integer>();
-        zipcodes.add(zip);
-         ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
-                em.setName(name);
-                u.setUsername(username);
-                u.setPassword(password);
-                u.setRole(new DeliveryAgentRole());
-                u.setEmployee(em);
-                d.setUseraccount(u);
-                d.setZipcodes(zipcodes);
-                d.setEnterprisename(enterprise);
-                
-                if(available == true){
-                     d.setActive(true);
-                }else{
-                    d.setActive(false);
-                }
-                delList.add(d);
-                enterprise.setDeliveryAgentsInEnterpiselist(delList);
-         
+
+            ArrayList<Integer> zipcodes = new ArrayList<Integer>();
+            zipcodes.add(zip);
+            ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
+            em.setName(name);
+            u.setUsername(username);
+            u.setPassword(password);
+            u.setRole(new DeliveryAgentRole());
+            u.setEmployee(em);
+            d.setUseraccount(u);
+            d.setZipcodes(zipcodes);
+            d.setEnterprisename(enterprise);
+
+            if(available == true){
+                d.setActive(true);
+            }else{
+                d.setActive(false);
+            }
+            delList.add(d);
+            enterprise.setDeliveryAgentsInEnterpiselist(delList);
+
             JOptionPane.showMessageDialog(null,"Delivery agent Added.");
             populateTable();
-       }
-        
-        
-        
+        }
+
         txtName.setText("");
-        txtZipcode.setText("");
+        cmbzipcode.setSelectedItem("");
         txtUsername.setText("");
         txtPassword.setText("");
         jcheckyes.setSelected(false);
@@ -385,10 +386,25 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
             dtm.insertRow(dtm.getRowCount(),inrow); 
             System.out.println("done");
   }
-        
-        
-        
+   
  }
+    
+    
+    private void displaycombo() {
+       
+         del = enterprise.getDeliveryAgentsInEnterpiselist();
+         
+        
+        for(DeliveryAgent dd : del ){
+         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
+           // z.add(dd.getZipcodes().get(j));
+              z = dd.getZipcodes();
+              for(int i =0; i< dd.getZipcodes().size(); i++){
+              cmbzipcode.addItem(z.get(i).toString());
+              }
+             }  
+//    }
+    }
  
    
        
@@ -432,6 +448,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btndelete;
+    private javax.swing.JComboBox<String> cmbzipcode;
     private javax.swing.JTable deliveryjTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -446,6 +463,5 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
-    private javax.swing.JTextField txtZipcode;
     // End of variables declaration//GEN-END:variables
 }
