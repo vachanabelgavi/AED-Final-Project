@@ -151,7 +151,7 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 //        update order
-        this.orderToUpdate.setStatus("Prescription uploaded");
+        this.orderToUpdate.setStatus("PRESCRIPTION UPLOADED");
         this.orderToUpdate.setPrescription(this.chosenFile);
         
         this.alerts.ShowAlert("Successfully updated your order!");
@@ -160,7 +160,7 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
     public void populateDp() {
 
         for (Order o : this.orderlist) {
-            if (o.getStatus().equals("Required Prescription")) {
+            if (o.getStatus().equals("PRESCRIPTION REQUIRED")) {
                 dropdownOrders.addItem(String.valueOf(o.getOrderId()));
             }
 

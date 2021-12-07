@@ -7,7 +7,7 @@ package UI.VaccinationEnterpriseRole;
 
 import Business.Customer.Customer;
 import Business.Ecosystem;
-import static Business.Ecosystem.ecosystem;
+//import static Business.Ecosystem.ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
@@ -56,6 +56,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         } else {
             System.out.println("this.ecosystem for pharma is not null");
         }
+
         
     }
 

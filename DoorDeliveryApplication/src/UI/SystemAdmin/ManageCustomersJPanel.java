@@ -129,7 +129,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 190, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 210, -1));
 
         btnView.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/auditor.png")); // NOI18N
         btnView.setText("View Customer");
@@ -138,7 +138,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnViewActionPerformed(evt);
             }
         });
-        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 190, -1));
+        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 430, 200, -1));
 
         btnSearch.setIcon(new javax.swing.ImageIcon("/Users/vachanabelgavi/Documents/AED-Final-Project/Images/icons8-search-client-64.png")); // NOI18N
         btnSearch.setText("Search Customer");
@@ -147,7 +147,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 430, 190, -1));
+        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, 190, -1));
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 156, 790, 440));
     }// </editor-fold>//GEN-END:initComponents
 

@@ -7,8 +7,11 @@ package Business.Role;
 
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Organization.PharmacyOrganization;
 import Business.UserAccount.UserAccount;
+import UI.OrganizationAdminPanels.PharmacyAdminJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -16,9 +19,9 @@ import javax.swing.JPanel;
  * @author Nidhi Raghavendra
  */
 public class PharmacistRole extends Role {
-     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem business) {
-//        return new DoctorWorkAreaJPanel(userProcessContainer, account, (DoctorOrganization)organization, enterprise); 
-        return null;
+
+    @Override
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Network network, Organization organization, Enterprise enterprise, Ecosystem business) {
+        return new PharmacyAdminJPanel(userProcessContainer, business, account, network, organization, enterprise);
     }
 }

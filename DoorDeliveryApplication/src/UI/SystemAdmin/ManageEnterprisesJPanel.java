@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -25,13 +26,13 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Ecosystem business;
-    
+    ArrayList<Network> networkList;
     public ManageEnterprisesJPanel(JPanel userProcessContainer, Ecosystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
         this.business = business;
-
+        this.networkList = business.getNetworks();
         populateTable();
         populateNetworkComboBox();
     }
@@ -331,7 +332,7 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         networkJComboBox.removeAllItems();
         
         for (Network network : business.getNetworks()){
-            networkJComboBox.addItem(String.valueOf(network));
+            networkJComboBox.addItem(network);
         }
     }
     
@@ -339,7 +340,7 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         enterpriseJComboBox1.removeAllItems();
         
         for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            enterpriseJComboBox1.addItem(String.valueOf(enterprise));
+            enterpriseJComboBox1.addItem(String.valueOf(enterprise.getName()));
         }
         
     }

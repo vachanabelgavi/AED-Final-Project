@@ -8,6 +8,7 @@ package Business.Enterprise.Role;
 import Business.Ecosystem;
 import static Business.Ecosystem.ecosystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import UI.VaccinationEnterpriseRole.VaccinationEnterpriseWorkAreaJPanel;
@@ -18,9 +19,8 @@ import javax.swing.JPanel;
  * @author Nidhi Raghavendra
  */
 public class VaccinationEnterpriseRole extends EnterpriseRole {
-    @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem business) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,  Network network,Organization organization, Enterprise enterprise, Ecosystem business) {
        return new VaccinationEnterpriseWorkAreaJPanel(userProcessContainer,  account,  enterprise, ecosystem); 
-        
+
     }
 }

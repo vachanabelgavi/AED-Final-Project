@@ -5,20 +5,22 @@
  */
 package Business.Role;
 
+import Business.Customer.Customer;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import ui.Customer.CustomerWorkAreaJPanel;
 
 /**
  *
  * @author Nidhi Raghavendra
  */
-public class CustomerRole extends Role {
-     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem business) {
-//        return new DoctorWorkAreaJPanel(userProcessContainer, account, (DoctorOrganization)organization, enterprise); 
-        return null;
+public class CustomerRole {
+    public JPanel createWorkArea(JPanel userProcessContainer, Ecosystem system, Network network, Customer customer) {
+        return new CustomerWorkAreaJPanel(userProcessContainer, system, network, customer); 
     }
+
 }

@@ -42,6 +42,13 @@ public class ConfigureASystem {
 
         Network n = system.createNetwork();
         n.setNetworkName("California");
+        
+        ArrayList<Integer> zips = n.getZipcodes();
+        int[] arr = { 90011, 90012, 90013, 90014, 90015, 91311, 91312, 91313, 91314, 91315 };
+        
+        for(int i: arr) {
+            zips.add(i);
+        }
 
 //        CREATE MUTLIPLE CUSTOMERS AND PEOPLE 
         for (int i = 1; i < 10; i++) {
