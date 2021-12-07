@@ -13,13 +13,11 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
-import UI.SystemAdmin.NextContainerJFrame;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *

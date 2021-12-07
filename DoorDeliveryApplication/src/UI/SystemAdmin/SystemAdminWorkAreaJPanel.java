@@ -204,7 +204,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void btnEnterpriseAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterpriseAdminActionPerformed
         // TODO add your handling code here:
         
-        ManageEnterpriseAdminsJPanel manageNetworkJPanel=new ManageEnterpriseAdminsJPanel(userProcessContainer, business);
+        ManageEnterpriseAdminsJPanel manageNetworkJPanel = new ManageEnterpriseAdminsJPanel(userProcessContainer, business);
         userProcessContainer.add("manageEnterpriseAdminsJPanel",manageNetworkJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -214,7 +214,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void btnNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNetworkActionPerformed
         // TODO add your handling code here:
         
-        ManageNetworksJPanel manageNetworkJPanel=new ManageNetworksJPanel(userProcessContainer, business);
+        ManageNetworksJPanel manageNetworkJPanel = new ManageNetworksJPanel(userProcessContainer, business);
         userProcessContainer.add("manageNetworkJPanel",manageNetworkJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -224,7 +224,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void btnEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterpriseActionPerformed
         // TODO add your handling code here:
         
-        ManageEnterprisesJPanel manageNetworkJPanel=new ManageEnterprisesJPanel(userProcessContainer, business);
+        ManageEnterprisesJPanel manageNetworkJPanel = new ManageEnterprisesJPanel(userProcessContainer, business);
         userProcessContainer.add("manageEnterpriseJPanel",manageNetworkJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
