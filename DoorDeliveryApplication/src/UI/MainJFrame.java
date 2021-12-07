@@ -102,7 +102,7 @@ public class MainJFrame extends javax.swing.JFrame {
         container.setBackground(new java.awt.Color(255, 255, 255));
         container.setOpaque(false);
         container.setLayout(new java.awt.CardLayout());
-        jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 640));
+        jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 550));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1250, 650));
 
         jSplitPane1.setRightComponent(jPanel1);
@@ -119,7 +119,7 @@ public class MainJFrame extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 10, -1, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 40));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
