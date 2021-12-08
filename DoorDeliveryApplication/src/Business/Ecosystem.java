@@ -23,7 +23,7 @@ public class Ecosystem extends Organization {
 
     public static Ecosystem ecosystem;
     private ArrayList<Network> networkList;
-
+    
     public Network createNetwork() {
         Network network = new Network();
         this.networkList.add(network);

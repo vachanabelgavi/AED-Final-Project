@@ -259,6 +259,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         jSplitPane1.setLeftComponent(jPanel1);
         jSplitPane1.setRightComponent(null);
+        dB4OUtil.storeSystem(business);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -79,6 +79,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -162,6 +163,14 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
             }
         });
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 190, 60));
+
+        jButton6.setText("MANAGE PRESCRIPTIONS");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 190, 60));
 
         jSplitPane1.setLeftComponent(jPanel2);
 
@@ -253,6 +262,12 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         jSplitPane1.add(new PharmacyAdminJPanel(userProcessContainer, ecosystem, user, network, organization, enterprise));
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(null);
+        jSplitPane1.setRightComponent(new PharmacyPrescriptionJPanel(userProcessContainer, ecosystem, user, network, organization, enterprise ));
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     public void fetchOrderObject() {
         for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
             for (Order o : customer.getOrderlist()) {
@@ -293,6 +308,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
