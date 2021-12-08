@@ -101,7 +101,7 @@ public class orgadminMainJFrame extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "DONE");
                     
                     JFrame jf = new JFrame();
-                    jf.getContentPane().add(new PharmacyAdminJPanel(ecosystem, ua, network, o, this.enterprise));
+                    //jf.getContentPane().add(new PharmacyAdminJPanel(ecosystem, ua, network, o, this.enterprise));
                     jf.setSize(1000, 900);
                     jf.setVisible(true);
                     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
