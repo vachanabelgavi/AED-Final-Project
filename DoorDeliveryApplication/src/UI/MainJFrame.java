@@ -111,13 +111,13 @@ public class MainJFrame extends javax.swing.JFrame {
         container.setBackground(new java.awt.Color(255, 255, 255));
         container.setOpaque(false);
         container.setLayout(new java.awt.CardLayout());
-<<<<<<< HEAD
+
         jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 550));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1250, 650));
-=======
+
         jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 640));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 100));
->>>>>>> 07eb6e8b733b0cc4972965583a6ace0c83e6d759
+
 
         jSplitPane1.setRightComponent(jPanel1);
 

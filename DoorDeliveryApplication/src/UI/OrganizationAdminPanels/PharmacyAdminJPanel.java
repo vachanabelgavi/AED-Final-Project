@@ -160,7 +160,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
                 jButton5ActionPerformed(evt);
             }
         });
-<<<<<<< HEAD
+
         add(btnSendPrescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, -1, -1));
 
         jTextArea1.setColumns(20);
@@ -174,9 +174,9 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("DOCTOR SIGNATURE");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, -1, -1));
-=======
+
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 190, 60));
->>>>>>> 07eb6e8b733b0cc4972965583a6ace0c83e6d759
+
 
         jSplitPane1.setLeftComponent(jPanel2);
 

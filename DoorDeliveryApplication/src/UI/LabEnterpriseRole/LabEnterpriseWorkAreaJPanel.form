@@ -81,7 +81,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="221" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -89,10 +89,10 @@
                           <Component id="lblSelectedNode" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="btndeliveryagents" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                              <Component id="btnmanageorders" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                              <Component id="btnlabassistants" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="btndeliveryagents" alignment="1" pref="200" max="32767" attributes="0"/>
+                              <Component id="btnmanageorders" alignment="1" pref="200" max="32767" attributes="0"/>
+                              <Component id="btnLabcenters" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
@@ -114,7 +114,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btndeliveryagents" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnlabassistants" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLabcenters" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="205" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -159,12 +159,12 @@
             <Property name="text" type="java.lang.String" value="&lt;View_selected_node&gt;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnlabassistants">
+        <Component class="javax.swing.JButton" name="btnLabcenters">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Lab Centers"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnlabassistantsActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLabcentersActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

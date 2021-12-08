@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package UI.LabEnterpriseRole;
+
 
 import Business.Customer.Customer;
 import Business.Ecosystem;
@@ -68,10 +65,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         btnmanageorders = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblSelectedNode = new javax.swing.JLabel();
-<<<<<<< HEAD
-        btnlabassistants = new javax.swing.JButton();
-=======
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
+        btnLabcenters = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -113,58 +107,36 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         lblSelectedNode.setForeground(new java.awt.Color(102, 102, 255));
         lblSelectedNode.setText("<View_selected_node>");
 
-<<<<<<< HEAD
-        btnlabassistants.setText("Manage Lab Centers");
-        btnlabassistants.addActionListener(new java.awt.event.ActionListener() {
+        btnLabcenters.setText("Manage Lab Centers");
+        btnLabcenters.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnlabassistantsActionPerformed(evt);
+                btnLabcentersActionPerformed(evt);
             }
         });
 
-=======
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(221, Short.MAX_VALUE)
-=======
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(216, Short.MAX_VALUE)
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
+                .addGap(221, 221, 221)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(37, 37, 37)
-<<<<<<< HEAD
                         .addComponent(lblSelectedNode))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btndeliveryagents, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnmanageorders, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnlabassistants, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btndeliveryagents, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(btnmanageorders, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(btnLabcenters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(106, 106, 106)))
                 .addGap(200, 200, 200))
-=======
-                        .addComponent(lblSelectedNode)
-                        .addGap(255, 255, 255))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btndeliveryagents, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnmanageorders, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(361, 361, 361))))
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-<<<<<<< HEAD
                 .addGap(43, 43, 43)
-=======
-                .addGap(37, 37, 37)
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSelectedNode)
                     .addComponent(jLabel2))
@@ -172,24 +144,16 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnmanageorders)
                 .addGap(18, 18, 18)
                 .addComponent(btndeliveryagents)
-<<<<<<< HEAD
                 .addGap(18, 18, 18)
-                .addComponent(btnlabassistants)
+                .addComponent(btnLabcenters)
                 .addContainerGap(205, Short.MAX_VALUE))
-=======
-                .addContainerGap(245, Short.MAX_VALUE))
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addGap(0, 800, Short.MAX_VALUE)
-=======
-            .addGap(0, 850, Short.MAX_VALUE)
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap()
@@ -200,11 +164,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addGap(0, 600, Short.MAX_VALUE)
-=======
-            .addGap(0, 587, Short.MAX_VALUE)
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -234,23 +194,22 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnmanageordersActionPerformed
 
-    private void btnlabassistantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlabassistantsActionPerformed
+    private void btnLabcentersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLabcentersActionPerformed
         // TODO add your handling code here:
         
         ManageLabCentersJPanel managelabs = new ManageLabCentersJPanel(userProcessContainer, account, organization, enterprise, ecosystem);
         userProcessContainer.add("manageLabOrdersJPanel",managelabs);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-        
-    }//GEN-LAST:event_btnlabassistantsActionPerformed
+    }//GEN-LAST:event_btnLabcentersActionPerformed
 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton btndeliveryagents;
-    private javax.swing.JButton btnlabassistants;
+    //private javax.swing.JButton btndeliveryagents;
+    //private javax.swing.JButton btnlabassistants;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLabcenters;
     private javax.swing.JButton btndeliveryagents;
->>>>>>> 956cdc91722f690a0b7ba26dd8491a1fa6ed991a
     private javax.swing.JButton btnmanageorders;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

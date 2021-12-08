@@ -26,8 +26,8 @@ public class Order {
     private static int count = 0;
     private String organizationname;
     private String enterprisename;
-    private double totalPrice;
-
+    //private double totalPrice;
+/*
     public double getTotalPrice() {
         return totalPrice;
     }
@@ -35,7 +35,7 @@ public class Order {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
-    
+  */  
     
     private ArrayList<OrderItem> itemsOrdered;
     
