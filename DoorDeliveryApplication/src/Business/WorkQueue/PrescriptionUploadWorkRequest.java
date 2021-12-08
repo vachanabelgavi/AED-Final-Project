@@ -26,7 +26,7 @@ public class PrescriptionUploadWorkRequest extends WorkRequest {
     
     
     public PrescriptionUploadWorkRequest() {
-        this.presecription = null;
+        this.prescribedOrderItems = new ArrayList<>();
     }
 
     public File getPresecription() {

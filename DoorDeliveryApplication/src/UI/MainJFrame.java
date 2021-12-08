@@ -196,7 +196,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                         jSplitPane1.setRightComponent(container);
                                         break;
                                     } else {
-                                        
+
                                     }
                                 }
                             } else {
@@ -209,6 +209,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                 jSplitPane1.setRightComponent(null);
                                 container.removeAll();
                                 container.setVisible(true);
+                                container.setLayout(new CardLayout());
                                 CardLayout layout = (CardLayout) container.getLayout();
                                 container.setSize(1500, 1000);
                                 container.add("enterprise area", userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
@@ -228,6 +229,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 jSplitPane1.setRightComponent(null);
                 container.removeAll();
                 container.setVisible(true);
+                container.setLayout(new CardLayout());
                 CardLayout layout = (CardLayout) container.getLayout();
                 container.setSize(1500, 1000);
                 container.add("work rea", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
@@ -236,7 +238,6 @@ public class MainJFrame extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "User does not exist!");
             }
-
 
         }
 
@@ -258,6 +259,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         jSplitPane1.setLeftComponent(jPanel1);
         jSplitPane1.setRightComponent(null);
+        dB4OUtil.storeSystem(business);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -25,7 +25,6 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageLabOrdersJPanel
      */
-
      private JPanel userProcessContainer;
     private Ecosystem business;
     private CustomerDirectory customerDirectory;
