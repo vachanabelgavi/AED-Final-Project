@@ -7,6 +7,7 @@ package UI;
 
 import Business.Customer.Customer;
 import Business.DB4OUtil.DB4OUtil;
+import Business.DeliveryAgent.DeliveryAgent;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
@@ -16,6 +17,7 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -163,6 +165,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     jSplitPane1.setRightComponent(null);
                     container.setVisible(true);
                     container = new CustomerRole().createWorkArea(container, business, network, c);
+                    System.out.println("Inside customer" + c.getUsername());
                     jSplitPane1.setRightComponent(container);
                     break;
 
@@ -176,27 +179,58 @@ public class MainJFrame extends javax.swing.JFrame {
                             userAccount = enterprise.getEnterpriseUserAccountDirectory().authenticateUser(userName, password);
                             if (userAccount == null) {
                                 //Step 3:check against each organization for each enterprise
-                                for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
 
-                                    userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
-                                    if (userAccount != null) {
-                                        inEnterprise = enterprise;
-                                        inOrganization = organization;
-                                        inNetwork = network;
-                                        JOptionPane.showMessageDialog(null, "login successful!");
-                                        jSplitPane1.setLeftComponent(null);
-                                        jSplitPane1.setRightComponent(null);
-                                        container.removeAll();
-                                        container.setVisible(true);
-                                        container.setLayout(new CardLayout());
-                                        CardLayout layout = (CardLayout) container.getLayout();
-                                        container.setSize(1500, 1000);
-                                        container.add("org area", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
-                                        layout.next(container);
-                                        jSplitPane1.setRightComponent(container);
-                                        break;
-                                    } else {
-                                        
+                                ArrayList<DeliveryAgent> delAgents = enterprise.getDeliveryAgentsInEnterpiselist();
+
+                                for (DeliveryAgent del : delAgents) {
+                                    if (del != null) {
+
+                                        if (userName.equals(del.getUseraccount().getUsername()) && password.equals(del.getUseraccount().getPassword())) {
+                                            userAccount = del.getUseraccount();
+                                            inEnterprise = enterprise;
+                                            inNetwork = network;
+                                            JOptionPane.showMessageDialog(null, "login successful!");
+                                            jSplitPane1.setLeftComponent(null);
+                                            jSplitPane1.setRightComponent(null);
+                                            container.removeAll();
+                                            container.setVisible(true);
+                                            container.setLayout(new CardLayout());
+                                            CardLayout layout = (CardLayout) container.getLayout();
+                                            container.setSize(1500, 1000);
+                                            container.add("org area", del.getUseraccount().getRole().createWorkArea(container, del.getUseraccount(), inNetwork, inOrganization, inEnterprise, business));
+                                            System.out.println("Inside area" + userName);
+                                            layout.next(container);
+                                            jSplitPane1.setRightComponent(container);
+                                            break;
+                                        }
+                                    }
+
+                                }
+                                if (userAccount == null) {
+
+                                    for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+
+                                        userAccount = organization.getUserAccountDirectory().authenticateUser(userName, password);
+                                        if (userAccount != null) {
+                                            inEnterprise = enterprise;
+                                            inOrganization = organization;
+                                            inNetwork = network;
+                                            JOptionPane.showMessageDialog(null, "login successful!");
+                                            jSplitPane1.setLeftComponent(null);
+                                            jSplitPane1.setRightComponent(null);
+                                            container.removeAll();
+                                            container.setVisible(true);
+                                            container.setLayout(new CardLayout());
+                                            CardLayout layout = (CardLayout) container.getLayout();
+                                            container.setSize(1500, 1000);
+                                            container.add("org area", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
+                                            System.out.println("Inside area" + userName);
+                                            layout.next(container);
+                                            jSplitPane1.setRightComponent(container);
+                                            break;
+                                        } else {
+
+                                        }
                                     }
                                 }
                             } else {
@@ -204,7 +238,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                 inEnterprise = enterprise;
 
                                 JOptionPane.showMessageDialog(null, "login successful!");
-
+                                System.out.println("CMES HERE bUT FAIls");
                                 jSplitPane1.setLeftComponent(null);
                                 jSplitPane1.setRightComponent(null);
                                 container.removeAll();
@@ -229,15 +263,16 @@ public class MainJFrame extends javax.swing.JFrame {
                 jSplitPane1.setRightComponent(null);
                 container.removeAll();
                 container.setVisible(true);
+                container.setLayout(new CardLayout());
                 CardLayout layout = (CardLayout) container.getLayout();
                 container.setSize(1500, 1000);
-                container.add("work rea", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
+                container.add("work area", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
+                System.out.print("Inside work arre role");
                 layout.next(container);
                 jSplitPane1.setRightComponent(container);
             } else {
                 JOptionPane.showMessageDialog(null, "User does not exist!");
             }
-
 
         }
 

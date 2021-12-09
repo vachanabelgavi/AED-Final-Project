@@ -286,8 +286,8 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                         recipients = cust.getEmail();
                         }
                         System.out.println("Entering assign for email ==========");
-                        String subjects = "Testing";
-                        String messaget = "Test done successfully";
+                        String subjects = "Delivery";
+                        String messaget = "Delivered agent assigned successfully";
 
                         System.out.println("Start");
                         final String username = "pannagaveeramohan@gmail.com";
@@ -391,7 +391,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
               z = dd.getZipcodes();
               for(int j =0; j< dd.getZipcodes().size(); j++){
               if(cust.getZipcode() == z.get(j) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                 deliverycmb.addItem(dd.getUseraccount().getEmployee().getName());
+                deliverycmb.addItem(dd.getUseraccount().getUsername());
                 }
                 }
                 }//closing delivery agent assignment

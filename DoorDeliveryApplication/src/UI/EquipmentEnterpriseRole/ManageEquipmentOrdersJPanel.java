@@ -247,23 +247,21 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
                             System.out.println(" "+d.getUseraccount().getUsername());
                             JOptionPane.showMessageDialog(null, "Delivery agent not available for now");
                         }else{
-                            //                 o.setDeliveryAgent(dlvrymn);
-                            //                dlvrymn.setUseraccount(ua);
-                            //                ua.setUsername(agent);
+                               
                             dtm.insertRow(dtm.getRowCount(), new Object[]{
                                 o.getOrderId(),
                                 Arrays.toString(pr.toArray()),
                                 cust.getName(),
                                 cust.getZipcode(),
                                 o.getPrice(),
-                                agent
+                                o.getDeliveryAgent().getUseraccount().getUsername()
                             });
                             recipients = cust.getEmail();
                         }
 
                         System.out.println("Entering assign for email ==========");
-                        String subjects = "Testing";
-                        String messaget = "Test done successfully";
+                        String subjects = "Delivery";
+                        String messaget = "Delivered agent assigned successfully";
 
                         System.out.println("Start");
                         final String username = "pannagaveeramohan@gmail.com";
@@ -382,7 +380,7 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
               z = dd.getZipcodes();
               for(int j =0; j< dd.getZipcodes().size(); j++){
               if(cust.getZipcode() == z.get(j) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                 deliverycmb.addItem(dd.getUseraccount().getEmployee().getName());
+                 deliverycmb.addItem(dd.getUseraccount().getUsername());
                 }
                 }
                 }//closing delivery agent assignment
