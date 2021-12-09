@@ -372,12 +372,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
                         try {
 
-                            this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
-
+                            System.out.println("CAME TO DOCTOR PANEL  ---------- "+ this.toPharmacist.getUsername());
+                           
                             PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
                             pq.setSender(user);
                             pq.setCustomer(newCustoemr);
-                            pq.setReceiver(toPharmacist);
+                            pq.setReceiver(this.toPharmacist);
                             pq.setPresecription(chosenFile);
                             pq.setSignature(fieldSignature.getText());
                             pq.setComments(fieldNotes.getText());
@@ -548,6 +548,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     public void populateZipcodes() {
 
         try {
+            zipcodeCombo.removeAllItems();
             for (Network n : this.ecosystem.getNetworks()) {
                 Network nSelected = (Network) networkCombo.getSelectedItem();
                 if (nSelected != null) {
