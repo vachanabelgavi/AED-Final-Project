@@ -38,22 +38,26 @@ JPanel userProcessContainer;
     DeliveryAgent dlvrymn;
     Enterprise enterprise;
     DefaultTableModel dtm;
+    ArrayList<DeliveryAgent> del;
+    ArrayList<Integer> z;
     /**
      * Creates new form ManageLabDeliveryAgentJPanel
      */
     public ManageLabDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
-        initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.business = business;
+         this.userProcessContainer = userProcessContainer;
+        this.business = ecosystem;
         this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
-
+        this.z = new ArrayList<>();
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
 
+
+
         System.out.println("Going inside populate table");
         populateTable();
+        displaycombo();
 
 
 
@@ -67,6 +71,22 @@ JPanel userProcessContainer;
 
 
 
+    }
+    
+    private void displaycombo() {
+
+         del = enterprise.getDeliveryAgentsInEnterpiselist();
+
+
+        for(DeliveryAgent dd : del ){
+         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
+           // z.add(dd.getZipcodes().get(j));
+              z = dd.getZipcodes();
+              for(int i =0; i< dd.getZipcodes().size(); i++){
+              cmbzipcode.addItem(z.get(i).toString());
+              }
+             }
+//    }
     }
 
     /**
@@ -87,7 +107,6 @@ JPanel userProcessContainer;
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtZipcode = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
@@ -97,6 +116,7 @@ JPanel userProcessContainer;
         jLabel3 = new javax.swing.JLabel();
         jcheckyes = new javax.swing.JCheckBox();
         jcheckno = new javax.swing.JCheckBox();
+        cmbzipcode = new javax.swing.JComboBox<>();
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -145,7 +165,6 @@ JPanel userProcessContainer;
         jLabel9.setText("Password");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
         jPanel3.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 150, 194, -1));
-        jPanel3.add(txtZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 194, -1));
         jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 194, -1));
         jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 194, -1));
 
@@ -155,7 +174,7 @@ JPanel userProcessContainer;
                 btnAddActionPerformed(evt);
             }
         });
-        jPanel3.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 100, -1));
+        jPanel3.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 100, -1));
 
         btndelete.setText("Delete");
         btndelete.addActionListener(new java.awt.event.ActionListener() {
@@ -199,6 +218,9 @@ JPanel userProcessContainer;
         });
         jPanel3.add(jcheckno, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
 
+        cmbzipcode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jPanel3.add(cmbzipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -239,12 +261,12 @@ JPanel userProcessContainer;
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
 
-        Employee em = new Employee();
+         Employee em = new Employee();
         DeliveryAgent d = new DeliveryAgent();
         UserAccount u = d.getUseraccount();
 
         String name = txtName.getText();
-        int zip = Integer.parseInt(txtZipcode.getText());
+        int zip = Integer.parseInt((String) cmbzipcode.getSelectedItem());
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         boolean available;
@@ -259,14 +281,14 @@ JPanel userProcessContainer;
         }
 
         if(name.isEmpty() ||
-            txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty() || txtZipcode.getText().isEmpty()){
+            txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty() || cmbzipcode.getSelectedItem().toString().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(txtZipcode.getText().length() < 5 || txtZipcode.getText().length() > 6){
-            JOptionPane.showMessageDialog(null, "Zip code must be 5 or 6 digits", "Warining", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+//        if(txtZipcode.getText().length() < 5 || txtZipcode.getText().length() > 6){
+//            JOptionPane.showMessageDialog(null, "Zip code must be 5 or 6 digits", "Warining", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        }
         System.out.println("Inside loop");
         boolean flag = business.getUserAccountDirectory().checkIfUsernameIsUnique(username);
         if(flag == false){
@@ -304,11 +326,12 @@ JPanel userProcessContainer;
         }
 
         txtName.setText("");
-        txtZipcode.setText("");
+        cmbzipcode.setSelectedItem("");
         txtUsername.setText("");
         txtPassword.setText("");
         jcheckyes.setSelected(false);
         jcheckno.setSelected(false);
+
 
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -377,6 +400,7 @@ JPanel userProcessContainer;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btndelete;
+    private javax.swing.JComboBox<String> cmbzipcode;
     private javax.swing.JTable deliveryjTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -392,7 +416,6 @@ JPanel userProcessContainer;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
-    private javax.swing.JTextField txtZipcode;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {

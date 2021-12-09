@@ -209,6 +209,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                 jSplitPane1.setRightComponent(null);
                                 container.removeAll();
                                 container.setVisible(true);
+                                container.setLayout(new CardLayout());
                                 CardLayout layout = (CardLayout) container.getLayout();
                                 container.setSize(1500, 1000);
                                 container.add("enterprise area", userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));

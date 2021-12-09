@@ -16,14 +16,26 @@ import Business.Network.Network;
 import Business.Orders.Order;
 import Business.Orders.OrderItem;
 import Business.Organization.Organization;
+import Business.Products.Product;
 import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.PasswordAuthentication;
+import javax.mail.internet.MimeMessage;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.activation.*;
+import javax.mail.Address;
 
 /**
  *
@@ -42,7 +54,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     DeliveryAgent dlvrymn;
     Enterprise enterprise;
     DefaultTableModel dtm;
-    ArrayList<DeliveryAgent> d;
+    //ArrayList<DeliveryAgent> d;
     UserAccountDirectory userdir;
     Customer customer;
     private OrderItem itemsdir;
@@ -50,8 +62,11 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     private ArrayList<Order> orderplaced = new ArrayList<Order>();
     Organization organization;
     Network network;
+    ArrayList<DeliveryAgent> del;
+    ArrayList<Integer> z;
 
-    public ManagePharmaOrdersJPanel(JPanel userProcessContainer, Ecosystem business,Network network,UserAccountDirectory userdir, Enterprise enterprise, Customer customer) {
+
+    public ManagePharmaOrdersJPanel(JPanel userProcessContainer, Ecosystem business,Network network,UserAccountDirectory userdir, Enterprise enterprise, Customer customer, Organization organization, UserAccount ua) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = business;
@@ -59,7 +74,10 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.customer = customer;
         this.network = network;
-
+        this.organization = organization;
+         this.z = new ArrayList<>();
+         this.ua = ua;
+         this.dlvrymn = new DeliveryAgent();
 
         System.out.println("CAME INTO PHARMA ORDER PANEL");
         dtm = (DefaultTableModel) pharmaOrderTable.getModel();
@@ -73,10 +91,31 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
 //            }
 
 
-        displaycombobox();
-        populateTable();
+       // displaycombobox();
+        //populateTable();
+       
+        populateDp();
+        
     }
 
+    
+    
+    public void populateDp() {
+      //  dtm.setRowCount(0);
+       // int selectrow = pharmaOrderTable.getSelectedRow();
+         ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
+         System.out.println("Inside combo box");
+            
+            for(Customer cust: customerdir){
+                    for (Order o : cust.getOrderlist()) {
+                //  Order o : this.customer.getOrderlist()//              populate items
+                if("ACCEPTED".equals(o.getStatus())){
+                orderscmb.addItem(String.valueOf(o.getOrderId()));
+            }
+        }
+
+    }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +130,9 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         deliverycmb = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        assignbtn = new javax.swing.JButton();
+        btnshoworders = new javax.swing.JButton();
+        orderscmb = new javax.swing.JComboBox<>();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -100,11 +141,11 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order ID", "Product Name", "Name", "Location", "Zipcode", "Price", "Delivery agent"
+                "Order ID", "Product Name", "Name", "Zipcode", "Price", "Delivery agent"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, true, true
+                true, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -133,8 +174,28 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         jLabel1.setText("Assign Delivery agent");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, -1, -1));
 
-        jButton1.setText("Assign");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 105, -1));
+        assignbtn.setText("Assign");
+        assignbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignbtnActionPerformed(evt);
+            }
+        });
+        add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 105, -1));
+
+        btnshoworders.setText("Show Orders");
+        btnshoworders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnshowordersActionPerformed(evt);
+            }
+        });
+        add(btnshoworders, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 130, -1));
+
+        orderscmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderscmbActionPerformed(evt);
+            }
+        });
+        add(orderscmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 110, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -152,24 +213,154 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_deliverycmbActionPerformed
 
+    private void assignbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignbtnActionPerformed
+        // TODO add your handling code here:
+        String agent = deliverycmb.getSelectedItem().toString();
+        
+        System.out.println("Inside assign button");
+        dtm.setRowCount(0);
+        int selectrow = pharmaOrderTable.getSelectedRow();
+         ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
+        String recipients = null;
+        
+       
+             System.out.println("Inside table after assigning");
+            
+            for(Customer cust: customerdir){
+                    for (Order o : cust.getOrderlist()) {
+                    ArrayList<OrderItem> oi = o.getItemsOrdered();
+                    ArrayList<String> pr = new ArrayList<>();
+                //  Order o : this.customer.getOrderlist()//              populate items
+                for (int i = 0; i < oi.size(); i++) {
+                    
+                    pr.add(oi.get(i).getProductName());
+                }
+                
+                if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                     System.out.println(" "+agent);
+                     o.setDeliveryAgent(dlvrymn);
+                    dlvrymn.setUseraccount(ua);
+                    ua.setUsername(agent); 
+                    ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
+                    System.out.println(o.getDeliveryAgent().getUseraccount().getUsername());
+                for(DeliveryAgent d: del){
+                   
+                if(o.getDeliveryAgent().getUseraccount().getUsername() == agent && d.getUseraccount().getUsername() == agent){
+                    //o.getDeliveryAgent().getUseraccount().getUsername()
+                     System.out.println(" "+d.getUseraccount().getUsername());
+                   JOptionPane.showMessageDialog(null, "Delivery agent not available for now");
+                }else{
+//                 o.setDeliveryAgent(dlvrymn);
+//                dlvrymn.setUseraccount(ua);
+//                ua.setUsername(agent); 
+                dtm.insertRow(dtm.getRowCount(), new Object[]{
+                     o.getOrderId(),
+                     Arrays.toString(pr.toArray()),
+                    cust.getName(),
+                    cust.getZipcode(),
+                    o.getPrice(),
+                    agent
+                });
+                
+                
+         recipients = cust.getEmail();
+}      
+         System.out.println("Entering assign for email ==========");
+         String subjects = "Testing";
+         String messaget = "Test done successfully"; 
+        
+        
+        System.out.println("Start");
+        final String username = "pannagaveeramohan@gmail.com";
+        final String password = "9686300037";
+
+        Properties p = new Properties();
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", "465");
+        p.put("mail.transport.protocol", "smtp");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+         Session session = Session.getInstance(p,
+                  new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                  });
+
+
+        try {
+           
+            Transport transport=session.getTransport();
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
+            
+            final Address[] recipientAddresses = InternetAddress.parse(recipients);
+            message.setRecipients(Message.RecipientType.TO,recipientAddresses);
+            message.setSubject(subjects);//formBean.getString(
+            message.setText(messaget);
+            transport.connect();
+            transport.send(message, recipientAddresses);//(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            System.out.println("e="+e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }
+    JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");
+    JOptionPane.showMessageDialog(null, "Email sent to customer successful");  
+ 
+     }
+    }
+    }
+    }
+    }//GEN-LAST:event_assignbtnActionPerformed
+
+    private void orderscmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderscmbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderscmbActionPerformed
+
+    private void btnshowordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshowordersActionPerformed
+        // TODO add your handling code here:
+        
+        ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
+         System.out.println("Inside table");
+            
+            for(Customer cust: customerdir){
+                    for (Order o : cust.getOrderlist()) {
+                        if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                            populateTable();        
+                        }
+                    }
+            }
+        
+    }//GEN-LAST:event_btnshowordersActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton assignbtn;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnshoworders;
     private javax.swing.JComboBox<String> deliverycmb;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> orderscmb;
     private javax.swing.JTable pharmaOrderTable;
     // End of variables declaration//GEN-END:variables
 
     private void displaycombobox() {
+        
+//      d = enterprise.getDeliveryAgentsInEnterpiselist();
+//        for(DeliveryAgent dd : d ){
+//            deliverycmb.addItem(dd.getUseraccount().getEmployee().getName());
 
-      d = enterprise.getDeliveryAgentsInEnterpiselist();
-        for(DeliveryAgent dd : d ){
-            deliverycmb.addItem(dd.getUseraccount().getEmployee().getName());
-
-        }
+        
 
     }
 
@@ -177,22 +368,50 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
     private void populateTable() {
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);
-         ArrayList<Order> customerOrder = this.customer.getOrderlist();
+         ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
+          del = this.enterprise.getDeliveryAgentsInEnterpiselist();
          ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
-      for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
-          for (Order o : customerOrder) {
-
-              System.out.println("" + o.getOrderId());
-               System.out.println("" + customer.getCustomerCart().getCartId());
-                System.out.println("" + customer.getName() );
-                System.out.println("" + customer.getLocation());
-                 System.out.println("" + customer.getZipcode());
-                  System.out.println("" + o.getOrderPayment().getAmount());
-          Object[] inrow = {o.getOrderId(),customer.getCustomerCart().getCartId(),customer.getName(),customer.getLocation(),customer.getZipcode(), o.getOrderPayment().getAmount(), null};
-            dtm.insertRow(dtm.getRowCount(),inrow);
-            System.out.println("done");
+//         ArrayList<Product> products = this.organization.getOrganizationProducts();
+             System.out.println("Inside table");
+            
+            
+                for(Customer cust: customerdir){
+                    for (Order o : cust.getOrderlist()) {
+                    ArrayList<OrderItem> oi = o.getItemsOrdered();
+                    ArrayList<String> p = new ArrayList<>();
+                //  Order o : this.customer.getOrderlist()//              populate items
+                //&& orderscmb.getSelectedItem().equals(o.getOrderId())
+                for (int i = 0; i < oi.size(); i++) {
+                    
+                    p.add(oi.get(i).getProductName());
+                }
+                if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                
+                dtm.insertRow(dtm.getRowCount(), new Object[]{
+                     o.getOrderId(),
+                     Arrays.toString(p.toArray()),
+                    cust.getName(),
+                    cust.getZipcode(),
+                    o.getPrice(),
+                    o.getDeliveryAgent().getUseraccount().getUsername()
+                });
+                
+             for(DeliveryAgent dd : del ){
+         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
+           // z.add(dd.getZipcodes().get(j));
+              z = dd.getZipcodes();
+              for(int j =0; j< dd.getZipcodes().size(); j++){
+              if(cust.getZipcode() == z.get(j) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                 deliverycmb.addItem(dd.getUseraccount().getEmployee().getName());
+                }
+                }
+                }//closing delivery agent assignment
+               }
+               }//closing if statement
             }
-      }
-       System.out.println("done with populate Table");
-    }
+                
+               System.out.println("Done with populate table");
+   } 
+    
 }
+

@@ -25,6 +25,6 @@ import javax.swing.JPanel;
 public class EquipmentEnterpriseRole extends EnterpriseRole {
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Network network, Organization organization, Enterprise enterprise, Ecosystem business) {
-      return new EquipmentEnterpriseWorkAreaJPanel(userProcessContainer, account, organization, enterprise, business); 
+      return new EquipmentEnterpriseWorkAreaJPanel(userProcessContainer,account,network,organization,enterprise,business); 
     }
 }

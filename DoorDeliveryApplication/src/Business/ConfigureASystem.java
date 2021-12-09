@@ -57,8 +57,15 @@ public class ConfigureASystem {
             String password = "customer" + String.valueOf(i);
 
             CustomerDirectory cdri = n.getCustomerDirectory();
-            Customer myCustomer = cdri.createCustomer(name, "n@gmail.com", username, password, 2120 + i, "", "addd", 1234567890);
+            Customer myCustomer = cdri.createCustomer(name, "n@gmail.com", username, password, 90010 + i, "", "addd", 1234567890);
         }
+        
+            String name = "Danny" ;
+            String username = "cust" ;
+            String password = "cust" ;
+
+            CustomerDirectory cdri = n.getCustomerDirectory();
+            Customer myCustomer = cdri.createCustomer(name, "pannaga3009@gmail.com", username, password, 91316 , "", "addd", 1234567890);
 
         Employee enterpriseEmployeeAdmin = system.getEmployeeDirectory().createEmployee("enterpriseadmin");
         UserAccount ua2 = system.getUserAccountDirectory().createEnterpriseUser("enterpriseadmin", "enterpriseadmin", enterpriseEmployeeAdmin, new EnterpriseAdminRole());
@@ -78,7 +85,7 @@ public class ConfigureASystem {
         ArrayList<Integer> z2 = new ArrayList<>();
         for (int j = 1; j < 10; j++) {
             DeliveryAgent d = new DeliveryAgent();
-            z1.add(90011 + j);
+            z1.add(90010 + j);
 
             if (j < 5) {
                 Employee em = new Employee();
@@ -92,7 +99,6 @@ public class ConfigureASystem {
                 d.setZipcodes(z1);
                 d.setEnterprisename(e);
                 delList.add(d);
-                e.setDeliveryAgentsInEnterpiselist(delList);
 
             } else {
                 z2.add(91311 + j);
@@ -106,14 +112,13 @@ public class ConfigureASystem {
                 d.setZipcodes(z2);
                 d.setEnterprisename(e);
                 delList.add(d);
-                e.setDeliveryAgentsInEnterpiselist(delList);
             }
         }
         e.setDeliveryAgentsInEnterpiselist(delList);
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();
 
-        Organization org = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", "California state", 2120);
+        Organization org = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", "California state", 90011);
 //        orgList.add(o.createOrganization(Type.Pharmacist, "Pharmacy Org in Pharmaceuitical", "California city", 0));
         Organization org2 = o.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "LA", 0);
 
@@ -144,7 +149,7 @@ public class ConfigureASystem {
         
         Employee vaccineEntAdmin = new Employee();
         vaccineEntAdmin.setName("VACCINE AND IMMUNIZATION ENTERPRISE ADMIN");
-        e2.getEnterpriseUserAccountDirectory().createEnterpriseUser("enterprisevaccine", "enterprisevaccine", vaccineEntAdmin, new VaccinationEnterpriseRole());
+        e2.getEnterpriseUserAccountDirectory().createEnterpriseUser("evaccine", "evaccine", vaccineEntAdmin, new VaccinationEnterpriseRole());
         OrganizationDirectory o2 = e2.getOrganizationDirectory();
 
 //        create orgs under Vaccine enterprise
@@ -162,7 +167,7 @@ public class ConfigureASystem {
         }
         e2.setDeliveryAgentsInEnterpiselist(delList);
         n.setEnterpriseDirectory(edir);
-        
+
         
         for (Network net : system.getNetworks()) {
             for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
