@@ -22,10 +22,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vachanabelgavi
  */
-public class SampleCollectionJPanel extends javax.swing.JPanel {
+public class CustomerTestOrderJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form SampleCollectionJPanel
+     * Creates new form CustomerTestOrderJPanel
      */
     private JPanel userProcessContainer;
     private Ecosystem business;
@@ -36,7 +36,7 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
     private Organization organization;
 
     
-    public SampleCollectionJPanel(JPanel userProcessContainer, Ecosystem business, Network network, Customer customer) {
+    public CustomerTestOrderJPanel(JPanel userProcessContainer, Ecosystem business, Network network, Customer customer) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -67,7 +67,6 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnAddtoCart = new javax.swing.JButton();
-        btnLabAssistant = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -118,13 +117,6 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnLabAssistant.setText("Lab Asisstant");
-        btnLabAssistant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLabAssistantActionPerformed(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -157,13 +149,8 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnLabAssistant, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAddtoCart, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(343, 343, 343))))
+                .addComponent(btnAddtoCart, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(343, 343, 343))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -194,20 +181,9 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addGap(40, 40, 40)
-                .addComponent(btnLabAssistant, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLabAssistantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLabAssistantActionPerformed
-        // TODO add your handling code here:
-        
-        LabAgentSampleCollectionJPanel manageCustomerJPanel = new LabAgentSampleCollectionJPanel(userProcessContainer, business, network, customer);
-        userProcessContainer.add("manageCustomerJPanel",manageCustomerJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnLabAssistantActionPerformed
 
     private void btnAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtoCartActionPerformed
         // TODO add your handling code here:
@@ -268,7 +244,6 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddtoCart;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnLabAssistant;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

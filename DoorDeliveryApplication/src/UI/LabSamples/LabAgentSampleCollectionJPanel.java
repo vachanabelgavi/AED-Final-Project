@@ -185,12 +185,12 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
 
         if (selectedRow >= 0) {
             workrequest = (ReportUploadWorkRequest) labJTable.getValueAt(selectedRow, 0);
-            if (workrequest.getStatus().equalsIgnoreCase("Completed")) {
+            if (workrequest.getStatus().equalsIgnoreCase("Completed") || workrequest.getStatus().equalsIgnoreCase("Pending Sample Collection")) {
                 JOptionPane.showMessageDialog(null, "Request already processed.");
                 return;
             } else {
                 workrequest.setReceiver(userAccount);
-                workrequest.setStatus("Collect Samples");
+                workrequest.setStatus("Samples Collected");
                 populateTable();
                 JOptionPane.showMessageDialog(null, "Request has successfully assigned");
             }
