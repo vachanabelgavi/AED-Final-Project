@@ -157,7 +157,7 @@ public class ConfigureASystem {
         Employee emp1 = org.getEmployeeDirectory().createEmployee("Pannaga Veeramohan");
         Employee emp1B = org.getEmployeeDirectory().createEmployee("Boston Pharmacist");
         org2.getUserAccountDirectory().createUserAccount("pannaga", "pannaga", emp1, new PharmacistRole());
-        orgB2.getUserAccountDirectory().createUserAccount("bostonpharmacist", "bostonpharmacist", emp1, new PharmacistRole());
+        orgB2.getUserAccountDirectory().createUserAccount("bostonpharmacist", "bostonpharmacist", emp1B, new PharmacistRole());
 
         String[] drugs = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
         for (String s1 : drugs) {

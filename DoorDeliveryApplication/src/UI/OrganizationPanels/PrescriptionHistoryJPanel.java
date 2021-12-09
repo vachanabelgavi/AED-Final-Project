@@ -7,6 +7,9 @@ package UI.OrganizationPanels;
 
 import Business.Customer.Customer;
 import Business.Ecosystem;
+import Business.Orders.Order;
+import Business.WorkQueue.PrescriptionUploadWorkRequest;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +20,18 @@ public class PrescriptionHistoryJPanel extends javax.swing.JPanel {
     /**
      * Creates new form PrescriptionHistoryJPanel
      */
-    public PrescriptionHistoryJPanel(Ecosystem sytem, Customer customer) {
+    Ecosystem ecosystem;
+    Customer customer;
+    DefaultTableModel tableModel;
+
+    public PrescriptionHistoryJPanel(Ecosystem system, Customer customer) {
         initComponents();
-        
+        this.ecosystem = system;
+        this.customer = customer;
+
+        this.tableModel = (DefaultTableModel) jTable1.getModel();
+
+        populateOrders();
     }
 
     /**
@@ -77,6 +89,28 @@ public class PrescriptionHistoryJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void populateOrders() {
+        tableModel.setRowCount(0);
+        try {
+            for (PrescriptionUploadWorkRequest pu : this.ecosystem.getPrescriptionWorkList()) {
+                if (pu != null) {
+                    if (pu.getCustomer().equals(this.customer)) {
+
+                        Order o = this.customer.findOrderById(pu.getOrderId());
+
+                        tableModel.insertRow(tableModel.getRowCount(), new Object[]{
+                            o.getOrderId(),
+                            o.getStatus(),
+                            pu.getComments(),
+                            pu.getSignature()
+                        });
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;

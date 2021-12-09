@@ -144,6 +144,15 @@ public abstract class Organization {
         prod.setStockunits(stock);
         this.productList.add(prod);
     }
+    
+    public Product fetchProduct(int id) {
+        for(Product p: this.productList) {
+            if(p.getProductId() == id) {
+                return p;
+            }
+        } 
+        return null;
+    }
 
     public ArrayList<PrescriptionUploadWorkRequest> getPrescriptionWorkList() {
         return prescriptionWorkList;

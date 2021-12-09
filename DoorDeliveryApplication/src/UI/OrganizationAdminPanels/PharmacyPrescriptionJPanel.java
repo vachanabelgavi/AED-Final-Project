@@ -8,6 +8,8 @@ package UI.OrganizationAdminPanels;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Orders.Order;
+import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Products.Product;
 import Business.UserAccount.UserAccount;
@@ -141,7 +143,6 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(526, 347, -1, 304));
 
-        dropdownPrescription.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(dropdownPrescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(566, 106, 180, -1));
 
         jLabel2.setText("CUSTOMER NAME");
@@ -175,6 +176,11 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
         add(labelOrderStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 304, 229, 14));
 
         createOrderbttn.setText("CREATE ORDER");
+        createOrderbttn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createOrderbttnActionPerformed(evt);
+            }
+        });
         add(createOrderbttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 645, -1, -1));
 
         btnGo.setText("GO");
@@ -209,6 +215,49 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnGoActionPerformed
 
+    private void createOrderbttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrderbttnActionPerformed
+        // TODO add your handling code here:
+
+//        Create an order
+        ArrayList<Order> customerorder = this.currentWorkingRequest.getCustomer().getOrderlist();
+
+        Order o = new Order();
+
+        try {
+            int count = this.tableModel.getRowCount();
+
+            ArrayList<OrderItem> oi = o.getItemsOrdered();
+            OrderItem item = new OrderItem();
+
+            for (int i = 0; i < count; i++) {
+                item.setProductId((int) tableModel.getValueAt(i, 0));
+                item.setProductName((String) tableModel.getValueAt(i, 1));
+                item.setProductPrice((double) tableModel.getValueAt(i, 2));
+                item.setQty((int) tableModel.getValueAt(i, 3));
+
+                Product p = organization.fetchProduct(item.getProductId());
+                int stock = p.getStockunits() - item.getQty();
+                p.setStockunits(stock);
+
+                oi.add(item);
+            }
+
+            o.setPrescription(this.currentWorkingRequest.getPresecription());
+            labelOrderId.setText(String.valueOf(o.getOrderId()));
+            o.setStatus("APPROVED");
+            o.calcOrderTotal();
+            labelOrderStatus.setText(o.getStatus());
+
+            customerorder.add(o);
+            this.currentWorkingRequest.setPrescribedOrderItems(oi);
+
+            JOptionPane.showMessageDialog(null, "ORDER HAS BEEN CREATED.");
+        } catch (Exception e) {
+            System.out.println(e + " In Prescription Pharmacy");
+        }
+
+    }//GEN-LAST:event_createOrderbttnActionPerformed
+
     public void populatePres() {
 
         for (PrescriptionUploadWorkRequest pu : this.workrequest) {
@@ -225,13 +274,15 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
             tableModel.setRowCount(0);
 
             for (Product p : organization.getOrganizationProducts()) {
-                tableModel.insertRow(tableModel.getRowCount(), new Object[]{
-                    p.getProductId(),
-                    p.getName(),
-                    p.getPrice(),
-                    p.getStockunits(),
-                    1
-                });
+                if (p.getStockunits() != 0) {
+                    tableModel.insertRow(tableModel.getRowCount(), new Object[]{
+                        p.getProductId(),
+                        p.getName(),
+                        p.getPrice(),
+                        p.getStockunits(),
+                        1
+                    });
+                }
             }
 
         } catch (Exception e) {
