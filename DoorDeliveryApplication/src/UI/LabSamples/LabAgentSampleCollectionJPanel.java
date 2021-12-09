@@ -39,7 +39,7 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
         
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
         this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Lab Center");
-
+        
         populateTable();
     }
 
@@ -175,7 +175,7 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
-        
+        /*
         int selectedRow = workRequestJTable.getSelectedRow();
         
         if (selectedRow < 0){
@@ -190,6 +190,7 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
         userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
+*/
     }//GEN-LAST:event_btnProcessActionPerformed
 
 
@@ -219,7 +220,7 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
                     
                     obj[0] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getOrderId();
                     obj[1] = n.getCustomerDirectory().getCustomerList().get(i).getName();
-                    obj[2] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getTotalPrice();
+                    //obj[2] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getTotalPrice();
                     obj[3] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getStatus();
                     
                     model.addRow(obj);

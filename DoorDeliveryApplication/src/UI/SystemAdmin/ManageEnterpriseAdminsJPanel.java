@@ -8,6 +8,10 @@ package UI.SystemAdmin;
 import Business.Ecosystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.Role.EquipmentEnterpriseRole;
+import Business.Enterprise.Role.LabEnterprise;
+import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
+import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -26,6 +30,7 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Ecosystem business;
+    UserAccount account;
     
     public ManageEnterpriseAdminsJPanel(JPanel userProcessContainer, Ecosystem business) {
         initComponents();
@@ -63,6 +68,8 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
         txtPassword = new javax.swing.JTextField();
         comboEnterprise = new javax.swing.JComboBox();
         comboNetwork = new javax.swing.JComboBox();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setText("Network");
 
@@ -104,6 +111,8 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -206,7 +215,7 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,7 +223,7 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnAdd)
                 .addGap(21, 21, 21))
         );
@@ -245,19 +254,19 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                         switch(String.valueOf(enterprise)){
                             
                             case "PharmacyEnterpriseAdminRole":
-                                //UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new PharmaceuticalEnterpriseAdminRole());
+                                account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new PharmaceuticalEnterpriseAdminRole());
                                 break;
                                 
                             case "EquipmentEnterpriseRole":
-                                
+                                account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new EquipmentEnterpriseRole());
                                 break;
                                 
                             case "VaccinationEnterpriseRole":
-                                
+                                account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new VaccinationEnterpriseRole());
                                 break;
                                 
                             case "LabEnterprise":
-                                
+                                account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new LabEnterprise());
                                 break;
                                 
                         }
