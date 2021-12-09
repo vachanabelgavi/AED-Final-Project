@@ -61,7 +61,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         leftPane = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         prescriptionBtn = new javax.swing.JButton();
         browseBtn1 = new javax.swing.JButton();
         cartBtn1 = new javax.swing.JButton();
@@ -109,14 +108,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         pane.setRightComponent(jTabbedPane1);
 
         leftPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("<< BACK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        leftPane.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 5, -1, -1));
 
         prescriptionBtn.setText("MY PRESCRIPTIONS");
         prescriptionBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -192,21 +183,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         pane.setRightComponent(new CustomerPrescriptionJPanel(this.system, this.customer));
     }//GEN-LAST:event_prescriptionBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        userProcessContainer.remove(this);
-//        Component[] componentArray = userProcessContainer.getComponents();
-//        if(componentArray.length == 1) {
-//            Component component = componentArray[componentArray.length - 1];
-//        } else {
-//            Component component = componentArray[componentArray.length];
-//        }
-        
-        
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         pane.setRightComponent(null);
@@ -243,7 +219,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseBtn1;
     private javax.swing.JButton cartBtn1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

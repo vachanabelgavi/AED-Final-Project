@@ -11,7 +11,10 @@ import Business.DeliveryAgent.DeliveryAgent;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
+import Business.Enterprise.MedicalEquipments;
 import Business.Enterprise.Role.EnterpriseAdminRole;
+import Business.Enterprise.Role.EquipmentEnterpriseRole;
+import Business.Enterprise.Role.LabEnterprise;
 import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
 import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
@@ -19,6 +22,10 @@ import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Role.DeliveryAgentRole;
 import Business.Role.DoctorRole;
+import Business.Role.EquipmentProviderRole;
+import Business.Role.LabAssistantRole;
+import Business.Role.LabTesterRole;
+import Business.Role.MarketManagerRole;
 import Business.Role.PharmacistRole;
 import Business.Role.SystemAdminRole;
 import Business.Role.VaccinatorRole;
@@ -67,10 +74,10 @@ public class ConfigureASystem {
             String password = "customer" + String.valueOf(i);
 
             CustomerDirectory cdri = n.getCustomerDirectory();
-            Customer myCustomer = cdri.createCustomer(name, "n@gmail.com", username, password, 90010 + i, "", "addd", 1234567890);
+            Customer myCustomer = cdri.createCustomer(name, "n@gmail.com", username, password, 90010 + i, n.getNetworkName(), "address in california", 1234567890);
 
             CustomerDirectory cdri2 = n2.getCustomerDirectory();
-            Customer myCustomer1 = cdri2.createCustomer(name+"B", "boston@gmail.com", username+"B", password+"B", 2115 + i, "", "address boston", 1231231231);
+            Customer myCustomer1 = cdri2.createCustomer(name + "B", "boston@gmail.com", username + "B", password + "B", 2115 + i, n2.getNetworkName(), "address in boston", 1231231231);
         }
 
         Employee enterpriseEmployeeAdmin = system.getEmployeeDirectory().createEmployee("enterpriseadmin");
@@ -79,18 +86,48 @@ public class ConfigureASystem {
 //        ONE ENTERPRISE
         EnterpriseDirectory edir = new EnterpriseDirectory();
         Enterprise e = edir.createEnterprise(Enterprise.EnterpriseType.Pharmaceutical, "Pharmaceutical", "California");
+        Enterprise e1 = edir.createEnterprise(Enterprise.EnterpriseType.MedicalEquipements, "Medical Equipments", "California");
+        Enterprise e2 = edir.createEnterprise(Enterprise.EnterpriseType.LabDiagnostics, "Lab Center & Diagnostics", "California");
+        Enterprise e3 = edir.createEnterprise(Enterprise.EnterpriseType.Vaccination, "Immunization & Vaccination", "California");
 
         EnterpriseDirectory edir2 = new EnterpriseDirectory();
         Enterprise eB = edir2.createEnterprise(Enterprise.EnterpriseType.Pharmaceutical, "Pharmaceutical", "Boston");
+        Enterprise e1B = edir2.createEnterprise(Enterprise.EnterpriseType.MedicalEquipements, "Medical Equipments", "Boston");
+        Enterprise e2B = edir2.createEnterprise(Enterprise.EnterpriseType.LabDiagnostics, "Lab Center & Diagnostics", "Boston");
+        Enterprise e3B = edir2.createEnterprise(Enterprise.EnterpriseType.Vaccination, "Immunization & Vaccination", "Boston");
 
 //        CREATE ENTERPRISE USER ADMINS FOR 2 ENTERPRISES
         Employee pharmaEntemp = new Employee();
         pharmaEntemp.setName("PHARMA ENTERPRISE ADMIN CALIFORNIA");
-        e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmaEnterprise", "pharmaEnterprise", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
+        e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmaenterprise", "pharmaenterprise", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
+
+        Employee medEqupEntEmp = new Employee();
+        medEqupEntEmp.setName("MEDICAL EQUIPMENTS ENTERPRISE ADMIN CALIFORNIA");
+        e1.getEnterpriseUserAccountDirectory().createEnterpriseUser("medicalenterprise", "medicalenterprise", medEqupEntEmp, new EquipmentEnterpriseRole());
+
+        Employee labEntpEMp = new Employee();
+        labEntpEMp.setName("LAB CENTER & DIAGNOSTICS ENTERPRISE ADMIN CALIFORNIA");
+        e2.getEnterpriseUserAccountDirectory().createEnterpriseUser("labenterprise", "labenterprise", labEntpEMp, new LabEnterprise());
+
+        Employee vaccineEntAdmin = new Employee();
+        vaccineEntAdmin.setName("VACCINE AND IMMUNIZATION ENTERPRISE ADMIN CALIFORNIA");
+        e3.getEnterpriseUserAccountDirectory().createEnterpriseUser("vaccineenterprise", "vaccineenterprise", vaccineEntAdmin, new VaccinationEnterpriseRole());
 
         Employee pharmaEntemp2 = new Employee();
         pharmaEntemp.setName("PHARMA ENTERPRISE ADMIN BOSTON");
-        eB.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmaEnterprise", "pharmaEnterprise", pharmaEntemp2, new PharmaceuticalEnterpriseAdminRole());
+        eB.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bpharmaenterprise", "Bpharmaenterprise", pharmaEntemp2, new PharmaceuticalEnterpriseAdminRole());
+
+        Employee medEqupEntEmp2 = new Employee();
+        medEqupEntEmp2.setName("MEDICAL EQUIPMENTS ENTERPRISE ADMIN BOSTON");
+        e1B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bmedicalenterprise", "Bmedicalenterprise", medEqupEntEmp2, new EquipmentEnterpriseRole());
+
+        Employee labEntpEMp2 = new Employee();
+        labEntpEMp.setName("LAB CENTER & DIAGNOSTICS ENTERPRISE ADMIN BOSTON");
+        e2B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Blabenterprise", "Blabenterprise", labEntpEMp2, new LabEnterprise());
+
+        Employee vaccineEntAdmin2 = new Employee();
+        vaccineEntAdmin2.setName("VACCINE AND IMMUNIZATION ENTERPRISE ADMIN BOSTON");
+        e3B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bvaccineenterprise", "Bvaccineenterprise", vaccineEntAdmin2, new VaccinationEnterpriseRole());
 
 //        create delivery agents in enterprise
         ArrayList<DeliveryAgent> delList = e.getDeliveryAgentsInEnterpiselist();
@@ -112,15 +149,15 @@ public class ConfigureASystem {
                 d.setZipcodes(z1);
                 d.setEnterprisename(e);
                 delList.add(d);
-                e.setDeliveryAgentsInEnterpiselist(delList);
+                eB.setDeliveryAgentsInEnterpiselist(delList);
 
             } else {
                 z2.add(91311 + j);
                 Employee em = new Employee();
-                em.setName("Delivery Man " + String.valueOf(j));
+                em.setName("Delivery Man Boston" + String.valueOf(j));
                 UserAccount u = d.getUseraccount();
-                u.setUsername("delivery" + String.valueOf(j));
-                u.setPassword("delivery" + String.valueOf(j));
+                u.setUsername("deliveryb" + String.valueOf(j));
+                u.setPassword("deliveryb" + String.valueOf(j));
                 u.setRole(new DeliveryAgentRole());
                 u.setEmployee(em);
                 d.setZipcodes(z2);
@@ -129,63 +166,98 @@ public class ConfigureASystem {
                 e.setDeliveryAgentsInEnterpiselist(delList);
             }
         }
-        e.setDeliveryAgentsInEnterpiselist(delList);
+       
+
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();
+        OrganizationDirectory o1 = e1.getOrganizationDirectory();
+        OrganizationDirectory o2 = e2.getOrganizationDirectory();
+        OrganizationDirectory o3 = e3.getOrganizationDirectory();
+
+        Organization orgP = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", "California", 90011);
+        Organization orgP1 = o.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "California", 90011);
+        Organization orgP2 = o.createOrganization(Organization.Type.MarketManager, "Supermarket", "California", 90011);
+
+        Organization orgM = o1.createOrganization(Organization.Type.EquipmentManager, "Equipments", "California", 90011);
+
+        Organization orgV = o3.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", "California", 990011);
+
+        Organization orgL = o2.createOrganization(Organization.Type.LabAssistant, "Lab Center", "California", 990011);
+        Organization orgL1 = o2.createOrganization(Organization.Type.LabTester, "Testing Center", "California", 990011);
+
         OrganizationDirectory oo = eB.getOrganizationDirectory();
+        OrganizationDirectory oo1 = e1B.getOrganizationDirectory();
+        OrganizationDirectory oo2 = e2B.getOrganizationDirectory();
+        OrganizationDirectory oo3 = e3B.getOrganizationDirectory();
 
-        Organization org = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", "California", 90011);
-        Organization orgB = oo.createOrganization(Organization.Type.Doctor, "Doctor Associate", "Boston", 2120);
+        Organization orgBP = oo.createOrganization(Organization.Type.Doctor, "Doctor Associate", "Boston", 2120);
+        Organization orgBP1 = oo.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "Boston", 2120);
+        Organization orgBP2 = oo.createOrganization(Organization.Type.MarketManager, "Supermarket", "Boston", 2120);
 
-        Organization org2 = o.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "LA", 990011);
-        Organization orgB2 = oo.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "Quincy", 2120);
+        Organization orgMB = oo1.createOrganization(Organization.Type.EquipmentManager, "Equipments", "Boston", 2120);
 
-        System.out.println(org.getSupportedRole());
-        ArrayList<Organization> orgList = o.getOrganizationList();
+        Organization orgVB = oo3.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", "Boston", 2120);
+
+        Organization orgLB = oo2.createOrganization(Organization.Type.LabAssistant, "Lab Center", "Boston", 2120);
+        Organization orgLB1 = oo2.createOrganization(Organization.Type.LabTester, "Testing Center", "Boston", 2120);
+
 //        System.out.println("ORG LIST SIZE " + orgList.size());
 
 //        ArrayList<Enterprise> eList = edir.getEnterpriseList();
 //        edir.setEnterpriseList(eList);
-        System.out.println("ORGANIZATIONS UNDER PHARMA E ---- " + orgList.size());
-        Employee emp = org.getEmployeeDirectory().createEmployee("Nidhi Raghavendra");
-        Employee empB = org.getEmployeeDirectory().createEmployee("Boston Doctor ");
+        Employee emp = orgP.getEmployeeDirectory().createEmployee("California Doctor");
+        Employee empB = orgBP.getEmployeeDirectory().createEmployee("Boston Doctor");
 
-        org.getUserAccountDirectory().createUserAccount("nidhi", "nidhi", emp, new DoctorRole());
-        orgB.getUserAccountDirectory().createUserAccount("bostondoctor", "bostondoctor", empB, new DoctorRole());
+        orgP.getUserAccountDirectory().createUserAccount("caldoctor", "caldoctor", emp, new DoctorRole());
+        orgBP.getUserAccountDirectory().createUserAccount("bostondoctor", "bostondoctor", empB, new DoctorRole());
 
-//        THE DOCTOR ORG DOES NOT HAVE PRODUCTS
-        Employee emp1 = org.getEmployeeDirectory().createEmployee("Pannaga Veeramohan");
-        Employee emp1B = org.getEmployeeDirectory().createEmployee("Boston Pharmacist");
-        org2.getUserAccountDirectory().createUserAccount("pannaga", "pannaga", emp1, new PharmacistRole());
-        orgB2.getUserAccountDirectory().createUserAccount("bostonpharmacist", "bostonpharmacist", emp1B, new PharmacistRole());
+        Employee emp1 = orgP1.getEmployeeDirectory().createEmployee("California Pharmacist");
+        Employee emp1B = orgBP1.getEmployeeDirectory().createEmployee("Boston Pharmacist");
+        orgP1.getUserAccountDirectory().createUserAccount("calpharmacist", "calpharmacist", emp1, new PharmacistRole());
+        orgBP1.getUserAccountDirectory().createUserAccount("bostonpharmacist", "bostonpharmacist", emp1B, new PharmacistRole());
+
+        Employee emp2 = orgP2.getEmployeeDirectory().createEmployee("California Supermarket");
+        Employee emp2B = orgBP2.getEmployeeDirectory().createEmployee("Boston Supermarket");
+        orgP2.getUserAccountDirectory().createUserAccount("calsupermarket", "calsupermarket", emp2, new MarketManagerRole());
+        orgBP2.getUserAccountDirectory().createUserAccount("bostonsupermarket", "bostonsupermarket", emp2B, new MarketManagerRole());
+
+        Employee empM = orgM.getEmployeeDirectory().createEmployee("California Medical Equipment");
+        Employee empMB = orgMB.getEmployeeDirectory().createEmployee("Boston Medical Equipment");
+        orgM.getUserAccountDirectory().createUserAccount("calmedical", "calmedical", empM, new EquipmentProviderRole());
+        orgMB.getUserAccountDirectory().createUserAccount("bostonmedical", "bostonmedical", empMB, new EquipmentProviderRole());
+
+        Employee empV = orgV.getEmployeeDirectory().createEmployee("California Immunizer");
+        Employee empVB = orgVB.getEmployeeDirectory().createEmployee("Boston Immunizer");
+        orgV.getUserAccountDirectory().createUserAccount("calvaccine", "calvaccine", empV, new VaccinatorRole());
+        orgVB.getUserAccountDirectory().createUserAccount("bostonvaccine", "bostonvaccine", empVB, new VaccinatorRole());
+
+        Employee empL = orgL.getEmployeeDirectory().createEmployee("California Lab Center");
+        Employee empLB = orgLB.getEmployeeDirectory().createEmployee("Boston Lab Center");
+        orgL.getUserAccountDirectory().createUserAccount("callab", "callab", empL, new LabAssistantRole());
+        orgLB.getUserAccountDirectory().createUserAccount("bostonlab", "bostonlab", empLB, new LabAssistantRole());
+        
+        Employee empL1 = orgL1.getEmployeeDirectory().createEmployee("California Lab Center");
+        Employee empLB1 = orgLB1.getEmployeeDirectory().createEmployee("Boston Lab Center");
+        orgL1.getUserAccountDirectory().createUserAccount("callab", "callab", empL1, new LabTesterRole());
+        orgLB1.getUserAccountDirectory().createUserAccount("bostonlab", "bostonlab", empLB1, new LabTesterRole());
+        
+        
 
         String[] drugs = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
         for (String s1 : drugs) {
-            org2.addProduct(s1, 7.5, 500);
+            orgP1.addProduct(s1, 7.5, 500);
+            orgP2.addProduct(s1, 6.5, 1500);
+            orgBP1.addProduct(s1, 8.0, 1000);
+            orgBP2.addProduct(s1, 7.45, 3500);
         }
-
-//      TWO ENTERPRISE 
-        Enterprise e2 = edir.createEnterprise(Enterprise.EnterpriseType.Vaccination, "Immunization & Vaccination", "California");
-
-        Employee vaccineEntAdmin = new Employee();
-        vaccineEntAdmin.setName("VACCINE AND IMMUNIZATION ENTERPRISE ADMIN");
-        e2.getEnterpriseUserAccountDirectory().createEnterpriseUser("enterprisevaccine", "enterprisevaccine", vaccineEntAdmin, new VaccinationEnterpriseRole());
-        OrganizationDirectory o2 = e2.getOrganizationDirectory();
 
 //        create orgs under Vaccine enterprise
-        Organization org1 = o2.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", "California", 02220);
-        Employee emp2 = org.getEmployeeDirectory().createEmployee("Vachana B");
-
-        org1.getUserAccountDirectory().createUserAccount("vachana", "vachana", emp2, new VaccinatorRole());
-
-        System.out.println(org1.getUserAccountDirectory().getUserAccountList().size() + " THIS SHOULD BE ");
-
         String[] vaccineProducts = {"Moderna", "J&J", "Hepatitis B", "Pfizer", "Meningococcal"};
         for (String s : vaccineProducts) {
-            org1.addProduct(s, 10.0, 200);
+            orgV.addProduct(s, 10.0, 200);
+            orgVB.addProduct(s, 12.0, 2100);
 
         }
-        e2.setDeliveryAgentsInEnterpiselist(delList);
 
         n.setEnterpriseDirectory(edir);
         n2.setEnterpriseDirectory(edir2);

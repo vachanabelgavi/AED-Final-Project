@@ -30,7 +30,7 @@ public abstract class WorkRequest {
     }
 
     public UserAccount getReceiver() {
-        return receiver;
+        return this.receiver;
     }
 
     public void setReceiver(UserAccount receiver) {
