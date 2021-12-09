@@ -12,6 +12,7 @@ import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.EnterpriseDirectory;
 import Business.Enterprise.Role.EnterpriseAdminRole;
+import Business.Enterprise.Role.EquipmentEnterpriseRole;
 import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
 import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
@@ -19,6 +20,7 @@ import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Role.DeliveryAgentRole;
 import Business.Role.DoctorRole;
+import Business.Role.EquipmentProviderRole;
 import Business.Role.PharmacistRole;
 import Business.Role.SystemAdminRole;
 import Business.Role.VaccinatorRole;
@@ -168,6 +170,28 @@ public class ConfigureASystem {
         e2.setDeliveryAgentsInEnterpiselist(delList);
         n.setEnterpriseDirectory(edir);
 
+        //THIRD ENTERPRISE 
+        Enterprise e3 = edir.createEnterprise(Enterprise.EnterpriseType.MedicalEquipements, "Medical Equipements", "California");
+        
+        Employee MEquipmentEntAdmin = new Employee();
+        MEquipmentEntAdmin.setName("MEDICAL EQUIPMENT ENTERPRISE ADMIN");
+        e3.getEnterpriseUserAccountDirectory().createEnterpriseUser("meent", "meent", MEquipmentEntAdmin, new EquipmentEnterpriseRole());
+        OrganizationDirectory og3 = e3.getOrganizationDirectory();
+
+//        create orgs under medical rquipment enterprise
+        Organization org11 = og3.createOrganization(Organization.Type.EquipmentManager, "Immunization", "California", 02220);
+        Employee emp11 = org.getEmployeeDirectory().createEmployee("Monisha");
+
+        org11.getUserAccountDirectory().createUserAccount("moni", "moni", emp11, new EquipmentProviderRole() );
+
+        System.out.println(org11.getUserAccountDirectory().getUserAccountList().size() + " THIS SHOULD BE ");
+
+        String[] MEquipments = {"Insulin pumps", "Nebulizers", "Portable oxygen tanks", "Oximeter", "Medical Thermometer"};
+        for (String s : MEquipments) {
+            org1.addProduct(s, 10.0, 300);    
+        }
+        e3.setDeliveryAgentsInEnterpiselist(delList);
+        n.setEnterpriseDirectory(edir);
         
         for (Network net : system.getNetworks()) {
             for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {
