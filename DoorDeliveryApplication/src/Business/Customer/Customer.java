@@ -72,7 +72,7 @@ public class Customer {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -80,7 +80,7 @@ public class Customer {
     }
 
     public String getLocation() {
-        return location;
+        return this.location;
     }
 
     public void setLocation(String location) {

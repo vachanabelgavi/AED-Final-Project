@@ -28,21 +28,21 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
     private final Network network;
     private final UserAccount user;
     private final Organization organization;
-    
+
     DefaultTableModel tableModel;
-    
+
     public PharmacyProductJPanel(JPanel userprocessContainer, Ecosystem system, UserAccount ua, Network network, Organization organization, Enterprise enterprise) {
         initComponents();
-        
+
         this.ecosystem = system;
         this.network = network;
         this.user = ua;
         this.organization = organization;
-        
+
         this.tableModel = (DefaultTableModel) prodTable.getModel();
-        
+        System.out.println("ORGNAME --------- " + this.organization.getName() + this.organization.getOrganizationProducts().size());
         populateProducts();
-        
+
     }
 
     /**
@@ -165,19 +165,28 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (fieldProductName.getText().trim().length() > 0 && Double.valueOf(fieldProductPrice.getText()) > 0.0 && Integer.valueOf(fieldStock.getText()) > 0) {
-                for (Product p : this.organization.getProductList()) {
-                    if (p.getName().equals(fieldProductName.getText())) {
-                        JOptionPane.showMessageDialog(null, "Product already exists");
-                        break;
-                    } else {
-                        Product prod = new Product();
-                        prod.setName(fieldProductName.getText());
-                        prod.setPrice(Double.valueOf(fieldProductPrice.getText()));
-                        prod.setStockunits(Integer.valueOf(fieldStock.getText()));
-                        this.organization.getProductList().add(prod);
-                        JOptionPane.showMessageDialog(null, "Added !");
-                        break;
+                if (this.organization.getOrganizationProducts().size() > 0) {
+                    for (Product p : this.organization.getOrganizationProducts()) {
+                        if (p.getName().equals(fieldProductName.getText())) {
+                            JOptionPane.showMessageDialog(null, "Product already exists");
+                            break;
+                        } else {
+                            Product prod = new Product();
+                            prod.setName(fieldProductName.getText());
+                            prod.setPrice(Double.valueOf(fieldProductPrice.getText()));
+                            prod.setStockunits(Integer.valueOf(fieldStock.getText()));
+                            this.organization.getOrganizationProducts().add(prod);
+                            JOptionPane.showMessageDialog(null, "Added !");
+                            break;
+                        }
                     }
+                } else {
+                    Product prod = new Product();
+                    prod.setName(fieldProductName.getText());
+                    prod.setPrice(Double.valueOf(fieldProductPrice.getText()));
+                    prod.setStockunits(Integer.valueOf(fieldStock.getText()));
+                    this.organization.addProduct(fieldProductName.getText(), Double.valueOf(fieldProductPrice.getText()), Integer.valueOf(fieldStock.getText()));
+                    JOptionPane.showMessageDialog(null, "Added !");
                 }
             }
             populateProducts();
@@ -192,25 +201,30 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
         int count = this.tableModel.getRowCount();
         try {
             for (int i = 0; i < count; i++) {
-                for (Product p : this.organization.getProductList()) {
+                for (Product p : this.organization.getOrganizationProducts()) {
                     if (p.getProductId() == Integer.valueOf((int) this.tableModel.getValueAt(i, 0))) {
+
+                        System.out.println((int) this.tableModel.getValueAt(i, 3));
+                        int idx = this.organization.getOrganizationProducts().indexOf(p);
                         p.setStockunits((int) this.tableModel.getValueAt(i, 3));
                         p.setPrice(Double.valueOf((Double) this.tableModel.getValueAt(i, 2)));
-                        
-                        JOptionPane.showMessageDialog(null, "Updated!");
-                        populateProducts();
+                        this.organization.getOrganizationProducts().set(idx, p);
+
                     }
                 }
+
             }
+            JOptionPane.showMessageDialog(null, "Updated the product!");
+            populateProducts();
         } catch (Exception e) {
             System.out.println(e + " ------------- ");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     public void populateProducts() {
         tableModel.setRowCount(0);
-        for (Product p : organization.getOrganizationProducts()) {
+        for (Product p : this.organization.getOrganizationProducts()) {
             if (p.getStockunits() != 0) {
                 tableModel.insertRow(tableModel.getRowCount(), new Object[]{
                     p.getProductId(),

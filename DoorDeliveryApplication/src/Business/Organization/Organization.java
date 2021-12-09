@@ -129,7 +129,7 @@ public abstract class Organization {
     }
 
     public ArrayList<Product> getProductList() {
-        return productList;
+        return this.productList;
     }
 
     public void setProductList(ArrayList<Product> productList) {
