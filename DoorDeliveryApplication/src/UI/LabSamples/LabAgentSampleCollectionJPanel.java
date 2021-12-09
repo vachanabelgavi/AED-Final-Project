@@ -10,6 +10,10 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ReportUploadWorkRequest;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,18 +28,21 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
      */
     private JPanel userProcessContainer;
     private Ecosystem business;
+    private UserAccount userAccount;
     private Network network;
     private Customer customer;
     private Enterprise enterprise;
     private Organization organization;
+    private ReportUploadWorkRequest workrequest;
     
-    public LabAgentSampleCollectionJPanel(JPanel userProcessContainer, Ecosystem business, Network network, Customer customer) {
+    public LabAgentSampleCollectionJPanel(JPanel userProcessContainer, UserAccount userAccount, Ecosystem business, Network network, Customer customer) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.network = network;
         this.customer = customer;
+        this.userAccount = userAccount;
         
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
         this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Lab Center");
@@ -57,7 +64,7 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         labJTable = new javax.swing.JTable();
-        btnLabAssistant = new javax.swing.JButton();
+        btnAssign = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnProcess = new javax.swing.JButton();
 
@@ -91,18 +98,22 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
 
         labJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Order Number", "Customer", "Total", "Order Status"
+                "Order Number", "Customer", "Total", "Order Status", "null"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -110,10 +121,10 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(labJTable);
 
-        btnLabAssistant.setText("Assign to me");
-        btnLabAssistant.addActionListener(new java.awt.event.ActionListener() {
+        btnAssign.setText("Assign to me");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLabAssistantActionPerformed(evt);
+                btnAssignActionPerformed(evt);
             }
         });
 
@@ -140,13 +151,13 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(221, 221, 221)
-                        .addComponent(btnLabAssistant)
+                        .addComponent(btnAssign)
                         .addGap(81, 81, 81)
                         .addComponent(btnProcess)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnLabAssistant, btnProcess});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAssign, btnProcess});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,20 +169,36 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLabAssistant)
+                    .addComponent(btnAssign)
                     .addComponent(btnProcess))
                 .addContainerGap(147, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnLabAssistant, btnProcess});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAssign, btnProcess});
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLabAssistantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLabAssistantActionPerformed
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         // TODO add your handling code here:
         
-        
-    }//GEN-LAST:event_btnLabAssistantActionPerformed
+        int selectedRow = labJTable.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            workrequest = (ReportUploadWorkRequest) labJTable.getValueAt(selectedRow, 0);
+            if (workrequest.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            } else {
+                workrequest.setReceiver(userAccount);
+                workrequest.setStatus("Collect Samples");
+                populateTable();
+                JOptionPane.showMessageDialog(null, "Request has successfully assigned");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Choose a request to process.");
+            return;
+        }
+    }//GEN-LAST:event_btnAssignActionPerformed
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
@@ -191,11 +218,16 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
 */
+        ProcessLabWorkRequestJPanel workRequestPanel = new ProcessLabWorkRequestJPanel(userProcessContainer, business, network, customer);
+        userProcessContainer.add("manageCustomerJPanel",workRequestPanel);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
     }//GEN-LAST:event_btnProcessActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLabAssistant;
+    private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnProcess;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
