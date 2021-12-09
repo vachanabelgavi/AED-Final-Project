@@ -59,6 +59,7 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
 //populate product dropdown
             populatePres();
             populateProducts();
+            System.out.println("IN PHARM PPRESC  ----- " + this.organization.getName() + this.organization.getOrganizationProducts().size());
 
         } else {
             JOptionPane.showMessageDialog(null, "No Prescription Requests!");
@@ -233,22 +234,36 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
                 item.setProductId((int) tableModel.getValueAt(i, 0));
                 item.setProductName((String) tableModel.getValueAt(i, 1));
                 item.setProductPrice((double) tableModel.getValueAt(i, 2));
-                item.setQty((int) tableModel.getValueAt(i, 3));
+                item.setQty((int) tableModel.getValueAt(i, 4));
 
-                Product p = organization.fetchProduct(item.getProductId());
+                Product p = this.organization.fetchProduct(item.getProductId());
+                if(item.getQty() > p.getStockunits()) {
+                    JOptionPane.showMessageDialog(null, "Quantity is greater than stock units. Can't perform this operation.");
+                    break;
+                }
+                
+               ArrayList<Product> prods = this.organization.getOrganizationProducts();
+               int idx = prods.indexOf(p);
+                System.out.println("FOUNT PPRODUCT AT  ------- " + idx);
                 int stock = p.getStockunits() - item.getQty();
                 p.setStockunits(stock);
-
+                prods.set(idx, p);
+                this.organization.setProductList(prods);
+                
                 oi.add(item);
             }
 
             o.setPrescription(this.currentWorkingRequest.getPresecription());
             labelOrderId.setText(String.valueOf(o.getOrderId()));
-            o.setStatus("APPROVED");
+            o.setStatus("ACCEPTED");
             o.calcOrderTotal();
             labelOrderStatus.setText(o.getStatus());
+            o.setOrganizationname(this.organization.getName());
+            
 
             customerorder.add(o);
+            this.currentWorkingRequest.setOrderId(o.getOrderId());
+            this.currentWorkingRequest.getCustomer().setOrderlist(customerorder);
             this.currentWorkingRequest.setPrescribedOrderItems(oi);
 
             JOptionPane.showMessageDialog(null, "ORDER HAS BEEN CREATED.");
@@ -271,11 +286,12 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
 
     public void populateProducts() {
         try {
-            tableModel.setRowCount(0);
-
-            for (Product p : organization.getOrganizationProducts()) {
+            this.tableModel.setRowCount(0);
+            
+            for (Product p : this.organization.getOrganizationProducts()) {
+                System.out.println("INSIDE POPuLATE ORDER  --- ");
                 if (p.getStockunits() != 0) {
-                    tableModel.insertRow(tableModel.getRowCount(), new Object[]{
+                    this.tableModel.insertRow(this.tableModel.getRowCount(), new Object[]{
                         p.getProductId(),
                         p.getName(),
                         p.getPrice(),
@@ -286,7 +302,7 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-
+            System.out.println("-------------- ORG PRODUCTS IN PHARMACY PRESC "+ e);
         }
 
     }

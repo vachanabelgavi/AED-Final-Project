@@ -94,8 +94,8 @@ public class PrescriptionHistoryJPanel extends javax.swing.JPanel {
         try {
             for (PrescriptionUploadWorkRequest pu : this.ecosystem.getPrescriptionWorkList()) {
                 if (pu != null) {
-                    if (pu.getCustomer().equals(this.customer)) {
-
+                    if (pu.getCustomer().getUsername().equals(this.customer.getUsername())) {
+                        System.out.println(pu.getOrderId());
                         Order o = this.customer.findOrderById(pu.getOrderId());
 
                         tableModel.insertRow(tableModel.getRowCount(), new Object[]{
@@ -108,7 +108,7 @@ public class PrescriptionHistoryJPanel extends javax.swing.JPanel {
                 }
             }
         } catch (Exception e) {
-
+            System.out.println(e + " --------- IN PRESCRIPTION HISTORY ");
         }
     }
 

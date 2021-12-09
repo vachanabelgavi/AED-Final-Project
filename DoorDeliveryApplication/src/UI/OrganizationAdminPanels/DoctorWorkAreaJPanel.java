@@ -398,6 +398,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 //                    MAILING SERVICE
                 } else {
 
+                    System.out.println(this.toPharmacist + " 888888888888888 PHARMACIST OBJECT");
                     PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
                     pq.setSender(user);
                     pq.setCustomer(this.currentCustomer);
@@ -517,10 +518,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                     this.customerOrganization = network.getEnterpriseDirectory().getEnterprise("Pharmaceutical").getOrganizationDirectory().getOrganizationByName("Pharmacy");
                     if (network.getNetworkName().equals("California")) {
                         System.out.println("ADDED PANNAGA ----------------");
-                        this.toPharmacist = customerOrganization.getUserAccountDirectory().findUser("pannaga");
+                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
                     } else {
                         System.out.println("ADDED BOSTON PHARMACIST --------------------- ");
-                        this.toPharmacist = customerOrganization.getUserAccountDirectory().findUser("bostonpharmacist");
+                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
                     }
 
                     JOptionPane.showMessageDialog(null, "Done!");
