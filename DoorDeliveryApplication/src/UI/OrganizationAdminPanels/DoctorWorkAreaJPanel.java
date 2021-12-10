@@ -31,12 +31,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
-    private final JPanel userProcessContainer;
-    private final Ecosystem ecosystem;
-    private final UserAccount user;
-    private final Network network;
-    private final Organization organization;
-    private final Enterprise enterprise;
+    private JPanel userProcessContainer;
+    private Ecosystem ecosystem;
+    private UserAccount user;
+    private Network network;
+    private Organization organization;
+    private Enterprise enterprise;
 
     DefaultTableModel tableModel;
     private final ArrayList<PrescriptionUploadWorkRequest> workRequest;
@@ -357,27 +357,39 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 //        CHECK IF ITS A NEW CUSTOMER
                 if (fieldNewCheckBox.isSelected() == true) {
                     Network selectedNetwork = (Network) networkCombo.getSelectedItem();
-
+                    System.out.println("SELECTED NETWORK ------------ " + selectedNetwork + selectedNetwork.getNetworkName());
                     Boolean b = checkIfCustomerExists();
 
                     if (!b) {
-
+                        System.out.println("CAME INTO CREATING NEW CUSTOMER");
                         Customer newCustoemr = selectedNetwork.getCustomerDirectory().createCustomer(fieldName.getText(), fieldEmail.getText(), "", "", (int) zipcodeCombo.getSelectedItem(), selectedNetwork.getNetworkName(), fieldAddress.getText(), Integer.valueOf(fieldPhone.getText()));
 
 //           Create order for customer in pharmacy admin panel
 //           Prescription work request is at the system level
-                        PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
-                        pq.setSender(user);
-                        pq.setCustomer(newCustoemr);
-                        pq.setReceiver(toPharmacist);
-                        pq.setPresecription(chosenFile);
-                        pq.setSignature(fieldSignature.getText());
-                        pq.setComments(fieldNotes.getText());
-                        pq.setStatus("INCOMING PRESCRIPTION");
-                        pq.generateRequestId();
-                        this.workRequest.add(pq);
+// get the pharmacist in this  network's pharmacy organization
+                        Enterprise e = selectedNetwork.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
+                        this.customerOrganization = e.getOrganizationDirectory().getOrganizationByName("Pharmacy");
 
-                        JOptionPane.showMessageDialog(null, "PRESCRIPTION SENT TO " + toPharmacist.getEmployee().getName());
+                        try {
+
+                            System.out.println("CAME TO DOCTOR PANEL  ---------- "+ this.toPharmacist.getUsername());
+                           
+                            PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
+                            pq.setSender(user);
+                            pq.setCustomer(newCustoemr);
+                            pq.setReceiver(this.toPharmacist);
+                            pq.setPresecription(chosenFile);
+                            pq.setSignature(fieldSignature.getText());
+                            pq.setComments(fieldNotes.getText());
+                            pq.setStatus("INCOMING PRESCRIPTION");
+                            pq.generateRequestId();
+                            this.workRequest.add(pq);
+
+                            JOptionPane.showMessageDialog(null, "PRESCRIPTION SENT TO " + this.toPharmacist.getEmployee().getName());
+                        } catch (Exception err) {
+                            System.out.println("error --- " + err);
+                            JOptionPane.showMessageDialog(null, "Looks like there is no pharmacy admin for the organization!");
+                        }
 
                     } else {
                         JOptionPane.showMessageDialog(null, "CUSTOMER EXISTS.");
@@ -386,8 +398,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 //                    MAILING SERVICE
                 } else {
 
-                   
-
+                    System.out.println(this.toPharmacist + " 888888888888888 PHARMACIST OBJECT");
                     PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
                     pq.setSender(user);
                     pq.setCustomer(this.currentCustomer);
@@ -507,12 +518,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                     this.customerOrganization = network.getEnterpriseDirectory().getEnterprise("Pharmaceutical").getOrganizationDirectory().getOrganizationByName("Pharmacy");
                     if (network.getNetworkName().equals("California")) {
                         System.out.println("ADDED PANNAGA ----------------");
-                        this.toPharmacist = customerOrganization.getUserAccountDirectory().findUser("pannaga");
+                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
                     } else {
                         System.out.println("ADDED BOSTON PHARMACIST --------------------- ");
-                        this.toPharmacist = customerOrganization.getUserAccountDirectory().findUser("bostonpharmacist");
+                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
                     }
-                    
+
                     JOptionPane.showMessageDialog(null, "Done!");
                     break;
                 } else {
@@ -537,6 +548,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     public void populateZipcodes() {
 
         try {
+            zipcodeCombo.removeAllItems();
             for (Network n : this.ecosystem.getNetworks()) {
                 Network nSelected = (Network) networkCombo.getSelectedItem();
                 if (nSelected != null) {
@@ -555,7 +567,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     public Boolean checkIfCustomerExists() {
         for (Network n : this.ecosystem.getNetworks()) {
-            if (jTextField1.getText().equals(n.getCustomerDirectory().searchCustomer(jTextField1.getText()))) {
+//            if the customer account is present - it returns a NOT null
+            System.out.println(fieldName.getText() + " ********* customer new **********");
+            if (n.getCustomerDirectory().searchCustomer(fieldName.getText()) != null) {
+                System.out.println("FOUND A CUSTOMER WITH THIS NAEM !");
                 return true;
             } else {
 

@@ -10,8 +10,10 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Orders.Order;
+import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Organization.PharmacyOrganization;
+import Business.Products.Product;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.PrescriptionUploadWorkRequest;
@@ -191,6 +193,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        updateProductsTable();
         for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
             for (Order o : customer.getOrderlist()) {
                 if (o.getOrderId() == this.orderid) {
@@ -253,7 +256,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         jSplitPane1.setRightComponent(null);
-        jSplitPane1.setRightComponent(new PharmacyProductJPanel());
+        jSplitPane1.setRightComponent(new PharmacyProductJPanel(userProcessContainer, ecosystem,  user,  network,  organization,  enterprise));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -300,6 +303,15 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         }
 
     }
+    
+   public void updateProductsTable() {
+       for(OrderItem oi: this.currentOrder.getItemsOrdered()) {
+           Product p = this.organization.fetchProduct(oi.getProductId());
+           
+           int stock = p.getStockunits() - oi.getQty();
+           p.setStockunits(stock);
+       }
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSendPrescription;
