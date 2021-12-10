@@ -85,6 +85,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(253, 252, 249));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton3.setText("REFRESH");
@@ -148,6 +149,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
         jSplitPane1.setRightComponent(jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(253, 252, 249));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton4.setText("MANAGE PRODUCTS");

@@ -23,7 +23,7 @@ public class Ecosystem extends Organization {
 
     public static Ecosystem ecosystem;
     private ArrayList<Network> networkList;
-    
+
     public Network createNetwork() {
         Network network = new Network();
         this.networkList.add(network);
@@ -57,7 +57,7 @@ public class Ecosystem extends Organization {
         roleList.add(new SystemAdminRole());
         return roleList;
     }
-    
+
     public Network getNetwork(String name){
         for(Network n : networkList){
             if(n.getNetworkName().equalsIgnoreCase(name))
@@ -65,7 +65,7 @@ public class Ecosystem extends Organization {
         }
         return null;
     }
-    
+
     public void removeNetwork(Network n){
         networkList.remove(n);
     }
@@ -100,7 +100,7 @@ public class Ecosystem extends Organization {
                     }
                 }
             }
-        }        
-      
+        }
+
     }
 }

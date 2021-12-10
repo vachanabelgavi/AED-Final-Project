@@ -38,7 +38,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
      Organization organization;
      Network network;
     
-    public VaccinationEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise,Ecosystem ecosystem) {
+    public VaccinationEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Network network,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
         
         this.userProcessContainer=userProcessContainer;
@@ -46,7 +46,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
          this.account = account;
         this.enterprise = enterprise;
         this.organization = organization;
-        this.network = new Network();
+        this.network = network;
         this.customer = new Customer();
         
         System.out.println("Inside Vaccination Enterprise");
@@ -182,7 +182,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
     private void btnmanageordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmanageordersActionPerformed
         // TODO add your handling code here:
 
-        ManageVaccinationOrdersJPanel manageVacOrdersJPanel=new ManageVaccinationOrdersJPanel(userProcessContainer, ecosystem);
+        ManageVaccinationOrdersJPanel manageVacOrdersJPanel=new ManageVaccinationOrdersJPanel(userProcessContainer, ecosystem,network,useraccountdirectory,enterprise,customer,organization, account);
         userProcessContainer.add("manageVacOrdersJPanel",manageVacOrdersJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

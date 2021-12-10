@@ -17,6 +17,7 @@ import UI.Alert;
 import UI.OrganizationPanels.CustomerPrescriptionJPanel;
 import UI.OrganizationPanels.MedicalEquipmentsJPanel;
 import UI.OrganizationPanels.OrdersJPanel;
+import UI.OrganizationPanels.PaymentsJPanel;
 import UI.OrganizationPanels.PrescriptionHistoryJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -156,6 +157,11 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         leftPane.add(orderBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 150, 40));
 
         paymentBTn1.setText("MY PAYMENTS");
+        paymentBTn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paymentBTn1ActionPerformed(evt);
+            }
+        });
         leftPane.add(paymentBTn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 150, 40));
 
         jButton2.setText("PRESCRIPTION HISTORY");
@@ -394,6 +400,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             System.out.println(e + " CART PROBLEM ");
         }
     }//GEN-LAST:event_addCartButtonActionPerformed
+
+    private void paymentBTn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentBTn1ActionPerformed
+        // TODO add your handling code here:
+        pane.setRightComponent(null);
+        pane.setRightComponent(new PaymentsJPanel(this.customer));
+    }//GEN-LAST:event_paymentBTn1ActionPerformed
 
     public void populateTable() {
         tableModel.setRowCount(0);
