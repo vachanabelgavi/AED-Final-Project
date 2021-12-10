@@ -34,7 +34,8 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
     private final Order supermarketOrder;
     private final Order vaccineOrder;
     private final Order equipmentOrder;
-
+    private final Order labOrder;
+    
     public CustomerCartJPanel(Ecosystem system, Network network, Customer customer) {
         initComponents();
 
@@ -46,6 +47,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         this.supermarketOrder = new Order();
         this.vaccineOrder = new Order();
         this.equipmentOrder = new Order();
+        this.labOrder = new Order();
 
         this.alert = new Alert();
         this.setVisible(true);
@@ -170,6 +172,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         ArrayList<OrderItem> equipmentItems = this.equipmentOrder.getItemsOrdered();
         ArrayList<OrderItem> supermarketItems = this.supermarketOrder.getItemsOrdered();
         ArrayList<OrderItem> vaccineItems = this.vaccineOrder.getItemsOrdered();
+        ArrayList<OrderItem> labItems = this.labOrder.getItemsOrdered();
 
         for (OrderItem oi : this.customer.getCustomerCart().getCartItems()) {
             if (oi.getOrganizationname().equalsIgnoreCase("pharmacy")) {
@@ -180,6 +183,8 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
                 vaccineItems.add(oi);
             } else if (oi.getOrganizationname().equalsIgnoreCase("supermarket")) {
                 supermarketItems.add(oi);
+            } else if(oi.getOrganizationname().equalsIgnoreCase("lab centers")){
+                labItems.add(oi);
             }
         }
 
@@ -220,7 +225,16 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
             this.supermarketOrder.calcOrderTotal();
             customerOrder.add(supermarketOrder);
         }
-
+        /*
+        if (labItems.size() > 0) {
+            this.labOrder.setItemsOrdered(labItems);
+            this.labOrder.setOrganizationname("Lab Centers");
+            this.labOrder.setEnterprisename("Lab Center & Diagnostics");
+            this.labOrder.setStatus("Give Samples");
+            this.labOrder.calcOrderTotal();
+            customerOrder.add(labOrder);
+        }
+*/
         this.alert.ShowAlert("Order placed successfully!");
         this.customer.getCustomerCart().setCartItems(new ArrayList<OrderItem>());
         populateTable();

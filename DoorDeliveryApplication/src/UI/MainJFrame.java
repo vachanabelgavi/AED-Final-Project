@@ -143,6 +143,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2.setText("USERNAME");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 230, 100, 20));
 
+
         jSplitPane1.setRightComponent(jPanel1);
 
         getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1500, 910));

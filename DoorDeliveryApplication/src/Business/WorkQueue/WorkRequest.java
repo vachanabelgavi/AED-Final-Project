@@ -30,7 +30,7 @@ public abstract class WorkRequest {
     }
 
     public UserAccount getReceiver() {
-        return this.receiver;
+        return receiver;
     }
 
     public void setReceiver(UserAccount receiver) {
@@ -52,8 +52,6 @@ public abstract class WorkRequest {
     public void setSender(UserAccount sender) {
         this.sender = sender;
     }
-    
-    
 
     public int getRequestId() {
         return requestId;
@@ -68,6 +66,5 @@ public abstract class WorkRequest {
         
         this.requestId = ((1+r.nextInt(2))*10000 + r.nextInt(10000));
     }
-    
     
 }

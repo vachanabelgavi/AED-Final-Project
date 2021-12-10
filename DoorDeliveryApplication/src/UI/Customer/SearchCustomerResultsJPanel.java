@@ -87,7 +87,8 @@ public class SearchCustomerResultsJPanel extends javax.swing.JPanel {
         jLabel1.setText("                         Customer Details");
 
         btnBack.setBackground(new java.awt.Color(63, 130, 117));
-        btnBack.setText("<< Back");
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-back-50.png"))); // NOI18N
+        btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -100,9 +101,9 @@ public class SearchCustomerResultsJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnBack)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 691, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +111,7 @@ public class SearchCustomerResultsJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(btnBack)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -119,7 +120,8 @@ public class SearchCustomerResultsJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Address");
 
-        btnUpdate.setBackground(new java.awt.Color(63, 130, 117));
+        btnUpdate.setBackground(new java.awt.Color(255, 255, 255));
+        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-update-50.png"))); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +137,8 @@ public class SearchCustomerResultsJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Email Address");
 
-        btnSave.setBackground(new java.awt.Color(63, 130, 117));
+        btnSave.setBackground(new java.awt.Color(255, 255, 255));
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-save-50.png"))); // NOI18N
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,11 +205,11 @@ public class SearchCustomerResultsJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(34, 34, 34)
                 .addComponent(btnUpdate)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSave)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

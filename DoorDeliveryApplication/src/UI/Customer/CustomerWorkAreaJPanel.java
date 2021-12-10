@@ -104,7 +104,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         supermarketTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        addCartButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -211,13 +211,13 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 5, 700, -1));
 
-        jButton1.setText("ADD TO CART");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addCartButton.setText("ADD TO CART");
+        addCartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addCartButtonActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, -1, -1));
+        jPanel3.add(addCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, -1, -1));
 
         jButton3.setText("REFRESH");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -337,7 +337,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCartButtonActionPerformed
         // TODO add your handling code here:
 
         int rows = this.tableModel.getRowCount();
@@ -393,7 +393,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println(e + " CART PROBLEM ");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addCartButtonActionPerformed
 
     public void populateTable() {
         tableModel.setRowCount(0);
@@ -439,9 +439,9 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCartButton;
     private javax.swing.JButton browseBtn1;
     private javax.swing.JButton cartBtn1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
