@@ -213,104 +213,106 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
 
     private void assignbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignbtnActionPerformed
         // TODO add your handling code here:
-        String agent = deliverycmb.getSelectedItem().toString();
-
+       String agent = deliverycmb.getSelectedItem().toString();
         System.out.println("Inside assign button");
         dtm.setRowCount(0);
-        int selectrow = EquipmentOrderTable.getSelectedRow();
         ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
         String recipients = null;
-
+        boolean emailsend = true;
         System.out.println("Inside table after assigning");
 
-        for(Customer cust: customerdir){
-            for (Order o : cust.getOrderlist()) {
-                ArrayList<OrderItem> oi = o.getItemsOrdered();
-                ArrayList<String> pr = new ArrayList<>();
+               for(Customer cust: customerdir){
+                    for (Order o : cust.getOrderlist()) {
+                    ArrayList<OrderItem> oi = o.getItemsOrdered();
+                    ArrayList<String> pr = new ArrayList<>();
                 //  Order o : this.customer.getOrderlist()//              populate items
                 for (int i = 0; i < oi.size(); i++) {
-
+                    
                     pr.add(oi.get(i).getProductName());
                 }
-
+                
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                    System.out.println(" "+agent);
-                    o.setDeliveryAgent(dlvrymn);
+                     System.out.println(" "+agent);
+                     o.setDeliveryAgent(dlvrymn);
                     dlvrymn.setUseraccount(ua);
-                    ua.setUsername(agent);
+                    ua.setUsername(agent); 
+                    dlvrymn.setActive(false);
+                    deliverycmb.setSelectedItem(" ");    
+                    populateTable();
+                   
+                    ArrayList<String> agentslist = new ArrayList<>();
+                    agentslist.add(agent);
                     ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
                     System.out.println(o.getDeliveryAgent().getUseraccount().getUsername());
-                    for(DeliveryAgent d: del){
 
-                        if(o.getDeliveryAgent().getUseraccount().getUsername() == agent && d.getUseraccount().getUsername() == agent){
-                            //o.getDeliveryAgent().getUseraccount().getUsername()
-                            System.out.println(" "+d.getUseraccount().getUsername());
-                            JOptionPane.showMessageDialog(null, "Delivery agent not available for now");
-                        }else{
-                               
-                            dtm.insertRow(dtm.getRowCount(), new Object[]{
-                                o.getOrderId(),
-                                Arrays.toString(pr.toArray()),
-                                cust.getName(),
-                                cust.getZipcode(),
-                                o.getPrice(),
-                                o.getDeliveryAgent().getUseraccount().getUsername()
-                            });
-                            recipients = cust.getEmail();
-                        }
+        
+        if(emailsend = true){
+        
+        JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");   
+        int dialogueb = JOptionPane.INFORMATION_MESSAGE;
+        System.out.println(""+dialogueb);
+        int dialoguer = JOptionPane.showConfirmDialog(this, "SENDING EMAIL\n"
+                + "If yes please wait","DELIVERY AGENT ASSIGNMENT", dialogueb);
+        if(dialoguer == 0){      
+         recipients = cust.getEmail();
+         System.out.println("Entering assign for email ==========");
+         String subjects = "Delivery";
+         String messaget = "Delivered agent assigned successfully";
+        
+        
+        System.out.println("Start");
+        final String username = "pannagaveeramohan@gmail.com";
+        final String password = "9686300037";
 
-                        System.out.println("Entering assign for email ==========");
-                        String subjects = "Delivery";
-                        String messaget = "Delivered agent assigned successfully";
+        Properties p = new Properties();
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", "465");
+        p.put("mail.transport.protocol", "smtp");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-                        System.out.println("Start");
-                        final String username = "pannagaveeramohan@gmail.com";
-                        final String password = "9686300037";
-
-                        Properties p = new Properties();
-                        p.put("mail.smtp.auth", "true");
-                        p.put("mail.smtp.host", "smtp.gmail.com");
-                        p.put("mail.smtp.port", "465");
-                        p.put("mail.transport.protocol", "smtp");
-                        p.put("mail.smtp.starttls.enable", "true");
-                        p.put("mail.smtp.starttls.enable", "true");
-                        p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-
-                        Session session = Session.getInstance(p,
-                            new javax.mail.Authenticator() {
-                                protected PasswordAuthentication getPasswordAuthentication() {
-                                    return new PasswordAuthentication(username, password);
-                                }
-                            });
-
-                            try {
-
-                                Transport transport=session.getTransport();
-                                Message message = new MimeMessage(session);
-                                message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
-
-                                final Address[] recipientAddresses = InternetAddress.parse(recipients);
-                                message.setRecipients(Message.RecipientType.TO,recipientAddresses);
-                                message.setSubject(subjects);//formBean.getString(
-                                    message.setText(messaget);
-                                    transport.connect();
-                                    transport.send(message, recipientAddresses);//(message);
-
-                                    System.out.println("Done");
-
-                                } catch (MessagingException e) {
-                                    System.out.println("e="+e);
-                                    e.printStackTrace();
-                                    throw new RuntimeException(e);
-
-                                }
-                                JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");
-                                JOptionPane.showMessageDialog(null, "Email sent to customer successful");
-
-                            }
-                        }
+         Session session = Session.getInstance(p,
+                  new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
                     }
-                }
+                  });
+
+
+        try {
+           
+            Transport transport=session.getTransport();
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
+            
+            final Address[] recipientAddresses = InternetAddress.parse(recipients);
+            message.setRecipients(Message.RecipientType.TO,recipientAddresses);
+            message.setSubject(subjects);//formBean.getString(
+            message.setText(messaget);
+            transport.connect();
+            transport.send(message, recipientAddresses);//(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            System.out.println("e="+e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
+
+        }
+    
+    JOptionPane.showMessageDialog(null, "Email sent to customer successful");              
+  }else{
+         JOptionPane.showMessageDialog(null, "Email sending cancelled");   
+        }
+        
+    }
+    }
+    }
+    }
+               
     }//GEN-LAST:event_assignbtnActionPerformed
 
     private void btnshowordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshowordersActionPerformed
@@ -322,6 +324,7 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
         for(Customer cust: customerdir){
             for (Order o : cust.getOrderlist()) {
                 if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                    deliverycmb.removeAllItems();
                     populateTable();
                 }
             }
@@ -351,14 +354,14 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
          ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
           del = this.enterprise.getDeliveryAgentsInEnterpiselist();
          ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
-
              System.out.println("Inside table");
-            
+                this.z = new ArrayList<>();
             
                 for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                     ArrayList<OrderItem> oi = o.getItemsOrdered();
                     ArrayList<String> p = new ArrayList<>();
+              
                 for (int i = 0; i < oi.size(); i++) {
                     
                     p.add(oi.get(i).getProductName());
@@ -375,11 +378,9 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
                 });
                 
              for(DeliveryAgent dd : del ){
-         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
-           // z.add(dd.getZipcodes().get(j));
               z = dd.getZipcodes();
               for(int j =0; j< dd.getZipcodes().size(); j++){
-              if(cust.getZipcode() == z.get(j) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+              if(cust.getZipcode() == z.get(j) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId())) && dd.getActive() == true){
                  deliverycmb.addItem(dd.getUseraccount().getUsername());
                 }
                 }

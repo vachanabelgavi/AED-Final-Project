@@ -62,6 +62,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
      */
     public DeliveryAgentWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Network network,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
+        initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         this.account = account;
@@ -85,12 +86,11 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 //        ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
 //        
         this.delmn = account;
-        jLabel_DelMan.setText(delmn.getEmployee().getName());
+       // jLabel_DelMan.setText(delmn.getEmployee().getName());
         
-        System.out.println("CAME INTO LAB ORDER PANEL");
+        System.out.println("CAME INTO DELIVERY AGENT PANEL");
         this.dtm = (DefaultTableModel) DeliveryOrderTable.getModel();
         populateTable();
-        
     }
 
     /**
@@ -381,22 +381,22 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
     private void orderPicked_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPicked_btnMouseClicked
         // TODO add your handling code here:
-        orderPicked_btn.setBackground(new Color(190,90,255));
+        
     }//GEN-LAST:event_orderPicked_btnMouseClicked
 
     private void orderPicked_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPicked_btnMouseEntered
         // TODO add your handling code here:
-        orderPicked_btn.setBackground(new Color(205,60,180));
+        orderPicked_btn.setBackground(new Color(253,252,249));
     }//GEN-LAST:event_orderPicked_btnMouseEntered
 
     private void orderDelivered_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderDelivered_btnMouseEntered
         // TODO add your handling code here:
-        orderDelivered_btn.setBackground(new Color(190,90,255));
+        orderDelivered_btn.setBackground(new Color(253,252,249));
     }//GEN-LAST:event_orderDelivered_btnMouseEntered
 
     private void orderDelivered_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderDelivered_btnMouseClicked
         // TODO add your handling code here:
-        orderDelivered_btn.setBackground(new Color(205,60,180));
+      //  orderDelivered_btn.setBackground(new Color(205,60,180));
     }//GEN-LAST:event_orderDelivered_btnMouseClicked
 
 
