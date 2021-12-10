@@ -127,6 +127,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         fieldSignature = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
 
+        jTabbedPane1.setBackground(new java.awt.Color(253, 252, 249));
+
+        jPanel1.setBackground(new java.awt.Color(253, 252, 249));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         itemTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -174,6 +177,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 373, 90));
 
+        jButton2.setBackground(new java.awt.Color(0, 102, 102));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("APPROVE");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -190,6 +195,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(orderComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 175, -1));
 
+        jButton6.setBackground(new java.awt.Color(0, 102, 102));
         jButton6.setText("GO");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,6 +211,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, 240, -1));
 
+        jButton7.setBackground(new java.awt.Color(0, 102, 102));
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("REJECT");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,6 +227,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("MY REQUESTS", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(253, 252, 249));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -227,6 +236,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         fieldNewCheckBox.setText("NEW CUSTOMER");
         jPanel2.add(fieldNewCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 580, -1, -1));
 
+        btnCreateACustomerPresc.setBackground(new java.awt.Color(0, 102, 102));
         btnCreateACustomerPresc.setText("CREATE ");
         btnCreateACustomerPresc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,6 +253,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 510, -1));
 
+        searchACustomerBtn.setBackground(new java.awt.Color(0, 102, 102));
         searchACustomerBtn.setText("GO");
         searchACustomerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,6 +299,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel10.setText("Zip code");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 390, -1, -1));
 
+        uploadFileBtn.setBackground(new java.awt.Color(0, 102, 102));
         uploadFileBtn.setText("UPLOAD PRESCRIPTION");
         uploadFileBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

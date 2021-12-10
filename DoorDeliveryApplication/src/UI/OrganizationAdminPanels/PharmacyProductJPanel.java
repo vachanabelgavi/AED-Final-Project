@@ -11,8 +11,11 @@ import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Products.Product;
 import Business.UserAccount.UserAccount;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +33,7 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
     private final Organization organization;
 
     DefaultTableModel tableModel;
+    private File chosenFile;
 
     public PharmacyProductJPanel(JPanel userprocessContainer, Ecosystem system, UserAccount ua, Network network, Organization organization, Enterprise enterprise) {
         initComponents();
@@ -64,6 +68,10 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
         fieldStock = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(253, 252, 249));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         prodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,75 +98,47 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(prodTable);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 519, 241));
+
+        addBt.setBackground(new java.awt.Color(0, 102, 102));
+        addBt.setForeground(new java.awt.Color(255, 255, 255));
         addBt.setText("ADD PRODUCTS");
         addBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBtActionPerformed(evt);
             }
         });
+        add(addBt, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 570, -1, -1));
+        add(fieldProductName, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 263, -1));
 
         jLabel1.setText("PRODUCT NAME");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
+        add(fieldProductPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 170, 263, -1));
 
         jLabel2.setText("PRODUCT PRICE");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, -1, -1));
+        add(fieldStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, 263, -1));
 
         jLabel3.setText("STOCK");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, -1, -1));
 
+        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("UPDATE PRODUCTS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 570, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addComponent(fieldProductName)
-                                .addComponent(fieldProductPrice)
-                                .addComponent(fieldStock, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addComponent(addBt)
-                        .addGap(76, 76, 76)
-                        .addComponent(jButton1)))
-                .addGap(162, 241, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fieldProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fieldProductPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(fieldStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBt)
-                    .addComponent(jButton1))
-                .addGap(15, 15, 15))
-        );
+        jButton3.setText("UPLOAD IMAGE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtActionPerformed
@@ -175,6 +155,9 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
                             prod.setName(fieldProductName.getText());
                             prod.setPrice(Double.valueOf(fieldProductPrice.getText()));
                             prod.setStockunits(Integer.valueOf(fieldStock.getText()));
+                            if (this.chosenFile != null) {
+                                prod.setProductImage(chosenFile);
+                            }
                             this.organization.getOrganizationProducts().add(prod);
                             JOptionPane.showMessageDialog(null, "Added !");
                             break;
@@ -185,6 +168,9 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
                     prod.setName(fieldProductName.getText());
                     prod.setPrice(Double.valueOf(fieldProductPrice.getText()));
                     prod.setStockunits(Integer.valueOf(fieldStock.getText()));
+                    if (this.chosenFile != null) {
+                        prod.setProductImage(chosenFile);
+                    }
                     this.organization.addProduct(fieldProductName.getText(), Double.valueOf(fieldProductPrice.getText()), Integer.valueOf(fieldStock.getText()));
                     JOptionPane.showMessageDialog(null, "Added !");
                 }
@@ -222,6 +208,16 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "jpg", "jpeg", "pdf");
+        chooser.addChoosableFileFilter(filter);
+        this.chosenFile = chooser.getSelectedFile();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public void populateProducts() {
         tableModel.setRowCount(0);
         for (Product p : this.organization.getOrganizationProducts()) {
@@ -243,6 +239,7 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField fieldProductPrice;
     private javax.swing.JTextField fieldStock;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
