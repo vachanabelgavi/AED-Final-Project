@@ -6,11 +6,12 @@
 package Business.Organization;
 
 import Business.Employee.EmployeeDirectory;
-import Business.Orders.Order;
+//import Business.Orders.Order;
 import Business.Products.Product;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.PrescriptionUploadWorkRequest;
+import Business.WorkQueue.ReportUploadWorkRequest;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,6 +34,7 @@ public abstract class Organization {
 
 //    WorkRequest Arraylist 
     private ArrayList<PrescriptionUploadWorkRequest> prescriptionWorkList;
+    private ArrayList<ReportUploadWorkRequest> reportWorkList;
             
             
     public enum Type {
@@ -160,6 +162,14 @@ public abstract class Organization {
 
     public void setPrescriptionWorkList(ArrayList<PrescriptionUploadWorkRequest> prescriptionWorkList) {
         this.prescriptionWorkList = prescriptionWorkList;
+    }
+
+    public ArrayList<ReportUploadWorkRequest> getReportWorkList() {
+        return reportWorkList;
+    }
+
+    public void setReportWorkList(ArrayList<ReportUploadWorkRequest> reportWorkList) {
+        this.reportWorkList = reportWorkList;
     }
     
     

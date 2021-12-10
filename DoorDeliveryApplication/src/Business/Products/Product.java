@@ -5,6 +5,8 @@
  */
 package Business.Products;
 
+import java.io.File;
+
 /**
  *
  * @author Nidhi Raghavendra
@@ -16,6 +18,7 @@ public class Product {
     private int stockunits;
     private boolean availability;
     private static int count = 0;
+    private File productImage;
 
     public String getName() {
         return name;
@@ -72,6 +75,14 @@ public class Product {
 
     public static void setCount(int count) {
         Product.count = count;
+    }
+
+    public File getProductImage() {
+        return this.productImage;
+    }
+
+    public void setProductImage(File productImage) {
+        this.productImage = productImage;
     }
     
     

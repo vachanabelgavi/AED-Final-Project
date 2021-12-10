@@ -89,6 +89,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(50, 50, 50))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
         btnCustomer.setText("Manage Customers");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

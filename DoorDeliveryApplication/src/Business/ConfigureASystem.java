@@ -20,6 +20,7 @@ import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
+import Business.Products.Product;
 import Business.Role.DeliveryAgentRole;
 import Business.Role.DoctorRole;
 import Business.Role.EquipmentProviderRole;
@@ -30,6 +31,7 @@ import Business.Role.PharmacistRole;
 import Business.Role.SystemAdminRole;
 import Business.Role.VaccinatorRole;
 import Business.UserAccount.UserAccount;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 /**
@@ -67,7 +69,7 @@ public class ConfigureASystem {
             zips2.add(j);
         }
 
-//        CREATE MUTLIPLE CUSTOMERS AND PEOPLE 
+//        CREATE MUTLIPLE CUSTOMERS AND PEOPLE
         for (int i = 1; i < 10; i++) {
             String name = "Customer" + String.valueOf(i);
             String username = "customer" + String.valueOf(i);
@@ -81,7 +83,7 @@ public class ConfigureASystem {
             Customer myCustomer1 = cdri2.createCustomer(name + "B", "boston@gmail.com", username + "B", password + "B", 02115 + i, n2.getNetworkName(), "address in boston", 1231231231);
 
         }
-        
+
             String name = "Danny" ;
             String username = "cust" ;
             String password = "cust" ;
@@ -146,7 +148,7 @@ public class ConfigureASystem {
             DeliveryAgent d = new DeliveryAgent();
             z1.add(90010 + j);
 //
-            
+
                 Employee em = new Employee();
                 em.setName("Delivery Man" + String.valueOf(j));
                 UserAccount u = d.getUseraccount();
@@ -158,7 +160,7 @@ public class ConfigureASystem {
                 d.setZipcodes(z1);
                 d.setEnterprisename(e);
                 delList.add(d);
-                
+
 
 
             }
@@ -167,7 +169,7 @@ public class ConfigureASystem {
          for (int j = 1; j < 5; j++){
                 z2.add(02115 + j);
                 DeliveryAgent d = new DeliveryAgent();
-                
+
                 Employee em = new Employee();
                 em.setName("Delivery Man Boston" + String.valueOf(j));
                 UserAccount u = d.getUseraccount();
@@ -178,11 +180,11 @@ public class ConfigureASystem {
                 d.setZipcodes(z2);
                 d.setEnterprisename(e);
                 delList2.add(d);
-                
-            
+
+
         }
          eB.setDeliveryAgentsInEnterpiselist(delList2);
-       
+
 
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();
@@ -217,7 +219,7 @@ public class ConfigureASystem {
         Organization orgLB = oo2.createOrganization(Organization.Type.LabAssistant, "Lab Center", "Boston", 02120);
         Organization orgLB1 = oo2.createOrganization(Organization.Type.LabTester, "Testing Center", "Boston", 02120);
 
-
+        
 //        System.out.println("ORG LIST SIZE " + orgList.size());
 
 //        ArrayList<Enterprise> eList = edir.getEnterpriseList();
@@ -253,13 +255,13 @@ public class ConfigureASystem {
         Employee empLB = orgLB.getEmployeeDirectory().createEmployee("Boston Lab Center");
         orgL.getUserAccountDirectory().createUserAccount("callab", "callab", empL, new LabAssistantRole());
         orgLB.getUserAccountDirectory().createUserAccount("bostonlab", "bostonlab", empLB, new LabAssistantRole());
-        
+
         Employee empL1 = orgL1.getEmployeeDirectory().createEmployee("California Lab Center");
         Employee empLB1 = orgLB1.getEmployeeDirectory().createEmployee("Boston Lab Center");
         orgL1.getUserAccountDirectory().createUserAccount("callab", "callab", empL1, new LabTesterRole());
         orgLB1.getUserAccountDirectory().createUserAccount("bostonlab", "bostonlab", empLB1, new LabTesterRole());
-        
-        
+
+
 
         String[] drugs = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
         for (String s1 : drugs) {
@@ -276,7 +278,7 @@ public class ConfigureASystem {
             orgVB.addProduct(s, 12.0, 2100);
 
         }
-  
+
         String[] Medicalequipments = {"Medical Thermometer", "Insulin pumps","Breast pumps", "Oximeter", "Portable oxygen cylinder"};
         for (String s : Medicalequipments) {
             orgM.addProduct(s, 10.0, 2000);

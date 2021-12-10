@@ -64,7 +64,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
     Network network;
     ArrayList<DeliveryAgent> del;
     ArrayList<Integer> z;
-    
+
     public ManageLabOrdersJPanel(JPanel userProcessContainer, Ecosystem business,Network network,UserAccountDirectory userdir, Enterprise enterprise, Customer customer, Organization organization, UserAccount ua) {
         initComponents();
         //initComponents();
@@ -93,14 +93,14 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
        // displaycombobox();
         //populateTable();
-       
+
         populateDp();
 
         for(Network n : business.getNetworks()){
             this.customerDirectory = n.getCustomerDirectory();
         }
 
-        
+
     }
 
     /**
@@ -204,13 +204,13 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     public void populateDp() {
       //  dtm.setRowCount(0);
        // int selectrow = pharmaOrderTable.getSelectedRow();
          ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
          System.out.println("Inside combo box");
-            
+
             for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                 //  Order o : this.customer.getOrderlist()//              populate items
@@ -221,8 +221,8 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
     }
     }
-    
-    
+
+
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
 
@@ -253,39 +253,39 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                     ArrayList<String> pr = new ArrayList<>();
                 //  Order o : this.customer.getOrderlist()//              populate items
                 for (int i = 0; i < oi.size(); i++) {
-                    
+
                     pr.add(oi.get(i).getProductName());
                 }
-                
+
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
                      System.out.println(" "+agent);
                      o.setDeliveryAgent(dlvrymn);
                     dlvrymn.setUseraccount(ua);
-                    ua.setUsername(agent); 
+                    ua.setUsername(agent);
                     dlvrymn.setActive(false);
-                    deliverycmb.setSelectedItem(" ");    
+                    deliverycmb.setSelectedItem(" ");
                     populateTable();
-                   
+
                     ArrayList<String> agentslist = new ArrayList<>();
                     agentslist.add(agent);
                     ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
                     System.out.println(o.getDeliveryAgent().getUseraccount().getUsername());
 
-        
+
         if(emailsend = true){
-        
-        JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");   
+
+        JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");
         int dialogueb = JOptionPane.INFORMATION_MESSAGE;
         System.out.println(""+dialogueb);
         int dialoguer = JOptionPane.showConfirmDialog(this, "SENDING EMAIL\n"
                 + "If yes please wait","DELIVERY AGENT ASSIGNMENT", dialogueb);
-        if(dialoguer == 0){      
+        if(dialoguer == 0){
          recipients = cust.getEmail();
          System.out.println("Entering assign for email ==========");
          String subjects = "Delivery";
          String messaget = "Delivered agent assigned successfully";
-        
-        
+
+
         System.out.println("Start");
         final String username = "pannagaveeramohan@gmail.com";
         final String password = "9686300037";
@@ -308,11 +308,11 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
 
         try {
-           
+
             Transport transport=session.getTransport();
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
-            
+
             final Address[] recipientAddresses = InternetAddress.parse(recipients);
             message.setRecipients(Message.RecipientType.TO,recipientAddresses);
             message.setSubject(subjects);//formBean.getString(
@@ -328,16 +328,16 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
             throw new RuntimeException(e);
 
         }
-    
-    JOptionPane.showMessageDialog(null, "Email sent to customer successful");              
+
+    JOptionPane.showMessageDialog(null, "Email sent to customer successful");
   }else{
-         JOptionPane.showMessageDialog(null, "Email sending cancelled");   
+         JOptionPane.showMessageDialog(null, "Email sending cancelled");
         }
-        
+
     }
     }
     }
-    }  
+    }
     }//GEN-LAST:event_assignbtnActionPerformed
 
     private void btnshowordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshowordersActionPerformed
@@ -365,18 +365,18 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
          ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
              System.out.println("Inside table");
                 this.z = new ArrayList<>();
-            
+
                 for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                     ArrayList<OrderItem> oi = o.getItemsOrdered();
                     ArrayList<String> p = new ArrayList<>();
-              
+
                 for (int i = 0; i < oi.size(); i++) {
-                    
+
                     p.add(oi.get(i).getProductName());
                 }
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                
+
                 dtm.insertRow(dtm.getRowCount(), new Object[]{
                      o.getOrderId(),
                      Arrays.toString(p.toArray()),
@@ -385,7 +385,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                     o.getPrice(),
                     o.getDeliveryAgent().getUseraccount().getUsername()
                 });
-                
+
              for(DeliveryAgent dd : del ){
               z = dd.getZipcodes();
               for(int j =0; j< dd.getZipcodes().size(); j++){
@@ -397,11 +397,11 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                }
                }//closing if statement
             }
-                
+
                System.out.println("Done with populate table");
-   } 
-    
-    
+   }
+
+
     private void orderscmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderscmbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_orderscmbActionPerformed
@@ -419,5 +419,5 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> orderscmb;
     // End of variables declaration//GEN-END:variables
 
-    
+
 }
