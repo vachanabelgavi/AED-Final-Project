@@ -129,7 +129,7 @@ public abstract class Organization {
     }
 
     public ArrayList<Product> getProductList() {
-        return productList;
+        return this.productList;
     }
 
     public void setProductList(ArrayList<Product> productList) {
@@ -143,6 +143,15 @@ public abstract class Organization {
         prod.setPrice(price);
         prod.setStockunits(stock);
         this.productList.add(prod);
+    }
+    
+    public Product fetchProduct(int id) {
+        for(Product p: this.productList) {
+            if(p.getProductId() == id) {
+                return p;
+            }
+        } 
+        return null;
     }
 
     public ArrayList<PrescriptionUploadWorkRequest> getPrescriptionWorkList() {

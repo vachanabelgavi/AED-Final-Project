@@ -81,13 +81,18 @@ public class OrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, 740, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 740, 180));
 
         jLabel1.setText("ORDER HISTORY");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, -1, -1));
 
         jButton1.setText("MAKE PAYMENT");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 320, 130, -1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 300, 130, -1));
 
         jButton2.setText("REFRESH");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +100,7 @@ public class OrdersJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 140, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 300, 140, -1));
 
         orderhistoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,7 +127,7 @@ public class OrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(orderhistoryTable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 740, 180));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 740, 180));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,6 +149,10 @@ public class OrdersJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateOrders();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void populateOrders() {
         tableModel.setRowCount(0);

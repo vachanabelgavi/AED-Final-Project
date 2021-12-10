@@ -10,8 +10,11 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Orders.Order;
+import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Organization.PharmacyOrganization;
+import Business.Products.Product;
+import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.PrescriptionUploadWorkRequest;
 import Business.WorkQueue.WorkQueue;
@@ -78,6 +81,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -162,6 +166,14 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 190, 60));
 
+        jButton6.setText("MANAGE PRESCRIPTIONS");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 190, 60));
+
         jSplitPane1.setLeftComponent(jPanel2);
 
         add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, -5, 1250, 710));
@@ -181,6 +193,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        updateProductsTable();
         for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
             for (Order o : customer.getOrderlist()) {
                 if (o.getOrderId() == this.orderid) {
@@ -208,8 +221,15 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
         ArrayList<PrescriptionUploadWorkRequest> workrequests = this.ecosystem.getPrescriptionWorkList();
 
-        UserAccount doctorUser = this.enterprise.getOrganizationDirectory().getOrganizationByName("Doctor Associate").getUserAccountDirectory().findUser("nidhi");
+        ArrayList<UserAccount> users = this.enterprise.getOrganizationDirectory().getOrganizationByName("Doctor Associate").getUserAccountDirectory().getUserAccountList();
 
+        UserAccount doctorUser = null;
+        for(UserAccount u: users) {
+            if(u.getRole().equals(Role.RoleType.Doctor)) {
+                doctorUser = u;
+            }
+        }
+        
         PrescriptionUploadWorkRequest pu = new PrescriptionUploadWorkRequest();
         pu.setOrderId(this.orderid);
         pu.setSender(user);
@@ -223,7 +243,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
 
 //        GET DOCTOR's WORKREQUEST
 //        created a new work request between organization admin and the doctor
-        doctorUser.getWorkQueue().getWorkRequestList().add(pu);
+//        doctorUser.getWorkQueue().getWorkRequestList().add(pu);
 //        add the prescription to customer workqueue as well
         this.currentCustomer.getWorkQueue().getWorkRequestList().add(pu);
         this.currentOrder.setStatus("APPROVAL NEEDED");
@@ -236,7 +256,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         jSplitPane1.setRightComponent(null);
-        jSplitPane1.setRightComponent(new PharmacyProductJPanel());
+        jSplitPane1.setRightComponent(new PharmacyProductJPanel(userProcessContainer, ecosystem,  user,  network,  organization,  enterprise));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -244,6 +264,12 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         jSplitPane1.removeAll();
         jSplitPane1.add(new PharmacyAdminJPanel(userProcessContainer, ecosystem, user, network, organization, enterprise));
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(null);
+        jSplitPane1.setRightComponent(new PharmacyPrescriptionJPanel(userProcessContainer, ecosystem, user, network, organization, enterprise ));
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     public void fetchOrderObject() {
         for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
@@ -277,6 +303,15 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
         }
 
     }
+    
+   public void updateProductsTable() {
+       for(OrderItem oi: this.currentOrder.getItemsOrdered()) {
+           Product p = this.organization.fetchProduct(oi.getProductId());
+           
+           int stock = p.getStockunits() - oi.getQty();
+           p.setStockunits(stock);
+       }
+   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSendPrescription;
@@ -285,6 +320,7 @@ public class PharmacyAdminJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

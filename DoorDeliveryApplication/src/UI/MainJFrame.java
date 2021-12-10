@@ -32,7 +32,8 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     Ecosystem business;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
-
+    UserAccount userAccount;
+    
     public MainJFrame() {
         initComponents();
 
@@ -147,7 +148,7 @@ public class MainJFrame extends javax.swing.JFrame {
         String password = String.valueOf(passwordCharArray);
 
         //Step1: Check in the system admin user account directory if you have the user
-        UserAccount userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
+        this.userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
 
         Enterprise inEnterprise = null;
         Organization inOrganization = null;
@@ -160,6 +161,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 Customer c = network.getCustomerDirectory().authenticateCustomer(userName, password);
                 if (c != null) {
 //                   create a customerworkareajpanel
+                    System.out.println("Customer not null");
                     JOptionPane.showMessageDialog(null, "login successful!");
                     jSplitPane1.setLeftComponent(null);
                     jSplitPane1.setRightComponent(null);
@@ -185,11 +187,13 @@ public class MainJFrame extends javax.swing.JFrame {
                                 for (DeliveryAgent del : delAgents) {
                                     if (del != null) {
 
-                                        if (userName.equals(del.getUseraccount().getUsername()) && password.equals(del.getUseraccount().getPassword())) {
+                                        if (del.getUseraccount().getUsername().equals(userName) && del.getUseraccount().getPassword().equals(password)){
                                             userAccount = del.getUseraccount();
+                                            System.out.println(userAccount.getUsername() + " 88888888888888888888");
                                             inEnterprise = enterprise;
                                             inNetwork = network;
-                                            JOptionPane.showMessageDialog(null, "login successful!");
+                                            System.out.println("Delivery agent");
+                                            JOptionPane.showMessageDialog(null, "login successful for delivery agent!");
                                             jSplitPane1.setLeftComponent(null);
                                             jSplitPane1.setRightComponent(null);
                                             container.removeAll();
@@ -203,7 +207,15 @@ public class MainJFrame extends javax.swing.JFrame {
                                             jSplitPane1.setRightComponent(container);
                                             break;
                                         }
+                                        
+                                        if(userAccount != null) {
+                                            break;
+                                        }else{
+                                            continue;
+                                        }
+                                        
                                     }
+                                    break;
 
                                 }
                                 if (userAccount == null) {
@@ -215,6 +227,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                             inEnterprise = enterprise;
                                             inOrganization = organization;
                                             inNetwork = network;
+                                             System.out.println("Get Role");
                                             JOptionPane.showMessageDialog(null, "login successful!");
                                             jSplitPane1.setLeftComponent(null);
                                             jSplitPane1.setRightComponent(null);
@@ -232,11 +245,13 @@ public class MainJFrame extends javax.swing.JFrame {
 
                                         }
                                     }
-                                }
+                                } else{
+                                break;
+                            }
                             } else {
                                 inNetwork = network;
                                 inEnterprise = enterprise;
-
+                                  System.out.println("get enterprise role");
                                 JOptionPane.showMessageDialog(null, "login successful!");
                                 System.out.println("CMES HERE bUT FAIls");
                                 jSplitPane1.setLeftComponent(null);
@@ -267,7 +282,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 CardLayout layout = (CardLayout) container.getLayout();
                 container.setSize(1500, 1000);
                 container.add("work area", userAccount.getRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
-                System.out.print("Inside work arre role");
+                System.out.print("Inside work area role");
                 layout.next(container);
                 jSplitPane1.setRightComponent(container);
             } else {
@@ -294,6 +309,7 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         jSplitPane1.setLeftComponent(jPanel1);
         jSplitPane1.setRightComponent(null);
+        dB4OUtil.storeSystem(business);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
