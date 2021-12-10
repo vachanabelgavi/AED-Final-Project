@@ -37,13 +37,14 @@ public class EquipmentEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
      Network network;
 
 
-    public EquipmentEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem ecosystem) {
+    public EquipmentEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Network network,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
         this.account = account;
         this.enterprise = enterprise;
         this.organization = organization;
+        this.network = network;
 //        this.network = new Network();
 //        this.customer = new Customer();
     }
@@ -177,7 +178,7 @@ public class EquipmentEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
     private void btnmanageordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmanageordersActionPerformed
         // TODO add your handling code here:
 
-        ManageEquipmentOrdersJPanel manageMEOrdersJPanel=new ManageEquipmentOrdersJPanel(userProcessContainer, ecosystem);
+        ManageEquipmentOrdersJPanel manageMEOrdersJPanel=new ManageEquipmentOrdersJPanel(userProcessContainer,ecosystem,network,useraccountdirectory,enterprise,customer,organization, account);
         userProcessContainer.add("manageMEOrdersJPanel",manageMEOrdersJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

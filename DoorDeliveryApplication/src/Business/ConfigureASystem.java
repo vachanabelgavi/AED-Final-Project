@@ -54,8 +54,8 @@ public class ConfigureASystem {
 
         ArrayList<Integer> zips = n.getZipcodes();
 
-        int[] arr = {90011, 90012, 90013, 90014, 90015, 91311, 91312, 91313, 91314, 91315};
-        int[] arr2 = {2115, 2116, 2117, 2118, 2119, 02120, 02121, 02123, 02124};
+        int[] arr = {90011, 90012, 90013, 90014, 90015};
+        int[] arr2 = {02116, 02117, 2118, 2119, 02120};
 //        CREATING SECOND NETWORK
 
         Network n2 = system.createNetwork();
@@ -69,18 +69,27 @@ public class ConfigureASystem {
             zips2.add(j);
         }
 
-//        CREATE MUTLIPLE CUSTOMERS AND PEOPLE 
+//        CREATE MUTLIPLE CUSTOMERS AND PEOPLE
         for (int i = 1; i < 10; i++) {
             String name = "Customer" + String.valueOf(i);
             String username = "customer" + String.valueOf(i);
             String password = "customer" + String.valueOf(i);
 
             CustomerDirectory cdri = n.getCustomerDirectory();
+
             Customer myCustomer = cdri.createCustomer(name, "n@gmail.com", username, password, 90010 + i, n.getNetworkName(), "address in california", 1234567890);
 
             CustomerDirectory cdri2 = n2.getCustomerDirectory();
-            Customer myCustomer1 = cdri2.createCustomer(name + "B", "boston@gmail.com", username + "B", password + "B", 2115 + i, n2.getNetworkName(), "address in boston", 1231231231);
+            Customer myCustomer1 = cdri2.createCustomer(name + "B", "boston@gmail.com", username + "B", password + "B", 02115 + i, n2.getNetworkName(), "address in boston", 1231231231);
+
         }
+
+            String name = "Danny" ;
+            String username = "cust" ;
+            String password = "cust" ;
+
+            CustomerDirectory cdri = n.getCustomerDirectory();
+            Customer myCustomer = cdri.createCustomer(name, "pannaga3009@gmail.com", username, password, 90014 , "", "addd", 1234567890);
 
         Employee enterpriseEmployeeAdmin = system.getEmployeeDirectory().createEmployee("enterpriseadmin");
         UserAccount ua2 = system.getUserAccountDirectory().createEnterpriseUser("enterpriseadmin", "enterpriseadmin", enterpriseEmployeeAdmin, new EnterpriseAdminRole());
@@ -135,26 +144,32 @@ public class ConfigureASystem {
         ArrayList<DeliveryAgent> delList = e.getDeliveryAgentsInEnterpiselist();
         ArrayList<Integer> z1 = new ArrayList<>();
         ArrayList<Integer> z2 = new ArrayList<>();
-        for (int j = 1; j < 10; j++) {
+        for (int j = 1; j < 5; j++) {
             DeliveryAgent d = new DeliveryAgent();
-            z1.add(90011 + j);
+            z1.add(90010 + j);
+//
 
-            if (j < 5) {
                 Employee em = new Employee();
-                em.setName("Delivery Man " + String.valueOf(j));
+                em.setName("Delivery Man" + String.valueOf(j));
                 UserAccount u = d.getUseraccount();
-                u.setUsername("delivery" + String.valueOf(j));
-                u.setPassword("delivery" + String.valueOf(j));
+                u.setUsername("deliveryc" + String.valueOf(j));
+                u.setPassword("deliveryc" + String.valueOf(j));
                 u.setRole(new DeliveryAgentRole());
                 u.setEmployee(em);
                 d.setUseraccount(u);
                 d.setZipcodes(z1);
                 d.setEnterprisename(e);
                 delList.add(d);
-                eB.setDeliveryAgentsInEnterpiselist(delList);
 
-            } else {
-                z2.add(91311 + j);
+
+
+            }
+        e.setDeliveryAgentsInEnterpiselist(delList);
+         ArrayList<DeliveryAgent> delList2 = eB.getDeliveryAgentsInEnterpiselist();
+         for (int j = 1; j < 5; j++){
+                z2.add(02115 + j);
+                DeliveryAgent d = new DeliveryAgent();
+
                 Employee em = new Employee();
                 em.setName("Delivery Man Boston" + String.valueOf(j));
                 UserAccount u = d.getUseraccount();
@@ -164,11 +179,12 @@ public class ConfigureASystem {
                 u.setEmployee(em);
                 d.setZipcodes(z2);
                 d.setEnterprisename(e);
-                delList.add(d);
-                e.setDeliveryAgentsInEnterpiselist(delList);
-            }
+                delList2.add(d);
+
+
         }
-       
+         eB.setDeliveryAgentsInEnterpiselist(delList2);
+
 
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();
@@ -182,27 +198,28 @@ public class ConfigureASystem {
 
         Organization orgM = o1.createOrganization(Organization.Type.EquipmentManager, "Equipments", "California", 90011);
 
-        Organization orgV = o3.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", "California", 990011);
+        Organization orgV = o3.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", "California", 90011);
 
-        Organization orgL = o2.createOrganization(Organization.Type.LabAssistant, "Lab Center", "California", 990011);
-        Organization orgL1 = o2.createOrganization(Organization.Type.LabTester, "Testing Center", "California", 990011);
+        Organization orgL = o2.createOrganization(Organization.Type.LabAssistant, "Lab Center", "California", 90011);
+        Organization orgL1 = o2.createOrganization(Organization.Type.LabTester, "Testing Center", "California", 90011);
 
         OrganizationDirectory oo = eB.getOrganizationDirectory();
         OrganizationDirectory oo1 = e1B.getOrganizationDirectory();
         OrganizationDirectory oo2 = e2B.getOrganizationDirectory();
         OrganizationDirectory oo3 = e3B.getOrganizationDirectory();
 
-        Organization orgBP = oo.createOrganization(Organization.Type.Doctor, "Doctor Associate", "Boston", 2120);
-        Organization orgBP1 = oo.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "Boston", 2120);
-        Organization orgBP2 = oo.createOrganization(Organization.Type.MarketManager, "Supermarket", "Boston", 2120);
+        Organization orgBP = oo.createOrganization(Organization.Type.Doctor, "Doctor Associate", "Boston", 02120);
+        Organization orgBP1 = oo.createOrganization(Organization.Type.Pharmacist, "Pharmacy", "Boston", 02120);
+        Organization orgBP2 = oo.createOrganization(Organization.Type.MarketManager, "Supermarket", "Boston", 02120);
 
-        Organization orgMB = oo1.createOrganization(Organization.Type.EquipmentManager, "Equipments", "Boston", 2120);
+        Organization orgMB = oo1.createOrganization(Organization.Type.EquipmentManager, "Equipments", "Boston", 02120);
 
-        Organization orgVB = oo3.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", "Boston", 2120);
+        Organization orgVB = oo3.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", "Boston", 02120);
 
-        Organization orgLB = oo2.createOrganization(Organization.Type.LabAssistant, "Lab Center", "Boston", 2120);
-        Organization orgLB1 = oo2.createOrganization(Organization.Type.LabTester, "Testing Center", "Boston", 2120);
+        Organization orgLB = oo2.createOrganization(Organization.Type.LabAssistant, "Lab Center", "Boston", 02120);
+        Organization orgLB1 = oo2.createOrganization(Organization.Type.LabTester, "Testing Center", "Boston", 02120);
 
+        
 //        System.out.println("ORG LIST SIZE " + orgList.size());
 
 //        ArrayList<Enterprise> eList = edir.getEnterpriseList();
@@ -223,6 +240,7 @@ public class ConfigureASystem {
         orgP2.getUserAccountDirectory().createUserAccount("calsupermarket", "calsupermarket", emp2, new MarketManagerRole());
         orgBP2.getUserAccountDirectory().createUserAccount("bostonsupermarket", "bostonsupermarket", emp2B, new MarketManagerRole());
 
+
         Employee empM = orgM.getEmployeeDirectory().createEmployee("California Medical Equipment");
         Employee empMB = orgMB.getEmployeeDirectory().createEmployee("Boston Medical Equipment");
         orgM.getUserAccountDirectory().createUserAccount("calmedical", "calmedical", empM, new EquipmentProviderRole());
@@ -237,13 +255,13 @@ public class ConfigureASystem {
         Employee empLB = orgLB.getEmployeeDirectory().createEmployee("Boston Lab Center");
         orgL.getUserAccountDirectory().createUserAccount("callab", "callab", empL, new LabAssistantRole());
         orgLB.getUserAccountDirectory().createUserAccount("bostonlab", "bostonlab", empLB, new LabAssistantRole());
-        
+
         Employee empL1 = orgL1.getEmployeeDirectory().createEmployee("California Lab Center");
         Employee empLB1 = orgLB1.getEmployeeDirectory().createEmployee("Boston Lab Center");
         orgL1.getUserAccountDirectory().createUserAccount("callab", "callab", empL1, new LabTesterRole());
         orgLB1.getUserAccountDirectory().createUserAccount("bostonlab", "bostonlab", empLB1, new LabTesterRole());
-        
-        
+
+
 
         String[] drugs = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
         for (String s1 : drugs) {
@@ -261,8 +279,16 @@ public class ConfigureASystem {
 
         }
 
+        String[] Medicalequipments = {"Medical Thermometer", "Insulin pumps","Breast pumps", "Oximeter", "Portable oxygen cylinder"};
+        for (String s : Medicalequipments) {
+            orgM.addProduct(s, 10.0, 2000);
+            orgMB.addProduct(s, 15.0, 3100);
+
+        }
+
         n.setEnterpriseDirectory(edir);
         n2.setEnterpriseDirectory(edir2);
+
 
         for (Network net : system.getNetworks()) {
             for (Enterprise ent : net.getEnterpriseDirectory().getEnterpriseList()) {

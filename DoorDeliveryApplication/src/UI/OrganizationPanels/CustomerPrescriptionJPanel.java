@@ -74,6 +74,11 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 55, 460, 420));
 
         dropdownOrders.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+        dropdownOrders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropdownOrdersActionPerformed(evt);
+            }
+        });
         add(dropdownOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 69, 160, -1));
 
         jButton1.setText("SHOW ITEMS");
@@ -156,6 +161,10 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
         
         this.alerts.ShowAlert("Successfully updated your order!");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void dropdownOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownOrdersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dropdownOrdersActionPerformed
 
     public void populateDp() {
 

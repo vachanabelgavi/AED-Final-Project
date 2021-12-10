@@ -178,10 +178,10 @@ public class MainJFrame extends javax.swing.JFrame {
         //Step1: Check in the system admin user account directory if you have the user
         this.userAccount = business.getUserAccountDirectory().authenticateUser(userName, password);
         this.c = null;
+
         Enterprise inEnterprise = null;
         Organization inOrganization = null;
         Network inNetwork = null;
-
         try {
             if (userAccount == null) {
                 //Step 2: Go inside each network and check each enterprise
@@ -190,7 +190,6 @@ public class MainJFrame extends javax.swing.JFrame {
                     this.c = network.getCustomerDirectory().authenticateCustomer(userName, password);
                     if (c != null) {
 //                   create a customerworkareajpanel
-
                         JOptionPane.showMessageDialog(null, "login successful!");
                         jSplitPane1.setLeftComponent(null);
                         jSplitPane1.setRightComponent(null);
@@ -207,8 +206,27 @@ public class MainJFrame extends javax.swing.JFrame {
 
                             this.userAccount = enterprise.getEnterpriseUserAccountDirectory().authenticateUser(userName, password);
 
+                            if (this.userAccount != null) {
+                                inNetwork = network;
+                                inEnterprise = enterprise;
+
+                                JOptionPane.showMessageDialog(null, "Enterprise login successful!");
+
+                                jSplitPane1.setLeftComponent(null);
+                                jSplitPane1.setRightComponent(null);
+                                container.removeAll();
+                                container.setVisible(true);
+                                container.setLayout(new CardLayout());
+                                CardLayout layout = (CardLayout) container.getLayout();
+                                container.setSize(1500, 1000);
+                                container.add("enterprise area", userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
+                                layout.next(container);
+                                jSplitPane1.setRightComponent(container);
+                                break;
+                            }
+
                             if (userAccount == null) {
-//                        CHECK THE DELIVERY AGENTS 
+//                        CHECK THE DELIVERY AGENTS
                                 ArrayList<DeliveryAgent> deliveryAgents = enterprise.getDeliveryAgentsInEnterpiselist();
 
                                 for (DeliveryAgent agent : deliveryAgents) {
@@ -256,37 +274,20 @@ public class MainJFrame extends javax.swing.JFrame {
                                         layout.next(container);
                                         jSplitPane1.setRightComponent(container);
                                         break;
+
                                     }
+
                                 }
-                                if (this.userAccount == null) {
-//                                    Look for delivery agents
-                                } else {
-                                    break;
-                                }
+
                             } else {
-                                inNetwork = network;
-                                inEnterprise = enterprise;
-
-                                JOptionPane.showMessageDialog(null, "Enterprise login successful!");
-
-                                jSplitPane1.setLeftComponent(null);
-                                jSplitPane1.setRightComponent(null);
-                                container.removeAll();
-                                container.setVisible(true);
-                                container.setLayout(new CardLayout());
-                                CardLayout layout = (CardLayout) container.getLayout();
-                                container.setSize(1500, 1000);
-                                container.add("enterprise area", userAccount.getEnterpriseRole().createWorkArea(container, userAccount, inNetwork, inOrganization, inEnterprise, business));
-                                layout.next(container);
-                                jSplitPane1.setRightComponent(container);
                                 break;
                             }
 
-//                        }
                         }
                     }
 
                 }
+
             } else {
                 if (userAccount != null && this.c == null) {
                     jSplitPane1.setLeftComponent(null);
@@ -305,7 +306,7 @@ public class MainJFrame extends javax.swing.JFrame {
             }
 
         } catch (Exception exc) {
-            System.out.println("An exception exc -------- "+ exc);
+            System.out.println("An exception exc -------- " + exc);
             JOptionPane.showMessageDialog(null, "User does not exist!");
         }
         btnLogin.setEnabled(true);
@@ -352,7 +353,7 @@ public class MainJFrame extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

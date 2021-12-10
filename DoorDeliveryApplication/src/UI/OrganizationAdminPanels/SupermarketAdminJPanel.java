@@ -256,7 +256,7 @@ public class SupermarketAdminJPanel extends javax.swing.JPanel {
 
     private void btnreqPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnreqPrescriptionActionPerformed
         // TODO add your handling code here:
-        
+
 //        SEND MAIL TO REQUEST PRESCRIPTION
     }//GEN-LAST:event_btnreqPrescriptionActionPerformed
 

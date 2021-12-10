@@ -40,13 +40,15 @@ JPanel userProcessContainer;
     DeliveryAgent dlvrymn;
     Enterprise enterprise;
     DefaultTableModel dtm;
+    ArrayList<DeliveryAgent> del;
+    ArrayList<Integer> z;
     /**
      * Creates new form ManageVaccinationDeliveryAgentJPanel
      */
     public ManageVaccinationDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
         initComponents();
 
-             this.userProcessContainer = userProcessContainer;
+        this.userProcessContainer = userProcessContainer;
         this.business = ecosystem;
         this.ua = ua;
         this.userdir = userdir;
@@ -63,6 +65,7 @@ JPanel userProcessContainer;
 
         System.out.println("Going inside populate table");
         populateTable();
+        displaycombo();
 
 
 
@@ -94,7 +97,6 @@ JPanel userProcessContainer;
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtZipcode = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
@@ -104,6 +106,7 @@ JPanel userProcessContainer;
         jLabel3 = new javax.swing.JLabel();
         jcheckyes = new javax.swing.JCheckBox();
         jcheckno = new javax.swing.JCheckBox();
+        cmbzipcode = new javax.swing.JComboBox<>();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -152,7 +155,6 @@ JPanel userProcessContainer;
         jLabel9.setText("Password");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, -1));
         jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 150, 194, -1));
-        jPanel1.add(txtZipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 194, -1));
         jPanel1.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 194, -1));
         jPanel1.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 194, -1));
 
@@ -206,11 +208,13 @@ JPanel userProcessContainer;
         });
         jPanel1.add(jcheckno, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
 
+        cmbzipcode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        jPanel1.add(cmbzipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-
             .addGap(0, 1069, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -226,7 +230,6 @@ JPanel userProcessContainer;
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
-
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -254,7 +257,7 @@ JPanel userProcessContainer;
         UserAccount u = d.getUseraccount();
 
         String name = txtName.getText();
-        int zip = Integer.parseInt(txtZipcode.getText());
+        int zip = Integer.parseInt((String) cmbzipcode.getSelectedItem());
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         boolean available;
@@ -269,14 +272,14 @@ JPanel userProcessContainer;
         }
 
         if(name.isEmpty() ||
-            txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty() || txtZipcode.getText().isEmpty()){
+            txtPassword.getText().isEmpty() || username.isEmpty() || password.isEmpty() || cmbzipcode.getSelectedItem().toString().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        if(txtZipcode.getText().length() < 5 || txtZipcode.getText().length() > 6){
-            JOptionPane.showMessageDialog(null, "Zip code must be 5 or 6 digits", "Warining", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+//        if(txtZipcode.getText().length() < 5 || txtZipcode.getText().length() > 6){
+//            JOptionPane.showMessageDialog(null, "Zip code must be 5 or 6 digits", "Warining", JOptionPane.WARNING_MESSAGE);
+//            return;
+//        }
         System.out.println("Inside loop");
         boolean flag = business.getUserAccountDirectory().checkIfUsernameIsUnique(username);
         if(flag == false){
@@ -314,7 +317,7 @@ JPanel userProcessContainer;
         }
 
         txtName.setText("");
-        txtZipcode.setText("");
+        cmbzipcode.setSelectedItem("");
         txtUsername.setText("");
         txtPassword.setText("");
         jcheckyes.setSelected(false);
@@ -387,6 +390,7 @@ JPanel userProcessContainer;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btndelete;
+    private javax.swing.JComboBox<String> cmbzipcode;
     private javax.swing.JTable deliveryjTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -402,7 +406,6 @@ JPanel userProcessContainer;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUsername;
-    private javax.swing.JTextField txtZipcode;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
@@ -421,4 +424,22 @@ JPanel userProcessContainer;
             System.out.println("done");
   }
    }
+    
+    
+    private void displaycombo() {
+
+         del = enterprise.getDeliveryAgentsInEnterpiselist();
+
+
+        for(DeliveryAgent dd : del ){
+         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
+           // z.add(dd.getZipcodes().get(j));
+              z = dd.getZipcodes();
+              for(int i =0; i< dd.getZipcodes().size(); i++){
+              cmbzipcode.addItem(z.get(i).toString());
+              }
+             }
+//    }
+    }
+    
 }

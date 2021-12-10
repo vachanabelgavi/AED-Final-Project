@@ -24,6 +24,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.PasswordAuthentication;
+import javax.mail.internet.MimeMessage;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.activation.*;
+import javax.mail.Address;
 
 /**
  *
@@ -374,20 +384,31 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
                     if (!b) {
                         System.out.println("CAME INTO CREATING NEW CUSTOMER");
-                        Customer newCustoemr = selectedNetwork.getCustomerDirectory().createCustomer(fieldName.getText(), fieldEmail.getText(), "", "", (int) zipcodeCombo.getSelectedItem(), selectedNetwork.getNetworkName(), fieldAddress.getText(), Integer.valueOf(fieldPhone.getText()));
+                            int min = 1;
+                            int max = 100;
+        
+                    //Generate random int value from 50 to 100 
+                            System.out.println("Random value in int from "+min+" to "+max+ ":");
+                            int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+                            System.out.println(random_int);
+                             
+                            String username = "newcustomer" + String.valueOf(random_int);
+                            String password = "newcustomer" + String.valueOf(random_int);
+                            Customer newCustoemr = selectedNetwork.getCustomerDirectory().createCustomer(fieldName.getText(), fieldEmail.getText(),username , password, (int) zipcodeCombo.getSelectedItem(), selectedNetwork.getNetworkName(), fieldAddress.getText(), Integer.valueOf(fieldPhone.getText()));
 
 //           Create order for customer in pharmacy admin panel
 //           Prescription work request is at the system level
 // get the pharmacist in this  network's pharmacy organization
                         Enterprise e = selectedNetwork.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
                         this.customerOrganization = e.getOrganizationDirectory().getOrganizationByName("Pharmacy");
-
+                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
                         try {
 
                             System.out.println("CAME TO DOCTOR PANEL  ---------- "+ this.toPharmacist.getUsername());
-                           
                             PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
                             pq.setSender(user);
+                            user.setUsername(username);
+                            user.setPassword(password);
                             pq.setCustomer(newCustoemr);
                             pq.setReceiver(this.toPharmacist);
                             pq.setPresecription(chosenFile);
@@ -396,8 +417,66 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                             pq.setStatus("INCOMING PRESCRIPTION");
                             pq.generateRequestId();
                             this.workRequest.add(pq);
+                           // MAILING SERVICE
+        JOptionPane.showMessageDialog(null, "PRESCRIPTION SENT TO " + this.toPharmacist.getEmployee().getName());
+        int dialogueb = JOptionPane.INFORMATION_MESSAGE;
+        System.out.println(""+dialogueb);
+        int dialoguer = JOptionPane.showConfirmDialog(this, "SENDING EMAIL\n"
+                + "If yes please wait","DELIVERY AGENT ASSIGNMENT", dialogueb);
+        if(dialoguer == 0){      
+        String recipients = fieldEmail.getText();
+         System.out.println("Entering assign for email ==========");
+         String subjects = "New Credentials";
+         String messaget = "Username: "+username+"\nPassword "+password;
+        
+        
+        System.out.println("Start");
+        final String usernamesender = "pannagaveeramohan@gmail.com";
+        final String passwordsender = "9686300037";
 
-                            JOptionPane.showMessageDialog(null, "PRESCRIPTION SENT TO " + this.toPharmacist.getEmployee().getName());
+        Properties p = new Properties();
+        p.put("mail.smtp.auth", "true");
+        p.put("mail.smtp.host", "smtp.gmail.com");
+        p.put("mail.smtp.port", "465");
+        p.put("mail.transport.protocol", "smtp");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.starttls.enable", "true");
+        p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+         Session session = Session.getInstance(p,
+                  new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(usernamesender, passwordsender);
+                    }
+                  });
+
+
+        try {
+           
+            Transport transport=session.getTransport();
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
+            
+            final Address[] recipientAddresses = InternetAddress.parse(recipients);
+            message.setRecipients(Message.RecipientType.TO,recipientAddresses);
+            message.setSubject(subjects);//formBean.getString(
+            message.setText(messaget);
+            transport.connect();
+            transport.send(message, recipientAddresses);//(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException ex) {
+            System.out.println("e="+ex);
+            ex.printStackTrace();
+            throw new RuntimeException(ex);
+
+        }
+        JOptionPane.showMessageDialog(null, "Email sent to customer successful");              
+        }else{
+         JOptionPane.showMessageDialog(null, "Email sending cancelled");   
+        }
+                            
                         } catch (Exception err) {
                             System.out.println("error --- " + err);
                             JOptionPane.showMessageDialog(null, "Looks like there is no pharmacy admin for the organization!");
@@ -407,8 +486,13 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "CUSTOMER EXISTS.");
                     }
 
-//                    MAILING SERVICE
-                } else {
+//                    
+                } 
+                
+                
+                
+                
+                else {
 
                     System.out.println(this.toPharmacist + " 888888888888888 PHARMACIST OBJECT");
                     PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
