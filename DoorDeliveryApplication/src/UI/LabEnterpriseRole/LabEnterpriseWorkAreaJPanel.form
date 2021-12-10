@@ -16,7 +16,11 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+          <EmptySpace min="0" pref="850" max="32767" attributes="0"/>
+=======
           <EmptySpace min="0" pref="800" max="32767" attributes="0"/>
+>>>>>>> 92541059d5b53b3646fd8fc470c185475dff5e30
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -31,7 +35,11 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+          <EmptySpace min="0" pref="587" max="32767" attributes="0"/>
+=======
           <EmptySpace min="0" pref="600" max="32767" attributes="0"/>
+>>>>>>> 92541059d5b53b3646fd8fc470c185475dff5e30
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
@@ -80,13 +88,30 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace pref="216" max="32767" attributes="0"/>
+=======
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
+>>>>>>> 92541059d5b53b3646fd8fc470c185475dff5e30
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Component id="lblSelectedNode" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                          <EmptySpace min="-2" pref="255" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="btndeliveryagents" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="btnmanageorders" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="361" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+=======
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -98,13 +123,18 @@
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+>>>>>>> 92541059d5b53b3646fd8fc470c185475dff5e30
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+=======
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+>>>>>>> 92541059d5b53b3646fd8fc470c185475dff5e30
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblSelectedNode" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -113,9 +143,13 @@
                   <Component id="btnmanageorders" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btndeliveryagents" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
+                  <EmptySpace pref="245" max="32767" attributes="0"/>
+=======
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnLabcenters" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="205" max="32767" attributes="0"/>
+>>>>>>> 92541059d5b53b3646fd8fc470c185475dff5e30
               </Group>
           </Group>
         </DimensionLayout>
@@ -159,6 +193,8 @@
             <Property name="text" type="java.lang.String" value="&lt;View_selected_node&gt;"/>
           </Properties>
         </Component>
+<<<<<<< HEAD
+=======
         <Component class="javax.swing.JButton" name="btnLabcenters">
           <Properties>
             <Property name="text" type="java.lang.String" value="Manage Lab Centers"/>
@@ -167,6 +203,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLabcentersActionPerformed"/>
           </Events>
         </Component>
+>>>>>>> 92541059d5b53b3646fd8fc470c185475dff5e30
       </SubComponents>
     </Container>
   </SubComponents>

@@ -39,7 +39,7 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
      Organization organization;
      Network network;
 
-    public PharmaceuticalEnterpriseJPanel(JPanel userProcessContainer, UserAccount account,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
+    public PharmaceuticalEnterpriseJPanel(JPanel userProcessContainer, UserAccount account,Network network,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
 
         this.userProcessContainer=userProcessContainer;
@@ -47,7 +47,7 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
         this.account = account;
         this.enterprise = enterprise;
         this.organization = organization;
-        this.network = new Network();
+        this.network = network;
         this.customer = new Customer();
 
         System.out.println("HAS TO CIome  in phharma e ");
@@ -190,7 +190,7 @@ public class PharmaceuticalEnterpriseJPanel extends javax.swing.JPanel {
     private void btnmanageordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmanageordersActionPerformed
         // TODO add your handling code here:
 
-        ManagePharmaOrdersJPanel managePharmaOrdersJPanel=new ManagePharmaOrdersJPanel(userProcessContainer, ecosystem,network,useraccountdirectory,enterprise,customer);
+        ManagePharmaOrdersJPanel managePharmaOrdersJPanel=new ManagePharmaOrdersJPanel(userProcessContainer, ecosystem,network,useraccountdirectory,enterprise,customer,organization, account);
         userProcessContainer.add("managePharmaOrdersJPanel",managePharmaOrdersJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

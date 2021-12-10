@@ -21,6 +21,6 @@ public class PharmaceuticalEnterpriseAdminRole extends EnterpriseRole {
     
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Network network, Organization organization, Enterprise enterprise, Ecosystem business) {
-        return new PharmaceuticalEnterpriseJPanel(userProcessContainer, account, organization, enterprise, business); 
+        return new PharmaceuticalEnterpriseJPanel(userProcessContainer,account,network,organization,enterprise,business); 
     }
 }
