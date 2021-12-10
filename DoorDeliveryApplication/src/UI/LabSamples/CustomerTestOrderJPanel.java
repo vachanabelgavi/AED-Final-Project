@@ -10,6 +10,7 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Orders.Cart;
+import Business.Orders.Order;
 import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Products.Product;
@@ -35,7 +36,7 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
     DefaultTableModel tableModel;
     private Enterprise enterprise;
     private Organization organization;
-
+    private final Order labOrder;
     
     public CustomerTestOrderJPanel(JPanel userProcessContainer, Ecosystem business, Network network, Customer customer) {
         initComponents();
@@ -44,6 +45,7 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
         this.business = business;
         this.network = network;
         this.customer = customer;
+        labOrder = new Order();
         
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
         this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Lab Center");
@@ -66,7 +68,7 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelTotalOrder = new javax.swing.JLabel();
         btnAddtoCart = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -108,10 +110,10 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabel3.setText("Order Total: ");
 
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
-        jLabel4.setText("<value>");
+        labelTotalOrder.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+        labelTotalOrder.setText("<value>");
 
-        btnAddtoCart.setText("Add to Cart");
+        btnAddtoCart.setText("Order");
         btnAddtoCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddtoCartActionPerformed(evt);
@@ -165,7 +167,7 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelTotalOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(280, 280, 280))
         );
         layout.setVerticalGroup(
@@ -181,7 +183,7 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(labelTotalOrder))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -217,6 +219,17 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
                             o1.setOrganizationname("Lab Center");
                             customerCartItems.add(o1);
                             JOptionPane.showMessageDialog(null, "Added " + o1.getProductName() + " to cart!");
+                        
+                        double total=0;
+                        ArrayList<OrderItem> labtestItems = this.labOrder.getItemsOrdered();
+                        
+                        Order order = new Order();
+                        order.setItemsOrdered(labtestItems);
+                        customer.addOrder(order);
+                        
+                        order.calcOrderTotal();
+                        
+                        labelTotalOrder.setText(String.valueOf(order.getPrice()));
                     }
                 }
             }
@@ -234,10 +247,10 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel labelTotalOrder;
     // End of variables declaration//GEN-END:variables
 
     public void populateTable() {

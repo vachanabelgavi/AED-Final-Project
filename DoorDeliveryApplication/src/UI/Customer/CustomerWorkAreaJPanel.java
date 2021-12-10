@@ -60,6 +60,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        labelTotalOrder = new javax.swing.JLabel();
+        btnAddtoCart = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         leftPane = new javax.swing.JPanel();
         prescriptionBtn = new javax.swing.JButton();
         browseBtn1 = new javax.swing.JButton();
@@ -103,6 +109,56 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jTabbedPane1.addTab("VACCINE & IMMUNIZATION", jPanel4);
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 16)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Lab Tests");
+        jPanel5.add(jLabel2);
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+        jLabel3.setText("Order Total: ");
+        jPanel5.add(jLabel3);
+
+        labelTotalOrder.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+        labelTotalOrder.setText("<value>");
+        jPanel5.add(labelTotalOrder);
+
+        btnAddtoCart.setText("Order");
+        btnAddtoCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddtoCartActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnAddtoCart);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Test ID", "Test", "Cost", "Add to Cart"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel5.add(jScrollPane1);
+
         jTabbedPane1.addTab("LAB CENTER & DIAGNOSTICS", jPanel5);
 
         pane.setRightComponent(jTabbedPane1);
@@ -215,17 +271,75 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jPanel1FocusGained
 
+    private void btnAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtoCartActionPerformed
+        // TODO add your handling code here:
+
+        int rows = tableModel.getRowCount();
+        Cart custoemrcart = this.customer.getCustomerCart();
+
+        ArrayList<OrderItem> customerCartItems = custoemrcart.getCartItems();
+
+        try {
+            for (int i = 0; i < rows; i++) {
+                if ((Boolean) tableModel.getValueAt(i, 3)) {
+
+                    Boolean found = false;
+
+                    if (customerCartItems.size() > 0) {
+                        System.out.println("IN  Lab Test CART > 0 ");
+                        for (OrderItem item : customerCartItems) {
+                            System.out.println(item + " ************** Item in Lab Test");
+                            if (item.getProductName().equals(String.valueOf(tableModel.getValueAt(i, 1)))) {
+                                JOptionPane.showMessageDialog(null, "Chosen item" + item.getProductName() + " already in cart!");
+                                found = true;
+                                break;
+                            }
+                        }
+                        OrderItem o1 = new OrderItem();
+                        o1.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                        o1.setProductName(String.valueOf(tableModel.getValueAt(i, 1)));
+                        o1.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                        o1.setOrganizationname("Lab Center");
+                        customerCartItems.add(o1);
+                        JOptionPane.showMessageDialog(null, "Added " + o1.getProductName() + " to cart!");
+
+                        double total=0;
+                        ArrayList<OrderItem> labtestItems = this.labOrder.getItemsOrdered();
+
+                        Order order = new Order();
+                        order.setItemsOrdered(labtestItems);
+                        customer.addOrder(order);
+
+                        order.calcOrderTotal();
+
+                        labelTotalOrder.setText(String.valueOf(order.getPrice()));
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e + " CART PROBLEM IN Lab");
+        }
+
+    }//GEN-LAST:event_btnAddtoCartActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton browseBtn1;
+    private javax.swing.JButton btnAddtoCart;
     private javax.swing.JButton cartBtn1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel labelTotalOrder;
     private javax.swing.JPanel leftPane;
     private javax.swing.JButton orderBtn1;
     private javax.swing.JSplitPane pane;
