@@ -99,7 +99,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(cartTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 770, 290));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 770, 290));
 
         jButton2.setText("PLACE ORDER");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +107,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 460, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 460, -1, -1));
 
         jButton3.setText("EDIT CART");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 460, 100, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, 100, -1));
 
         jButton1.setText("REFRESH");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +123,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 460, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 460, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
