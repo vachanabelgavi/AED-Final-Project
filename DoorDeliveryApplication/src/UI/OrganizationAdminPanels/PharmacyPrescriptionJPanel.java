@@ -112,6 +112,7 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
 
         jLabel10.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        setBackground(new java.awt.Color(253, 252, 249));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("PHARMACIST'S PRESCRIPTION WORK AREA");
