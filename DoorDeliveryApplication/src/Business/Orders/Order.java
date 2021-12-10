@@ -7,9 +7,9 @@ package Business.Orders;
 
 //import Business.Payment.Payment;
 import Business.DeliveryAgent.DeliveryAgent;
+import Business.LabAssistants.LabAssistants;
 import Business.Payment.Payment;
  
-import java.awt.Image;
 import java.util.ArrayList;
 import java.io.File;
 
@@ -26,14 +26,23 @@ public class Order {
     private static int count = 0;
     private String organizationname;
     private String enterprisename;
-    
-    
+    //private double totalPrice;
+/*
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+  */  
     
     private ArrayList<OrderItem> itemsOrdered;
     
     // A payment is attached to an order
     Payment orderPayment;
     DeliveryAgent deliveryAgent;
+    LabAssistants labAssistant;
     
     public Order() {
         this.name = "";
@@ -43,6 +52,7 @@ public class Order {
         this.orderId = this.count;
         this.itemsOrdered = new ArrayList<OrderItem>();
         this.deliveryAgent = new DeliveryAgent();
+        this.labAssistant = new LabAssistants();
     }
 
     public String getName() {
@@ -133,6 +143,13 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
+    public LabAssistants getLabAssistant() {
+        return labAssistant;
+    }
+
+    public void setLabAssistant(LabAssistants labAssistant) {
+        this.labAssistant = labAssistant;
+    }
     
 }
