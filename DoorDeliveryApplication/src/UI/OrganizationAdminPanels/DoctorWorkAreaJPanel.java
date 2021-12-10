@@ -32,7 +32,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.internet.MimeMessage;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.activation.*;
+//import javax.activation.*;
 import javax.mail.Address;
 
 /**

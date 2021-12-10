@@ -231,6 +231,19 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
                         
                         labelTotalOrder.setText(String.valueOf(order.getPrice()));
                     }
+                    else {
+                        System.out.println("NEW ITEMS ADDED ");
+                        OrderItem o = new OrderItem();
+                        o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                        o.setProductName((String) tableModel.getValueAt(i, 1));
+                        o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                        o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                        o.setOrganizationname("Equipments");
+                        customerCartItems.add(o);
+                        JOptionPane.showMessageDialog(null, "Added " + o.getProductName() + " to cart!");
+                    }
+                }else{
+                            
                 }
             }
 
