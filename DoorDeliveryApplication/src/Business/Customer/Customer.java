@@ -8,6 +8,7 @@ package Business.Customer;
 import Business.Orders.Cart;
 import Business.Orders.Order;
 import Business.WorkQueue.PrescriptionUploadWorkRequest;
+import Business.WorkQueue.ReportUploadWorkRequest;
 import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class Customer {
     
     private WorkQueue workQueue;
     ArrayList<PrescriptionUploadWorkRequest> customerPrescriptionRequestList;
+    ArrayList<ReportUploadWorkRequest> labReportRequestList;
     
     public ArrayList<Order> getOrderlist() {
         return orderlist;
@@ -158,8 +160,14 @@ public class Customer {
     public void setCustomerPrescriptionRequestList(ArrayList<PrescriptionUploadWorkRequest> customerPrescriptionRequestList) {
         this.customerPrescriptionRequestList = customerPrescriptionRequestList;
     }
-    
-    
+
+    public ArrayList<ReportUploadWorkRequest> getLabReportRequestList() {
+        return labReportRequestList;
+    }
+
+    public void setLabReportRequestList(ArrayList<ReportUploadWorkRequest> labReportRequestList) {
+        this.labReportRequestList = labReportRequestList;
+    }
     
     @Override
     public String toString(){
