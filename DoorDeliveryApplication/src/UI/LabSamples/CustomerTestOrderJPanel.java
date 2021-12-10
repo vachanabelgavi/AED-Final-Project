@@ -38,10 +38,10 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
     private Organization organization;
     private final Order labOrder;
     
-    public CustomerTestOrderJPanel(JPanel userProcessContainer, Ecosystem business, Network network, Customer customer) {
+    public CustomerTestOrderJPanel(Ecosystem business, Network network, Customer customer) {
         initComponents();
         
-        this.userProcessContainer = userProcessContainer;
+        //this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.network = network;
         this.customer = customer;
