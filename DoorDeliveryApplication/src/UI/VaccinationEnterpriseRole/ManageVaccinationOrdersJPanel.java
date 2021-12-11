@@ -245,16 +245,24 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                 
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
                      System.out.println(" "+agent);
-                     o.setDeliveryAgent(dlvrymn);
-                    dlvrymn.setUseraccount(ua);
-                    ua.setUsername(agent); 
-                    dlvrymn.setActive(false);
-                    deliverycmb.setSelectedItem(" ");    
-                    populateTable();
+                     ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
+                     for(DeliveryAgent d: del){
+                     if(agent == d.getUseraccount().getUsername()){
+                      d.setActive(false); 
+                      o.setDeliveryAgent(d);
+                      System.out.println(" "+ o.getDeliveryAgent().getUseraccount().getUsername());
+                      System.out.println(" "+ d.getActive());
+                    //  o.getDeliveryAgent().getUseraccount().getUsername();
+                      //d.getUseraccount().getUsername();
+
+                    System.out.println("cmae hre ");
+                     }
+                     }
+                     populateTable();
                    
                     ArrayList<String> agentslist = new ArrayList<>();
                     agentslist.add(agent);
-                    ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
+                   
                     System.out.println(o.getDeliveryAgent().getUseraccount().getUsername());
                 
         if(emailsend = true){

@@ -226,7 +226,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
             for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                 //  Order o : this.customer.getOrderlist()//              populate items
-                if("ACCEPTED".equals(o.getStatus()) && o.getDeliveryAgent().getUseraccount().getUsername() == this.delmn.getUsername()){
+                if(("ACCEPTED".equalsIgnoreCase(o.getStatus())) || ("REQUEST COLLECTION".equalsIgnoreCase(o.getStatus())) && o.getDeliveryAgent().getUseraccount().getUsername() == this.delmn.getUsername()){
                 orderscmb.addItem(String.valueOf(o.getOrderId()));
             }
         }
@@ -243,7 +243,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
                 Date d = new Date();
                 SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                // txtupdatedcat.setText(sdt.format(d));     
-        String status = "Order Picked";
+        String status = null;
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);
          ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
@@ -261,8 +261,15 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
                     
                     p.add(oi.get(i).getProductName());
                 }
-                if("ACCEPTED".equals(o.getStatus()) && o.getDeliveryAgent().getUseraccount().getUsername() == delmn.getUsername() && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                  o.setStatus("OUT FOR DELIVERY");
+                if(("ACCEPTED".equalsIgnoreCase(o.getStatus())) || ("REQUEST COLLECTION".equalsIgnoreCase(o.getStatus())) && o.getDeliveryAgent().getUseraccount().getUsername() == delmn.getUsername() && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                  if("ACCEPTED".equalsIgnoreCase(o.getStatus())){
+                       o.setStatus("OUT FOR DELIVERY");
+                       status = "Order Picked";
+                  }else{
+                       o.setStatus("OUT FOR COLLECTION");
+                       status = "Out for collection";
+                  }
+                   
                 dtm.insertRow(dtm.getRowCount(), new Object[]{
                      o.getOrderId(),
                      Arrays.toString(p.toArray()),
@@ -297,7 +304,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          Date d = new Date();
          SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-         String status = "Order Delivered";
+         String status = null;
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);
       
@@ -318,7 +325,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
                 }
                
         
-             if("OUT FOR DELIVERY".equals(o.getStatus()) && o.getDeliveryAgent().getUseraccount().getUsername() == delmn.getUsername() && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId())))
+             if(("OUT FOR DELIVERY".equalsIgnoreCase(o.getStatus())) || ("OUT FOR COLLECTION".equalsIgnoreCase(o.getStatus())) && o.getDeliveryAgent().getUseraccount().getUsername() == delmn.getUsername() && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId())))
              {
                  System.out.println("Inside out for delivery");
                 if( o.getOrderPayment().getStatus() == "NOT PAID"){
@@ -326,7 +333,17 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
                     o.setOrderPayment(odpayment);
                     odpayment.setStatus("AMOUNT COLLECTED");
                 }
-                o.setStatus("DELIVERED");
+                
+                if("OUT FOR DELIVERY".equalsIgnoreCase(o.getStatus())){
+                       o.setStatus("ORDER DELIVERED");
+                       status = "ORDER DELIVERED";
+                       JOptionPane.showMessageDialog(null, "Delivery agent delivered the order" + sdt.format(d));
+                  }else{
+                       o.setStatus("ORDER REQUEST COLLECTED");
+                       status = "ORDER REQUEST COLLECTED";
+                        JOptionPane.showMessageDialog(null, "Delivery agent collected the order request" + sdt.format(d));
+                  }
+               
                 dtm.insertRow(dtm.getRowCount(), new Object[]{
                      o.getOrderId(),
                      Arrays.toString(pi.toArray()),
@@ -335,7 +352,9 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
                     o.getOrderPayment().getStatus(),
                     status  
                 });
+                
         String recipients = cust.getEmail(); 
+        
         int dialogueb = JOptionPane.INFORMATION_MESSAGE;
         System.out.println(""+dialogueb);
         int dialoguer = JOptionPane.showConfirmDialog(this, "Please wait confirmation mail sending","CUSTOMER NOTIFICATION IN PROCESS", dialogueb);
@@ -383,7 +402,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
             transport.send(message, recipientAddresses);//(message);
 
             System.out.println("Done");
-            JOptionPane.showMessageDialog(null, "Delivery agent delivered the order" + sdt.format(d));
+           
 
         } catch (MessagingException e) {
             System.out.println("e="+e);
@@ -397,7 +416,8 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
              else{
             JOptionPane.showMessageDialog(null, "Email sent to customer cancelled "); 
         }
-               }
+             }
+             
           }
        }
     }//GEN-LAST:event_orderDelivered_btnActionPerformed

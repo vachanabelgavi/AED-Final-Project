@@ -215,7 +215,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
             for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                 //  Order o : this.customer.getOrderlist()//              populate items
-                if("ACCEPTED".equals(o.getStatus()) && ((o.getOrganizationname().equals("Lab Center") || o.getOrganizationname().equals("Testing Center"))) ){
+                if(("ACCEPTED".equalsIgnoreCase(o.getStatus())) || ("REQUEST COLLECTION".equalsIgnoreCase(o.getStatus())) && ((o.getOrganizationname().equals("Lab Center") || o.getOrganizationname().equals("Testing Center"))) ){
                 orderscmb.addItem(String.valueOf(o.getOrderId()));
             }
         }
@@ -260,7 +260,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                     pr.add(oi.get(i).getProductName());
                 }
 
-                if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                if(("ACCEPTED".equalsIgnoreCase(o.getStatus())) || ("REQUEST COLLECTION".equalsIgnoreCase(o.getStatus())) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
                      System.out.println(" "+agent);
                     ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
                      for(DeliveryAgent d: del){
@@ -385,7 +385,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
                     p.add(oi.get(i).getProductName());
                 }
-                if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                if(("ACCEPTED".equalsIgnoreCase(o.getStatus())) || ("REQUEST COLLECTION".equalsIgnoreCase(o.getStatus())) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
 
                 dtm.insertRow(dtm.getRowCount(), new Object[]{
                      o.getOrderId(),
