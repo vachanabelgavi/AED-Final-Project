@@ -178,10 +178,11 @@ public class MedicalEquipmentsJPanel extends javax.swing.JPanel {
         stockList.setBackground(new java.awt.Color(239, 239, 254));
         jScrollPane2.setViewportView(stockList);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(878, 161, 140, 325));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(878, 161, 190, 325));
 
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel1.setText("OUT OF STOCK :(");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 120, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 110, -1, -1));
 
         jButton2.setText("REFRESH");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

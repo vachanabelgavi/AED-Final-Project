@@ -163,19 +163,19 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(549, 304, -1, -1));
 
         labelCustomerName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(labelCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 175, 229, 14));
+        add(labelCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 169, 229, 20));
 
         labelNetwork.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(labelNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 207, 229, 14));
+        add(labelNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 201, 229, 20));
 
         labelDoctorSign.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(labelDoctorSign, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 239, 229, 14));
+        add(labelDoctorSign, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 233, 229, 20));
 
         labelOrderId.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(labelOrderId, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 271, 229, 14));
+        add(labelOrderId, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 264, 229, 20));
 
         labelOrderStatus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        add(labelOrderStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 304, 229, 14));
+        add(labelOrderStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 300, 229, 20));
 
         createOrderbttn.setBackground(new java.awt.Color(0, 102, 102));
         createOrderbttn.setForeground(new java.awt.Color(255, 255, 255));
@@ -233,29 +233,35 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
             int count = this.tableModel.getRowCount();
 
             ArrayList<OrderItem> oi = o.getItemsOrdered();
-            OrderItem item = new OrderItem();
 
             for (int i = 0; i < count; i++) {
-                item.setProductId((int) tableModel.getValueAt(i, 0));
-                item.setProductName((String) tableModel.getValueAt(i, 1));
-                item.setProductPrice((double) tableModel.getValueAt(i, 2));
-                item.setQty((int) tableModel.getValueAt(i, 4));
 
-                Product p = this.organization.fetchProduct(item.getProductId());
-                if(item.getQty() > p.getStockunits()) {
-                    JOptionPane.showMessageDialog(null, "Quantity is greater than stock units. Can't perform this operation.");
-                    break;
+                if ((int) tableModel.getValueAt(i, 4) > 0) {
+
+                    OrderItem item = new OrderItem();
+                    item.setProductId((int) tableModel.getValueAt(i, 0));
+                    item.setProductName((String) tableModel.getValueAt(i, 1));
+                    item.setProductPrice((double) tableModel.getValueAt(i, 2));
+                    item.setQty((int) tableModel.getValueAt(i, 4));
+
+                    Product p = this.organization.fetchProduct(item.getProductId());
+                    if (item.getQty() > p.getStockunits()) {
+                        JOptionPane.showMessageDialog(null, "Quantity is greater than stock units. Can't perform this operation.");
+                        break;
+                    }
+
+                    ArrayList<Product> prods = this.organization.getOrganizationProducts();
+                    int idx = prods.indexOf(p);
+                    System.out.println("FOUNT PPRODUCT AT  ------- " + idx);
+                    int stock = p.getStockunits() - item.getQty();
+                    p.setStockunits(stock);
+                    prods.set(idx, p);
+                    this.organization.setProductList(prods);
+
+                    oi.add(item);
+                    System.out.println("ADDING ITEMS");
+                    o.setItemsOrdered(oi);
                 }
-                
-               ArrayList<Product> prods = this.organization.getOrganizationProducts();
-               int idx = prods.indexOf(p);
-                System.out.println("FOUNT PPRODUCT AT  ------- " + idx);
-                int stock = p.getStockunits() - item.getQty();
-                p.setStockunits(stock);
-                prods.set(idx, p);
-                this.organization.setProductList(prods);
-                
-                oi.add(item);
             }
 
             o.setPrescription(this.currentWorkingRequest.getPresecription());
@@ -264,7 +270,6 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
             o.calcOrderTotal();
             labelOrderStatus.setText(o.getStatus());
             o.setOrganizationname(this.organization.getName());
-            
 
             customerorder.add(o);
             this.currentWorkingRequest.setOrderId(o.getOrderId());
@@ -272,6 +277,7 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
             this.currentWorkingRequest.setPrescribedOrderItems(oi);
 
             JOptionPane.showMessageDialog(null, "ORDER HAS BEEN CREATED.");
+            populateProducts();
         } catch (Exception e) {
             System.out.println(e + " In Prescription Pharmacy");
         }
@@ -292,7 +298,7 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
     public void populateProducts() {
         try {
             this.tableModel.setRowCount(0);
-            
+
             for (Product p : this.organization.getOrganizationProducts()) {
                 System.out.println("INSIDE POPuLATE ORDER  --- ");
                 if (p.getStockunits() != 0) {
@@ -307,7 +313,7 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
             }
 
         } catch (Exception e) {
-            System.out.println("-------------- ORG PRODUCTS IN PHARMACY PRESC "+ e);
+            System.out.println("-------------- ORG PRODUCTS IN PHARMACY PRESC " + e);
         }
 
     }
