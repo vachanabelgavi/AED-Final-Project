@@ -13,6 +13,7 @@ import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ReportUploadWorkRequest;
 import java.awt.CardLayout;
+import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -21,10 +22,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vachanabelgavi
  */
-public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
+public class LabAssistantJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form LabAgentSampleCollectionJPanel
+     * Creates new form LabAssistantJPanel
      */
     private JPanel userProcessContainer;
     private Ecosystem business;
@@ -34,8 +35,9 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private Organization organization;
     private ReportUploadWorkRequest workrequest;
+    File report;
     
-    public LabAgentSampleCollectionJPanel(JPanel userProcessContainer, UserAccount userAccount, Ecosystem business, Network network, Customer customer) {
+    public LabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Ecosystem business, Network network, Customer customer) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -61,12 +63,13 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         labJTable = new javax.swing.JTable();
         btnAssign = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         btnProcess = new javax.swing.JButton();
+        btnAssign1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        labJTable1 = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -75,25 +78,18 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
         jLabel1.setBackground(new java.awt.Color(63, 130, 117));
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("                         Assign Lab Assistant");
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-back-50.png"))); // NOI18N
-        jButton1.setText("Back");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Lab Assistant");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                .addComponent(jButton1))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         labJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -101,25 +97,21 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order Number", "Customer", "Total", "Order Status", "null"
+                "Test ID", "Test", "Price"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(labJTable);
+        if (labJTable.getColumnModel().getColumnCount() > 0) {
+            labJTable.getColumnModel().getColumn(2).setHeaderValue("Total");
+        }
 
         btnAssign.setText("Assign to me");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
@@ -128,8 +120,6 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("Sample Collection for Orders Placed");
-
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,24 +127,48 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAssign1.setText("Order Items");
+        btnAssign1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssign1ActionPerformed(evt);
+            }
+        });
+
+        labJTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Order Number", "Customer", "Order Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(labJTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(170, 170, 170)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
+                        .addComponent(btnAssign1)
+                        .addGap(41, 41, 41)
                         .addComponent(btnAssign)
-                        .addGap(81, 81, 81)
-                        .addComponent(btnProcess)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnProcess))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAssign, btnProcess});
@@ -163,15 +177,16 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jLabel3)
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAssign)
-                    .addComponent(btnProcess))
-                .addContainerGap(147, Short.MAX_VALUE))
+                    .addComponent(btnProcess)
+                    .addComponent(btnAssign1))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAssign, btnProcess});
@@ -191,6 +206,7 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
             } else {
                 workrequest.setReceiver(userAccount);
                 workrequest.setStatus("Samples Collected");
+                //workrequest.setReport(report);
                 populateTable();
                 JOptionPane.showMessageDialog(null, "Request has successfully assigned");
             }
@@ -225,16 +241,21 @@ public class LabAgentSampleCollectionJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnProcessActionPerformed
 
+    private void btnAssign1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssign1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAssign1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssign;
+    private javax.swing.JButton btnAssign1;
     private javax.swing.JButton btnProcess;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable labJTable;
+    private javax.swing.JTable labJTable1;
     // End of variables declaration//GEN-END:variables
 
     public void populateTable(){
