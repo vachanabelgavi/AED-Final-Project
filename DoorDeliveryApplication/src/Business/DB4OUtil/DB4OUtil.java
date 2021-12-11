@@ -22,6 +22,7 @@ public class DB4OUtil {
     
     private static final String FILENAME = Paths.get("Databank.db4o").toAbsolutePath().toString();// path to the data store
     private static DB4OUtil dB4OUtil;
+    private ObjectContainer conn;
 
     public synchronized static DB4OUtil getInstance() {
         if (dB4OUtil == null) {
@@ -61,18 +62,18 @@ public class DB4OUtil {
 
     public synchronized void storeSystem(Ecosystem system) {
         try {
-            ObjectContainer conn = createConnection();
+            this.conn = createConnection();
             conn.store(system);
             conn.commit();
             conn.close();
         } catch (Exception e) {
-
+            System.out.println(e + " IN SOTRING");
         }
     }
 
     public Ecosystem retrieveSystem() {
         try {
-        ObjectContainer conn = createConnection();
+        this.conn = createConnection();
         ObjectSet<Ecosystem> systems = conn.query(Ecosystem.class); // Change to the object you want to save
         Ecosystem system;
 

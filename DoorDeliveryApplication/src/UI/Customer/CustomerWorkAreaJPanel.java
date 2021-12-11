@@ -111,6 +111,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         stockList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -232,7 +233,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(supermarketTable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 5, 700, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 700, 390));
 
         addCartButton.setBackground(new java.awt.Color(0, 102, 102));
         addCartButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,7 +243,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 addCartButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(addCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, -1, -1));
+        jPanel1.add(addCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, -1));
 
         jButton3.setText("REFRESH");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -250,15 +251,20 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 510, 100, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 500, 100, -1));
 
         stockList.setBackground(new java.awt.Color(239, 239, 254));
         jScrollPane1.setViewportView(stockList);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 70, 210, 330));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 130, 210, 330));
 
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel1.setText("OUT OF STOCK :(");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 90, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Users\\AED-D-Drive\\AED_PROJECT_LATEST\\AED-Final-Project\\DoorDeliveryApplication\\src\\UI\\resources\\supermarket.png")); // NOI18N
+        jLabel2.setToolTipText("");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 590, 430));
 
         jTabbedPane2.addTab("SUPERMARKETS", jPanel1);
 
@@ -475,7 +481,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                             false
                         });
                     } else {
-                        ImageIcon icon = new ImageIcon("pill.png");
+                        ImageIcon icon = new ImageIcon("/resources/pill.png");
 
                         tableModel.insertRow(tableModel.getRowCount(), new Object[]{
                             p.getProductId(),
@@ -503,6 +509,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

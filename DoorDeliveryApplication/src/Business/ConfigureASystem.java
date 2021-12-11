@@ -263,11 +263,15 @@ public class ConfigureASystem {
 
 
 
-        String[] drugs = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
+        String[] drugs = {"Brufen", "Paracetamol", "Pan D", "Crocin", "Atrovastin", "Lisinopril", "Amlodipine"};
         for (String s1 : drugs) {
             orgP1.addProduct(s1, 7.5, 500);
-            orgP2.addProduct(s1, 6.5, 1500);
             orgBP1.addProduct(s1, 8.0, 1000);
+        }
+        
+        String[] sup = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
+        for (String s1 : drugs) {
+            orgP2.addProduct(s1, 6.5, 1500);
             orgBP2.addProduct(s1, 7.45, 3500);
         }
 

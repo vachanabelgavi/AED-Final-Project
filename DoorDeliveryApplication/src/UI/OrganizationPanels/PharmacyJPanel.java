@@ -94,6 +94,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         stockList = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(253, 252, 249));
         setPreferredSize(new java.awt.Dimension(1500, 900));
@@ -124,7 +125,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(prodTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 690, 380));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 690, 380));
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -134,7 +135,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 450, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 610, -1, -1));
 
         jButton2.setText("REFRESH");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +143,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 510, 100, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 610, 100, -1));
 
         stockList.setBackground(new java.awt.Color(239, 239, 254));
         stockList.setModel(new javax.swing.AbstractListModel<String>() {
@@ -152,10 +153,14 @@ public class PharmacyJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(stockList);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 130, 200, 280));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 220, 200, 310));
 
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel2.setText("OUT OF STOCK :(");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 90, -1, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 160, -1, 20));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Users\\AED-D-Drive\\AED_PROJECT_LATEST\\AED-Final-Project\\DoorDeliveryApplication\\src\\UI\\resources\\pharmacy.png")); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 130, 510, 640));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -284,6 +289,7 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
