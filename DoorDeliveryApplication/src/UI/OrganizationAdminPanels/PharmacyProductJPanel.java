@@ -132,6 +132,8 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 570, -1, -1));
 
+        jButton3.setBackground(new java.awt.Color(0, 204, 204));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("UPLOAD IMAGE");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,15 +223,13 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
     public void populateProducts() {
         tableModel.setRowCount(0);
         for (Product p : this.organization.getOrganizationProducts()) {
-            if (p.getStockunits() != 0) {
-                tableModel.insertRow(tableModel.getRowCount(), new Object[]{
-                    p.getProductId(),
-                    p.getName(),
-                    p.getPrice(),
-                    p.getStockunits(),
-                    1
-                });
-            }
+            tableModel.insertRow(tableModel.getRowCount(), new Object[]{
+                p.getProductId(),
+                p.getName(),
+                p.getPrice(),
+                p.getStockunits(),
+                1
+            });
         }
     }
 
