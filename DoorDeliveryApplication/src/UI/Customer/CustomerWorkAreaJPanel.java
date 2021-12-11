@@ -14,10 +14,15 @@ import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Products.Product;
 import UI.Alert;
+import UI.LabSamples.CustomerTestOrderJPanel;
 import UI.OrganizationPanels.CustomerPrescriptionJPanel;
 import UI.OrganizationPanels.MedicalEquipmentsJPanel;
 import UI.OrganizationPanels.OrdersJPanel;
+
+//import UI.OrganizationPanels.PaymentsJPanel;
+
 import UI.OrganizationPanels.PaymentsJPanel;
+
 import UI.OrganizationPanels.PrescriptionHistoryJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -105,10 +110,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         supermarketTable = new javax.swing.JTable();
@@ -118,6 +119,10 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         stockList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(253, 252, 249));
         setMinimumSize(new java.awt.Dimension(1500, 900));
@@ -204,38 +209,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(253, 252, 249));
-        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jPanel1FocusGained(evt);
-            }
-        });
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
-            }
-        });
-        jTabbedPane2.addTab("PHARMACY", jPanel2);
-
-        jPanel3.setBackground(new java.awt.Color(253, 252, 249));
-        jTabbedPane2.addTab("MEDICAL EQUIPMENTS", jPanel3);
-
-        jPanel4.setBackground(new java.awt.Color(253, 252, 249));
-        jPanel4.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jPanel4FocusGained(evt);
-            }
-        });
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel4MouseClicked(evt);
-            }
-        });
-        jTabbedPane2.addTab("VACCINE & IMMUNIZATION", jPanel4);
-
-        jPanel5.setBackground(new java.awt.Color(253, 252, 249));
-        jTabbedPane2.addTab("LAB CENTER & DIAGNOSTICS", jPanel5);
-
         jPanel1.setBackground(new java.awt.Color(253, 252, 249));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -305,6 +278,38 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
         jTabbedPane2.addTab("SUPERMARKETS", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(253, 252, 249));
+        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+        });
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+        jTabbedPane2.addTab("PHARMACY", jPanel2);
+
+        jPanel3.setBackground(new java.awt.Color(253, 252, 249));
+        jTabbedPane2.addTab("MEDICAL EQUIPMENTS", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(253, 252, 249));
+        jPanel4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel4FocusGained(evt);
+            }
+        });
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
+        jTabbedPane2.addTab("VACCINE & IMMUNIZATION", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(253, 252, 249));
+        jTabbedPane2.addTab("LAB CENTER & DIAGNOSTICS", jPanel5);
+
         pane.setRightComponent(jTabbedPane2);
 
         add(pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 5, 1450, 750));
@@ -347,6 +352,9 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jTabbedPane2.setComponentAt(1, new PharmacyJPanel(this.system, this.network, this.customer));
         jTabbedPane2.setComponentAt(3, new VaccineJPanel(this.system, this.network, this.customer));
         jTabbedPane2.setComponentAt(2, new MedicalEquipmentsJPanel(this.system, this.network, this.customer));
+
+        jTabbedPane2.setComponentAt(4, new CustomerTestOrderJPanel(this.system, this.network, this.customer));
+
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked

@@ -126,6 +126,9 @@
           <Image iconType="2" name="D:\Users\AED-D-Drive\AED_PROJECT_LATEST\AED-Final-Project\DoorDeliveryApplication\src\UI\resources\vaccine.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="610" y="220" width="880" height="670"/>

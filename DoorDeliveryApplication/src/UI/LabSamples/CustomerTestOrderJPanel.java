@@ -14,6 +14,8 @@ import Business.Orders.Order;
 import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Products.Product;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ReportUploadWorkRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -38,10 +40,14 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
     private Organization organization;
     private final Order labOrder;
     
-    public CustomerTestOrderJPanel(JPanel userProcessContainer, Ecosystem business, Network network, Customer customer) {
+    Organization labOrganization;
+    UserAccount labassAccount;
+    
+    
+    public CustomerTestOrderJPanel(Ecosystem business, Network network, Customer customer) {
         initComponents();
         
-        this.userProcessContainer = userProcessContainer;
+        //this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.network = network;
         this.customer = customer;
@@ -195,32 +201,49 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
         Cart custoemrcart = this.customer.getCustomerCart();
 
         ArrayList<OrderItem> customerCartItems = custoemrcart.getCartItems();
-
+        
         try {
             for (int i = 0; i < rows; i++) {
-                if ((Boolean) tableModel.getValueAt(i, 3)) {
+                if ((Boolean) tableModel.getValueAt(i, 5)) {
 
-                    Boolean found = false;
-                    
+                    System.out.println(custoemrcart.getCartId() + " :: THIS IS HIS CART ID");
+//                    Look for an already existing order in the cart
                     if (customerCartItems.size() > 0) {
-                        System.out.println("IN  Lab Test CART > 0 ");
+                        System.out.println("CART IS > 0 ");
+                        Boolean found = false;
                         for (OrderItem item : customerCartItems) {
-                            System.out.println(item + " ************** Item in Lab Test");
+                            System.out.println(item.getProductName() + " ******** item");
                             if (item.getProductName().equals(String.valueOf(tableModel.getValueAt(i, 1)))) {
+                                System.out.println(item.getProductName() + " ******** item exists");
                                 JOptionPane.showMessageDialog(null, "Chosen item" + item.getProductName() + " already in cart!");
                                 found = true;
                                 break;
                             }
                         }
-                            OrderItem o1 = new OrderItem();
-                            o1.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
-                            o1.setProductName(String.valueOf(tableModel.getValueAt(i, 1)));
-                            o1.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
-                            o1.setOrganizationname("Lab Center");
-                            customerCartItems.add(o1);
-                            JOptionPane.showMessageDialog(null, "Added " + o1.getProductName() + " to cart!");
-                        
-                        double total=0;
+
+                        if (!found) {
+                            OrderItem o = new OrderItem();
+                            o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                            o.setProductName((String) tableModel.getValueAt(i, 1));
+                            o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                            //o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                            o.setOrganizationname("Sample Collection");
+                            customerCartItems.add(o);
+                            JOptionPane.showMessageDialog(null, "Added " + o.getProductName() + " to cart!");
+                        }
+                    } else {
+                        System.out.println("NEW ITEMS ADDED ");
+                        OrderItem o = new OrderItem();
+                        o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                        o.setProductName((String) tableModel.getValueAt(i, 1));
+                        o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                        //o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                        o.setOrganizationname("Sample Collection");
+                        customerCartItems.add(o);
+                        JOptionPane.showMessageDialog(null, "Added " + o.getProductName() + " to cart!");
+                    }
+                    
+                    double total=0;
                         ArrayList<OrderItem> labtestItems = this.labOrder.getItemsOrdered();
                         
                         Order order = new Order();
@@ -230,12 +253,26 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
                         order.calcOrderTotal();
                         
                         labelTotalOrder.setText(String.valueOf(order.getPrice()));
-                    }
+                        
+                        Enterprise e = network.getEnterpriseDirectory().getEnterprise("Lab Center and Diagnostics");
+                        this.labOrganization = e.getOrganizationDirectory().getOrganizationByName("Sample Collection");
+                        this.labassAccount = this.labOrganization.getUserAccountDirectory().getUserAccountList().get(0);
+                        
+                        ReportUploadWorkRequest req = new ReportUploadWorkRequest();
+                        
+                        //req.setOrderId(ERROR);
+                        req.setReceiver(this.labassAccount);
+                        req.generateRequestId();
+                        req.setCustomer(this.customer);
+                        req.setStatus("Ordered");
+                        
+                } else {
                 }
+
             }
 
         } catch (Exception e) {
-            System.out.println(e + " CART PROBLEM IN Lab");
+            System.out.println(e + " CART PROBLEM IN EQUIP ");
         }
         
     }//GEN-LAST:event_btnAddtoCartActionPerformed

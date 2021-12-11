@@ -148,7 +148,7 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        LabAgentSampleCollectionJPanel dwjp = (LabAgentSampleCollectionJPanel) component;
+        LabAssistantJPanel dwjp = (LabAssistantJPanel) component;
         dwjp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
