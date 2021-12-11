@@ -273,6 +273,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
         fetchOrderObject();
         populateItems();
         populateOrders();
+         
     }//GEN-LAST:event_ordeTableMouseClicked
 
     private void addBt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBt1ActionPerformed

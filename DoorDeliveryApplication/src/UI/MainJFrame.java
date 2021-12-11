@@ -209,7 +209,7 @@ public class MainJFrame extends javax.swing.JFrame {
                             if (this.userAccount != null) {
                                 inNetwork = network;
                                 inEnterprise = enterprise;
-
+                                
                                 JOptionPane.showMessageDialog(null, "Enterprise login successful!");
 
                                 jSplitPane1.setLeftComponent(null);

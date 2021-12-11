@@ -40,15 +40,18 @@ JPanel userProcessContainer;
     DefaultTableModel dtm;
     ArrayList<DeliveryAgent> del;
     ArrayList<Integer> z;
+    Network network;
+    
     /**
      * Creates new form ManageLabDeliveryAgentJPanel
      */
-    public ManageLabDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
+    public ManageLabDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem,Network network, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
          this.userProcessContainer = userProcessContainer;
         this.business = ecosystem;
         this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
+        this.network = network;
         this.z = new ArrayList<>();
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
@@ -78,14 +81,16 @@ JPanel userProcessContainer;
          del = enterprise.getDeliveryAgentsInEnterpiselist();
 
 
-        for(DeliveryAgent dd : del ){
+      
          //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
            // z.add(dd.getZipcodes().get(j));
-              z = dd.getZipcodes();
-              for(int i =0; i< dd.getZipcodes().size(); i++){
+                
+              z = network.getZipcodes();
+              for(int i =0; i< z.size(); i++){
               cmbzipcode.addItem(z.get(i).toString());
               }
-             }
+          
+//    }
 //    }
     }
 

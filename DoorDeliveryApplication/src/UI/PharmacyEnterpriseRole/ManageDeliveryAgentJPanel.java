@@ -37,18 +37,20 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     DeliveryAgent dlvrymn;
     Enterprise enterprise;
     DefaultTableModel dtm;
+    Network network;
     ArrayList<DeliveryAgent> del;
     ArrayList<Integer> z;
     /**
      * Creates new form ManageDeliveryAgentJPanel
      */
-    public ManageDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
+    public ManageDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, Network network,UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = ecosystem;
         this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
+        this.network = network;
         this.z = new ArrayList<>();
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
@@ -61,6 +63,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
         System.out.println("Going inside populate table");
         populateTable();
+        cmbzipcode.removeAllItems();
         displaycombo();
 
 
@@ -87,9 +90,6 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -105,41 +105,12 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jcheckyes = new javax.swing.JCheckBox();
         jcheckno = new javax.swing.JCheckBox();
         cmbzipcode = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(253, 252, 249));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Manage Delivery agent");
-
-        btnBack.setText("<< Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(42, 42, 42))
-        );
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1006, -1));
 
         jLabel2.setText("Name");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 155, -1, -1));
@@ -156,6 +127,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 194, -1));
         add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 194, -1));
 
+        btnAdd.setBackground(new java.awt.Color(0, 102, 102));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,14 +136,16 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         });
         add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 100, -1));
 
+        btndelete.setBackground(new java.awt.Color(0, 102, 102));
         btndelete.setText("Delete");
         btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndeleteActionPerformed(evt);
             }
         });
-        add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 470, -1, -1));
+        add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 440, -1, -1));
 
+        deliveryjTable.setBackground(new java.awt.Color(204, 255, 204));
         deliveryjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -185,7 +159,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(deliveryjTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(485, 138, 477, 323));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 477, 323));
 
         jLabel3.setText("Active");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
@@ -208,24 +182,25 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
         cmbzipcode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         add(cmbzipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/delivery-man-parcel-handover-to-customer-online-delivery-service-smartphone-cartoon-art-illustration-vector.jpeg"))); // NOI18N
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-390, 90, 1670, 1090));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Manage Delivery agent");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 1070, -1));
+
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-
-//        userProcessContainer.remove(this);
-//        Component[] componentArray = userProcessContainer.getComponents();
-//        Component component = componentArray[componentArray.length - 1];
-//        PharmaceuticalEnterpriseJPanel sysAdminwjp = (PharmaceuticalEnterpriseJPanel) component;
-//      populateTable();
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.previous(userProcessContainer);
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-
-
-    }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
@@ -372,6 +347,22 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_btndeleteActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+
+        //        userProcessContainer.remove(this);
+        //        Component[] componentArray = userProcessContainer.getComponents();
+        //        Component component = componentArray[componentArray.length - 1];
+        //        PharmaceuticalEnterpriseJPanel sysAdminwjp = (PharmaceuticalEnterpriseJPanel) component;
+        //      populateTable();
+        //        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        //        layout.previous(userProcessContainer);
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+
+    }//GEN-LAST:event_btnBackActionPerformed
+
     public void populateTable(){
 
         System.out.println("Inside populate Table");
@@ -396,14 +387,15 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
          del = enterprise.getDeliveryAgentsInEnterpiselist();
 
 
-        for(DeliveryAgent dd : del ){
+      
          //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
            // z.add(dd.getZipcodes().get(j));
-              z = dd.getZipcodes();
-              for(int i =0; i< dd.getZipcodes().size(); i++){
+                
+              z = network.getZipcodes();
+              for(int i =0; i< z.size(); i++){
               cmbzipcode.addItem(z.get(i).toString());
               }
-             }
+          
 //    }
     }
 
@@ -454,10 +446,10 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox jcheckno;
     private javax.swing.JCheckBox jcheckyes;

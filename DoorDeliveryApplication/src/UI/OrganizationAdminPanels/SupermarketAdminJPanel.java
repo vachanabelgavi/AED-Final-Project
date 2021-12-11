@@ -234,6 +234,8 @@ public class SupermarketAdminJPanel extends javax.swing.JPanel {
         try {
 
             this.currentOrder.setStatus("ACCEPTED");
+            this.currentOrder.setOrganizationname(this.organization.getName());
+            System.out.println(""+this.organization.getName());
 
         } catch (Exception e) {
 

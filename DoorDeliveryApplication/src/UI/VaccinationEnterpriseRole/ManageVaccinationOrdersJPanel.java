@@ -85,7 +85,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
 
        
         populateDp();
-        
+        //Immunization
         
     }
 
@@ -107,9 +107,12 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
         assignbtn = new javax.swing.JButton();
         btnshoworders = new javax.swing.JButton();
         orderscmb = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
+        jPanel1.setBackground(new java.awt.Color(253, 252, 249));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        VaccineOrderTable.setBackground(new java.awt.Color(204, 255, 204));
         VaccineOrderTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -128,8 +131,10 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(VaccineOrderTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 803, 186));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 803, 120));
 
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,55 +143,67 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 54, -1, -1));
 
+        deliverycmb.setForeground(new java.awt.Color(0, 102, 102));
         deliverycmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deliverycmbActionPerformed(evt);
             }
         });
-        jPanel1.add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, 148, -1));
+        jPanel1.add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 600, 148, 20));
 
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Assign Delivery agent");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 600, -1, -1));
 
+        assignbtn.setBackground(new java.awt.Color(0, 102, 102));
+        assignbtn.setForeground(new java.awt.Color(255, 255, 255));
         assignbtn.setText("Assign");
         assignbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 assignbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 105, -1));
+        jPanel1.add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 630, 105, -1));
 
+        btnshoworders.setBackground(new java.awt.Color(0, 102, 102));
+        btnshoworders.setForeground(new java.awt.Color(255, 255, 255));
         btnshoworders.setText("Show Orders");
         btnshoworders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnshowordersActionPerformed(evt);
             }
         });
-        jPanel1.add(btnshoworders, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 130, -1));
+        jPanel1.add(btnshoworders, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, 130, -1));
 
+        orderscmb.setForeground(new java.awt.Color(0, 102, 102));
         orderscmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 orderscmbActionPerformed(evt);
             }
         });
-        jPanel1.add(orderscmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 110, -1));
+        jPanel1.add(orderscmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 110, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/orders11_trial.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, 90, 1080, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 993, Short.MAX_VALUE)
+            .addGap(0, 992, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 981, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 6, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 608, Short.MAX_VALUE)
+            .addGap(0, 694, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -216,6 +233,8 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
              System.out.println("Inside table after assigning");
            for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
+                        if(o.getOrganizationname().equals("Immunization"))
+                      {
                     ArrayList<OrderItem> oi = o.getItemsOrdered();
                     ArrayList<String> pr = new ArrayList<>();
                 //  Order o : this.customer.getOrderlist()//              populate items
@@ -303,6 +322,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
     }
     }
     }
+    }
     }  
     }//GEN-LAST:event_assignbtnActionPerformed
 
@@ -314,7 +334,8 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
 
         for(Customer cust: customerdir){
             for (Order o : cust.getOrderlist()) {
-                if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId())) && o.getOrganizationname().equals("Immunization")){
+                    deliverycmb.removeAllItems();
                     populateTable();
                 }
             }
@@ -342,6 +363,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnshoworders;
     private javax.swing.JComboBox<String> deliverycmb;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> orderscmb;
@@ -354,8 +376,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
             for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                 //  Order o : this.customer.getOrderlist()//              populate items
-                if("ACCEPTED".equals(o.getStatus())){
-                deliverycmb.removeAllItems();
+                if("ACCEPTED".equals(o.getStatus()) && o.getOrganizationname().equals("Immunization")){
                 orderscmb.addItem(String.valueOf(o.getOrderId()));
             }
         }
@@ -373,8 +394,11 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
              System.out.println("Inside table");
                 this.z = new ArrayList<>();
             
+                try{
                 for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
+                      if(o.getOrganizationname().equals("Immunization"))
+                      {
                     ArrayList<OrderItem> oi = o.getItemsOrdered();
                     ArrayList<String> p = new ArrayList<>();
                 //  Order o : this.customer.getOrderlist()//              populate items
@@ -407,6 +431,12 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                }
                }//closing if statement
             }
+      }
+                }catch(Exception ex)
+                {
+                    System.out.println("Inside Vaccination Order Jpanel check it out");
+                            
+                }
                 
                System.out.println("Done with populate table");
     }

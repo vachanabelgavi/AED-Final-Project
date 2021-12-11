@@ -177,7 +177,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btndeliveryagentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeliveryagentsActionPerformed
         // TODO add your handling code here:
-        ManageLabDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageLabDeliveryAgentJPanel(userProcessContainer,ecosystem, account,useraccountdirectory,enterprise);
+        ManageLabDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageLabDeliveryAgentJPanel(userProcessContainer,ecosystem,network,account,useraccountdirectory,enterprise);
         userProcessContainer.add("manageDeliveryAgentJPanel",manageDeliveryAgentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

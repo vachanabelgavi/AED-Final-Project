@@ -95,7 +95,8 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
         //populateTable();
 
         populateDp();
-
+        //Lab Center
+        //Testing Center
         for(Network n : business.getNetworks()){
             this.customerDirectory = n.getCustomerDirectory();
         }
@@ -214,7 +215,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
             for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                 //  Order o : this.customer.getOrderlist()//              populate items
-                if("ACCEPTED".equals(o.getStatus())){
+                if("ACCEPTED".equals(o.getStatus()) && ((o.getOrganizationname().equals("Lab Center") || o.getOrganizationname().equals("Testing Center"))) ){
                 orderscmb.addItem(String.valueOf(o.getOrderId()));
             }
         }
@@ -249,6 +250,8 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
                for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
+                        if((o.getOrganizationname().equals("Lab Center") || o.getOrganizationname().equals("Testing Center")))
+                      {
                     ArrayList<OrderItem> oi = o.getItemsOrdered();
                     ArrayList<String> pr = new ArrayList<>();
                 //  Order o : this.customer.getOrderlist()//              populate items
@@ -259,18 +262,22 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
                      System.out.println(" "+agent);
-                     o.setDeliveryAgent(dlvrymn);
-                    dlvrymn.setUseraccount(ua);
-                    ua.setUsername(agent);
-                    dlvrymn.setActive(false);
-                    deliverycmb.setSelectedItem(" ");
+                    ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
+                     for(DeliveryAgent d: del){
+                     if(agent == d.getUseraccount().getUsername()){
+                      d.setActive(false); 
+                      o.setDeliveryAgent(d);
+                      System.out.println(" "+ o.getDeliveryAgent().getUseraccount().getUsername());
+                      System.out.println(" "+ d.getActive());
+                    //  o.getDeliveryAgent().getUseraccount().getUsername();
+                      //d.getUseraccount().getUsername();
+
+                    System.out.println("cmae hre ");
+                     }
+                     }
                     populateTable();
 
-                    ArrayList<String> agentslist = new ArrayList<>();
-                    agentslist.add(agent);
-                    ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
-                    System.out.println(o.getDeliveryAgent().getUseraccount().getUsername());
-
+                 
 
         if(emailsend = true){
 
@@ -337,6 +344,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
     }
     }
     }
+                    }
     }
     }//GEN-LAST:event_assignbtnActionPerformed
 
@@ -348,7 +356,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
         for(Customer cust: customerdir){
             for (Order o : cust.getOrderlist()) {
-                if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId())) && (o.getOrganizationname().equals("Lab Center") || o.getOrganizationname().equals("Testing Center"))){
                     deliverycmb.removeAllItems();
                     populateTable();
                 }
@@ -368,6 +376,8 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
                 for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
+                        if((o.getOrganizationname().equals("Lab Center") || o.getOrganizationname().equals("Testing Center")))
+                      {
                     ArrayList<OrderItem> oi = o.getItemsOrdered();
                     ArrayList<String> p = new ArrayList<>();
 
@@ -397,6 +407,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                }
                }//closing if statement
             }
+     }
 
                System.out.println("Done with populate table");
    }

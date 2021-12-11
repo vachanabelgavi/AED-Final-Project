@@ -45,8 +45,7 @@ public class EquipmentEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.organization = organization;
         this.network = network;
-//        this.network = new Network();
-//        this.customer = new Customer();
+
     }
 
     /**
@@ -168,7 +167,7 @@ public class EquipmentEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btndeliveryagentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeliveryagentsActionPerformed
         // TODO add your handling code here:
-        ManageEquipmentDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageEquipmentDeliveryAgentJPanel(userProcessContainer, ecosystem, account,useraccountdirectory,enterprise);
+        ManageEquipmentDeliveryAgentJPanel manageDeliveryAgentJPanel=new ManageEquipmentDeliveryAgentJPanel(userProcessContainer, ecosystem,network,account,useraccountdirectory,enterprise);
         userProcessContainer.add("manageDeliveryAgentJPanel",manageDeliveryAgentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
