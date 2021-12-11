@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
@@ -43,7 +44,7 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
         this.alerts = new Alert();
         this.orderlist = this.customer.getOrderlist();
         this.orderToUpdate = new Order();
-        
+
         this.tableModel = (DefaultTableModel) itemsTable.getModel();
 
         populateDp();
@@ -82,6 +83,8 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
         });
         add(dropdownOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 69, 160, -1));
 
+        jButton1.setBackground(new java.awt.Color(0, 153, 153));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("SHOW ITEMS");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +120,8 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 124, 294, 350));
 
+        jFile.setBackground(new java.awt.Color(0, 102, 102));
+        jFile.setForeground(new java.awt.Color(255, 255, 255));
         jFile.setText("UPLOAD PRESCRIPTION");
         jFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +130,8 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
         });
         add(jFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 500, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(0, 102, 102));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("UPDATE ORDER");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,10 +164,14 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 //        update order
-        this.orderToUpdate.setStatus("PRESCRIPTION UPLOADED");
-        this.orderToUpdate.setPrescription(this.chosenFile);
-        
-        this.alerts.ShowAlert("Successfully updated your order!");
+        if (this.chosenFile != null) {
+            this.orderToUpdate.setStatus("PRESCRIPTION UPLOADED");
+            this.orderToUpdate.setPrescription(this.chosenFile);
+
+            this.alerts.ShowAlert("Successfully updated your order!");
+        } else {
+            JOptionPane.showMessageDialog(null, "You forgot an attachment");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void dropdownOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropdownOrdersActionPerformed

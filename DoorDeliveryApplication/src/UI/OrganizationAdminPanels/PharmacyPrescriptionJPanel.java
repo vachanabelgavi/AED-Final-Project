@@ -177,6 +177,8 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
         labelOrderStatus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         add(labelOrderStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 304, 229, 14));
 
+        createOrderbttn.setBackground(new java.awt.Color(0, 102, 102));
+        createOrderbttn.setForeground(new java.awt.Color(255, 255, 255));
         createOrderbttn.setText("CREATE ORDER");
         createOrderbttn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +187,8 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
         });
         add(createOrderbttn, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 645, -1, -1));
 
+        btnGo.setBackground(new java.awt.Color(0, 102, 102));
+        btnGo.setForeground(new java.awt.Color(255, 255, 255));
         btnGo.setText("GO");
         btnGo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

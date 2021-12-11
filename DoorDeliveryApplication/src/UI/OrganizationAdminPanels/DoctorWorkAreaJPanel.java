@@ -14,8 +14,10 @@ import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import Business.ValidationClass;
 import Business.WorkQueue.PrescriptionUploadWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -34,6 +36,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.activation.*;
 import javax.mail.Address;
+import javax.swing.BorderFactory;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 /**
  *
@@ -47,6 +52,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private Network network;
     private Organization organization;
     private Enterprise enterprise;
+    ValidationClass validate;
 
     DefaultTableModel tableModel;
     private final ArrayList<PrescriptionUploadWorkRequest> workRequest;
@@ -76,7 +82,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.workRequest = this.ecosystem.getPrescriptionWorkList();
-
+        this.validate = new ValidationClass();
         this.tableModel = (DefaultTableModel) itemTable.getModel();
 
         populateOrderDropdown();
@@ -136,6 +142,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         fieldSignature = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(253, 252, 249));
 
         jTabbedPane1.setBackground(new java.awt.Color(253, 252, 249));
 
@@ -217,6 +225,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel13.setText("SIGNATURE");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
 
+        fieldSign.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldSignFocusLost(evt);
+            }
+        });
         jScrollPane4.setViewportView(fieldSign);
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, 240, -1));
@@ -272,6 +285,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(searchACustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, -1, -1));
 
+        fieldName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldNameFocusLost(evt);
+            }
+        });
         fieldName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldNameActionPerformed(evt);
@@ -285,6 +303,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jPanel2.add(networkCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 200, -1));
+
+        fieldEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldEmailFocusLost(evt);
+            }
+        });
         jPanel2.add(fieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 250, -1));
 
         jLabel5.setText("CUSTOMER NAME");
@@ -292,10 +316,22 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("EMAIL ADDRESS");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
+
+        fieldPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldPhoneFocusLost(evt);
+            }
+        });
         jPanel2.add(fieldPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 250, -1));
 
         jLabel7.setText("PHONE NUMBER");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, -1, -1));
+
+        fieldAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldAddressFocusLost(evt);
+            }
+        });
         jPanel2.add(fieldAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 250, 60));
 
         jLabel8.setText("ADDRESS");
@@ -326,6 +362,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel11.setText("NOTES");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, -1, -1));
+
+        fieldSignature.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldSignatureFocusLost(evt);
+            }
+        });
         jPanel2.add(fieldSignature, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 650, 230, -1));
 
         jLabel12.setText("SIGNATURE");
@@ -653,6 +695,81 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateZipcodes();
     }//GEN-LAST:event_networkComboActionPerformed
+
+    private void fieldNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNameFocusLost
+        // TODO add your handling code here:
+
+        if (fieldName.getText().trim().length() != 0 && validate.validateName(fieldName.getText()) == false) {
+            fieldName.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldName.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldNameFocusLost
+
+    private void fieldEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldEmailFocusLost
+        // TODO add your handling code here:
+        if (fieldEmail.getText().trim().length() != 0 && validate.validateEmail(fieldEmail.getText()) == false) {
+            fieldEmail.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldEmail.setBorder(border);
+        }
+
+    }//GEN-LAST:event_fieldEmailFocusLost
+
+    private void fieldPhoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldPhoneFocusLost
+        // TODO add your handling code here:
+        try {
+            if (fieldPhone.getText().trim().length() != 0 && validate.validatePhone(Integer.valueOf(fieldPhone.getText())) == false) {
+                fieldPhone.setBorder(new JTextField().getBorder());
+            } else {
+                Border border = BorderFactory.createLineBorder(Color.red);
+
+                fieldPhone.setBorder(border);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid Field");
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldPhone.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldPhoneFocusLost
+
+    private void fieldAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldAddressFocusLost
+        // TODO add your handling code here:
+        if (fieldAddress.getText().trim().length() != 0 && validate.valdiateAddress(fieldAddress.getText())) {
+            fieldAddress.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldAddress.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldAddressFocusLost
+
+    private void fieldSignatureFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSignatureFocusLost
+        // TODO add your handling code here:
+         if (fieldSignature.getText().trim().length() != 0 && validate.validateName(fieldSignature.getText()) == false) {
+            fieldSignature.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldSignature.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldSignatureFocusLost
+
+    private void fieldSignFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSignFocusLost
+        // TODO add your handling code here:
+         if (fieldSign.getText().trim().length() != 0 && validate.validateName(fieldSign.getText()) == false) {
+            fieldSign.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldSign.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldSignFocusLost
 
     public void populateZipcodes() {
 
