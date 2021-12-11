@@ -427,7 +427,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                                 String recipients = fieldEmail.getText();
                                 System.out.println("Entering assign for email ==========");
                                 String subjects = "New Credentials";
-                                String messaget = "Hello" + fieldName.getText()+" ! Welcome to Door Delivery. Your doctor has a prescription prepared for you. Please login with the below credentials. \n Username: " + username + "\nPassword " + password;
+                                String messaget = "Hello" + fieldName.getText() + " ! Welcome to Door Delivery. Your doctor has a prescription prepared for you. Please login with the below credentials. \n Username: " + username + "\nPassword " + password;
 
                                 System.out.println("Start");
                                 final String usernamesender = "pannagaveeramohan@gmail.com";
@@ -505,6 +505,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println("EXCEPTION --------------- " + e);
         }
+        fieldName.setEnabled(true);
+        fieldEmail.setEnabled(true);
+        fieldPhone.setEnabled(true);
+        fieldAddress.setEnabled(true);
+
     }//GEN-LAST:event_btnCreateACustomerPrescActionPerformed
 
     private void orderComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderComboBoxActionPerformed
@@ -560,6 +565,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             this.currentRequest.setStatus("PRESCRIPTION APPROVED");
 
             JOptionPane.showMessageDialog(null, "Your request is closed!");
+            fieldName.setEnabled(true);
+            fieldEmail.setEnabled(true);
+            fieldPhone.setEnabled(true);
+            fieldAddress.setEnabled(true);
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -573,6 +582,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             this.currentRequest.setStatus("PRESCRIPTION REJECTED");
 
             JOptionPane.showMessageDialog(null, "Your request is closed!");
+            fieldName.setEnabled(true);
+            fieldEmail.setEnabled(true);
+            fieldPhone.setEnabled(true);
+            fieldAddress.setEnabled(true);
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -600,6 +613,13 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                     fieldAddress.setText(customer.getAddress());
                     networkCombo.setSelectedItem(network);
                     zipcodeCombo.setSelectedItem(customer.getZipcode());
+
+//                    DISABLE FIELDS
+                    fieldName.setEnabled(false);
+                    fieldEmail.setEnabled(false);
+                    fieldPhone.setEnabled(false);
+                    fieldAddress.setEnabled(false);
+
                     this.currentCustomer = customer;
 
 //                    Registering the customer's network, pharmacy organization

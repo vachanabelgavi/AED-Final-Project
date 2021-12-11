@@ -8,6 +8,7 @@ package UI.OrganizationPanels;
 import Business.Customer.Customer;
 import Business.Orders.Order;
 import Business.Orders.OrderItem;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,7 @@ public class PaymentsJPanel extends javax.swing.JPanel {
 
     private final Customer customer;
     private final DefaultTableModel tableModel;
+    private final DefaultTableModel payModel;
     private Order order;
 
     /**
@@ -29,8 +31,9 @@ public class PaymentsJPanel extends javax.swing.JPanel {
         
         this.customer  = c;
         this.tableModel = (DefaultTableModel) itemtable.getModel();
-        
+        this.payModel = (DefaultTableModel) PAYtABLE.getModel();
         populateDropdown();
+        populatePayments();
     }
 
     /**
@@ -59,6 +62,8 @@ public class PaymentsJPanel extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        PAYtABLE = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(253, 252, 249));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -148,13 +153,40 @@ public class PaymentsJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 670, -1, -1));
+
+        PAYtABLE.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "PAYMENT ID", "ORDER ID", "AMOUNT", "DATE"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(PAYtABLE);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
         try {
-            this.order = (Order) comboOrder.getSelectedItem();
+            this.order = this.customer.findOrderById((int) comboOrder.getSelectedItem());
             
             Double total = this.order.getPrice()  + 5.00 + 3.5;
             
@@ -170,12 +202,36 @@ public class PaymentsJPanel extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-       this.order.setStatus("PAID");
+       this.order.getOrderPayment().setStatus("PAID");
+       this.order.getOrderPayment().setPaymentDate(new Date());
+       this.order.getOrderPayment().setAmount(Double.valueOf(LABELtOTAL.getText()));
+       
        this.order.setPrice(Double.valueOf(LABELtOTAL.getText()));
        
-       JOptionPane.showMessageDialog(null, "PAYMENT RECEIVED");
+       JOptionPane.showMessageDialog(null, "PAYMENT RECEIVED \n" + this.order.getOrderPayment().getPaymentID() + " is your Payment ID");
+       populatePayments();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void populatePayments() {
+          this.payModel.setRowCount(0);
+        
+        try{
+            
+            for(Order o: this.customer.getOrderlist()) {
+                if(o.getOrderPayment().getStatus().equalsIgnoreCase("paid")) {
+                   this.payModel.insertRow(this.payModel.getRowCount(), new Object[] {
+                       o.getOrderPayment().getPaymentID(),
+                       o.getOrderId(),
+                       o.getOrderPayment().getAmount(),
+                       o.getOrderPayment().getPaymentDate()
+                   });
+                }
+            }
+            
+        } catch (Exception e) {
+            
+        }
+    }
     
     public void populateItems() {
         this.tableModel.setRowCount(0);
@@ -198,8 +254,8 @@ public class PaymentsJPanel extends javax.swing.JPanel {
         try{
             
             for(Order o: this.customer.getOrderlist()) {
-                if(o.getStatus().equalsIgnoreCase("not paid")) {
-                    comboOrder.addItem(o);
+                if(o.getOrderPayment().getStatus().equalsIgnoreCase("not paid")) {
+                    comboOrder.addItem(o.getOrderId());
                 }
             }
             
@@ -210,6 +266,7 @@ public class PaymentsJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LABELtOTAL;
+    private javax.swing.JTable PAYtABLE;
     private javax.swing.JComboBox comboOrder;
     private javax.swing.JTable itemtable;
     private javax.swing.JButton jButton1;
@@ -226,5 +283,6 @@ public class PaymentsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
