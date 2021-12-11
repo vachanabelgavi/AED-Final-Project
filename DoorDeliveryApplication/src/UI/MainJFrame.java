@@ -143,7 +143,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2.setText("USERNAME");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 230, 100, 20));
 
-
         jSplitPane1.setRightComponent(jPanel1);
 
         getContentPane().add(jSplitPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 1500, 910));
@@ -153,7 +152,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(1500, 900));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("EXIT");
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

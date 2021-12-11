@@ -258,6 +258,8 @@ public class SupermarketAdminJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
 //        SEND MAIL TO REQUEST PRESCRIPTION
+           this.currentOrder.setStatus("PRESCRIPTION REQUIRED");
+           populateOrders();
     }//GEN-LAST:event_btnreqPrescriptionActionPerformed
 
     public void fetchOrderObject() {

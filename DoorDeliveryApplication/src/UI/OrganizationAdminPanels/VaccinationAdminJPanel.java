@@ -56,6 +56,7 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
         this.itemTableModel = (DefaultTableModel) prodTable1.getModel();
         System.out.println("ORGNAME --------- " + this.organization.getName() + this.organization.getOrganizationProducts().size());
         populateProducts();
+        populateOrders();
 
     }
 
@@ -88,9 +89,12 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(253, 252, 249));
         setPreferredSize(new java.awt.Dimension(1500, 1000));
 
         jTabbedPane1.setBackground(new java.awt.Color(253, 252, 249));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(1500, 1000));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1500, 1000));
 
         jPanel1.setBackground(new java.awt.Color(253, 252, 249));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -154,6 +158,8 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, -1, 280));
 
+        jButton2.setBackground(new java.awt.Color(0, 102, 102));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("ACCEPT ORDER");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +168,8 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
 
+        jButton3.setBackground(new java.awt.Color(255, 153, 0));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("REJECT ORDER");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,16 +249,14 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(488, 488, 488)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(549, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 2007, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(575, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1065, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -338,7 +344,7 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
         try {
 
             this.currentOrder.setStatus("ACCEPTED");
-
+            populateOrders();
         } catch (Exception e) {
 
         }
@@ -349,7 +355,7 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
         try {
 
             this.currentOrder.setStatus("REJECTED");
-
+            populateOrders();
         } catch (Exception e) {
 
         }
