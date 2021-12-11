@@ -62,7 +62,7 @@ public class DB4OUtil {
 
     public synchronized void storeSystem(Ecosystem system) {
         try {
-            this.conn = createConnection();
+            ObjectContainer conn = createConnection();
             conn.store(system);
             conn.commit();
             conn.close();

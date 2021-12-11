@@ -27,6 +27,7 @@ import UI.OrganizationPanels.PharmacyJPanel;
 import UI.OrganizationPanels.VaccineJPanel;
 import java.awt.Image;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -102,7 +103,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         orderBtn1 = new javax.swing.JButton();
         paymentBTn1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         supermarketTable = new javax.swing.JTable();
@@ -112,10 +118,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         stockList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(253, 252, 249));
         setMinimumSize(new java.awt.Dimension(1500, 900));
@@ -189,6 +191,9 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         });
         leftPane.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 150, 40));
 
+        jLabel3.setText("jLabel3");
+        leftPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
         pane.setLeftComponent(leftPane);
 
         jTabbedPane2.setBackground(new java.awt.Color(253, 252, 249));
@@ -199,6 +204,38 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jPanel2.setBackground(new java.awt.Color(253, 252, 249));
+        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+        });
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+        jTabbedPane2.addTab("PHARMACY", jPanel2);
+
+        jPanel3.setBackground(new java.awt.Color(253, 252, 249));
+        jTabbedPane2.addTab("MEDICAL EQUIPMENTS", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(253, 252, 249));
+        jPanel4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel4FocusGained(evt);
+            }
+        });
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel4MouseClicked(evt);
+            }
+        });
+        jTabbedPane2.addTab("VACCINE & IMMUNIZATION", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(253, 252, 249));
+        jTabbedPane2.addTab("LAB CENTER & DIAGNOSTICS", jPanel5);
+
         jPanel1.setBackground(new java.awt.Color(253, 252, 249));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -207,7 +244,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        supermarketTable.setBackground(new java.awt.Color(253, 252, 249));
         supermarketTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -231,6 +267,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        supermarketTable.setOpaque(false);
         jScrollPane2.setViewportView(supermarketTable);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 700, 390));
@@ -267,38 +304,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 590, 430));
 
         jTabbedPane2.addTab("SUPERMARKETS", jPanel1);
-
-        jPanel2.setBackground(new java.awt.Color(253, 252, 249));
-        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jPanel1FocusGained(evt);
-            }
-        });
-        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
-            }
-        });
-        jTabbedPane2.addTab("PHARMACY", jPanel2);
-
-        jPanel3.setBackground(new java.awt.Color(253, 252, 249));
-        jTabbedPane2.addTab("MEDICAL EQUIPMENTS", jPanel3);
-
-        jPanel4.setBackground(new java.awt.Color(253, 252, 249));
-        jPanel4.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jPanel4FocusGained(evt);
-            }
-        });
-        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel4MouseClicked(evt);
-            }
-        });
-        jTabbedPane2.addTab("VACCINE & IMMUNIZATION", jPanel4);
-
-        jPanel5.setBackground(new java.awt.Color(253, 252, 249));
-        jTabbedPane2.addTab("LAB CENTER & DIAGNOSTICS", jPanel5);
 
         pane.setRightComponent(jTabbedPane2);
 
@@ -481,7 +486,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                             false
                         });
                     } else {
-                        ImageIcon icon = new ImageIcon("/resources/pill.png");
+                        System.out.println("CAME --");
+                        ImageIcon icon = new ImageIcon("pill.png");
 
                         tableModel.insertRow(tableModel.getRowCount(), new Object[]{
                             p.getProductId(),
@@ -510,6 +516,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

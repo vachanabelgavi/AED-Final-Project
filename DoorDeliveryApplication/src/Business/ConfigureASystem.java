@@ -270,7 +270,7 @@ public class ConfigureASystem {
         }
         
         String[] sup = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
-        for (String s1 : drugs) {
+        for (String s1 : sup) {
             orgP2.addProduct(s1, 6.5, 1500);
             orgBP2.addProduct(s1, 7.45, 3500);
         }
