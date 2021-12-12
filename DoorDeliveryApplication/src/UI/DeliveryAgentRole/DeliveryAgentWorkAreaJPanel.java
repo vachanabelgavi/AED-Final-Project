@@ -103,7 +103,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
 //        ArrayList<UserAccount> usrl = useraccountdirectory.getUserAccountList();
 //        ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
-//        
+//
         this.delmn = account;
         System.out.println(" " + delmn.getEmployee().getName());
         jLabel_DelMan1.setText(delmn.getEmployee().getName());
@@ -252,7 +252,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
         Date d = new Date();
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        // txtupdatedcat.setText(sdt.format(d));     
+        // txtupdatedcat.setText(sdt.format(d));
         String status = null;
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);

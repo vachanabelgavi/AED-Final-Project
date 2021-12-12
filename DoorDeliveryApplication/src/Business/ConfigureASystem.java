@@ -318,7 +318,7 @@ public class ConfigureASystem {
 
          ArrayList<DeliveryAgent> delListL2 = e2B.getDeliveryAgentsInEnterpiselist();
          for (int j = 1; j < 5; j++){
-            
+
                 DeliveryAgent d = new DeliveryAgent();
                  z8.add(02115 + j);
 
@@ -425,7 +425,6 @@ public class ConfigureASystem {
             orgP1.addProduct(s1, 7.5, 500);
             orgBP1.addProduct(s1, 8.0, 1000);
         }
-
         String[] sup = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
         for (String s1 : sup) {
             orgP2.addProduct(s1, 6.5, 1500);

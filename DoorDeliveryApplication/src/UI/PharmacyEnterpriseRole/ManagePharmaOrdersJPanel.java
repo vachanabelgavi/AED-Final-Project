@@ -233,7 +233,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         String recipients = null;
 
         System.out.println("Inside table after assigning");
-        
+
         try{
         for (Customer cust : customerdir) {
             for (Order o : cust.getOrderlist()) {
