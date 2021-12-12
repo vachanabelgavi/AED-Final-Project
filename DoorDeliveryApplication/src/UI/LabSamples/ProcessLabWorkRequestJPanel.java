@@ -48,7 +48,7 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
         this.customer = customer;
         
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
-        this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Lab Center");
+        this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection");
 
     }
 
@@ -132,9 +132,9 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
                         .addGap(33, 33, 33)
                         .addComponent(btnSubmit))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addGap(42, 42, 42)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -159,7 +159,7 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
         
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("pdf", "txt");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "jpg", "jpeg");
         chooser.addChoosableFileFilter(filter);
         this.chosenFile = chooser.getSelectedFile();
 /*

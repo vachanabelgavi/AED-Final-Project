@@ -12,6 +12,7 @@ import Business.Organization.Organization;
 import Business.Products.Product;
 import Business.UserAccount.UserAccount;
 import java.io.File;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -166,6 +167,7 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
                         }
                     }
                 } else {
+                    ArrayList<Product> plist = this.organization.getProductList();
                     Product prod = new Product();
                     prod.setName(fieldProductName.getText());
                     prod.setPrice(Double.valueOf(fieldProductPrice.getText()));
@@ -173,7 +175,9 @@ public class PharmacyProductJPanel extends javax.swing.JPanel {
                     if (this.chosenFile != null) {
                         prod.setProductImage(chosenFile);
                     }
-                    this.organization.addProduct(fieldProductName.getText(), Double.valueOf(fieldProductPrice.getText()), Integer.valueOf(fieldStock.getText()));
+
+                    plist.add(prod);
+                    this.organization.setProductList(plist);
                     JOptionPane.showMessageDialog(null, "Added !");
                 }
             }

@@ -89,7 +89,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
             for (Order o : c.getOrderlist()) {
                 if (o.getDeliveryAgent().getUseraccount() != null) {
                     System.out.println("Inside if condition");
-                    if (o.getStatus().equalsIgnoreCase("accepted") || o.getStatus().equals("request collected")) {
+                    if (o.getStatus().equalsIgnoreCase("accepted") || o.getStatus().equalsIgnoreCase("request collection")) {
                         if (o.getDeliveryAgent().getUseraccount().getUsername().equals(this.account.getUsername())) {
                             this.orderlist.add(o);
                         }

@@ -6,17 +6,21 @@
 package UI.LabSamples;
 
 import Business.Customer.Customer;
+import Business.DeliveryAgent.DeliveryAgent;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Orders.Order;
+import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ReportUploadWorkRequest;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.RepaintManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,22 +39,54 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
     Organization organization;
     Enterprise enterprise;
     Ecosystem business;
+    ReportUploadWorkRequest req;
     
     private int orderid;
     private Order currentOrder;
     private Customer currentCustomer;
     
+    ArrayList<Order> orderslist;
+    ArrayList<Customer> customerlist;
+    
     public SampleCollectionJPanel(JPanel userProcessContainer, UserAccount account, Ecosystem business, Network network, Organization organization, Enterprise enterprise) {
         initComponents();
         
+        System.out.println("Inside Sample Collection");
         this.userProcessContainer = userProcessContainer;
         this.account = account;
         this.business = business;
         this.network = network;
-        
+
+        this.orderslist = new ArrayList<Order>();
+        this.customerlist = new ArrayList<Customer>();
+
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
-        this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection");
-        
+        this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection Center");
+
+        try {
+            for (Customer c : network.getCustomerDirectory().getCustomerList()) {
+                for (Order o : c.getOrderlist()) {
+                    if (o.getOrganizationname().equalsIgnoreCase(this.organization.getName())) {
+                        for (ReportUploadWorkRequest r : this.organization.getReportWorkList()) {
+                            
+                            if (r.getOrderId() == o.getOrderId()) {
+                                this.orderid = r.getOrderId();
+                                this.currentOrder = o;
+                                this.currentCustomer = c;
+
+                                orderslist.add(o);
+                                customerlist.add(c);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        //this.currentCustomer = pu.getCustomer();\
+        //this.orderid = pu.getOrderId();\
+        //this.currentOrder =\
         populateOrders();
     }
 
@@ -63,32 +99,11 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableOrders = new javax.swing.JTable();
         btnDelivery = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel1.setBackground(new java.awt.Color(63, 130, 117));
-
-        jLabel1.setBackground(new java.awt.Color(63, 130, 117));
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Sample Collection");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
 
         tableOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,12 +113,19 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Order Number", "Customer", "Total", "Order Status"
+                "Order Number", "Customer", "Test", "Order Status"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -127,23 +149,22 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(329, 329, 329)
-                .addComponent(btnDelivery)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 676, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addComponent(btnDelivery))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addGap(113, 113, 113)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(118, 118, 118)
                 .addComponent(btnDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 94, Short.MAX_VALUE))
         );
@@ -152,93 +173,98 @@ public class SampleCollectionJPanel extends javax.swing.JPanel {
     private void btnDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeliveryActionPerformed
         // TODO add your handling code here:
         
+        int selectedRow = tableOrders.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int orderid = (int) tableOrders.getValueAt(selectedRow, 0);
+
         ArrayList<ReportUploadWorkRequest> workrequests = this.business.getReportWorkList();
 
-        ArrayList<UserAccount> users = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection").getUserAccountDirectory().getUserAccountList();
+        //ArrayList<UserAccount> users = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection").getUserAccountDirectory().getUserAccountList();\
+        UserAccount labcenterUser = this.enterprise.getOrganizationDirectory().getOrganizationByName("Lab Center").getUserAccountDirectory().getUserAccountList().get(0);
 
-        UserAccount delivery = null;
+        ArrayList<DeliveryAgent> delag = this.enterprise.getDeliveryAgentsInEnterpiselist();
+
+        UserAccount deliveryman = null;
+        /*\
+        for(UserAccount u: users) \{\
+            if(u.getRole().equals(Role.RoleType.LabTester)) \{\
+                deliveryman = u;\
+            \}\
+        \}*/
+
         
-        for(UserAccount u: users) {
-            if(u.getRole().equals(Role.RoleType.LabTester)) {
-                delivery = u;
+        for (Customer c : this.network.getCustomerDirectory().getCustomerList()) {
+            Order order = c.findOrderById(orderid);
+            if (order!=null) {
+                
+                for(ReportUploadWorkRequest r : workrequests){
+                    if(r.getOrderId() == orderid){
+                        System.out.println("inside if1");
+                        for (DeliveryAgent d : delag) {
+                            if (d.getActive() == true) {
+                                System.out.println("inside if2");
+                                r.setDeliveryAgent(d);
+                                
+                                System.out.println("compare request id");
+                                order.setDeliveryAgent(d);
+                                order.setStatus("Request Collection");
+                                
+                                JOptionPane.showMessageDialog(null, d.getUseraccount().getUsername());
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
             }
         }
-        
-        ReportUploadWorkRequest pu = new ReportUploadWorkRequest();
-        pu.setOrderId(this.orderid);
-        pu.setSender(account);
-        pu.setCustomer(this.currentCustomer);
-        pu.setReceiver(delivery);
-        pu.setReport(this.currentOrder.getPrescription());
-        pu.generateRequestId();
-        pu.setTestOrderItems(this.currentOrder.getItemsOrdered());
-        
-        workrequests.add(pu);
-        
-        this.currentCustomer.getWorkQueue().getWorkRequestList().add(pu);
-        this.currentOrder.setStatus("Collect Samples");
-        
+
+        //this.currentCustomer.getWorkQueue().getWorkRequestList().add(pu);\
+        //this.currentOrder.setStatus("Assigned Delivery Agent");\
         populateOrders();
+
+        System.out.println("Assign Delivery Agent");
         
     }//GEN-LAST:event_btnDeliveryActionPerformed
 
     private void tableOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableOrdersMouseClicked
-        // TODO add your handling code here:
-        
-        JTable source = (JTable) evt.getSource();
-        int row = source.rowAtPoint(evt.getPoint());
-        int column = source.columnAtPoint(evt.getPoint());
 
-        this.orderid = Integer.valueOf((Integer) source.getModel().getValueAt(row, column));
-        
-        fetchOrderObject();
     }//GEN-LAST:event_tableOrdersMouseClicked
 
 
-    public void populateOrders(){
-        
+    public void populateOrders() {
+
         DefaultTableModel model = (DefaultTableModel) tableOrders.getModel();
         model.setRowCount(0);
-        
-        try{
-            for(Customer c : network.getCustomerDirectory().getCustomerList()){
-                for(Order o : c.getOrderlist()){
-                    if(o.getOrganizationname().equals(this.organization)){
-                        
-                        Object[] list = new Object[4];
-                        
-                        list[0] = o.getOrderId();
-                        list[1] = c.getName();
-                        list[2] = o.getPrice();
-                        list[3] = o.getStatus();
-                        
-                        model.addRow(list);
-                        
+
+        System.out.println("Inside populate of sample team");
+
+        try {
+            for (Customer c : this.network.getCustomerDirectory().getCustomerList()) {
+                for (Order o : c.getOrderlist()) {
+                    for (OrderItem i : o.getItemsOrdered()) {
+                        if (o.getOrganizationname().equalsIgnoreCase(this.organization.getName())) {
+
+                            //Object[] list = new Object[4];\
+                            model.insertRow(model.getRowCount(), new Object[]{
+                                o.getOrderId(),
+                                c.getName(),
+                                i.getProductName(),
+                                o.getStatus()
+                            });
+                        }
                     }
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
-        
-    }
-    
-    public void fetchOrderObject(){
-        
-        for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
-            for (Order o : customer.getOrderlist()) {
-                if (o.getOrderId() == this.orderid) {
-                    this.currentOrder = o;
-                    this.currentCustomer = customer;
-                }
-            }
-        }
-        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelivery;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableOrders;
     // End of variables declaration//GEN-END:variables

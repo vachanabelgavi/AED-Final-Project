@@ -5,6 +5,7 @@
  */
 package Business.WorkQueue;
 
+import Business.DeliveryAgent.DeliveryAgent;
 import Business.Orders.OrderItem;
 import java.io.File;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class ReportUploadWorkRequest extends WorkRequest{
     private String comments;
     private String signature;
     ArrayList<OrderItem> testOrderItems;
+    DeliveryAgent deliveryAgent;
     
     //    status is covered in abstract class
     
@@ -67,6 +69,14 @@ public class ReportUploadWorkRequest extends WorkRequest{
 
     public void setTestOrderItems(ArrayList<OrderItem> testOrderItems) {
         this.testOrderItems = testOrderItems;
+    }
+
+    public DeliveryAgent getDeliveryAgent() {
+        return deliveryAgent;
+    }
+
+    public void setDeliveryAgent(DeliveryAgent deliverAgent) {
+        this.deliveryAgent = deliverAgent;
     }
 
     

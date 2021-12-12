@@ -306,6 +306,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
                         }
                     }
                 } else {
+                    ArrayList<Product> plist = this.organization.getProductList();
                     Product prod = new Product();
                     prod.setName(fieldProductName.getText());
                     prod.setPrice(Double.valueOf(fieldProductPrice.getText()));
@@ -313,7 +314,9 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
                     if (this.chosenFile != null) {
                         prod.setProductImage((File) chosenFile);
                     }
-                    this.organization.addProduct(fieldProductName.getText(), Double.valueOf(fieldProductPrice.getText()), Integer.valueOf(fieldStock.getText()));
+
+                    plist.add(prod);
+                    this.organization.setProductList(plist);
                     JOptionPane.showMessageDialog(null, "Added !");
                 }
             }
@@ -329,7 +332,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
 
             this.currentOrder.setStatus("ACCEPTED");
             populateOrders();
@@ -340,7 +343,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         try {
+        try {
 
             this.currentOrder.setStatus("REJECTED");
             populateOrders();
@@ -360,7 +363,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void fetchOrderObject() {
-         for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
+        for (Customer customer : this.network.getCustomerDirectory().getCustomerList()) {
             for (Order o : customer.getOrderlist()) {
                 if (o.getOrderId() == this.orderid) {
                     this.currentOrder = o;
@@ -413,9 +416,8 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
         }
     }
 
-
     public void populateProducts() {
-         tableModel.setRowCount(0);
+        tableModel.setRowCount(0);
         for (Product p : this.organization.getOrganizationProducts()) {
             if (p.getStockunits() != 0) {
                 tableModel.insertRow(tableModel.getRowCount(), new Object[]{
