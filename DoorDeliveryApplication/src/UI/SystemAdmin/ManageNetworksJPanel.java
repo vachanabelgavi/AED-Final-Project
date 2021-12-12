@@ -166,6 +166,7 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
         network.setNetworkName(name);
         
         ArrayList<Integer> zipcodes = network.getZipcodes();
+            System.out.println("SETTING ZIPS");
         for(int i=1; i<10; i++) {
             int z = Integer.valueOf(jTextField1.getText());
             zipcodes.add(z);
