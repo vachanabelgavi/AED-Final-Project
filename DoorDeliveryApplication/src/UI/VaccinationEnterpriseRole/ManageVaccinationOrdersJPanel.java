@@ -247,7 +247,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                      System.out.println(" "+agent);
                      ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
                      for(DeliveryAgent d: del){
-                     if(agent == d.getUseraccount().getUsername()){
+                     if(d.getUseraccount().getUsername().equals(agent)){
                       d.setActive(false);
                       o.setDeliveryAgent(d);
                       System.out.println(" "+ o.getDeliveryAgent().getUseraccount().getUsername());

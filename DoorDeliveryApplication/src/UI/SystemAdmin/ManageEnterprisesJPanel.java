@@ -8,6 +8,8 @@ package UI.SystemAdmin;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -27,9 +29,10 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Ecosystem business;
     ArrayList<Network> networkList;
+
     public ManageEnterprisesJPanel(JPanel userProcessContainer, Ecosystem business) {
         initComponents();
-        
+
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.networkList = business.getNetworks();
@@ -58,9 +61,9 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        txtLocation = new javax.swing.JTextField();
         networkJComboBox = new javax.swing.JComboBox();
         enterpriseJComboBox1 = new javax.swing.JComboBox();
+        combozip = new javax.swing.JComboBox();
 
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,12 +137,16 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Location");
+        jLabel7.setText("Zipcode");
 
         networkJComboBox.setBackground(new java.awt.Color(0, 102, 204));
         networkJComboBox.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         networkJComboBox.setForeground(new java.awt.Color(255, 255, 255));
-        networkJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        networkJComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                networkJComboBoxItemStateChanged(evt);
+            }
+        });
         networkJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 networkJComboBoxActionPerformed(evt);
@@ -149,7 +156,6 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         enterpriseJComboBox1.setBackground(new java.awt.Color(0, 102, 204));
         enterpriseJComboBox1.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         enterpriseJComboBox1.setForeground(new java.awt.Color(255, 255, 255));
-        enterpriseJComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         enterpriseJComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enterpriseJComboBox1ActionPerformed(evt);
@@ -164,7 +170,7 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(504, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -177,15 +183,15 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(txtLocation, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                             .addComponent(networkJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(enterpriseJComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(enterpriseJComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(combozip, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 87, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdd, btnDelete});
@@ -212,10 +218,10 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combozip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(btnAdd)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdd, btnDelete});
@@ -224,39 +230,54 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
+
         Network network = (Network) networkJComboBox.getSelectedItem();
         Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) enterpriseJComboBox1.getSelectedItem();
-
+        System.out.println("CAME HERE ");
         if (network == null || type == null) {
             JOptionPane.showMessageDialog(null, "Invalid Input!");
             return;
         }
-        
-        if(txtName.getText().isEmpty() || txtLocation.getText().isEmpty()){
+
+        if (txtName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         String name = txtName.getText();
-        String location = txtLocation.getText();
+        int zipcode = (int) combozip.getSelectedItem();
 
-        Enterprise enterprise = network.getEnterpriseDirectory().createEnterprise(type, name, location);
-	JOptionPane.showMessageDialog(txtName, "Enterprise Added Successfully");
+        Enterprise enterprise = network.getEnterpriseDirectory().createEnterprise(type, name, network.getNetworkName());
+        OrganizationDirectory o = enterprise.getOrganizationDirectory();
+
+        if (type.toString().equalsIgnoreCase("pharmaceutical")) {
+            Organization orgP = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", network.getNetworkName(), zipcode);
+            Organization orgP1 = o.createOrganization(Organization.Type.Pharmacist, "Pharmacy", network.getNetworkName(), zipcode);
+            Organization orgP2 = o.createOrganization(Organization.Type.MarketManager, "Supermarket", network.getNetworkName(), zipcode);
+
+        } else if (type.toString().equalsIgnoreCase("medical equipments")) {
+            Organization orgM = o.createOrganization(Organization.Type.EquipmentManager, "Equipments", network.getNetworkName(), zipcode);
+
+        } else if (type.toString().equalsIgnoreCase("immunization & vaccination")) {
+            Organization orgV = o.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", network.getNetworkName(), zipcode);
+        } else {
+            Organization orgL = o.createOrganization(Organization.Type.LabAssistant, "Lab Center", network.getNetworkName(), zipcode);
+            Organization orgL1 = o.createOrganization(Organization.Type.LabTester, "Sample Collection Center", network.getNetworkName(), zipcode);
+        }
+
+        JOptionPane.showMessageDialog(txtName, "Enterprise Added Successfully");
 
         populateTable();
-	
-	txtName.setText("");
-        txtLocation.setText("");
-        
+
+        txtName.setText("");
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedrow = enterpriseJTable.getSelectedRow();
-        
-        
+
         System.out.print(enterpriseJTable.getValueAt(selectedrow, 0).toString());
 //        String name = "knjk";
 //        
@@ -269,7 +290,7 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-        
+
         userProcessContainer.remove(this);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
@@ -278,9 +299,14 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
     private void networkJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_networkJComboBoxActionPerformed
 
         Network network = (Network) networkJComboBox.getSelectedItem();
-        if (network != null){
+        if (network != null) {
             populateEnterpriseComboBox(network);
+            combozip.removeAllItems();
+            for (int z : network.getZipcodes()) {
+                combozip.addItem(z);
+            }
         }
+
 
     }//GEN-LAST:event_networkJComboBoxActionPerformed
 
@@ -288,11 +314,17 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_enterpriseJComboBox1ActionPerformed
 
+    private void networkJComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_networkJComboBoxItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_networkJComboBoxItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JComboBox combozip;
     private javax.swing.JComboBox enterpriseJComboBox1;
     private javax.swing.JTable enterpriseJTable;
     private javax.swing.JLabel jLabel1;
@@ -303,22 +335,21 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox networkJComboBox;
-    private javax.swing.JTextField txtLocation;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
-    public void populateTable(){
-        
+    public void populateTable() {
+
         DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
         model.setRowCount(0);
-        
+
         for (Network network : business.getNetworks()) {
             for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
-                
+
                 for (UserAccount userAccount : enterprise.getEnterpriseUserAccountDirectory().getUserAccountList()) {
                     Object[] row = new Object[3];
-                    row[0] = enterprise.getName();
-                    row[1] = network.getNetworkName();
+                    row[1] = enterprise.getName();
+                    row[0] = network.getNetworkName();
                     row[2] = userAccount.getUsername();
 
                     model.addRow(row);
@@ -327,21 +358,25 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
         }
     }
 
-    public void populateNetworkComboBox(){
-            
+    public void populateNetworkComboBox() {
+
         networkJComboBox.removeAllItems();
-        
-        for (Network network : business.getNetworks()){
-            networkJComboBox.addItem(network);
+
+        for (Network network : business.getNetworks()) {
+            if (network != null) {
+                networkJComboBox.addItem(network);
+            }
         }
     }
-    
-    private void populateEnterpriseComboBox(Network network){
+
+    private void populateEnterpriseComboBox(Network network) {
         enterpriseJComboBox1.removeAllItems();
+
+            enterpriseJComboBox1.addItem(Enterprise.EnterpriseType.Pharmaceutical);
+            enterpriseJComboBox1.addItem(Enterprise.EnterpriseType.Vaccination);
+            enterpriseJComboBox1.addItem(Enterprise.EnterpriseType.LabDiagnostics);
+            enterpriseJComboBox1.addItem(Enterprise.EnterpriseType.MedicalEquipements);
         
-        for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            enterpriseJComboBox1.addItem(String.valueOf(enterprise.getName()));
-        }
-        
+
     }
 }

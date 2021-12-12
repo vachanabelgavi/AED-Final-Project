@@ -19,7 +19,7 @@ import java.nio.file.Paths;
  * @author Nidhi Raghavendra
  */
 public class DB4OUtil {
-    
+
     private static final String FILENAME = Paths.get("Databank.db4o").toAbsolutePath().toString();// path to the data store
     private static DB4OUtil dB4OUtil;
     private ObjectContainer conn;
@@ -66,6 +66,7 @@ public class DB4OUtil {
             conn.store(system);
             conn.commit();
             conn.close();
+            System.out.println("Closed XXXXXXXX");
         } catch (Exception e) {
             System.out.println(e + " IN SOTRING");
         }
@@ -73,20 +74,23 @@ public class DB4OUtil {
 
     public Ecosystem retrieveSystem() {
         try {
-        this.conn = createConnection();
-        ObjectSet<Ecosystem> systems = conn.query(Ecosystem.class); // Change to the object you want to save
-        Ecosystem system;
 
-        if (systems.isEmpty()) {
-            System.out.println("HI HI ");
+            ObjectContainer conn = createConnection();
+            System.out.println("New object");
+            ObjectSet<Ecosystem> systems = conn.query(Ecosystem.class); // Change to the object you want to save
+            Ecosystem system;
+
+            if (systems.isEmpty()) {
+                System.out.println("HI HI ");
 //            Predefined objects created in the system
-            system = ConfigureASystem.configure();  // If there's no System in the record, create a new one
+                system = ConfigureASystem.configure();  // If there's no System in the record, create a new one
+                conn.close();
+                return system;
+            } else {
+                system = systems.get(systems.size() - 1);
+            }
+            conn.close();
             return system;
-        } else {
-            system = systems.get(systems.size() - 1);
-        }
-        conn.close();
-        return system;
         } catch (Exception e) {
             System.out.println(e);
         }

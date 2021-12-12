@@ -261,7 +261,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
                      System.out.println(" "+agent);
 
                      for(DeliveryAgent d: del){
-                     if(agent == d.getUseraccount().getUsername()){
+                     if(d.getUseraccount().getUsername().equals(agent)){
                       d.setActive(false);
                       o.setDeliveryAgent(d);
                       System.out.println(" "+ o.getDeliveryAgent().getUseraccount().getUsername());
@@ -274,8 +274,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
                      }
                     populateTable();
 
-                    ArrayList<String> agentslist = new ArrayList<>();
-                    agentslist.add(agent);
+                    
 
                     System.out.println(o.getDeliveryAgent().getUseraccount().getUsername());
 

@@ -110,11 +110,11 @@ public class ConfigureASystem {
 //        CREATE ENTERPRISE USER ADMINS FOR 2 ENTERPRISES
         Employee pharmaEntemp = new Employee();
         pharmaEntemp.setName("PHARMA ENTERPRISE ADMIN CALIFORNIA");
-        e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmaenterprise", "pharmaenterprise", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
+        e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmae", "pharmae", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
 
         Employee medEqupEntEmp = new Employee();
         medEqupEntEmp.setName("MEDICAL EQUIPMENTS ENTERPRISE ADMIN CALIFORNIA");
-        e1.getEnterpriseUserAccountDirectory().createEnterpriseUser("medicalenterprise", "medicalenterprise", medEqupEntEmp, new EquipmentEnterpriseRole());
+        e1.getEnterpriseUserAccountDirectory().createEnterpriseUser("medicale", "medicale", medEqupEntEmp, new EquipmentEnterpriseRole());
 
         Employee labEntpEMp = new Employee();
         labEntpEMp.setName("LAB CENTER & DIAGNOSTICS ENTERPRISE ADMIN CALIFORNIA");
@@ -126,11 +126,11 @@ public class ConfigureASystem {
 
         Employee pharmaEntemp2 = new Employee();
         pharmaEntemp.setName("PHARMA ENTERPRISE ADMIN BOSTON");
-        eB.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bpharmaenterprise", "Bpharmaenterprise", pharmaEntemp2, new PharmaceuticalEnterpriseAdminRole());
+        eB.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bpharmae", "Bpharmae", pharmaEntemp2, new PharmaceuticalEnterpriseAdminRole());
 
         Employee medEqupEntEmp2 = new Employee();
         medEqupEntEmp2.setName("MEDICAL EQUIPMENTS ENTERPRISE ADMIN BOSTON");
-        e1B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bmedicalenterprise", "Bmedicalenterprise", medEqupEntEmp2, new EquipmentEnterpriseRole());
+        e1B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bmedicale", "Bmedicale", medEqupEntEmp2, new EquipmentEnterpriseRole());
 
         Employee labEntpEMp2 = new Employee();
         labEntpEMp.setName("LAB CENTER & DIAGNOSTICS ENTERPRISE ADMIN BOSTON");
@@ -140,8 +140,8 @@ public class ConfigureASystem {
         vaccineEntAdmin2.setName("VACCINE AND IMMUNIZATION ENTERPRISE ADMIN BOSTON");
         e3B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bvaccineenterprise", "Bvaccineenterprise", vaccineEntAdmin2, new VaccinationEnterpriseRole());
 
-        
-        
+
+
 //        For Pharma enterprise
 //        create delivery agents in enterprise
         ArrayList<DeliveryAgent> delList = e.getDeliveryAgentsInEnterpiselist();
@@ -188,15 +188,16 @@ public class ConfigureASystem {
         }
          eB.setDeliveryAgentsInEnterpiselist(delList2);
 
-         
-         
-         
-         
+
+
+
+
         // For Vaccine Enterprise
         //  create delivery agents in enterprise
         ArrayList<DeliveryAgent> delListV1 = e3.getDeliveryAgentsInEnterpiselist();
+         ArrayList<Integer> z3 = new ArrayList<>();
+          ArrayList<Integer> z4 = new ArrayList<>();
         for (int j = 1; j < 5; j++) {
-            ArrayList<Integer> z3 = new ArrayList<>();
             DeliveryAgent d = new DeliveryAgent();
             z3.add(90010 + j);
 //
@@ -219,7 +220,6 @@ public class ConfigureASystem {
         e3.setDeliveryAgentsInEnterpiselist(delListV1);
          ArrayList<DeliveryAgent> delListV2 = e3B.getDeliveryAgentsInEnterpiselist();
          for (int j = 1; j < 5; j++){
-             ArrayList<Integer> z4 = new ArrayList<>();
                 DeliveryAgent d = new DeliveryAgent();
                  z4.add(02115 + j);
 
@@ -237,16 +237,17 @@ public class ConfigureASystem {
 
         }
          e3B.setDeliveryAgentsInEnterpiselist(delListV2);
-         
-         
-         
-         
-         
+
+
+
+
+
          // For Medical equipment Enterprise
         //  create delivery agents in enterprise
         ArrayList<DeliveryAgent> delListME1 = e1.getDeliveryAgentsInEnterpiselist();
+         ArrayList<Integer> z5 = new ArrayList<>();
+         ArrayList<Integer> z6 = new ArrayList<>();
         for (int j = 1; j < 5; j++) {
-            ArrayList<Integer> z5 = new ArrayList<>();
             DeliveryAgent d = new DeliveryAgent();
             z5.add(90010 + j);
 //
@@ -269,7 +270,6 @@ public class ConfigureASystem {
         e1.setDeliveryAgentsInEnterpiselist(delListME1);
          ArrayList<DeliveryAgent> delListME2 = e1B.getDeliveryAgentsInEnterpiselist();
          for (int j = 1; j < 5; j++){
-             ArrayList<Integer> z6 = new ArrayList<>();
                 z6.add(02115 + j);
                 DeliveryAgent d = new DeliveryAgent();
 
@@ -287,14 +287,15 @@ public class ConfigureASystem {
 
         }
          e1B.setDeliveryAgentsInEnterpiselist(delListME2);
-         
-         
-         
+
+
+
          // For Lab Enterprise
         //  create delivery agents in enterprise
         ArrayList<DeliveryAgent> delListL1 = e2.getDeliveryAgentsInEnterpiselist();
+          ArrayList<Integer> z7 = new ArrayList<>();
+          ArrayList<Integer> z8 = new ArrayList<>();
         for (int j = 1; j < 5; j++) {
-            ArrayList<Integer> z7 = new ArrayList<>();
             DeliveryAgent d = new DeliveryAgent();
             z7.add(90010 + j);
 //
@@ -312,12 +313,12 @@ public class ConfigureASystem {
                 delListL1.add(d);
 
             }
-        
+
         e3.setDeliveryAgentsInEnterpiselist(delListV1);
-        
+
          ArrayList<DeliveryAgent> delListL2 = e2B.getDeliveryAgentsInEnterpiselist();
          for (int j = 1; j < 5; j++){
-             ArrayList<Integer> z8 = new ArrayList<>();
+            
                 DeliveryAgent d = new DeliveryAgent();
                  z8.add(02115 + j);
 
@@ -335,10 +336,10 @@ public class ConfigureASystem {
 
         }
          e2B.setDeliveryAgentsInEnterpiselist(delListL2);
-         
-         
-         
-         
+
+
+
+
 
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();

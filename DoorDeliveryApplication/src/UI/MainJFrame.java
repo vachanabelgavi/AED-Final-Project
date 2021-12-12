@@ -166,14 +166,6 @@ public class MainJFrame extends javax.swing.JFrame {
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 20, 150, 90));
 
-        jButton2.setText("X");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
-
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 900));
 
         pack();
@@ -340,6 +332,8 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         jSplitPane1.setLeftComponent(jPanel1);
         jSplitPane1.setRightComponent(null);
+         this.container.removeAll();
+        this.dB4OUtil.storeSystem(business);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
