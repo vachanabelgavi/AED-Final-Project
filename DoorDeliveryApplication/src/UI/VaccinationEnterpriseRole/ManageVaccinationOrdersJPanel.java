@@ -47,7 +47,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageVaccinationOrdersJPanel
      */
-    
+
     private JPanel userProcessContainer;
     private Ecosystem business;
     private CustomerDirectory customerDirectory;
@@ -65,7 +65,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
     Network network;
     ArrayList<DeliveryAgent> del;
     ArrayList<Integer> z;
-    
+
     public ManageVaccinationOrdersJPanel(JPanel userProcessContainer, Ecosystem business,Network network,UserAccountDirectory userdir, Enterprise enterprise, Customer customer, Organization organization, UserAccount ua) {
         initComponents();
          this.userProcessContainer = userProcessContainer;
@@ -83,10 +83,10 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
         dtm = (DefaultTableModel) VaccineOrderTable.getModel();
 
 
-       
+
         populateDp();
         //Immunization
-        
+
     }
 
     /**
@@ -228,8 +228,8 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
         dtm.setRowCount(0);
          ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
         String recipients = null;
-        
-       
+
+
              System.out.println("Inside table after assigning");
            for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
@@ -239,16 +239,16 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                     ArrayList<String> pr = new ArrayList<>();
                 //  Order o : this.customer.getOrderlist()//              populate items
                 for (int i = 0; i < oi.size(); i++) {
-                    
+
                     pr.add(oi.get(i).getProductName());
                 }
-                
+
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
                      System.out.println(" "+agent);
                      ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
                      for(DeliveryAgent d: del){
                      if(agent == d.getUseraccount().getUsername()){
-                      d.setActive(false); 
+                      d.setActive(false);
                       o.setDeliveryAgent(d);
                       System.out.println(" "+ o.getDeliveryAgent().getUseraccount().getUsername());
                       System.out.println(" "+ d.getActive());
@@ -259,26 +259,26 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                      }
                      }
                      populateTable();
-                   
+
                     ArrayList<String> agentslist = new ArrayList<>();
                     agentslist.add(agent);
-                   
+
                     System.out.println(o.getDeliveryAgent().getUseraccount().getUsername());
-                
+
         if(emailsend = true){
-        
-        JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");   
+
+        JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");
         int dialogueb = JOptionPane.INFORMATION_MESSAGE;
         System.out.println(""+dialogueb);
         int dialoguer = JOptionPane.showConfirmDialog(this, "SENDING EMAIL\n"
                 + "If yes please wait","DELIVERY AGENT ASSIGNMENT", dialogueb);
-        if(dialoguer == 0){      
+        if(dialoguer == 0){
          recipients = cust.getEmail();
          System.out.println("Entering assign for email ==========");
          String subjects = "Delivery";
          String messaget = "Delivered agent assigned successfully";
-        
-        
+
+
         System.out.println("Start");
         final String username = "pannagaveeramohan@gmail.com";
         final String password = "9686300037";
@@ -301,11 +301,11 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
 
 
         try {
-           
+
             Transport transport=session.getTransport();
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
-            
+
             final Address[] recipientAddresses = InternetAddress.parse(recipients);
             message.setRecipients(Message.RecipientType.TO,recipientAddresses);
             message.setSubject(subjects);//formBean.getString(
@@ -321,17 +321,17 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
             throw new RuntimeException(e);
 
         }
-    
-    JOptionPane.showMessageDialog(null, "Email sent to customer successful");              
+
+    JOptionPane.showMessageDialog(null, "Email sent to customer successful");
   }else{
-         JOptionPane.showMessageDialog(null, "Email sending cancelled");   
+         JOptionPane.showMessageDialog(null, "Email sending cancelled");
         }
-        
+
     }
     }
     }
     }
-    }  
+    }
     }//GEN-LAST:event_assignbtnActionPerformed
 
     private void btnshowordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshowordersActionPerformed
@@ -356,11 +356,11 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_orderscmbActionPerformed
 
     private void displaycombobox() {
-        
+
     }
 
     private void populateCustomerOrderTable() {
-       
+
     }
 
 
@@ -380,7 +380,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
     private void populateDp() {
        ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
          System.out.println("Inside combo box");
-            
+
             for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                 //  Order o : this.customer.getOrderlist()//              populate items
@@ -401,7 +401,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
 //         ArrayList<Product> products = this.organization.getOrganizationProducts();
              System.out.println("Inside table");
                 this.z = new ArrayList<>();
-            
+
                 try{
                 for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
@@ -412,11 +412,11 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                 //  Order o : this.customer.getOrderlist()//              populate items
                 //&& orderscmb.getSelectedItem().equals(o.getOrderId())
                 for (int i = 0; i < oi.size(); i++) {
-                    
+
                     p.add(oi.get(i).getProductName());
                 }
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                
+
                 dtm.insertRow(dtm.getRowCount(), new Object[]{
                      o.getOrderId(),
                      Arrays.toString(p.toArray()),
@@ -425,7 +425,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                     o.getPrice(),
                     o.getDeliveryAgent().getUseraccount().getUsername()
                 });
-                
+
              for(DeliveryAgent dd : del ){
          //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
            // z.add(dd.getZipcodes().get(j));
@@ -443,9 +443,9 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                 }catch(Exception ex)
                 {
                     System.out.println("Inside Vaccination Order Jpanel check it out");
-                            
+
                 }
-                
+
                System.out.println("Done with populate table");
     }
 }

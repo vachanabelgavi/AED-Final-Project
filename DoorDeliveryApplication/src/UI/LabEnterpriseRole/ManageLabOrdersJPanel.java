@@ -265,7 +265,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                     ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
                      for(DeliveryAgent d: del){
                      if(agent == d.getUseraccount().getUsername()){
-                      d.setActive(false); 
+                      d.setActive(false);
                       o.setDeliveryAgent(d);
                       System.out.println(" "+ o.getDeliveryAgent().getUseraccount().getUsername());
                       System.out.println(" "+ d.getActive());
@@ -277,7 +277,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                      }
                     populateTable();
 
-                 
+
 
         if(emailsend = true){
 
@@ -370,7 +370,6 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
         dtm.setRowCount(0);
          ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
           del = this.enterprise.getDeliveryAgentsInEnterpiselist();
-         ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
              System.out.println("Inside table");
                 this.z = new ArrayList<>();
 

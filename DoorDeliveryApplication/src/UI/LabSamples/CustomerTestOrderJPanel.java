@@ -10,11 +10,15 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Orders.Cart;
+import Business.Orders.Order;
 import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Products.Product;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ReportUploadWorkRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,15 +38,20 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
     DefaultTableModel tableModel;
     private Enterprise enterprise;
     private Organization organization;
-
+    private final Order labOrder;
     
-    public CustomerTestOrderJPanel(JPanel userProcessContainer, Ecosystem business, Network network, Customer customer) {
+    Organization labOrganization;
+    UserAccount labassAccount;
+    
+    
+    public CustomerTestOrderJPanel(Ecosystem business, Network network, Customer customer) {
         initComponents();
         
-        this.userProcessContainer = userProcessContainer;
+        //this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.network = network;
         this.customer = customer;
+        labOrder = new Order();
         
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
         this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Lab Center");
@@ -65,7 +74,7 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelTotalOrder = new javax.swing.JLabel();
         btnAddtoCart = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -107,10 +116,10 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabel3.setText("Order Total: ");
 
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
-        jLabel4.setText("<value>");
+        labelTotalOrder.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+        labelTotalOrder.setText("<value>");
 
-        btnAddtoCart.setText("Add to Cart");
+        btnAddtoCart.setText("Order");
         btnAddtoCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddtoCartActionPerformed(evt);
@@ -164,7 +173,7 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelTotalOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(280, 280, 280))
         );
         layout.setVerticalGroup(
@@ -180,7 +189,7 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(labelTotalOrder))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -192,50 +201,78 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
         Cart custoemrcart = this.customer.getCustomerCart();
 
         ArrayList<OrderItem> customerCartItems = custoemrcart.getCartItems();
-
+        
         try {
             for (int i = 0; i < rows; i++) {
-                if ((Boolean) tableModel.getValueAt(i, 4)) {
+                if ((Boolean) tableModel.getValueAt(i, 5)) {
 
-                    Boolean found = false;
+                    System.out.println(custoemrcart.getCartId() + " :: THIS IS HIS CART ID");
+//                    Look for an already existing order in the cart
                     if (customerCartItems.size() > 0) {
-                        System.out.println("IN  Lab Test CART > 0 ");
+                        System.out.println("CART IS > 0 ");
+                        Boolean found = false;
                         for (OrderItem item : customerCartItems) {
-                            System.out.println(item + " ************** Item in Lab Test");
+                            System.out.println(item.getProductName() + " ******** item");
                             if (item.getProductName().equals(String.valueOf(tableModel.getValueAt(i, 1)))) {
-                                //this.alert.ShowAlert("Chosen item" + item.getProductName() + " already in cart!");
+                                System.out.println(item.getProductName() + " ******** item exists");
+                                JOptionPane.showMessageDialog(null, "Chosen item" + item.getProductName() + " already in cart!");
                                 found = true;
                                 break;
                             }
                         }
 
                         if (!found) {
-                            OrderItem o1 = new OrderItem();
-                            o1.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
-                            o1.setProductName((String) tableModel.getValueAt(i, 1));
-                            o1.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
-                            //o1.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
-                            o1.setOrganizationname("Lab Center");
-                            customerCartItems.add(o1);
-                            //this.alert.ShowAlert("Added " + o1.getProductName() + " to cart!");
+                            OrderItem o = new OrderItem();
+                            o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                            o.setProductName((String) tableModel.getValueAt(i, 1));
+                            o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                            //o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                            o.setOrganizationname("Sample Collection");
+                            customerCartItems.add(o);
+                            JOptionPane.showMessageDialog(null, "Added " + o.getProductName() + " to cart!");
                         }
                     } else {
-                        System.out.println("ULIKELY IN LAB TEST");
-                        System.out.println(custoemrcart.getCartId() + " :: THIS IS HIS CART ID");
-                        OrderItem o1 = new OrderItem();
-                        o1.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
-                        o1.setProductName((String) tableModel.getValueAt(i, 1));
-                        o1.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
-                        o1.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
-                        o1.setOrganizationname("Immunization");
-                        customerCartItems.add(o1);
-                        //this.alert.ShowAlert("Added " + o1.getProductName() + " to cart!");
+                        System.out.println("NEW ITEMS ADDED ");
+                        OrderItem o = new OrderItem();
+                        o.setProductId(Integer.valueOf((Integer) tableModel.getValueAt(i, 0)));
+                        o.setProductName((String) tableModel.getValueAt(i, 1));
+                        o.setProductPrice(Double.valueOf((Double) tableModel.getValueAt(i, 2)));
+                        //o.setQty(Integer.valueOf((Integer) tableModel.getValueAt(i, 3)));
+                        o.setOrganizationname("Sample Collection");
+                        customerCartItems.add(o);
+                        JOptionPane.showMessageDialog(null, "Added " + o.getProductName() + " to cart!");
                     }
+                    
+                    double total=0;
+                        ArrayList<OrderItem> labtestItems = this.labOrder.getItemsOrdered();
+                        
+                        Order order = new Order();
+                        order.setItemsOrdered(labtestItems);
+                        customer.addOrder(order);
+                        
+                        order.calcOrderTotal();
+                        
+                        labelTotalOrder.setText(String.valueOf(order.getPrice()));
+                        
+                        Enterprise e = network.getEnterpriseDirectory().getEnterprise("Lab Center and Diagnostics");
+                        this.labOrganization = e.getOrganizationDirectory().getOrganizationByName("Sample Collection");
+                        this.labassAccount = this.labOrganization.getUserAccountDirectory().getUserAccountList().get(0);
+                        
+                        ReportUploadWorkRequest req = new ReportUploadWorkRequest();
+                        
+                        //req.setOrderId(ERROR);
+                        req.setReceiver(this.labassAccount);
+                        req.generateRequestId();
+                        req.setCustomer(this.customer);
+                        req.setStatus("Ordered");
+                        
+                } else {
                 }
+
             }
 
         } catch (Exception e) {
-            System.out.println(e + " CART PROBLEM IN VACCINE");
+            System.out.println(e + " CART PROBLEM IN EQUIP ");
         }
         
     }//GEN-LAST:event_btnAddtoCartActionPerformed
@@ -247,10 +284,10 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel labelTotalOrder;
     // End of variables declaration//GEN-END:variables
 
     public void populateTable() {
@@ -263,7 +300,6 @@ public class CustomerTestOrderJPanel extends javax.swing.JPanel {
                     p.getProductId(),
                     p.getName(),
                     p.getPrice(),
-                    1,
                     false
                 });
             }

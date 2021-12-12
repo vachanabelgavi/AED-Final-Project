@@ -14,6 +14,7 @@ import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -189,16 +190,16 @@ public class SupermarketAdminJPanel extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1083, Short.MAX_VALUE)
+            .addGap(0, 1495, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 760, Short.MAX_VALUE)
+            .addGap(0, 972, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("MANAGE PRODUCTS", jPanel2);
 
-        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 1000));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
@@ -234,8 +235,7 @@ public class SupermarketAdminJPanel extends javax.swing.JPanel {
         try {
 
             this.currentOrder.setStatus("ACCEPTED");
-            this.currentOrder.setOrganizationname(this.organization.getName());
-            System.out.println(""+this.organization.getName());
+            JOptionPane.showMessageDialog(null, "ACCEPTED");
 
         } catch (Exception e) {
 
@@ -250,6 +250,7 @@ public class SupermarketAdminJPanel extends javax.swing.JPanel {
         try {
 
             this.currentOrder.setStatus("REJECTED");
+            JOptionPane.showMessageDialog(null, "REJECTED");
 
         } catch (Exception e) {
 
@@ -260,6 +261,8 @@ public class SupermarketAdminJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
 //        SEND MAIL TO REQUEST PRESCRIPTION
+           this.currentOrder.setStatus("PRESCRIPTION REQUIRED");
+           populateOrders();
     }//GEN-LAST:event_btnreqPrescriptionActionPerformed
 
     public void fetchOrderObject() {

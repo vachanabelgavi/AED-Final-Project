@@ -14,8 +14,10 @@ import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import Business.ValidationClass;
 import Business.WorkQueue.PrescriptionUploadWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -32,8 +34,11 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.internet.MimeMessage;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.activation.*;
+//import javax.activation.*;
 import javax.mail.Address;
+import javax.swing.BorderFactory;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 /**
  *
@@ -47,6 +52,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private Network network;
     private Organization organization;
     private Enterprise enterprise;
+    ValidationClass validate;
 
     DefaultTableModel tableModel;
     private final ArrayList<PrescriptionUploadWorkRequest> workRequest;
@@ -76,7 +82,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.workRequest = this.ecosystem.getPrescriptionWorkList();
-
+        this.validate = new ValidationClass();
         this.tableModel = (DefaultTableModel) itemTable.getModel();
 
         populateOrderDropdown();
@@ -136,6 +142,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         fieldSignature = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(253, 252, 249));
 
         jTabbedPane1.setBackground(new java.awt.Color(253, 252, 249));
 
@@ -217,6 +225,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel13.setText("SIGNATURE");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
 
+        fieldSign.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldSignFocusLost(evt);
+            }
+        });
         jScrollPane4.setViewportView(fieldSign);
 
         jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, 240, -1));
@@ -272,6 +285,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(searchACustomerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, -1, -1));
 
+        fieldName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldNameFocusLost(evt);
+            }
+        });
         fieldName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldNameActionPerformed(evt);
@@ -285,6 +303,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jPanel2.add(networkCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, 200, -1));
+
+        fieldEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldEmailFocusLost(evt);
+            }
+        });
         jPanel2.add(fieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 250, -1));
 
         jLabel5.setText("CUSTOMER NAME");
@@ -292,10 +316,27 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("EMAIL ADDRESS");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
+
+        fieldPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldPhoneFocusLost(evt);
+            }
+        });
         jPanel2.add(fieldPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 250, -1));
 
         jLabel7.setText("PHONE NUMBER");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, -1, -1));
+
+        fieldAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldAddressFocusLost(evt);
+            }
+        });
+        fieldAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldAddressActionPerformed(evt);
+            }
+        });
         jPanel2.add(fieldAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 250, 60));
 
         jLabel8.setText("ADDRESS");
@@ -326,6 +367,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel11.setText("NOTES");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 470, -1, -1));
+
+        fieldSignature.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldSignatureFocusLost(evt);
+            }
+        });
         jPanel2.add(fieldSignature, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 650, 230, -1));
 
         jLabel12.setText("SIGNATURE");
@@ -376,142 +423,144 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             if (chosenFile == null) {
                 JOptionPane.showMessageDialog(null, "PRESCRIPTION REQUIRED!");
             } else {
+                if (fieldSignature.getText().trim().length() > 0) {
 //        CHECK IF ITS A NEW CUSTOMER
-                if (fieldNewCheckBox.isSelected() == true) {
-                    Network selectedNetwork = (Network) networkCombo.getSelectedItem();
-                    System.out.println("SELECTED NETWORK ------------ " + selectedNetwork + selectedNetwork.getNetworkName());
-                    Boolean b = checkIfCustomerExists();
+                    if (fieldNewCheckBox.isSelected() == true) {
+                        Network selectedNetwork = (Network) networkCombo.getSelectedItem();
+                        System.out.println("SELECTED NETWORK ------------ " + selectedNetwork + selectedNetwork.getNetworkName());
+                        Boolean b = checkIfCustomerExists();
 
-                    if (!b) {
-                        System.out.println("CAME INTO CREATING NEW CUSTOMER");
+                        if (!b) {
+                            System.out.println("CAME INTO CREATING NEW CUSTOMER");
                             int min = 1;
                             int max = 100;
-        
-                    //Generate random int value from 50 to 100 
-                            System.out.println("Random value in int from "+min+" to "+max+ ":");
-                            int random_int = (int)Math.floor(Math.random()*(max-min+1)+min);
+
+                            //Generate random int value from 50 to 100
+                            System.out.println("Random value in int from " + min + " to " + max + ":");
+                            int random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
                             System.out.println(random_int);
-                             
+
                             String username = "newcustomer" + String.valueOf(random_int);
                             String password = "newcustomer" + String.valueOf(random_int);
-                            Customer newCustoemr = selectedNetwork.getCustomerDirectory().createCustomer(fieldName.getText(), fieldEmail.getText(),username , password, (int) zipcodeCombo.getSelectedItem(), selectedNetwork.getNetworkName(), fieldAddress.getText(), Integer.valueOf(fieldPhone.getText()));
+                            Customer newCustoemr = selectedNetwork.getCustomerDirectory().createCustomer(fieldName.getText(), fieldEmail.getText(), username, password, (int) zipcodeCombo.getSelectedItem(), selectedNetwork.getNetworkName(), fieldAddress.getText(), Integer.valueOf(fieldPhone.getText()));
 
 //           Create order for customer in pharmacy admin panel
 //           Prescription work request is at the system level
 // get the pharmacist in this  network's pharmacy organization
-                        Enterprise e = selectedNetwork.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
-                        this.customerOrganization = e.getOrganizationDirectory().getOrganizationByName("Pharmacy");
-                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
-                        try {
+                            Enterprise e = selectedNetwork.getEnterpriseDirectory().getEnterprise("Pharmaceutical");
+                            this.customerOrganization = e.getOrganizationDirectory().getOrganizationByName("Pharmacy");
+                            this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
+                            try {
 
-                            System.out.println("CAME TO DOCTOR PANEL  ---------- "+ this.toPharmacist.getUsername());
-                            PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
-                            pq.setSender(user);
-                            user.setUsername(username);
-                            user.setPassword(password);
-                            pq.setCustomer(newCustoemr);
-                            pq.setReceiver(this.toPharmacist);
-                            pq.setPresecription(chosenFile);
-                            pq.setSignature(fieldSignature.getText());
-                            pq.setComments(fieldNotes.getText());
-                            pq.setStatus("INCOMING PRESCRIPTION");
-                            pq.generateRequestId();
-                            this.workRequest.add(pq);
-                           // MAILING SERVICE
-        JOptionPane.showMessageDialog(null, "PRESCRIPTION SENT TO " + this.toPharmacist.getEmployee().getName());
-        int dialogueb = JOptionPane.INFORMATION_MESSAGE;
-        System.out.println(""+dialogueb);
-        int dialoguer = JOptionPane.showConfirmDialog(this, "SENDING EMAIL\n"
-                + "If yes please wait","DELIVERY AGENT ASSIGNMENT", dialogueb);
-        if(dialoguer == 0){      
-        String recipients = fieldEmail.getText();
-         System.out.println("Entering assign for email ==========");
-         String subjects = "New Credentials";
-         String messaget = "Username: "+username+"\nPassword "+password;
-        
-        
-        System.out.println("Start");
-        final String usernamesender = "pannagaveeramohan@gmail.com";
-        final String passwordsender = "9686300037";
+                                System.out.println("CAME TO DOCTOR PANEL  ---------- " + this.toPharmacist.getUsername());
+                                PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
+                                pq.setSender(user);
+                                user.setUsername(username);
+                                user.setPassword(password);
+                                pq.setCustomer(newCustoemr);
+                                pq.setReceiver(this.toPharmacist);
+                                pq.setPresecription(chosenFile);
+                                pq.setSignature(fieldSignature.getText());
+                                pq.setComments(fieldNotes.getText());
+                                pq.setStatus("INCOMING PRESCRIPTION");
+                                pq.generateRequestId();
+                                this.workRequest.add(pq);
+                                // MAILING SERVICE
+                                JOptionPane.showMessageDialog(null, "PRESCRIPTION SENT TO " + this.toPharmacist.getEmployee().getName());
+                                int dialogueb = JOptionPane.INFORMATION_MESSAGE;
+                                System.out.println("" + dialogueb);
+                                int dialoguer = JOptionPane.showConfirmDialog(this, "SENDING EMAIL\n"
+                                        + "If yes please wait", "Mailing .........", dialogueb);
+                                if (dialoguer == 0) {
+                                    String recipients = fieldEmail.getText();
+                                    System.out.println("Entering assign for email ==========");
+                                    String subjects = "New Credentials";
+                                    String messaget = "Hello" + fieldName.getText() + " ! Welcome to Door Delivery. Your doctor has a prescription prepared for you. Please login with the below credentials. \n Username: " + username + "\nPassword " + password;
 
-        Properties p = new Properties();
-        p.put("mail.smtp.auth", "true");
-        p.put("mail.smtp.host", "smtp.gmail.com");
-        p.put("mail.smtp.port", "465");
-        p.put("mail.transport.protocol", "smtp");
-        p.put("mail.smtp.starttls.enable", "true");
-        p.put("mail.smtp.starttls.enable", "true");
-        p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+                                    System.out.println("Start");
+                                    final String usernamesender = "pannagaveeramohan@gmail.com";
+                                    final String passwordsender = "9686300037";
 
-         Session session = Session.getInstance(p,
-                  new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(usernamesender, passwordsender);
-                    }
-                  });
+                                    Properties p = new Properties();
+                                    p.put("mail.smtp.auth", "true");
+                                    p.put("mail.smtp.host", "smtp.gmail.com");
+                                    p.put("mail.smtp.port", "465");
+                                    p.put("mail.transport.protocol", "smtp");
+                                    p.put("mail.smtp.starttls.enable", "true");
+                                    p.put("mail.smtp.starttls.enable", "true");
+                                    p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
+                                    Session session = Session.getInstance(p,
+                                            new javax.mail.Authenticator() {
+                                        protected PasswordAuthentication getPasswordAuthentication() {
+                                            return new PasswordAuthentication(usernamesender, passwordsender);
+                                        }
+                                    });
 
-        try {
-           
-            Transport transport=session.getTransport();
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
-            
-            final Address[] recipientAddresses = InternetAddress.parse(recipients);
-            message.setRecipients(Message.RecipientType.TO,recipientAddresses);
-            message.setSubject(subjects);//formBean.getString(
-            message.setText(messaget);
-            transport.connect();
-            transport.send(message, recipientAddresses);//(message);
+                                    try {
 
-            System.out.println("Done");
+                                        Transport transport = session.getTransport();
+                                        Message message = new MimeMessage(session);
+                                        message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
 
-        } catch (MessagingException ex) {
-            System.out.println("e="+ex);
-            ex.printStackTrace();
-            throw new RuntimeException(ex);
+                                        final Address[] recipientAddresses = InternetAddress.parse(recipients);
+                                        message.setRecipients(Message.RecipientType.TO, recipientAddresses);
+                                        message.setSubject(subjects);//formBean.getString(
+                                        message.setText(messaget);
+                                        transport.connect();
+                                        transport.send(message, recipientAddresses);//(message);
 
-        }
-        JOptionPane.showMessageDialog(null, "Email sent to customer successful");              
-        }else{
-         JOptionPane.showMessageDialog(null, "Email sending cancelled");   
-        }
-                            
-                        } catch (Exception err) {
-                            System.out.println("error --- " + err);
-                            JOptionPane.showMessageDialog(null, "Looks like there is no pharmacy admin for the organization!");
+                                        System.out.println("Done");
+
+                                    } catch (MessagingException ex) {
+                                        System.out.println("e=" + ex);
+                                        ex.printStackTrace();
+                                        throw new RuntimeException(ex);
+
+                                    }
+                                    JOptionPane.showMessageDialog(null, "Email sent to customer successful");
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Email sending cancelled");
+                                }
+
+                            } catch (Exception err) {
+                                System.out.println("error --- " + err);
+                                JOptionPane.showMessageDialog(null, "Looks like there is no pharmacy admin for the organization!");
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "CUSTOMER EXISTS.");
                         }
 
+//
                     } else {
-                        JOptionPane.showMessageDialog(null, "CUSTOMER EXISTS.");
+
+                        System.out.println(this.toPharmacist + " 888888888888888 PHARMACIST OBJECT");
+                        PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
+                        pq.setSender(user);
+                        pq.setCustomer(this.currentCustomer);
+                        pq.setReceiver(this.toPharmacist);
+                        pq.setPresecription(chosenFile);
+                        pq.setSignature(fieldSignature.getText());
+                        pq.setComments(fieldNotes.getText());
+                        pq.setStatus("INCOMING PRESCRIPTION");
+                        pq.generateRequestId();
+                        this.workRequest.add(pq);
+
+                        JOptionPane.showMessageDialog(null, "PRESCRIPTION SENT TO " + this.toPharmacist.getEmployee().getName());
                     }
-
-//                    
-                } 
-                
-                
-                
-                
-                else {
-
-                    System.out.println(this.toPharmacist + " 888888888888888 PHARMACIST OBJECT");
-                    PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
-                    pq.setSender(user);
-                    pq.setCustomer(this.currentCustomer);
-                    pq.setReceiver(this.toPharmacist);
-                    pq.setPresecription(chosenFile);
-                    pq.setSignature(fieldSignature.getText());
-                    pq.setComments(fieldNotes.getText());
-                    pq.setStatus("INCOMING PRESCRIPTION");
-                    pq.generateRequestId();
-                    this.workRequest.add(pq);
-
-                    JOptionPane.showMessageDialog(null, "PRESCRIPTION SENT TO " + this.toPharmacist.getEmployee().getName());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Signature required.");
                 }
             }
         } catch (Exception e) {
             System.out.println("EXCEPTION --------------- " + e);
         }
+        fieldName.setEnabled(true);
+        fieldEmail.setEnabled(true);
+        fieldPhone.setEnabled(true);
+        fieldAddress.setEnabled(true);
+
     }//GEN-LAST:event_btnCreateACustomerPrescActionPerformed
 
     private void orderComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderComboBoxActionPerformed
@@ -560,26 +609,38 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if (this.currentRequest != null) {
+        if (this.currentRequest != null && fieldSign.getText().trim().length() > 0) {
             this.currentRequest.setComments(fieldComment.getText());
             this.currentRequest.setSignature(fieldSign.getText());
             this.currentOrder.setStatus("PRESCRIPTION APPROVED");
             this.currentRequest.setStatus("PRESCRIPTION APPROVED");
 
             JOptionPane.showMessageDialog(null, "Your request is closed!");
+            fieldName.setEnabled(true);
+            fieldEmail.setEnabled(true);
+            fieldPhone.setEnabled(true);
+            fieldAddress.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please provide a signature for the request.");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        if (this.currentRequest != null) {
+        if (this.currentRequest != null && fieldSign.getText().trim().length() > 0) {
             this.currentRequest.setComments(fieldComment.getText());
             this.currentRequest.setSignature(fieldSign.getText());
             this.currentOrder.setStatus("PRESCRIPTION REJECTED");
             this.currentRequest.setStatus("PRESCRIPTION REJECTED");
 
             JOptionPane.showMessageDialog(null, "Your request is closed!");
+            fieldName.setEnabled(true);
+            fieldEmail.setEnabled(true);
+            fieldPhone.setEnabled(true);
+            fieldAddress.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please provide a signature for the request.");
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -607,6 +668,13 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                     fieldAddress.setText(customer.getAddress());
                     networkCombo.setSelectedItem(network);
                     zipcodeCombo.setSelectedItem(customer.getZipcode());
+
+//                    DISABLE FIELDS
+                    fieldName.setEnabled(false);
+                    fieldEmail.setEnabled(false);
+                    fieldPhone.setEnabled(false);
+                    fieldAddress.setEnabled(false);
+
                     this.currentCustomer = customer;
 
 //                    Registering the customer's network, pharmacy organization
@@ -640,6 +708,85 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateZipcodes();
     }//GEN-LAST:event_networkComboActionPerformed
+
+    private void fieldNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNameFocusLost
+        // TODO add your handling code here:
+
+        if (fieldName.getText().trim().length() != 0 && validate.validateName(fieldName.getText()) == false) {
+            fieldName.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldName.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldNameFocusLost
+
+    private void fieldEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldEmailFocusLost
+        // TODO add your handling code here:
+        if (fieldEmail.getText().trim().length() != 0 && validate.validateEmail(fieldEmail.getText()) == false) {
+            fieldEmail.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldEmail.setBorder(border);
+        }
+
+    }//GEN-LAST:event_fieldEmailFocusLost
+
+    private void fieldPhoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldPhoneFocusLost
+        // TODO add your handling code here:
+        try {
+            if (fieldPhone.getText().trim().length() != 0 && validate.validatePhone(Integer.valueOf(fieldPhone.getText())) == false) {
+                fieldPhone.setBorder(new JTextField().getBorder());
+            } else {
+                Border border = BorderFactory.createLineBorder(Color.red);
+
+                fieldPhone.setBorder(border);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid Field");
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldPhone.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldPhoneFocusLost
+
+    private void fieldAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldAddressFocusLost
+        // TODO add your handling code here:
+        if (fieldAddress.getText().trim().length() != 0 && validate.valdiateAddress(fieldAddress.getText()) == false) {
+            fieldAddress.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldAddress.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldAddressFocusLost
+
+    private void fieldSignatureFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSignatureFocusLost
+        // TODO add your handling code here:
+        if (fieldSignature.getText().trim().length() != 0 && validate.validateName(fieldSignature.getText()) == false) {
+            fieldSignature.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldSignature.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldSignatureFocusLost
+
+    private void fieldSignFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldSignFocusLost
+        // TODO add your handling code here:
+        if (fieldSign.getText().trim().length() != 0 && validate.validateName(fieldSign.getText()) == false) {
+            fieldSign.setBorder(new JTextField().getBorder());
+        } else {
+            Border border = BorderFactory.createLineBorder(Color.red);
+
+            fieldSign.setBorder(border);
+        }
+    }//GEN-LAST:event_fieldSignFocusLost
+
+    private void fieldAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldAddressActionPerformed
 
     public void populateZipcodes() {
 

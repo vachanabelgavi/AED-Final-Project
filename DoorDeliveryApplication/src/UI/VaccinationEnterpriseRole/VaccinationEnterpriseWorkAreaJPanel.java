@@ -28,7 +28,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form VaccinationEnterpriseWorkAreaJPanel
      */
-      
+
     JPanel userProcessContainer;
      Ecosystem ecosystem;
      UserAccount account;
@@ -37,10 +37,10 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
      Customer customer;
      Organization organization;
      Network network;
-    
+
     public VaccinationEnterpriseWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Network network,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
         initComponents();
-        
+
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
          this.account = account;
@@ -48,16 +48,16 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.network = network;
         this.customer = new Customer();
-        
+
         System.out.println("Inside Vaccination Enterprise");
-        
+
         if(this.ecosystem == null) {
             JOptionPane.showMessageDialog(null, "Something went wrong");
         } else {
             System.out.println("this.ecosystem for pharma is not null");
         }
 
-        
+
     }
 
     /**

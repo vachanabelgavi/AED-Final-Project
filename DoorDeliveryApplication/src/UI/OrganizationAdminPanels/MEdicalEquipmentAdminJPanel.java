@@ -60,6 +60,9 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
         this.prodTableMode = (DefaultTableModel) ordeTable.getModel();
         this.temTbleModel = (DefaultTableModel) prodTable.getModel();
         this.tableModel = (DefaultTableModel) productsTable.getModel();
+        
+        
+        populateOrders();
     }
 
     /**
@@ -156,6 +159,8 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, -1, 280));
 
+        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("ACCEPT ORDER");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,6 +169,8 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(255, 153, 0));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("REJECT ORDER");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +243,8 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 600, -1, -1));
 
+        jButton3.setBackground(new java.awt.Color(0, 204, 204));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("UPLOAD IMAGE");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -325,7 +334,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
          try {
 
             this.currentOrder.setStatus("ACCEPTED");
-
+            populateOrders();
         } catch (Exception e) {
 
         }
@@ -336,7 +345,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
          try {
 
             this.currentOrder.setStatus("REJECTED");
-
+            populateOrders();
         } catch (Exception e) {
 
         }
@@ -358,6 +367,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
                 if (o.getOrderId() == this.orderid) {
                     this.currentOrder = o;
                     this.currentCustomer = customer;
+                    break;
                 }
             }
         }

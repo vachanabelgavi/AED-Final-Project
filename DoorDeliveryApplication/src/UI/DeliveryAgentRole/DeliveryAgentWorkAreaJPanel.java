@@ -40,60 +40,76 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author pannaga
  */
 public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
-     JPanel userProcessContainer;
-     Ecosystem ecosystem;
-     UserAccount account;
-     UserAccountDirectory useraccountdirectory;
-     Enterprise enterprise;
-     Customer customer;
-     Organization organization;
-     Network network;
-     UserAccount delmn;
-      ArrayList<Integer> z;
-      DefaultTableModel dtm;
-      ArrayList<DeliveryAgent> del;
+
+    JPanel userProcessContainer;
+    Ecosystem ecosystem;
+    UserAccount account;
+    UserAccountDirectory useraccountdirectory;
+    Enterprise enterprise;
+    Customer customer;
+    Organization organization;
+    Network network;
+    UserAccount delmn;
+    ArrayList<Integer> z;
+    DefaultTableModel dtm;
+    ArrayList<DeliveryAgent> del;
+    private final ArrayList<DeliveryAgent> deliveryAgents;
+    ArrayList<Order> orderlist;
+
     /**
      * Creates new form DeliveryAgentWorkAreaJPanel
      */
-    public DeliveryAgentWorkAreaJPanel(JPanel userProcessContainer, UserAccount account,Network network,Organization organization, Enterprise enterprise,Ecosystem ecosystem) {
+    public DeliveryAgentWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Network network, Organization organization, Enterprise enterprise, Ecosystem ecosystem) {
         initComponents();
-        initComponents();
-        this.userProcessContainer=userProcessContainer;
-        this.ecosystem=ecosystem;
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
         this.account = account;
         this.enterprise = enterprise;
         this.organization = organization;
         this.network = network;
         this.z = new ArrayList<>();
-         if(this.ecosystem.getUserAccountDirectory() == null) {
+        if (this.ecosystem.getUserAccountDirectory() == null) {
             this.useraccountdirectory = new UserAccountDirectory();
             ecosystem.setUserAccountDirectory(useraccountdirectory);
         } else {
             this.useraccountdirectory = ecosystem.getUserAccountDirectory();
 
         }
-        
-        
+
+        this.deliveryAgents = this.enterprise.getDeliveryAgentsInEnterpiselist();
+        this.orderlist = new ArrayList<Order>();
+
+        for (Customer c : this.network.getCustomerDirectory().getCustomerList()) {
+            for (Order o : c.getOrderlist()) {
+                if (o.getStatus().equalsIgnoreCase("accepted") || o.getStatus().equals("request collected")) {
+                    if (o.getDeliveryAgent().getUseraccount().getUsername().equals(this.account.getUsername())) {
+                        this.orderlist.add(o);
+                    }
+                }
+            }
+        }
+
         String orderpicked;
         String orderDelivered;
-        
+
 //        ArrayList<UserAccount> usrl = useraccountdirectory.getUserAccountList();
 //        ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
 //        
         this.delmn = account;
-        System.out.println(" "+ delmn.getEmployee().getName());
+        System.out.println(" " + delmn.getEmployee().getName());
         jLabel_DelMan1.setText(delmn.getEmployee().getName());
-        
+
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         this.dtm = (DefaultTableModel) DeliveryOrderTable.getModel();
         //populateTable();
         populateDp();
-        
+
     }
 
     /**
@@ -113,7 +129,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel_DelMan1 = new javax.swing.JLabel();
-        orderscmb = new javax.swing.JComboBox<>();
+        orderscmb = new javax.swing.JComboBox();
         btnshoworders = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -215,70 +231,61 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-     public void populateDp() {
-      //  dtm.setRowCount(0);
-       // int selectrow = pharmaOrderTable.getSelectedRow();
-         ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
-         System.out.println("Inside combo box");
-            
-            for(Customer cust: customerdir){
-                    for (Order o : cust.getOrderlist()) {
-                //  Order o : this.customer.getOrderlist()//              populate items
-                if(("ACCEPTED".equalsIgnoreCase(o.getStatus())) || ("REQUEST COLLECTION".equalsIgnoreCase(o.getStatus())) && o.getDeliveryAgent().getUseraccount().getUsername() == this.delmn.getUsername()){
-                orderscmb.addItem(String.valueOf(o.getOrderId()));
+    public void populateDp() {
+
+        try {
+            for (Order o : this.orderlist) {
+                orderscmb.addItem(o.getOrderId());
             }
+        } catch (Exception e) {
+
         }
 
     }
-    }
-     
-     
+
+
     private void orderPicked_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderPicked_btnActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-                Date d = new Date();
-                SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-               // txtupdatedcat.setText(sdt.format(d));     
+
+        Date d = new Date();
+        SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // txtupdatedcat.setText(sdt.format(d));     
         String status = null;
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);
-         ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
-          del = this.enterprise.getDeliveryAgentsInEnterpiselist();
+        ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
+        del = this.enterprise.getDeliveryAgentsInEnterpiselist();
         // ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
 
-             System.out.println("Inside table");
-            
-            
-                for(Customer cust: customerdir){
-                    for (Order o : cust.getOrderlist()) {
-                    ArrayList<OrderItem> oi = o.getItemsOrdered();
-                    ArrayList<String> p = new ArrayList<>();
+        System.out.println("Inside table");
+
+        for (Customer cust : customerdir) {
+            for (Order o : cust.getOrderlist()) {
+                 if (o.getOrderId() == Integer.valueOf((int) orderscmb.getSelectedItem())){
+                ArrayList<OrderItem> oi = o.getItemsOrdered();
+                ArrayList<String> p = new ArrayList<>();
                 for (int i = 0; i < oi.size(); i++) {
-                    
+
                     p.add(oi.get(i).getProductName());
                 }
-                if(("ACCEPTED".equalsIgnoreCase(o.getStatus())) || ("REQUEST COLLECTION".equalsIgnoreCase(o.getStatus())) && o.getDeliveryAgent().getUseraccount().getUsername() == delmn.getUsername() && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                  if("ACCEPTED".equalsIgnoreCase(o.getStatus())){
-                       o.setStatus("OUT FOR DELIVERY");
-                       status = "Order Picked";
-                  }else{
-                       o.setStatus("OUT FOR COLLECTION");
-                       status = "Out for collection";
-                  }
-                   
-                dtm.insertRow(dtm.getRowCount(), new Object[]{
-                     o.getOrderId(),
-                     Arrays.toString(p.toArray()),
-                    cust.getName(),
-                    cust.getZipcode(),
-                    o.getOrderPayment().getStatus(),
-                    status  
-                });
-                
+              
+                    if (o.getStatus().equalsIgnoreCase("ACCEPTED")) {
+                        o.setStatus("OUT FOR DELIVERY");
+                        status = "Order Picked";
+                    } else {
+                        o.setStatus("OUT FOR COLLECTION");
+                        status = "Out for collection";
+                    }
+
+                    dtm.insertRow(dtm.getRowCount(), new Object[]{
+                        o.getOrderId(),
+                        Arrays.toString(p.toArray()),
+                        cust.getName(),
+                        cust.getZipcode(),
+                        o.getOrderPayment().getStatus(),
+                        status
+                    });
+
 //             for(DeliveryAgent dd : del ){
 //         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
 //           // z.add(dd.getZipcodes().get(j));
@@ -289,158 +296,152 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 //                }
 //                }
 //                }//closing delivery agent assignment
-               }
-               }//closing if statement
-            }
-                
-               System.out.println("Done with order pick up table");
-   
-              JOptionPane.showMessageDialog(null, "Delivery agent picked up the order " + sdt.format(d));
-        
-        
+                }
+            }//closing if statement
+        }
+
+        System.out.println("Done with order pick up table");
+
+        JOptionPane.showMessageDialog(null, "Delivery agent picked up the order " + sdt.format(d));
+
     }//GEN-LAST:event_orderPicked_btnActionPerformed
 
     private void orderDelivered_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderDelivered_btnActionPerformed
         // TODO add your handling code here:
-         Date d = new Date();
-         SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-         String status = null;
+        Date d = new Date();
+        SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String status = null;
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);
-      
-         ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
-          del = this.enterprise.getDeliveryAgentsInEnterpiselist();
+
+        ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
+        del = this.enterprise.getDeliveryAgentsInEnterpiselist();
         // ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
 
-             System.out.println("Inside table");
-            
-            
-                for(Customer cust: customerdir){
-                    for (Order o : cust.getOrderlist()) {
-                    ArrayList<OrderItem> oi = o.getItemsOrdered();
-                    ArrayList<String> pi = new ArrayList<>();
+        System.out.println("Inside table");
+
+        for (Customer cust : customerdir) {
+            for (Order o : cust.getOrderlist()) {
+                 if (o.getOrderId() == Integer.valueOf((int) orderscmb.getSelectedItem())) {
+                ArrayList<OrderItem> oi = o.getItemsOrdered();
+                ArrayList<String> pi = new ArrayList<>();
                 for (int i = 0; i < oi.size(); i++) {
-                    
+
                     pi.add(oi.get(i).getProductName());
                 }
-               
-        
-             if(("OUT FOR DELIVERY".equalsIgnoreCase(o.getStatus())) || ("OUT FOR COLLECTION".equalsIgnoreCase(o.getStatus())) && o.getDeliveryAgent().getUseraccount().getUsername() == delmn.getUsername() && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId())))
-             {
-                 System.out.println("Inside out for delivery");
-                if( o.getOrderPayment().getStatus() == "NOT PAID"){
-                    Payment odpayment = new Payment();
-                    o.setOrderPayment(odpayment);
-                    odpayment.setStatus("AMOUNT COLLECTED");
-                }
-                
-                if("OUT FOR DELIVERY".equalsIgnoreCase(o.getStatus())){
-                       o.setStatus("ORDER DELIVERED");
-                       status = "ORDER DELIVERED";
-                       JOptionPane.showMessageDialog(null, "Delivery agent delivered the order" + sdt.format(d));
-                  }else{
-                       o.setStatus("ORDER REQUEST COLLECTED");
-                       status = "ORDER REQUEST COLLECTED";
-                        JOptionPane.showMessageDialog(null, "Delivery agent collected the order request" + sdt.format(d));
-                  }
-               
-                dtm.insertRow(dtm.getRowCount(), new Object[]{
-                     o.getOrderId(),
-                     Arrays.toString(pi.toArray()),
-                    cust.getName(),
-                    cust.getZipcode(),
-                    o.getOrderPayment().getStatus(),
-                    status  
-                });
-                
-        String recipients = cust.getEmail(); 
-        
-        int dialogueb = JOptionPane.INFORMATION_MESSAGE;
-        System.out.println(""+dialogueb);
-        int dialoguer = JOptionPane.showConfirmDialog(this, "Please wait confirmation mail sending","CUSTOMER NOTIFICATION IN PROCESS", dialogueb);
-        
-        System.out.println(" "+dialoguer);
-        if(dialoguer == 0){
-        
-         System.out.println("Entering assign for email ==========");
-         String subjects = "Order Delivered";
-         String messaget = "Delivered agent delivered order successfully";
-        
-        
-        System.out.println("Start");
-        final String username = "pannagaveeramohan@gmail.com";
-        final String password = "9686300037";
 
-        Properties p = new Properties();
-        p.put("mail.smtp.auth", "true");
-        p.put("mail.smtp.host", "smtp.gmail.com");
-        p.put("mail.smtp.port", "465");
-        p.put("mail.transport.protocol", "smtp");
-        p.put("mail.smtp.starttls.enable", "true");
-        p.put("mail.smtp.starttls.enable", "true");
-        p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-
-         Session session = Session.getInstance(p,
-                  new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
+                    System.out.println("Inside out for delivery");
+                    if (o.getOrderPayment().getStatus() == "NOT PAID") {
+                        Payment odpayment = new Payment();
+                        o.setOrderPayment(odpayment);
+                        odpayment.setStatus("AMOUNT COLLECTED");
                     }
-                  });
 
+                    if (o.getStatus().equalsIgnoreCase("OUT FOR DELIVERY")) {
+                        //"OUT FOR DELIVERY".equalsIgnoreCase(o.getStatus())
+                        o.setStatus("ORDER DELIVERED");
+                        status = "ORDER DELIVERED";
+                        JOptionPane.showMessageDialog(null, "Delivery agent delivered the order" + sdt.format(d));
+                    } else {
+                        o.setStatus("ORDER REQUEST COLLECTED");
+                        status = "ORDER REQUEST COLLECTED";
+                        JOptionPane.showMessageDialog(null, "Delivery agent collected the order request" + sdt.format(d));
+                    }
 
-        try {
-           
-            Transport transport=session.getTransport();
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
-            
-            final Address[] recipientAddresses = InternetAddress.parse(recipients);
-            message.setRecipients(Message.RecipientType.TO,recipientAddresses);
-            message.setSubject(subjects);//formBean.getString(
-            message.setText(messaget);
-            transport.connect();
-            transport.send(message, recipientAddresses);//(message);
+                    dtm.insertRow(dtm.getRowCount(), new Object[]{
+                        o.getOrderId(),
+                        Arrays.toString(pi.toArray()),
+                        cust.getName(),
+                        cust.getZipcode(),
+                        o.getOrderPayment().getStatus(),
+                        status
+                    });
 
-            System.out.println("Done");
-           
+                    String recipients = cust.getEmail();
 
-        } catch (MessagingException e) {
-            System.out.println("e="+e);
-            e.printStackTrace();
-            throw new RuntimeException(e);
+                    int dialogueb = JOptionPane.INFORMATION_MESSAGE;
+                    System.out.println("" + dialogueb);
+                    int dialoguer = JOptionPane.showConfirmDialog(this, "Please wait confirmation mail sending", "CUSTOMER NOTIFICATION IN PROCESS", dialogueb);
 
-        }
+                    System.out.println(" " + dialoguer);
+                    if (dialoguer == 0) {
+
+                        System.out.println("Entering assign for email ==========");
+                        String subjects = "Order Delivered";
+                        String messaget = "Delivered agent delivered order successfully";
+
+                        System.out.println("Start");
+                        final String username = "pannagaveeramohan@gmail.com";
+                        final String password = "9686300037";
+
+                        Properties p = new Properties();
+                        p.put("mail.smtp.auth", "true");
+                        p.put("mail.smtp.host", "smtp.gmail.com");
+                        p.put("mail.smtp.port", "465");
+                        p.put("mail.transport.protocol", "smtp");
+                        p.put("mail.smtp.starttls.enable", "true");
+                        p.put("mail.smtp.starttls.enable", "true");
+                        p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+                        Session session = Session.getInstance(p,
+                                new javax.mail.Authenticator() {
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(username, password);
+                            }
+                        });
+
+                        try {
+
+                            Transport transport = session.getTransport();
+                            Message message = new MimeMessage(session);
+                            message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
+
+                            final Address[] recipientAddresses = InternetAddress.parse(recipients);
+                            message.setRecipients(Message.RecipientType.TO, recipientAddresses);
+                            message.setSubject(subjects);//formBean.getString(
+                            message.setText(messaget);
+                            transport.connect();
+                            transport.send(message, recipientAddresses);//(message);
+
+                            System.out.println("Done");
+
+                        } catch (MessagingException e) {
+                            System.out.println("e=" + e);
+                            e.printStackTrace();
+                            throw new RuntimeException(e);
+
+                        }
+
+                        JOptionPane.showMessageDialog(null, "Email sent to customer successful at " + sdt.format(d));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Email sent to customer cancelled ");
+                    }
+                }
+                 }
+            }
         
-    JOptionPane.showMessageDialog(null, "Email sent to customer successful at "+ sdt.format(d)); 
-               }
-             else{
-            JOptionPane.showMessageDialog(null, "Email sent to customer cancelled "); 
-        }
-             }
-             
-          }
-       }
     }//GEN-LAST:event_orderDelivered_btnActionPerformed
 
     private void orderPicked_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPicked_btnMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_orderPicked_btnMouseClicked
 
     private void orderPicked_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPicked_btnMouseEntered
         // TODO add your handling code here:
-        orderPicked_btn.setBackground(new Color(253,252,249));
+        orderPicked_btn.setBackground(new Color(253, 252, 249));
     }//GEN-LAST:event_orderPicked_btnMouseEntered
 
     private void orderDelivered_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderDelivered_btnMouseEntered
         // TODO add your handling code here:
-        orderDelivered_btn.setBackground(new Color(253,252,249));
+        orderDelivered_btn.setBackground(new Color(253, 252, 249));
     }//GEN-LAST:event_orderDelivered_btnMouseEntered
 
     private void orderDelivered_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderDelivered_btnMouseClicked
         // TODO add your handling code here:
-      //  orderDelivered_btn.setBackground(new Color(205,60,180));
+        //  orderDelivered_btn.setBackground(new Color(205,60,180));
     }//GEN-LAST:event_orderDelivered_btnMouseClicked
+
 
     private void orderscmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderscmbActionPerformed
         // TODO add your handling code here:
@@ -448,17 +449,9 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnshowordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshowordersActionPerformed
         // TODO add your handling code here:
-
-        ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
         System.out.println("Inside table");
+        populateTable();
 
-        for(Customer cust: customerdir){
-            for (Order o : cust.getOrderlist()) {
-                if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                    populateTable();
-                }
-            }
-        }
     }//GEN-LAST:event_btnshowordersActionPerformed
 
 
@@ -472,40 +465,39 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton orderDelivered_btn;
     private javax.swing.JButton orderPicked_btn;
-    private javax.swing.JComboBox<String> orderscmb;
+    private javax.swing.JComboBox orderscmb;
     // End of variables declaration//GEN-END:variables
-
     private void populateTable() {
         String status = "";
         System.out.println("Inside populate Table Delivery");
         dtm.setRowCount(0);
-         ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
-          del = this.enterprise.getDeliveryAgentsInEnterpiselist();
+        ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
+        del = this.enterprise.getDeliveryAgentsInEnterpiselist();
         // ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
 
-            // System.out.println("Inside table");
-            
-            
-                for(Customer cust: customerdir){
-                    for (Order o : cust.getOrderlist()) {
-                    ArrayList<OrderItem> oi = o.getItemsOrdered();
+        // System.out.println("Inside table");
+        for (Customer cust : customerdir) {
+            for (Order o : cust.getOrderlist()) {
+                if (o.getOrderId() == Integer.valueOf((int) orderscmb.getSelectedItem())) {
+
                     ArrayList<String> p = new ArrayList<>();
-                for (int i = 0; i < oi.size(); i++) {
-                    
-                    p.add(oi.get(i).getProductName());
-                }
-               if("ACCEPTED".equals(o.getStatus()) && o.getDeliveryAgent().getUseraccount().getUsername() == delmn.getUsername() && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                    System.out.println(" "+ delmn.getUsername());
-                //&& o.getDeliveryAgent().getUseraccount().getUsername() == account.getUsername()
-                dtm.insertRow(dtm.getRowCount(), new Object[]{
-                     o.getOrderId(),
-                    Arrays.toString(p.toArray()),
-                    cust.getName(),
-                    cust.getZipcode(),
-                    o.getOrderPayment().getStatus(),
-                    status  
-                });
-                
+                    ArrayList<OrderItem> oi = o.getItemsOrdered();
+                    for (int i = 0; i < oi.size(); i++) {
+
+                        p.add(oi.get(i).getProductName());
+                    }
+
+                    System.out.println(" " + delmn.getUsername());
+                    //&& o.getDeliveryAgent().getUseraccount().getUsername() == account.getUsername()
+                    dtm.insertRow(dtm.getRowCount(), new Object[]{
+                        o.getOrderId(),
+                        Arrays.toString(p.toArray()),
+                        cust.getName(),
+                        cust.getZipcode(),
+                        o.getOrderPayment().getStatus(),
+                        status
+                    });
+
 //             for(DeliveryAgent dd : del ){
 //         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
 //           // z.add(dd.getZipcodes().get(j));
@@ -516,16 +508,10 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 //                }
 //                }
 //                }//closing delivery agent assignment
-                     
+                }
             }
-             }
-               }//closing if statement
-                
-      System.out.println("Done with populate table");
-            }
-                
-             
+        }
+    }//closing if statement
+
+   
 }
-    
-
-

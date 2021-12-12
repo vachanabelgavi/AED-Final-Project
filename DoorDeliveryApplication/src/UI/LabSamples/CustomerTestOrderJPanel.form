@@ -44,7 +44,7 @@
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabel4" min="-2" pref="104" max="-2" attributes="0"/>
+              <Component id="labelTotalOrder" min="-2" pref="104" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -62,7 +62,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelTotalOrder" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="118" max="32767" attributes="0"/>
           </Group>
@@ -142,7 +142,7 @@
         <Property name="text" type="java.lang.String" value="Order Total: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="labelTotalOrder">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Lucida Grande" size="15" style="0"/>
@@ -152,7 +152,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnAddtoCart">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add to Cart"/>
+        <Property name="text" type="java.lang.String" value="Order"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddtoCartActionPerformed"/>

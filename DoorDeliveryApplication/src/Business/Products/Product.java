@@ -6,6 +6,7 @@
 package Business.Products;
 
 import java.io.File;
+import javax.imageio.ImageIO;
 
 /**
  *

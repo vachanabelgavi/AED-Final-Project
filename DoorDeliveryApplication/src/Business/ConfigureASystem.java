@@ -140,6 +140,9 @@ public class ConfigureASystem {
         vaccineEntAdmin2.setName("VACCINE AND IMMUNIZATION ENTERPRISE ADMIN BOSTON");
         e3B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bvaccineenterprise", "Bvaccineenterprise", vaccineEntAdmin2, new VaccinationEnterpriseRole());
 
+        
+        
+//        For Pharma enterprise
 //        create delivery agents in enterprise
         ArrayList<DeliveryAgent> delList = e.getDeliveryAgentsInEnterpiselist();
         ArrayList<Integer> z1 = new ArrayList<>();
@@ -185,6 +188,157 @@ public class ConfigureASystem {
         }
          eB.setDeliveryAgentsInEnterpiselist(delList2);
 
+         
+         
+         
+         
+        // For Vaccine Enterprise
+        //  create delivery agents in enterprise
+        ArrayList<DeliveryAgent> delListV1 = e3.getDeliveryAgentsInEnterpiselist();
+        for (int j = 1; j < 5; j++) {
+            ArrayList<Integer> z3 = new ArrayList<>();
+            DeliveryAgent d = new DeliveryAgent();
+            z3.add(90010 + j);
+//
+
+                Employee em = new Employee();
+                em.setName("Delivery Man" + String.valueOf(j));
+                UserAccount u = d.getUseraccount();
+                u.setUsername("deliverycv" + String.valueOf(j));
+                u.setPassword("deliverycv" + String.valueOf(j));
+                u.setRole(new DeliveryAgentRole());
+                u.setEmployee(em);
+                d.setUseraccount(u);
+                d.setZipcodes(z3);
+                d.setEnterprisename(e3);
+                delListV1.add(d);
+
+
+
+            }
+        e3.setDeliveryAgentsInEnterpiselist(delListV1);
+         ArrayList<DeliveryAgent> delListV2 = e3B.getDeliveryAgentsInEnterpiselist();
+         for (int j = 1; j < 5; j++){
+             ArrayList<Integer> z4 = new ArrayList<>();
+                DeliveryAgent d = new DeliveryAgent();
+                 z4.add(02115 + j);
+
+                Employee em = new Employee();
+                em.setName("Delivery Man Boston" + String.valueOf(j));
+                UserAccount u = d.getUseraccount();
+                u.setUsername("deliverybv" + String.valueOf(j));
+                u.setPassword("deliverybv" + String.valueOf(j));
+                u.setRole(new DeliveryAgentRole());
+                u.setEmployee(em);
+                d.setZipcodes(z4);
+                d.setEnterprisename(e3B);
+                delListV2.add(d);
+
+
+        }
+         e3B.setDeliveryAgentsInEnterpiselist(delListV2);
+         
+         
+         
+         
+         
+         // For Medical equipment Enterprise
+        //  create delivery agents in enterprise
+        ArrayList<DeliveryAgent> delListME1 = e1.getDeliveryAgentsInEnterpiselist();
+        for (int j = 1; j < 5; j++) {
+            ArrayList<Integer> z5 = new ArrayList<>();
+            DeliveryAgent d = new DeliveryAgent();
+            z5.add(90010 + j);
+//
+
+                Employee em = new Employee();
+                em.setName("Delivery Man" + String.valueOf(j));
+                UserAccount u = d.getUseraccount();
+                u.setUsername("deliverycm" + String.valueOf(j));
+                u.setPassword("deliverycm" + String.valueOf(j));
+                u.setRole(new DeliveryAgentRole());
+                u.setEmployee(em);
+                d.setUseraccount(u);
+                d.setZipcodes(z5);
+                d.setEnterprisename(e1);
+                delListME1.add(d);
+
+
+
+            }
+        e1.setDeliveryAgentsInEnterpiselist(delListME1);
+         ArrayList<DeliveryAgent> delListME2 = e1B.getDeliveryAgentsInEnterpiselist();
+         for (int j = 1; j < 5; j++){
+             ArrayList<Integer> z6 = new ArrayList<>();
+                z6.add(02115 + j);
+                DeliveryAgent d = new DeliveryAgent();
+
+                Employee em = new Employee();
+                em.setName("Delivery Man Boston" + String.valueOf(j));
+                UserAccount u = d.getUseraccount();
+                u.setUsername("deliverybm" + String.valueOf(j));
+                u.setPassword("deliverybm" + String.valueOf(j));
+                u.setRole(new DeliveryAgentRole());
+                u.setEmployee(em);
+                d.setZipcodes(z6);
+                d.setEnterprisename(e1B);
+                delListV2.add(d);
+
+
+        }
+         e1B.setDeliveryAgentsInEnterpiselist(delListME2);
+         
+         
+         
+         // For Lab Enterprise
+        //  create delivery agents in enterprise
+        ArrayList<DeliveryAgent> delListL1 = e2.getDeliveryAgentsInEnterpiselist();
+        for (int j = 1; j < 5; j++) {
+            ArrayList<Integer> z7 = new ArrayList<>();
+            DeliveryAgent d = new DeliveryAgent();
+            z7.add(90010 + j);
+//
+
+                Employee em = new Employee();
+                em.setName("Delivery Man" + String.valueOf(j));
+                UserAccount u = d.getUseraccount();
+                u.setUsername("deliverycl" + String.valueOf(j));
+                u.setPassword("deliverycl" + String.valueOf(j));
+                u.setRole(new DeliveryAgentRole());
+                u.setEmployee(em);
+                d.setUseraccount(u);
+                d.setZipcodes(z7);
+                d.setEnterprisename(e2);
+                delListL1.add(d);
+
+            }
+        
+        e3.setDeliveryAgentsInEnterpiselist(delListV1);
+        
+         ArrayList<DeliveryAgent> delListL2 = e2B.getDeliveryAgentsInEnterpiselist();
+         for (int j = 1; j < 5; j++){
+             ArrayList<Integer> z8 = new ArrayList<>();
+                DeliveryAgent d = new DeliveryAgent();
+                 z8.add(02115 + j);
+
+                Employee em = new Employee();
+                em.setName("Delivery Man Boston" + String.valueOf(j));
+                UserAccount u = d.getUseraccount();
+                u.setUsername("deliverybl" + String.valueOf(j));
+                u.setPassword("deliverybl" + String.valueOf(j));
+                u.setRole(new DeliveryAgentRole());
+                u.setEmployee(em);
+                d.setZipcodes(z8);
+                d.setEnterprisename(e2B);
+                delListL2.add(d);
+
+
+        }
+         e2B.setDeliveryAgentsInEnterpiselist(delListL2);
+         
+         
+         
+         
 
 //        create users on enterprise level
         OrganizationDirectory o = e.getOrganizationDirectory();
@@ -219,7 +373,7 @@ public class ConfigureASystem {
         Organization orgLB = oo2.createOrganization(Organization.Type.LabAssistant, "Lab Center", "Boston", 02120);
         Organization orgLB1 = oo2.createOrganization(Organization.Type.LabTester, "Testing Center", "Boston", 02120);
 
-        
+
 //        System.out.println("ORG LIST SIZE " + orgList.size());
 
 //        ArrayList<Enterprise> eList = edir.getEnterpriseList();
@@ -263,11 +417,17 @@ public class ConfigureASystem {
 
 
 
-        String[] drugs = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
+
+
+        String[] drugs = {"Brufen", "Paracetamol", "Pan D", "Crocin", "Atrovastin", "Lisinopril", "Amlodipine"};
         for (String s1 : drugs) {
             orgP1.addProduct(s1, 7.5, 500);
-            orgP2.addProduct(s1, 6.5, 1500);
             orgBP1.addProduct(s1, 8.0, 1000);
+        }
+
+        String[] sup = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
+        for (String s1 : sup) {
+            orgP2.addProduct(s1, 6.5, 1500);
             orgBP2.addProduct(s1, 7.45, 3500);
         }
 
