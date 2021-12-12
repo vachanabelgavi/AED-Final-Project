@@ -212,7 +212,7 @@ public class CustomerCartJPanel extends javax.swing.JPanel {
         if (equipmentItems.size() > 0) {
             this.equipmentOrder.setItemsOrdered(equipmentItems);
             this.equipmentOrder.setOrganizationname("Equipments");
-            this.equipmentOrder.setEnterprisename("Medical Equipment");
+            this.equipmentOrder.setEnterprisename("Medical Equipments");
             this.equipmentOrder.setStatus("IN PROGRESS");
             this.equipmentOrder.calcOrderTotal();
             customerOrder.add(equipmentOrder);

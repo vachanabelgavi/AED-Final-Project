@@ -110,11 +110,11 @@ public class ConfigureASystem {
 //        CREATE ENTERPRISE USER ADMINS FOR 2 ENTERPRISES
         Employee pharmaEntemp = new Employee();
         pharmaEntemp.setName("PHARMA ENTERPRISE ADMIN CALIFORNIA");
-        e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmaenterprise", "pharmaenterprise", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
+        e.getEnterpriseUserAccountDirectory().createEnterpriseUser("pharmae", "pharmae", pharmaEntemp, new PharmaceuticalEnterpriseAdminRole());
 
         Employee medEqupEntEmp = new Employee();
         medEqupEntEmp.setName("MEDICAL EQUIPMENTS ENTERPRISE ADMIN CALIFORNIA");
-        e1.getEnterpriseUserAccountDirectory().createEnterpriseUser("medicalenterprise", "medicalenterprise", medEqupEntEmp, new EquipmentEnterpriseRole());
+        e1.getEnterpriseUserAccountDirectory().createEnterpriseUser("medicale", "medicale", medEqupEntEmp, new EquipmentEnterpriseRole());
 
         Employee labEntpEMp = new Employee();
         labEntpEMp.setName("LAB CENTER & DIAGNOSTICS ENTERPRISE ADMIN CALIFORNIA");
@@ -126,11 +126,11 @@ public class ConfigureASystem {
 
         Employee pharmaEntemp2 = new Employee();
         pharmaEntemp.setName("PHARMA ENTERPRISE ADMIN BOSTON");
-        eB.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bpharmaenterprise", "Bpharmaenterprise", pharmaEntemp2, new PharmaceuticalEnterpriseAdminRole());
+        eB.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bpharmae", "Bpharmae", pharmaEntemp2, new PharmaceuticalEnterpriseAdminRole());
 
         Employee medEqupEntEmp2 = new Employee();
         medEqupEntEmp2.setName("MEDICAL EQUIPMENTS ENTERPRISE ADMIN BOSTON");
-        e1B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bmedicalenterprise", "Bmedicalenterprise", medEqupEntEmp2, new EquipmentEnterpriseRole());
+        e1B.getEnterpriseUserAccountDirectory().createEnterpriseUser("Bmedicale", "Bmedicale", medEqupEntEmp2, new EquipmentEnterpriseRole());
 
         Employee labEntpEMp2 = new Employee();
         labEntpEMp.setName("LAB CENTER & DIAGNOSTICS ENTERPRISE ADMIN BOSTON");

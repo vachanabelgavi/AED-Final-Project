@@ -66,7 +66,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DOOR TO DOOR DELIVERY");
@@ -165,14 +164,6 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 20, 150, 90));
-
-        jButton2.setText("X");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, 900));
 
@@ -341,6 +332,8 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         jSplitPane1.setLeftComponent(jPanel1);
         jSplitPane1.setRightComponent(null);
+         this.container.removeAll();
+        this.dB4OUtil.storeSystem(business);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -359,12 +352,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordFocusLost
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        this.container.removeAll();
-        this.dB4OUtil.storeSystem(business);
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,7 +392,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JPanel container;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
