@@ -33,7 +33,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.internet.MimeMessage;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-//import javax.activation.*;
+import javax.activation.*;
 import javax.mail.Address;
 /**
  *
@@ -76,9 +76,10 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
 
         System.out.println("CAME INTO LAB ORDER PANEL");
         dtm = (DefaultTableModel) EquipmentOrderTable.getModel();
-        
-        
+
+
         populateDp();
+        //Equipments
     }
 
    public void populateDp() {
@@ -86,11 +87,11 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
        // int selectrow = pharmaOrderTable.getSelectedRow();
          ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
          System.out.println("Inside combo box");
-            
+
             for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                 //  Order o : this.customer.getOrderlist()//              populate items
-                if("ACCEPTED".equals(o.getStatus())){
+                if("ACCEPTED".equals(o.getStatus()) && o.getOrganizationname().equals("Equipments")){
                 orderscmb.addItem(String.valueOf(o.getOrderId()));
             }
         }
@@ -223,43 +224,49 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
 
                for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
+                        if(o.getOrganizationname().equals("Equipments"))
+                      {
                     ArrayList<OrderItem> oi = o.getItemsOrdered();
                     ArrayList<String> pr = new ArrayList<>();
                 //  Order o : this.customer.getOrderlist()//              populate items
                 for (int i = 0; i < oi.size(); i++) {
-                    
+
                     pr.add(oi.get(i).getProductName());
                 }
-                
+
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
                      System.out.println(" "+agent);
-                     o.setDeliveryAgent(dlvrymn);
-                    dlvrymn.setUseraccount(ua);
-                    ua.setUsername(agent); 
-                    dlvrymn.setActive(false);
-                    deliverycmb.setSelectedItem(" ");    
-                    populateTable();
-                   
-                    ArrayList<String> agentslist = new ArrayList<>();
-                    agentslist.add(agent);
-                    ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
-                    System.out.println(o.getDeliveryAgent().getUseraccount().getUsername());
+                   ArrayList<DeliveryAgent> del = enterprise.getDeliveryAgentsInEnterpiselist();
+                     for(DeliveryAgent d: del){
+                     if(d.getUseraccount().getUsername().equals(agent)){
+                      d.setActive(false);
+                      o.setDeliveryAgent(d);
+                      System.out.println(" "+ o.getDeliveryAgent().getUseraccount().getUsername());
+                      System.out.println(" "+ d.getActive());
+                    //  o.getDeliveryAgent().getUseraccount().getUsername();
+                      //d.getUseraccount().getUsername();
 
-        
+                    System.out.println("cmae hre ");
+                     }
+                     }
+                    populateTable();
+
+
+
         if(emailsend = true){
-        
-        JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");   
+
+        JOptionPane.showMessageDialog(null, "Delivery agent assigned successful");
         int dialogueb = JOptionPane.INFORMATION_MESSAGE;
         System.out.println(""+dialogueb);
         int dialoguer = JOptionPane.showConfirmDialog(this, "SENDING EMAIL\n"
                 + "If yes please wait","DELIVERY AGENT ASSIGNMENT", dialogueb);
-        if(dialoguer == 0){      
+        if(dialoguer == 0){
          recipients = cust.getEmail();
          System.out.println("Entering assign for email ==========");
          String subjects = "Delivery";
          String messaget = "Delivered agent assigned successfully";
-        
-        
+
+
         System.out.println("Start");
         final String username = "pannagaveeramohan@gmail.com";
         final String password = "9686300037";
@@ -282,11 +289,11 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
 
 
         try {
-           
+
             Transport transport=session.getTransport();
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
-            
+
             final Address[] recipientAddresses = InternetAddress.parse(recipients);
             message.setRecipients(Message.RecipientType.TO,recipientAddresses);
             message.setSubject(subjects);//formBean.getString(
@@ -302,17 +309,17 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
             throw new RuntimeException(e);
 
         }
-    
-    JOptionPane.showMessageDialog(null, "Email sent to customer successful");              
+
+    JOptionPane.showMessageDialog(null, "Email sent to customer successful");
   }else{
-         JOptionPane.showMessageDialog(null, "Email sending cancelled");   
+         JOptionPane.showMessageDialog(null, "Email sending cancelled");
         }
-        
+
     }
     }
     }
     }
-               
+               }
     }//GEN-LAST:event_assignbtnActionPerformed
 
     private void btnshowordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshowordersActionPerformed
@@ -323,7 +330,7 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
 
         for(Customer cust: customerdir){
             for (Order o : cust.getOrderlist()) {
-                if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
+                if(orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId())) && o.getOrganizationname().equals("Equipments")){
                     deliverycmb.removeAllItems();
                     populateTable();
                 }
@@ -353,21 +360,23 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
         dtm.setRowCount(0);
          ArrayList<Customer> customerdir = this.network.getCustomerDirectory().getCustomerList();
           del = this.enterprise.getDeliveryAgentsInEnterpiselist();
-         ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
+//         ArrayList<OrderItem> cartOrder = this.customer.getCustomerCart().getCartItems();
              System.out.println("Inside table");
                 this.z = new ArrayList<>();
-            
+
                 for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
+                        if(o.getOrganizationname().equals("Equipments"))
+                      {
                     ArrayList<OrderItem> oi = o.getItemsOrdered();
                     ArrayList<String> p = new ArrayList<>();
-              
+
                 for (int i = 0; i < oi.size(); i++) {
-                    
+
                     p.add(oi.get(i).getProductName());
                 }
                 if("ACCEPTED".equals(o.getStatus()) && orderscmb.getSelectedItem().toString().equals(String.valueOf(o.getOrderId()))){
-                
+
                 dtm.insertRow(dtm.getRowCount(), new Object[]{
                      o.getOrderId(),
                      Arrays.toString(p.toArray()),
@@ -376,7 +385,7 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
                     o.getPrice(),
                     o.getDeliveryAgent().getUseraccount().getUsername()
                 });
-                
+
              for(DeliveryAgent dd : del ){
               z = dd.getZipcodes();
               for(int j =0; j< dd.getZipcodes().size(); j++){
@@ -387,8 +396,9 @@ public class ManageEquipmentOrdersJPanel extends javax.swing.JPanel {
                 }//closing delivery agent assignment
                }
                }//closing if statement
+                    }
             }
-                
+
                System.out.println("Done with populate table");
-   } 
+   }
 }

@@ -240,6 +240,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        supermarketTable.setOpaque(false);
         jScrollPane2.setViewportView(supermarketTable);
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 700, 390));

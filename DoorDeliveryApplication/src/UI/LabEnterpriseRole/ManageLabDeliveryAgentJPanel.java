@@ -40,21 +40,26 @@ JPanel userProcessContainer;
     DefaultTableModel dtm;
     ArrayList<DeliveryAgent> del;
     ArrayList<Integer> z;
+    Network network;
+
     /**
      * Creates new form ManageLabDeliveryAgentJPanel
      */
-    public ManageLabDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
-         this.userProcessContainer = userProcessContainer;
+    public ManageLabDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem,Network network, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
+         
+        initComponents();
+        this.userProcessContainer = userProcessContainer;
         this.business = ecosystem;
         this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
+        this.network = network;
         this.z = new ArrayList<>();
-        System.out.println("CAME INTO DELIVERY AGENT PANEL");
-        dtm = (DefaultTableModel) deliveryjTable.getModel();
+        System.out.println("CAME INTO LAB DELIVERY AGENT PANEL");
+        
+        
 
-
-
+        this.dtm = (DefaultTableModel) delivery.getModel();
         System.out.println("Going inside populate table");
         populateTable();
         displaycombo();
@@ -71,22 +76,22 @@ JPanel userProcessContainer;
 
 
 
+
     }
-    
+
     private void displaycombo() {
 
          del = enterprise.getDeliveryAgentsInEnterpiselist();
 
 
-        for(DeliveryAgent dd : del ){
+      
          //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
            // z.add(dd.getZipcodes().get(j));
-              z = dd.getZipcodes();
-              for(int i =0; i< dd.getZipcodes().size(); i++){
+                
+              z = network.getZipcodes();
+              for(int i =0; i< z.size(); i++){
               cmbzipcode.addItem(z.get(i).toString());
               }
-             }
-//    }
     }
 
     /**
@@ -112,7 +117,7 @@ JPanel userProcessContainer;
         btnAdd = new javax.swing.JButton();
         btndelete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        deliveryjTable = new javax.swing.JTable();
+        delivery = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jcheckyes = new javax.swing.JCheckBox();
         jcheckno = new javax.swing.JCheckBox();
@@ -184,7 +189,7 @@ JPanel userProcessContainer;
         });
         jPanel3.add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 470, -1, -1));
 
-        deliveryjTable.setModel(new javax.swing.table.DefaultTableModel(
+        delivery.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -195,7 +200,7 @@ JPanel userProcessContainer;
                 "Name", "Zipcode", "Active", "Username", "Password"
             }
         ));
-        jScrollPane1.setViewportView(deliveryjTable);
+        jScrollPane1.setViewportView(delivery);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(485, 138, 477, 323));
 
@@ -261,7 +266,7 @@ JPanel userProcessContainer;
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
 
-         Employee em = new Employee();
+        Employee em = new Employee();
         DeliveryAgent d = new DeliveryAgent();
         UserAccount u = d.getUseraccount();
 
@@ -337,8 +342,8 @@ JPanel userProcessContainer;
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         // TODO add your handling code here:
-        int selectrow = deliveryjTable.getSelectedRow();
-        String name = deliveryjTable.getValueAt(selectrow, 0).toString();
+        int selectrow = delivery.getSelectedRow();
+        String name = delivery.getValueAt(selectrow, 0).toString();
 
         if(selectrow < 0) {
             JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
@@ -401,7 +406,7 @@ JPanel userProcessContainer;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btndelete;
     private javax.swing.JComboBox<String> cmbzipcode;
-    private javax.swing.JTable deliveryjTable;
+    private javax.swing.JTable delivery;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

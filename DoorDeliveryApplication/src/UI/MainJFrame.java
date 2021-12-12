@@ -66,6 +66,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DOOR TO DOOR DELIVERY");
@@ -287,7 +288,6 @@ public class MainJFrame extends javax.swing.JFrame {
                                 break;
                             }
 
-//                        }
                         }
                     }
 
@@ -334,7 +334,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(null);
          this.container.removeAll();
         this.dB4OUtil.storeSystem(business);
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
@@ -352,6 +351,12 @@ public class MainJFrame extends javax.swing.JFrame {
     private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordFocusLost
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.container.removeAll();
+        this.dB4OUtil.storeSystem(business);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,6 +397,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JPanel container;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

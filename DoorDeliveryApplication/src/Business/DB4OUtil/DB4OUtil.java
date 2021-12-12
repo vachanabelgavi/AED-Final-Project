@@ -22,6 +22,7 @@ public class DB4OUtil {
 
     private static final String FILENAME = Paths.get("Databank.db4o").toAbsolutePath().toString();// path to the data store
     private static DB4OUtil dB4OUtil;
+    private ObjectContainer conn;
 
     public synchronized static DB4OUtil getInstance() {
         if (dB4OUtil == null) {
@@ -73,6 +74,7 @@ public class DB4OUtil {
 
     public Ecosystem retrieveSystem() {
         try {
+
             ObjectContainer conn = createConnection();
             System.out.println("New object");
             ObjectSet<Ecosystem> systems = conn.query(Ecosystem.class); // Change to the object you want to save

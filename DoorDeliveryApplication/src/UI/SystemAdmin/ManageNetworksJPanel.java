@@ -160,50 +160,33 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         try {
-            String name = txtNetworkName.getText();
+        String name = txtNetworkName.getText();
 
-            Network network = business.createNetwork();
-            network.setNetworkName(name);
-
-            ArrayList<Integer> zipcodes = new ArrayList<>();
+        Network network = business.createNetwork();
+        network.setNetworkName(name);
+        
+        ArrayList<Integer> zipcodes = new ArrayList<>();
+        for(int i=1; i<10; i++) {
             int z = Integer.valueOf(jTextField1.getText());
-            for (int i = 1; i < 10; i++) {
+            zipcodes.add(z);
+        }
+        
+        EnterpriseDirectory edir = new EnterpriseDirectory();
+        Enterprise e = edir.createEnterprise(Enterprise.EnterpriseType.Pharmaceutical, "Pharmaceutical", name);
+        Enterprise e1 = edir.createEnterprise(Enterprise.EnterpriseType.MedicalEquipements, "Medical Equipments", name);
+        Enterprise e2 = edir.createEnterprise(Enterprise.EnterpriseType.LabDiagnostics, "Lab Center & Diagnostics", name);
+        Enterprise e3 = edir.createEnterprise(Enterprise.EnterpriseType.Vaccination, "Immunization & Vaccination", name);
+        
+        network.setZipcodes(zipcodes);
 
-                zipcodes.add(z + i);
-            }
+        network.setEnterpriseDirectory(edir);
+        
+        JOptionPane.showMessageDialog(btnAdd, "Network Added Successfully");
 
-            EnterpriseDirectory edir = new EnterpriseDirectory();
-            Enterprise e = edir.createEnterprise(Enterprise.EnterpriseType.Pharmaceutical, "Pharmaceutical", name);
-            Enterprise e1 = edir.createEnterprise(Enterprise.EnterpriseType.MedicalEquipements, "Medical Equipments", name);
-            Enterprise e2 = edir.createEnterprise(Enterprise.EnterpriseType.LabDiagnostics, "Lab Center & Diagnostics", name);
-            Enterprise e3 = edir.createEnterprise(Enterprise.EnterpriseType.Vaccination, "Immunization & Vaccination", name);
+        populateNetworkTable();
 
-            OrganizationDirectory o = e.getOrganizationDirectory();
-            OrganizationDirectory o1 = e1.getOrganizationDirectory();
-            OrganizationDirectory o2 = e2.getOrganizationDirectory();
-            OrganizationDirectory o3 = e3.getOrganizationDirectory();
-
-            Organization orgP = o.createOrganization(Organization.Type.Doctor, "Doctor Associate", name, z);
-            Organization orgP1 = o.createOrganization(Organization.Type.Pharmacist, "Pharmacy", name, z);
-            Organization orgP2 = o.createOrganization(Organization.Type.MarketManager, "Supermarket", name, z);
-
-            Organization orgM = o1.createOrganization(Organization.Type.EquipmentManager, "Equipments", name, z);
-
-            Organization orgV = o3.createOrganization(Organization.Type.PharmaOrgAdmin, "Immunization", name, z);
-
-            Organization orgL = o2.createOrganization(Organization.Type.LabAssistant, "Lab Center", name, z);
-            Organization orgL1 = o2.createOrganization(Organization.Type.LabTester, "Testing Center", name, z);
-
-            network.setZipcodes(zipcodes);
-
-            network.setEnterpriseDirectory(edir);
-
-            JOptionPane.showMessageDialog(btnAdd, "Network Added Successfully");
-
-            populateNetworkTable();
-
-            txtNetworkName.setText("");
-        } catch (Exception e) {
+        txtNetworkName.setText("");
+        } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "Check input fields");
         }
     }//GEN-LAST:event_btnAddActionPerformed
