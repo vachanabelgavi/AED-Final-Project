@@ -334,7 +334,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jSplitPane1.setRightComponent(null);
          this.container.removeAll();
         this.dB4OUtil.storeSystem(business);
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed

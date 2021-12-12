@@ -16,21 +16,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-          <EmptySpace min="0" pref="1224" max="32767" attributes="0"/>
-=======
           <EmptySpace min="0" pref="937" max="32767" attributes="0"/>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jPanel1" max="32767" attributes="0"/>
-<<<<<<< HEAD
-                      <Component id="jPanel2" pref="1212" max="32767" attributes="0"/>
-=======
                       <Component id="jPanel2" max="32767" attributes="0"/>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -39,21 +31,13 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-          <EmptySpace min="0" pref="836" max="32767" attributes="0"/>
-=======
           <EmptySpace min="0" pref="640" max="32767" attributes="0"/>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
-                  <Component id="jPanel2" pref="698" max="32767" attributes="0"/>
-=======
                   <Component id="jPanel2" max="32767" attributes="0"/>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -62,42 +46,19 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
-<<<<<<< HEAD
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f9" green="fc" red="fd" type="rgb"/>
-        </Property>
-      </Properties>
-=======
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-=======
               <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="49" max="32767" attributes="0"/>
-=======
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="40" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
               </Group>
           </Group>
         </DimensionLayout>
@@ -106,14 +67,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-<<<<<<< HEAD
-              <Font name="Lucida Grande" size="24" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="0" type="rgb"/>
-=======
               <Font name="Lucida Grande" size="24" style="0"/>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Pharmacy Enterprise Work Area"/>
@@ -122,16 +76,6 @@
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
-<<<<<<< HEAD
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f9" green="fc" red="fd" type="rgb"/>
-        </Property>
-      </Properties>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="false"/>
-=======
 
       <Layout>
         <DimensionLayout dim="0">
@@ -172,63 +116,23 @@
               </Group>
           </Group>
         </DimensionLayout>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JButton" name="btndeliveryagents">
           <Properties>
-<<<<<<< HEAD
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="0" type="rgb"/>
-            </Property>
-=======
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
             <Property name="text" type="java.lang.String" value="Manage Delivery Agents"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btndeliveryagentsActionPerformed"/>
           </Events>
-<<<<<<< HEAD
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="640" y="50" width="180" height="40"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnmanageorders">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="66" green="66" red="0" type="rgb"/>
-            </Property>
-=======
-        </Component>
-        <Component class="javax.swing.JButton" name="btnmanageorders">
-          <Properties>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
             <Property name="text" type="java.lang.String" value="Manage Orders"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnmanageordersActionPerformed"/>
           </Events>
-<<<<<<< HEAD
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="430" y="50" width="200" height="40"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/UI/resources/illustration-male-pharmacist-female-customer-counter.png"/>
-            </Property>
-          </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="310" y="110" width="700" height="400"/>
-            </Constraint>
-          </Constraints>
-=======
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -251,7 +155,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&lt;View_selected_node&gt;"/>
           </Properties>
->>>>>>> c328d940eaea29ac3ceb02adbecbcb4e7f2d2cc0
         </Component>
       </SubComponents>
     </Container>

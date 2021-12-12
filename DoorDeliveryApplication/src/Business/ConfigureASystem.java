@@ -425,7 +425,6 @@ public class ConfigureASystem {
             orgP1.addProduct(s1, 7.5, 500);
             orgBP1.addProduct(s1, 8.0, 1000);
         }
-
         String[] sup = {"Brufen", "Paracetamol", "Pan D", "Crocin"};
         for (String s1 : sup) {
             orgP2.addProduct(s1, 6.5, 1500);

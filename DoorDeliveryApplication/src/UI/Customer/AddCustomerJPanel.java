@@ -216,8 +216,8 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         String name = txtName.getText();
-        int phone = Integer.parseInt(txtPhone.getText());
-        int zip = Integer.parseInt(txtZipcode.getText());
+        int phone = Integer.valueOf(txtPhone.getText());
+        int zip = Integer.valueOf(txtZipcode.getText());
         String streetaddress = txtAddress.getText();
         String email = txtEmail.getText();
         String location = txtLocation.getText();

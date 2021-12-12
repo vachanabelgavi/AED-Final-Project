@@ -29,7 +29,6 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
 
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = system;
-
         populateNetworks();
 
     }
