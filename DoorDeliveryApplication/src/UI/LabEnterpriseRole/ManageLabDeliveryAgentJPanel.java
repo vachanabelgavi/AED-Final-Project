@@ -82,11 +82,6 @@ JPanel userProcessContainer;
     private void displaycombo() {
 
          del = enterprise.getDeliveryAgentsInEnterpiselist();
-
-
-      
-         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
-           // z.add(dd.getZipcodes().get(j));
                 
               z = network.getZipcodes();
               for(int i =0; i< z.size(); i++){
@@ -303,8 +298,8 @@ JPanel userProcessContainer;
         else{
             //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
             System.out.println("Inside else statement");
-            Employee employee = business.getEmployeeDirectory().createEmployee(name);
-            business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
+            //Employee employee = business.getEmployeeDirectory().createEmployee(name);
+            //business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
 
             ArrayList<Integer> zipcodes = new ArrayList<Integer>();
             zipcodes.add(zip);
@@ -314,7 +309,7 @@ JPanel userProcessContainer;
             u.setPassword(password);
             u.setRole(new DeliveryAgentRole());
             u.setEmployee(em);
-            d.setUseraccount(u);
+           // d.setUseraccount(u);
             d.setZipcodes(zipcodes);
             d.setEnterprisename(enterprise);
 

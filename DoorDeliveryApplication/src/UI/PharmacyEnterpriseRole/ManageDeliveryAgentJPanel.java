@@ -241,21 +241,21 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         }
 
         else{
-            //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
             System.out.println("Inside else statement");
-            Employee employee = business.getEmployeeDirectory().createEmployee(name);
-            business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
+            Employee employee = new Employee();
+            employee.setName(name);
 
             ArrayList<Integer> zipcodes = new ArrayList<Integer>();
             zipcodes.add(zip);
             ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
-            em.setName(name);
             u.setUsername(username);
             u.setPassword(password);
             u.setRole(new DeliveryAgentRole());
-            u.setEmployee(em);
-            d.setUseraccount(u);
+            u.setEmployee(employee);
+//            d.setUseraccount(u);
             d.setZipcodes(zipcodes);
+            System.out.println("delivery- eneterprise");
+            System.out.println("new changed ...... ");
             d.setEnterprisename(enterprise);
 
             if(available == true){
@@ -306,10 +306,6 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         ArrayList<UserAccount> usrl = userdir.getUserAccountList();
         ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
         String deliveryman = dtm.getValueAt(selectrow,0).toString();
-//        ArrayList<Integer> z1 = new ArrayList<>();
-//        z1.add((Integer) dtm.getValueAt(selectrow,1));
-       // String zipcodes = dtm.getValueAt(selectrow,1).toString();
-      //  String available = dtm.getValueAt(selectrow, 2).toString();
         String uname = dtm.getValueAt(selectrow,3).toString();
         String passwd = dtm.getValueAt(selectrow,4).toString();
         int dialogueb = JOptionPane.YES_NO_OPTION;

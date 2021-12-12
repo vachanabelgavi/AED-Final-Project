@@ -312,7 +312,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         } catch (Exception exc) {
             System.out.println("An exception exc -------- " + exc);
-            JOptionPane.showMessageDialog(null, "User does not exist!");
+//            JOptionPane.showMessageDialog(null, "User does not exist!");
         }
         btnLogin.setEnabled(true);
 //        btnExit.setEnabled(true);
