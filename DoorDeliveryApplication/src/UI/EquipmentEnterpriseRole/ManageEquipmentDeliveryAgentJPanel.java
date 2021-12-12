@@ -38,22 +38,27 @@ JPanel userProcessContainer;
     Enterprise enterprise;
     DefaultTableModel dtm;
     ArrayList<DeliveryAgent> del;
+    Network network;
+    ArrayList<Integer> z;
     /**
      * Creates new form ManageEquipmentDeliveryAgentJPanel
      */
-    public ManageEquipmentDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
+    public ManageEquipmentDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem,Network network, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = ecosystem;
         this.ua = ua;
         this.userdir = userdir;
         this.enterprise = enterprise;
+        this.network = network;
+        this.z = new ArrayList<>();
 
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
 
         System.out.println("Going inside populate table");
         populateTable();
+        cmbzipcode.removeAllItems();
         displaycombo();
 
 
@@ -410,9 +415,10 @@ JPanel userProcessContainer;
 
     private void displaycombo() {
          del = enterprise.getDeliveryAgentsInEnterpiselist();
-        for(DeliveryAgent dd : del ){
-            cmbzipcode.addItem(dd.getZipcodes().toString());
+              z = network.getZipcodes();
+              for(int i =0; i< z.size(); i++){
+              cmbzipcode.addItem(z.get(i).toString());
+              }
 
-        }
     }
 }

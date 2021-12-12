@@ -46,10 +46,10 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
     private Customer currentCustomer;
     private Object chosenFile;
     DefaultTableModel tableModel;
-    
+
     public MEdicalEquipmentAdminJPanel(JPanel userProcessContainer, Ecosystem system, UserAccount user, Network network, Organization organization, Enterprise enterprise) {
         initComponents();
-        
+
         this.userprocessocntainer = userProcessContainer;
         this.user = user;
         this.ecosystem = system;
@@ -280,6 +280,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
         fetchOrderObject();
         populateItems();
         populateOrders();
+
     }//GEN-LAST:event_ordeTableMouseClicked
 
     private void addBt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBt1ActionPerformed
@@ -350,7 +351,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "jpg", "jpeg", "pdf");
@@ -369,7 +370,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     public void populateItems() {
         this.temTbleModel.setRowCount(0);
         try {
@@ -385,7 +386,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
             System.out.println("IN ITEMS TABLE OF EQUIPMENT ---- " + e);
         }
     }
-    
+
     public void populateOrders() {
         try {
             this.prodTableMode.setRowCount(0);
@@ -411,8 +412,8 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
             System.out.println("IN SUPERMARKET Admin POPULATE ORDER ------ " + e);
         }
     }
-    
-    
+
+
     public void populateProducts() {
          tableModel.setRowCount(0);
         for (Product p : this.organization.getOrganizationProducts()) {
@@ -427,7 +428,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
             }
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBt1;
     private javax.swing.JTextField fieldProductName;
