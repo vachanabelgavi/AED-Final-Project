@@ -69,6 +69,7 @@ public abstract class Organization {
         this.organizationID = randomIdGenerator();
         this.productList = new ArrayList<Product>();
         this.prescriptionWorkList = new ArrayList<PrescriptionUploadWorkRequest>();
+        this.reportWorkList = new ArrayList<ReportUploadWorkRequest>();
     }
 
     public int randomIdGenerator() {
