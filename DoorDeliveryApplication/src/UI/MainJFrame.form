@@ -165,7 +165,7 @@
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="0" y="10" width="1500" height="1000"/>
+                  <AbsoluteConstraints x="30" y="10" width="1500" height="1000"/>
                 </Constraint>
               </Constraints>
 
@@ -194,7 +194,7 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="2" name="D:\Users\AED-D-Drive\AED_PROJECT_LATEST\AED-Final-Project\DoorDeliveryApplication\src\UI\resources\door-to-door-del.jpg"/>
+                  <Image iconType="3" name="/UI/resources/door-to-door-del.jpg"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -233,9 +233,6 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Users\AED-D-Drive\AED_PROJECT_LATEST\AED-Final-Project\DoorDeliveryApplication\src\UI\Images\doortodoor.jpg"/>
             </Property>
           </Properties>
           <Events>

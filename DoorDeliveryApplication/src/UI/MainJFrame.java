@@ -66,7 +66,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("DOOR TO DOOR DELIVERY");
@@ -137,7 +136,7 @@ public class MainJFrame extends javax.swing.JFrame {
         container.setOpaque(false);
         container.setVerifyInputWhenFocusTarget(false);
         container.setLayout(new java.awt.CardLayout());
-        jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1500, 1000));
+        jPanel1.add(container, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 1500, 1000));
 
         jLabel1.setText("PASSWORD");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 310, 100, 20));
@@ -145,7 +144,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2.setText("USERNAME");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 230, 100, 20));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\Users\\AED-D-Drive\\AED_PROJECT_LATEST\\AED-Final-Project\\DoorDeliveryApplication\\src\\UI\\resources\\door-to-door-del.jpg")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/door-to-door-del.jpg"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1320, 780));
 
         jSplitPane1.setRightComponent(jPanel1);
@@ -158,7 +157,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Users\\AED-D-Drive\\AED_PROJECT_LATEST\\AED-Final-Project\\DoorDeliveryApplication\\src\\UI\\Images\\doortodoor.jpg")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -397,7 +395,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JPanel container;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -111,7 +111,10 @@ JPanel userProcessContainer;
         btnBack = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
+
         jPanel1.setBackground(new java.awt.Color(253, 252, 249));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1500, 1000));
         jPanel1.setPreferredSize(new java.awt.Dimension(1290, 1190));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -216,7 +219,7 @@ JPanel userProcessContainer;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 976, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

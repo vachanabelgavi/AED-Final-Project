@@ -110,6 +110,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(253, 252, 249));
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Name");
@@ -128,6 +129,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 194, -1));
 
         btnAdd.setBackground(new java.awt.Color(0, 102, 102));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +139,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 100, -1));
 
         btndelete.setBackground(new java.awt.Color(0, 102, 102));
+        btndelete.setForeground(new java.awt.Color(255, 255, 255));
         btndelete.setText("Delete");
         btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,15 +187,16 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         add(cmbzipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/delivery-man-parcel-handover-to-customer-online-delivery-service-smartphone-cartoon-art-illustration-vector.jpeg"))); // NOI18N
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-390, 90, 1670, 1090));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-200, 90, 1730, 1090));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Delivery agent");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 1070, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 1070, -1));
 
         btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

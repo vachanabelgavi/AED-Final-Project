@@ -99,10 +99,19 @@ JPanel userProcessContainer;
         jcheckyes = new javax.swing.JCheckBox();
         jcheckno = new javax.swing.JCheckBox();
         cmbzipcode = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
+        setSize(new java.awt.Dimension(1500, 1000));
+
+        jPanel3.setBackground(new java.awt.Color(253, 252, 249));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(253, 252, 249));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Delivery agent");
 
@@ -117,11 +126,11 @@ JPanel userProcessContainer;
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnBack)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(1397, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +142,7 @@ JPanel userProcessContainer;
                 .addGap(42, 42, 42))
         );
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1006, -1));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, -1));
 
         jLabel2.setText("Name");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 155, -1, -1));
@@ -166,6 +175,7 @@ JPanel userProcessContainer;
         });
         jPanel3.add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 470, -1, -1));
 
+        deliveryjTable.setBackground(new java.awt.Color(204, 255, 204));
         deliveryjTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -203,23 +213,35 @@ JPanel userProcessContainer;
         cmbzipcode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jPanel3.add(cmbzipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, -1));
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/delivery-man-parcel-handover-to-customer-online-delivery-service-smartphone-cartoon-art-illustration-vector.jpeg"))); // NOI18N
+        jLabel5.setText("jLabel5");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-360, -110, 2270, 1410));
+
+        jLabel4.setText("jLabel4");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1081, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(394, 394, 394)
+                .addComponent(jLabel4)
+                .addContainerGap(971, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap(170, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1069, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(171, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(1337, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(139, 139, 139))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1486, Short.MAX_VALUE)
                     .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -381,6 +403,8 @@ JPanel userProcessContainer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

@@ -75,14 +75,14 @@ public class EquipmentEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1110, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1889, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
 
         jPanel2.setBackground(new java.awt.Color(253, 252, 249));
@@ -96,7 +96,7 @@ public class EquipmentEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                 btndeliveryagentsActionPerformed(evt);
             }
         });
-        jPanel2.add(btndeliveryagents, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 81, 200, 39));
+        jPanel2.add(btndeliveryagents, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 80, 200, 39));
 
         btnmanageorders.setBackground(new java.awt.Color(0, 102, 102));
         btnmanageorders.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,10 +106,10 @@ public class EquipmentEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                 btnmanageordersActionPerformed(evt);
             }
         });
-        jPanel2.add(btnmanageorders, new org.netbeans.lib.awtextra.AbsoluteConstraints(367, 81, 200, 39));
+        jPanel2.add(btnmanageorders, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 200, 39));
 
-        jLabel2.setText("jLabel2");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, -1, -1));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/Healthcare-equipment-tracking.jpeg"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 1190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -129,13 +129,13 @@ public class EquipmentEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(132, 132, 132)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(555, Short.MAX_VALUE)))
+                    .addContainerGap(755, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

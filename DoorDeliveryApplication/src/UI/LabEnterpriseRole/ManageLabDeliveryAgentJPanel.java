@@ -117,13 +117,23 @@ JPanel userProcessContainer;
         jcheckyes = new javax.swing.JCheckBox();
         jcheckno = new javax.swing.JCheckBox();
         cmbzipcode = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
+
+        jPanel3.setBackground(new java.awt.Color(253, 252, 249));
+        jPanel3.setPreferredSize(new java.awt.Dimension(1500, 1000));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(253, 252, 249));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Delivery agent");
 
+        btnBack.setBackground(new java.awt.Color(0, 102, 102));
+        btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +161,7 @@ JPanel userProcessContainer;
                 .addGap(42, 42, 42))
         );
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1006, -1));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1500, -1));
 
         jLabel2.setText("Name");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 155, -1, -1));
@@ -168,6 +178,8 @@ JPanel userProcessContainer;
         jPanel3.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 194, -1));
         jPanel3.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 194, -1));
 
+        btnAdd.setBackground(new java.awt.Color(0, 102, 102));
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,13 +188,15 @@ JPanel userProcessContainer;
         });
         jPanel3.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 100, -1));
 
+        btndelete.setBackground(new java.awt.Color(0, 102, 102));
+        btndelete.setForeground(new java.awt.Color(255, 255, 255));
         btndelete.setText("Delete");
         btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndeleteActionPerformed(evt);
             }
         });
-        jPanel3.add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 470, -1, -1));
+        jPanel3.add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 470, -1, -1));
 
         delivery.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,7 +211,7 @@ JPanel userProcessContainer;
         ));
         jScrollPane1.setViewportView(delivery);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(485, 138, 477, 323));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 477, 323));
 
         jLabel3.setText("Active");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
@@ -221,24 +235,25 @@ JPanel userProcessContainer;
         cmbzipcode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         jPanel3.add(cmbzipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, -1));
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/delivery-man-parcel-handover-to-customer-online-delivery-service-smartphone-cartoon-art-illustration-vector.jpeg"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-300, 100, 1880, 1040));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1081, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1069, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 668, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -405,6 +420,7 @@ JPanel userProcessContainer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
