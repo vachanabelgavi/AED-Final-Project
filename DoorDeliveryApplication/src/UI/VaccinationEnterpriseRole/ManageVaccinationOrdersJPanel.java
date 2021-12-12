@@ -231,6 +231,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
 
 
              System.out.println("Inside table after assigning");
+             try{
            for(Customer cust: customerdir){
                     for (Order o : cust.getOrderlist()) {
                         if(o.getOrganizationname().equals("Immunization"))
@@ -332,6 +333,9 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
     }
     }
     }
+             }catch(Exception ex){
+                 System.out.println(" "+ex);
+             }
     }//GEN-LAST:event_assignbtnActionPerformed
 
     private void btnshowordersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnshowordersActionPerformed

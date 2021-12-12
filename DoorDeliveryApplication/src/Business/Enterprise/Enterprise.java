@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Nidhi Raghavendra
@@ -25,18 +24,15 @@ public class Enterprise {
     private OrganizationDirectory organizationDirectory;
     private UserAccountDirectory enterpriseUserAccountDirectory;
     private ArrayList<DeliveryAgent> deliveryAgentsInEnterpiselist;
-    
+
 //    An enterprise has Orders
 //    An enterprise has its products
 //    A customer gives a prescription to the Pharma and Vaccine Enterprises
 //    An enterprise has its own payments
 //    An enterprise has its own Enterprise Admins
 //    An enterprise has its own Delivery Agents
-
 //    An enterprise has its own Enterprise Admins
 //    An enterprise has its own Delivery Agents : create the Delivery agents in user account directory
-    
-    
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;
     }
@@ -89,7 +85,7 @@ public class Enterprise {
     public String getLocation() {
         return location;
     }
-    
+
     public UserAccountDirectory getEnterpriseUserAccountDirectory() {
         return enterpriseUserAccountDirectory;
     }
@@ -98,7 +94,6 @@ public class Enterprise {
         this.enterpriseUserAccountDirectory = enterpriseUserAccountDirectory;
     }
 
-    
     public void setLocation(String location) {
         this.location = location;
     }
@@ -110,9 +105,8 @@ public class Enterprise {
     public void setDeliveryAgentsInEnterpiselist(ArrayList<DeliveryAgent> deliveryAgentsInEnterpiselist) {
         this.deliveryAgentsInEnterpiselist = deliveryAgentsInEnterpiselist;
     }
-    
-    
-     public void deleteDeliveryAgentsInEnterpiselist(DeliveryAgent d){
+
+    public void deleteDeliveryAgentsInEnterpiselist(DeliveryAgent d) {
         deliveryAgentsInEnterpiselist.remove(d);
     }
 
@@ -124,9 +118,16 @@ public class Enterprise {
         this.organizationDirectory = new OrganizationDirectory();
         this.enterpriseUserAccountDirectory = new UserAccountDirectory();
         this.deliveryAgentsInEnterpiselist = new ArrayList<>();
-        
+
     }
-    
+
+    public Enterprise() {
+        this.organizationDirectory = new OrganizationDirectory();
+        this.enterpriseUserAccountDirectory = new UserAccountDirectory();
+        this.deliveryAgentsInEnterpiselist = new ArrayList<>();
+
+    }
+
     @Override
     public String toString() {
         return name;

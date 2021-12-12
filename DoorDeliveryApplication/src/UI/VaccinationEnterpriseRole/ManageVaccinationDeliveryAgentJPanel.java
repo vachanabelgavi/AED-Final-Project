@@ -276,8 +276,8 @@ JPanel userProcessContainer;
         else{
             //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
             System.out.println("Inside else statement");
-            Employee employee = business.getEmployeeDirectory().createEmployee(name);
-            business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
+            //Employee employee = business.getEmployeeDirectory().createEmployee(name);
+            //business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
 
             ArrayList<Integer> zipcodes = new ArrayList<Integer>();
             zipcodes.add(zip);
@@ -287,7 +287,7 @@ JPanel userProcessContainer;
             u.setPassword(password);
             u.setRole(new DeliveryAgentRole());
             u.setEmployee(em);
-            d.setUseraccount(u);
+           // d.setUseraccount(u);
             d.setZipcodes(zipcodes);
             d.setEnterprisename(enterprise);
 
@@ -325,10 +325,6 @@ JPanel userProcessContainer;
         ArrayList<UserAccount> usrl = userdir.getUserAccountList();
         ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
         String deliveryman = dtm.getValueAt(selectrow,0).toString();
-        //        ArrayList<Integer> z1 = new ArrayList<>();
-        //        z1.add((Integer) dtm.getValueAt(selectrow,1));
-        // String zipcodes = dtm.getValueAt(selectrow,1).toString();
-        //  String available = dtm.getValueAt(selectrow, 2).toString();
         String uname = dtm.getValueAt(selectrow,3).toString();
         String passwd = dtm.getValueAt(selectrow,4).toString();
         int dialogueb = JOptionPane.YES_NO_OPTION;

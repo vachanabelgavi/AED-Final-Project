@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * @author Nidhi Raghavendra
  */
 public class UserAccount {
+
     private String username;
     private String password;
     private Employee employee;
@@ -25,6 +26,8 @@ public class UserAccount {
 
     public UserAccount() {
         workQueue = new WorkQueue();
+        username = "";
+        password = "";
     }
 
     public String getUsername() {
