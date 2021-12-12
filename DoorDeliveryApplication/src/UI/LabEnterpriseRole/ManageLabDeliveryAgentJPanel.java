@@ -46,7 +46,7 @@ JPanel userProcessContainer;
      * Creates new form ManageLabDeliveryAgentJPanel
      */
     public ManageLabDeliveryAgentJPanel(JPanel userProcessContainer, Ecosystem ecosystem,Network network, UserAccount ua,UserAccountDirectory userdir, Enterprise enterprise) {
-         
+
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.business = ecosystem;
@@ -56,8 +56,8 @@ JPanel userProcessContainer;
         this.network = network;
         this.z = new ArrayList<>();
         System.out.println("CAME INTO LAB DELIVERY AGENT PANEL");
-        
-        
+
+
 
         this.dtm = (DefaultTableModel) delivery.getModel();
         System.out.println("Going inside populate table");
@@ -83,11 +83,6 @@ JPanel userProcessContainer;
 
          del = enterprise.getDeliveryAgentsInEnterpiselist();
 
-
-      
-         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
-           // z.add(dd.getZipcodes().get(j));
-                
               z = network.getZipcodes();
               for(int i =0; i< z.size(); i++){
               cmbzipcode.addItem(z.get(i).toString());
@@ -303,8 +298,8 @@ JPanel userProcessContainer;
         else{
             //ecosystem.getCustomerdirectory().newCustomer(name, phone, age, streetaddress, emailaddress, username, password, country, city, zipcode);
             System.out.println("Inside else statement");
-            Employee employee = business.getEmployeeDirectory().createEmployee(name);
-            business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
+            //Employee employee = business.getEmployeeDirectory().createEmployee(name);
+            //business.getUserAccountDirectory().createUserAccount(username, password, employee , new DeliveryAgentRole());
 
             ArrayList<Integer> zipcodes = new ArrayList<Integer>();
             zipcodes.add(zip);
@@ -314,7 +309,7 @@ JPanel userProcessContainer;
             u.setPassword(password);
             u.setRole(new DeliveryAgentRole());
             u.setEmployee(em);
-            d.setUseraccount(u);
+           // d.setUseraccount(u);
             d.setZipcodes(zipcodes);
             d.setEnterprisename(enterprise);
 

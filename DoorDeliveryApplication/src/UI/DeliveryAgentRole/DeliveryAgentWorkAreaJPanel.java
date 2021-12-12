@@ -87,9 +87,12 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
         for (Customer c : this.network.getCustomerDirectory().getCustomerList()) {
             for (Order o : c.getOrderlist()) {
-                if (o.getStatus().equalsIgnoreCase("accepted") || o.getStatus().equals("request collected")) {
-                    if (o.getDeliveryAgent().getUseraccount().getUsername().equals(this.account.getUsername())) {
-                        this.orderlist.add(o);
+                if (o.getDeliveryAgent().getUseraccount() != null) {
+                    System.out.println("Inside if condition");
+                    if (o.getStatus().equalsIgnoreCase("accepted") || o.getStatus().equals("request collected")) {
+                        if (o.getDeliveryAgent().getUseraccount().getUsername().equals(this.account.getUsername())) {
+                            this.orderlist.add(o);
+                        }
                     }
                 }
             }
@@ -100,7 +103,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
 //        ArrayList<UserAccount> usrl = useraccountdirectory.getUserAccountList();
 //        ArrayList<DeliveryAgent> delList = enterprise.getDeliveryAgentsInEnterpiselist();
-//        
+//
         this.delmn = account;
         System.out.println(" " + delmn.getEmployee().getName());
         jLabel_DelMan1.setText(delmn.getEmployee().getName());
@@ -249,7 +252,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
         Date d = new Date();
         SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        // txtupdatedcat.setText(sdt.format(d));     
+        // txtupdatedcat.setText(sdt.format(d));
         String status = null;
         System.out.println("Inside populate Table");
         dtm.setRowCount(0);
@@ -261,14 +264,14 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
         for (Customer cust : customerdir) {
             for (Order o : cust.getOrderlist()) {
-                 if (o.getOrderId() == Integer.valueOf((int) orderscmb.getSelectedItem())){
-                ArrayList<OrderItem> oi = o.getItemsOrdered();
-                ArrayList<String> p = new ArrayList<>();
-                for (int i = 0; i < oi.size(); i++) {
+                if (o.getOrderId() == Integer.valueOf((int) orderscmb.getSelectedItem())) {
+                    ArrayList<OrderItem> oi = o.getItemsOrdered();
+                    ArrayList<String> p = new ArrayList<>();
+                    for (int i = 0; i < oi.size(); i++) {
 
-                    p.add(oi.get(i).getProductName());
-                }
-              
+                        p.add(oi.get(i).getProductName());
+                    }
+
                     if (o.getStatus().equalsIgnoreCase("ACCEPTED")) {
                         o.setStatus("OUT FOR DELIVERY");
                         status = "Order Picked";
@@ -322,16 +325,16 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
         for (Customer cust : customerdir) {
             for (Order o : cust.getOrderlist()) {
-                 if (o.getOrderId() == Integer.valueOf((int) orderscmb.getSelectedItem())) {
-                ArrayList<OrderItem> oi = o.getItemsOrdered();
-                ArrayList<String> pi = new ArrayList<>();
-                for (int i = 0; i < oi.size(); i++) {
+                if (o.getOrderId() == Integer.valueOf((int) orderscmb.getSelectedItem())) {
+                    ArrayList<OrderItem> oi = o.getItemsOrdered();
+                    ArrayList<String> pi = new ArrayList<>();
+                    for (int i = 0; i < oi.size(); i++) {
 
-                    pi.add(oi.get(i).getProductName());
-                }
+                        pi.add(oi.get(i).getProductName());
+                    }
 
                     System.out.println("Inside out for delivery");
-                    if (o.getOrderPayment().getStatus() == "NOT PAID") {
+                    if (o.getOrderPayment().getStatus().equalsIgnoreCase("NOT PAID")) {
                         Payment odpayment = new Payment();
                         o.setOrderPayment(odpayment);
                         odpayment.setStatus("AMOUNT COLLECTED");
@@ -417,9 +420,9 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Email sent to customer cancelled ");
                     }
                 }
-                 }
             }
-        
+        }
+
     }//GEN-LAST:event_orderDelivered_btnActionPerformed
 
     private void orderPicked_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPicked_btnMouseClicked
@@ -513,5 +516,4 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
         }
     }//closing if statement
 
-   
 }
