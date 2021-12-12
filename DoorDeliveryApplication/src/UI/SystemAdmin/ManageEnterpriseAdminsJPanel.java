@@ -31,10 +31,10 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private Ecosystem business;
     UserAccount account;
-    
+
     public ManageEnterpriseAdminsJPanel(JPanel userProcessContainer, Ecosystem business) {
         initComponents();
-        
+
         this.userProcessContainer = userProcessContainer;
         this.business = business;
 
@@ -70,12 +70,17 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
         comboNetwork = new javax.swing.JComboBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Network");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 318, -1, -1));
 
         jLabel3.setText("Enterprise");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 359, -1, -1));
 
         jLabel6.setText("Name");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 398, -1, -1));
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 395, 180, -1));
 
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,12 +103,15 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(enterpriseJTable);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 136, 616, 160));
+
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, 95, -1));
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +119,7 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 314, 105, -1));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -145,11 +154,23 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, -1));
+
         jLabel7.setText("Username");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 436, -1, -1));
+        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 433, 180, -1));
 
         jLabel8.setText("Password");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(139, 474, -1, -1));
+        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 471, 180, -1));
 
         comboEnterprise.setModel(new javax.swing.DefaultComboBoxModel(new String[] { }));
+        comboEnterprise.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboEnterpriseActionPerformed(evt);
+            }
+        });
+        add(comboEnterprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 355, 180, -1));
 
         comboNetwork.setBackground(new java.awt.Color(0, 204, 153));
         comboNetwork.setModel(new javax.swing.DefaultComboBoxModel<>());
@@ -158,75 +179,7 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
                 comboNetworkActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(comboEnterprise, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                    .addComponent(comboNetwork, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 89, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(95, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(192, 192, 192)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnDelete)
-                    .addComponent(comboNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(comboEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(btnAdd)
-                .addGap(21, 21, 21))
-        );
+        add(comboNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 314, 180, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -238,52 +191,49 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
         String name = txtName.getText();
 
         boolean flag = enterprise.getEnterpriseUserAccountDirectory().checkIfUsernameIsUnique(username);
-        
-        if(flag == false){
+        Network n = (Network) comboNetwork.getSelectedItem();
+        if (flag == false) {
             JOptionPane.showMessageDialog(txtUsername, "User name already exists");
-        }
-        else{
-            for(Network n : business.getNetworks()){
-                
-                for(Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
-                    
-                    for(int i=0; i < e.getOrganizationDirectory().getOrganizationList().size(); i++){
-                        
-                        Employee employee = e.getOrganizationDirectory().getOrganizationList().get(i).getEmployeeDirectory().createEmployee(name);
-                        
-                        switch(String.valueOf(enterprise)){
-                            
-                            case "PharmacyEnterpriseAdminRole":
-                                account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new PharmaceuticalEnterpriseAdminRole());
-                                break;
-                                
-                            case "EquipmentEnterpriseRole":
-                                account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new EquipmentEnterpriseRole());
-                                break;
-                                
-                            case "VaccinationEnterpriseRole":
-                                account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new VaccinationEnterpriseRole());
-                                break;
-                                
-                            case "LabEnterprise":
-                                account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new LabEnterprise());
-                                break;
-                                
-                        }
-                        //UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new EnterpriseAdminRole());
+        } else {
+
+            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+
+                Employee employee = new Employee();
+                employee.setName(name);
+
+                switch (enterprise.getName().toLowerCase()) {
+
+                    case "pharmaceutical":
+                        account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new PharmaceuticalEnterpriseAdminRole());
+                        break;
+
+                    case "medical equipments":
+                        account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new EquipmentEnterpriseRole());
+                        break;
+
+                    case "immunization & vaccination":
+                        account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new VaccinationEnterpriseRole());
+                        break;
+
+                    case "lab center & diagnostics":
+                        account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, new LabEnterprise());
+                        break;
+                    default:
+                        break;
+                }
+                //UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createUserAccount(username, password, employee, new EnterpriseAdminRole());
 
 //                        UserAccount account = enterprise.getEnterpriseUserAccountDirectory().createEnterpriseUser(username, password, employee, eRole)UserAccount(username, password, employee, new EnterpriseAdminRole());
-
-                        JOptionPane.showMessageDialog(txtName, "Enterprise Admin Added Successfully");
-                    }
-                }
+                JOptionPane.showMessageDialog(txtName, "Enterprise Admin Added Successfully");
+                break;
             }
+
             populateTable();
         }
-	
-	txtName.setText("");
-	txtUsername.setText("");
-	txtPassword.setText("");
+
+        txtName.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
 
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -293,7 +243,7 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
         int selectedrow = enterpriseJTable.getSelectedRow();
         String name = enterpriseJTable.getValueAt(selectedrow, 0).toString();
 
-        for (Network n : business.getNetworks()){
+        for (Network n : business.getNetworks()) {
             Enterprise e = n.getEnterpriseDirectory().getEnterprise(name);
             n.getEnterpriseDirectory().removeEnterprise(e);
         }
@@ -310,7 +260,16 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
 
     private void comboNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNetworkActionPerformed
         // TODO add your handling code here:
+        System.out.println("CAME TO ON CHANGE");
+        populateEnterpriseComboBox((Network) comboNetwork.getSelectedItem());
     }//GEN-LAST:event_comboNetworkActionPerformed
+
+    private void comboEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEnterpriseActionPerformed
+        // TODO add your handling code here:
+//        POPULATE ROLES 
+
+
+    }//GEN-LAST:event_comboEnterpriseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -333,8 +292,8 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    public void populateTable(){
-        
+    public void populateTable() {
+
         DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
 
         model.setRowCount(0);
@@ -352,21 +311,24 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
             }
         }
     }
-    
-    private void populateNetworkComboBox(){
+
+    private void populateNetworkComboBox() {
         comboNetwork.removeAllItems();
-        
-        for (Network network : business.getNetworks()){
+
+        for (Network network : business.getNetworks()) {
             comboNetwork.addItem(network);
         }
+
     }
-    
-    private void populateEnterpriseComboBox(Network network){
+
+    private void populateEnterpriseComboBox(Network network) {
+        Network n = (Network) comboNetwork.getSelectedItem();
         comboEnterprise.removeAllItems();
-        
-        for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
-            comboEnterprise.addItem(String.valueOf(enterprise));
+        if (n != null) {
+            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+                comboEnterprise.addItem(e);
+            }
         }
-        
+
     }
 }

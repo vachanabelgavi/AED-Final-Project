@@ -177,6 +177,16 @@
                 </Constraint>
               </Constraints>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jLabel3"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="40" y="60" width="-1" height="-1"/>
+                </Constraint>
+              </Constraints>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JTabbedPane" name="jTabbedPane2">
@@ -224,7 +234,7 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="151" y="5" width="700" height="-1"/>
+                      <AbsoluteConstraints x="120" y="70" width="700" height="390"/>
                     </Constraint>
                   </Constraints>
 
@@ -232,9 +242,6 @@
                   <SubComponents>
                     <Component class="javax.swing.JTable" name="supermarketTable">
                       <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="f9" green="fc" red="fd" type="rgb"/>
-                        </Property>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="5" rowCount="0">
                             <Column editable="false" title="PRODUCT ID" type="java.lang.Integer"/>
@@ -295,7 +302,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="460" y="470" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="310" y="500" width="-1" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -308,7 +315,7 @@
                   </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="460" y="510" width="100" height="-1"/>
+                      <AbsoluteConstraints x="540" y="500" width="100" height="-1"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -318,7 +325,7 @@
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="960" y="70" width="210" height="330"/>
+                      <AbsoluteConstraints x="960" y="130" width="210" height="330"/>
                     </Constraint>
                   </Constraints>
 
@@ -341,11 +348,27 @@
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Comic Sans MS" size="14" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="OUT OF STOCK :("/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="1020" y="30" width="-1" height="-1"/>
+                      <AbsoluteConstraints x="990" y="90" width="-1" height="-1"/>
+                    </Constraint>
+                  </Constraints>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel2">
+                  <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="2" name="D:\Users\AED-D-Drive\AED_PROJECT_LATEST\AED-Final-Project\DoorDeliveryApplication\src\UI\resources\supermarket.png"/>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                      <AbsoluteConstraints x="660" y="240" width="590" height="430"/>
                     </Constraint>
                   </Constraints>
                 </Component>

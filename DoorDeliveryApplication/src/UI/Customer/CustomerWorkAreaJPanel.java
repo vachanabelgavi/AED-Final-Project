@@ -32,6 +32,7 @@ import UI.OrganizationPanels.PharmacyJPanel;
 import UI.OrganizationPanels.VaccineJPanel;
 import java.awt.Image;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -107,18 +108,17 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         orderBtn1 = new javax.swing.JButton();
         paymentBTn1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         supermarketTable = new javax.swing.JTable();
         addCartButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-
-
         jScrollPane1 = new javax.swing.JScrollPane();
         stockList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
-
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -129,9 +129,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1500, 1000));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-
         pane.setDividerSize(1);
-
         pane.setMinimumSize(new java.awt.Dimension(1500, 900));
         pane.setPreferredSize(new java.awt.Dimension(1500, 1000));
 
@@ -198,12 +196,13 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         });
         leftPane.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 150, 40));
 
+        jLabel3.setText("jLabel3");
+        leftPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+
         pane.setLeftComponent(leftPane);
 
         jTabbedPane2.setBackground(new java.awt.Color(253, 252, 249));
-
         jTabbedPane2.setOpaque(true);
-
         jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane1MouseClicked(evt);
@@ -218,7 +217,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        supermarketTable.setBackground(new java.awt.Color(253, 252, 249));
         supermarketTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -244,7 +242,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(supermarketTable);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(151, 5, 700, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 700, 390));
 
         addCartButton.setBackground(new java.awt.Color(0, 102, 102));
         addCartButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -254,7 +252,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 addCartButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(addCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 470, -1, -1));
+        jPanel1.add(addCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, -1, -1));
 
         jButton3.setText("REFRESH");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -262,21 +260,22 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 510, 100, -1));
-
-
-        jTabbedPane2.addTab("SUPERMARKETS", jPanel1);
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 500, 100, -1));
 
         stockList.setBackground(new java.awt.Color(239, 239, 254));
         jScrollPane1.setViewportView(stockList);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 70, 210, 330));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 130, 210, 330));
 
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel1.setText("OUT OF STOCK :(");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 90, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Users\\AED-D-Drive\\AED_PROJECT_LATEST\\AED-Final-Project\\DoorDeliveryApplication\\src\\UI\\resources\\supermarket.png")); // NOI18N
+        jLabel2.setToolTipText("");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 590, 430));
 
         jTabbedPane2.addTab("SUPERMARKETS", jPanel1);
-
 
         jPanel2.setBackground(new java.awt.Color(253, 252, 249));
         jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -450,11 +449,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private void paymentBTn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentBTn1ActionPerformed
         // TODO add your handling code here:
         pane.setRightComponent(null);
-
-        //pane.setRightComponent(new PaymentsJPanel(this.customer));
-    }//GEN-LAST:event_paymentBTn1ActionPerformed
-
-
         pane.setRightComponent(new PaymentsJPanel(this.customer));
     }//GEN-LAST:event_paymentBTn1ActionPerformed
 
@@ -476,7 +470,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         }
     }
     
-
     public void populateTable() {
         tableModel.setRowCount(0);
         supermarketTable.setRowHeight(50);
@@ -500,6 +493,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                             false
                         });
                     } else {
+                        System.out.println("CAME --");
                         ImageIcon icon = new ImageIcon("pill.png");
 
                         tableModel.insertRow(tableModel.getRowCount(), new Object[]{
@@ -527,17 +521,15 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton cartBtn1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-
     private javax.swing.JLabel jLabel1;
-
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-
     private javax.swing.JScrollPane jScrollPane1;
-
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel leftPane;

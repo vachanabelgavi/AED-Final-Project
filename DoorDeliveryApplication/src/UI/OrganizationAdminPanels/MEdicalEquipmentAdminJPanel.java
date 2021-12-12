@@ -60,6 +60,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
         this.prodTableMode = (DefaultTableModel) ordeTable.getModel();
         this.temTbleModel = (DefaultTableModel) prodTable.getModel();
         this.tableModel = (DefaultTableModel) productsTable.getModel();
+        populateOrders();
     }
 
     /**
