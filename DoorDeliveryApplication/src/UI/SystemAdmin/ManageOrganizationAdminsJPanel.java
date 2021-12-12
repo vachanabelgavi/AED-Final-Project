@@ -188,7 +188,7 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
                 case "Lab Center":
                     UserAccount user5 = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new LabAssistantRole());
                     break;
-                case "Sample Collecting Center":
+                case "Sample Collection Center":
                     UserAccount user6 = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new LabTesterRole());
                     break;
                 default:
@@ -233,6 +233,7 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
     }
 
     public void populateNetworks() {
+        comboNetwork.removeAllItems();
         try {
             for (Network n : this.ecosystem.getNetworks()) {
                 if (n != null) {
