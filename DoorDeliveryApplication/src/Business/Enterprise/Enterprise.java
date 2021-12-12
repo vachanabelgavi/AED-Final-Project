@@ -42,7 +42,7 @@ public class Enterprise {
     }
 
     public enum EnterpriseType {
-        Pharmaceutical("Pharmaceutical"), MedicalEquipements("Medical Equipements"), LabDiagnostics("Labs and Diagnostics"), Vaccination("Vaccine and Immunization"), BloodBank("Blood bank");
+        Pharmaceutical("Pharmaceutical"), MedicalEquipements("Medical Equipements"), LabDiagnostics("Lab Center & Diagnostics"), Vaccination("Immunization & Vaccination"), BloodBank("Blood bank");
         private String value;
 
         private EnterpriseType(String value) {
