@@ -203,6 +203,10 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Email sending cancelled");
         }
+        
+        
+        
+        
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
