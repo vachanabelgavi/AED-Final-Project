@@ -241,7 +241,7 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 600, -1, -1));
 
-        jButton3.setBackground(new java.awt.Color(0, 204, 204));
+        jButton3.setBackground(new java.awt.Color(0, 102, 102));
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("UPLOAD IMAGE");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -419,15 +419,14 @@ public class MEdicalEquipmentAdminJPanel extends javax.swing.JPanel {
     public void populateProducts() {
         tableModel.setRowCount(0);
         for (Product p : this.organization.getOrganizationProducts()) {
-            if (p.getStockunits() != 0) {
-                tableModel.insertRow(tableModel.getRowCount(), new Object[]{
-                    p.getProductId(),
-                    p.getName(),
-                    p.getPrice(),
-                    p.getStockunits(),
-                    1
-                });
-            }
+            tableModel.insertRow(tableModel.getRowCount(), new Object[]{
+                p.getProductId(),
+                p.getName(),
+                p.getPrice(),
+                p.getStockunits(),
+                1
+            });
+
         }
     }
 

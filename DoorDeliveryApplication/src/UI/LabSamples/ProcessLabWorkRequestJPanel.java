@@ -15,6 +15,15 @@ import java.awt.Component;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Properties;
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -38,15 +47,15 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private Organization organization;
     private File chosenFile;
-    
+
     public ProcessLabWorkRequestJPanel(JPanel userProcessContainer, Ecosystem business, Network network, Customer customer) {
         initComponents();
-        
+
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.network = network;
         this.customer = customer;
-        
+
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
         this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection");
 
@@ -99,24 +108,23 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(backJButton)
+                .addContainerGap(709, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(backJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(btnSubmit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60))
+                        .addGap(51, 51, 51)
+                        .addComponent(btnSubmit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,15 +140,70 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
                         .addGap(33, 33, 33)
                         .addComponent(btnSubmit))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
+                        .addGap(38, 38, 38)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        //request.setTestResult(txtResult.getText());
-        //request.setStatus("Completed");
+
+        int dialogueb = JOptionPane.INFORMATION_MESSAGE;
+        System.out.println("" + dialogueb);
+        int dialoguer = JOptionPane.showConfirmDialog(this, "SENDING EMAIL\n"
+                + "If yes please wait", "Mailing .........", dialogueb);
+        if (dialoguer == 0) {
+            String recipients = "vachanabelgavi777@gmail.com";
+            System.out.println("Entering assign for email ==========");
+            String subjects = "New Credentials";
+            String messaget = "Hello Vachana! Welcome to Door Delivery. Your is ready. Please view the file.";
+
+            System.out.println("Start");
+            final String usernamesender = "pannagaveeramohan@gmail.com";
+            final String passwordsender = "9686300037";
+
+            Properties p = new Properties();
+            p.put("mail.smtp.auth", "true");
+            p.put("mail.smtp.host", "smtp.gmail.com");
+            p.put("mail.smtp.port", "465");
+            p.put("mail.transport.protocol", "smtp");
+            p.put("mail.smtp.starttls.enable", "true");
+            p.put("mail.smtp.starttls.enable", "true");
+            p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+            Session session = Session.getInstance(p,
+                    new javax.mail.Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(usernamesender, passwordsender);
+                }
+            });
+
+            try {
+
+                Transport transport = session.getTransport();
+                Message message = new MimeMessage(session);
+                message.setFrom(new InternetAddress("pannagaveeramohan@gmail.com"));//formBean.getString("fromEmail")
+
+                final Address[] recipientAddresses = InternetAddress.parse(recipients);
+                message.setRecipients(Message.RecipientType.TO, recipientAddresses);
+                message.setSubject(subjects);//formBean.getString(
+                message.setText(messaget);
+                transport.connect();
+                transport.send(message, recipientAddresses);//(message);
+
+                System.out.println("Done");
+
+            } catch (MessagingException ex) {
+                System.out.println("e=" + ex);
+                ex.printStackTrace();
+                throw new RuntimeException(ex);
+
+            }
+            JOptionPane.showMessageDialog(null, "Email sent to customer successful");
+        } else {
+            JOptionPane.showMessageDialog(null, "Email sending cancelled");
+        }
+
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
@@ -156,13 +219,13 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "jpg", "jpeg");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("png", "jpg", "jpeg", "pdf");
         chooser.addChoosableFileFilter(filter);
         this.chosenFile = chooser.getSelectedFile();
-/*
+        /*
         String[] headers = {"Number of Games Played:", "Total Score:", "Average Score:"};
         JLabel[] labels = new JLabel[3];
         for (int index = 0; index < labels.length; index++) {
@@ -182,7 +245,7 @@ public class ProcessLabWorkRequestJPanel extends javax.swing.JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Looks like you missed an attachment!");
         }
-*/
+         */
 
         try {
             ImageIcon ii = new ImageIcon(this.chosenFile.getAbsolutePath());

@@ -128,7 +128,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(253, 252, 249));
-        setPreferredSize(new java.awt.Dimension(893, 636));
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pharmaOrderTable.setBackground(new java.awt.Color(204, 255, 204));
@@ -150,7 +150,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(pharmaOrderTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 740, 110));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 740, 110));
 
         btnBack.setBackground(new java.awt.Color(0, 102, 102));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -160,7 +160,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
         deliverycmb.setForeground(new java.awt.Color(0, 102, 102));
         deliverycmb.addActionListener(new java.awt.event.ActionListener() {
@@ -168,12 +168,12 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
                 deliverycmbActionPerformed(evt);
             }
         });
-        add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 680, 148, -1));
+        add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 670, 148, -1));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Assign Delivery agent");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 680, -1, 20));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 670, -1, 20));
 
         assignbtn.setBackground(new java.awt.Color(0, 102, 102));
         assignbtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,7 +183,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
                 assignbtnActionPerformed(evt);
             }
         });
-        add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 710, 105, -1));
+        add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 700, 105, -1));
 
         btnshoworders.setBackground(new java.awt.Color(0, 102, 102));
         btnshoworders.setForeground(new java.awt.Color(255, 255, 255));
@@ -193,7 +193,7 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
                 btnshowordersActionPerformed(evt);
             }
         });
-        add(btnshoworders, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 30, 130, 30));
+        add(btnshoworders, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 60, 130, 30));
 
         orderscmb.setForeground(new java.awt.Color(0, 102, 102));
         orderscmb.addActionListener(new java.awt.event.ActionListener() {
@@ -201,10 +201,10 @@ public class ManagePharmaOrdersJPanel extends javax.swing.JPanel {
                 orderscmbActionPerformed(evt);
             }
         });
-        add(orderscmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 120, -1));
+        add(orderscmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 120, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/orders11_trial.png"))); // NOI18N
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-100, 70, 1090, 590));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/order_management_gif.gif"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 200, 1120, 460));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

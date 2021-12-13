@@ -285,12 +285,15 @@ public class PharmacyPrescriptionJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_createOrderbttnActionPerformed
 
     public void populatePres() {
+        try {
+            for (PrescriptionUploadWorkRequest pu : this.workrequest) {
+                if (pu.getReceiver().getUsername().equals(user.getUsername())) {
+                    dropdownPrescription.addItem(pu.getRequestId());
+                }
 
-        for (PrescriptionUploadWorkRequest pu : this.workrequest) {
-            if (pu.getReceiver().getUsername().equals(user.getUsername())) {
-                dropdownPrescription.addItem(pu.getRequestId());
             }
-
+        } catch (Exception e) {
+            System.out.println("In PRESRIPTION MGNMT " + e);
         }
 
     }

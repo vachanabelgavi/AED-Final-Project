@@ -235,6 +235,7 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
     public void populateNetworks() {
         comboNetwork.removeAllItems();
         try {
+            comboNetwork.removeAllItems();
             for (Network n : this.ecosystem.getNetworks()) {
                 if (n != null) {
                     comboNetwork.addItem(n);
