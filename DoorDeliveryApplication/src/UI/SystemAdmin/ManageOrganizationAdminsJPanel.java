@@ -6,10 +6,19 @@
 package UI.SystemAdmin;
 
 import Business.Ecosystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.Role.EquipmentEnterpriseRole;
+import Business.Enterprise.Role.LabEnterprise;
+import Business.Enterprise.Role.PharmaceuticalEnterpriseAdminRole;
+import Business.Enterprise.Role.VaccinationEnterpriseRole;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Role.Role;
+import Business.UserAccount.UserAccount;
+import Business.ValidationClass;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -20,6 +29,11 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
 
     private final JPanel userProcessContainer;
     private final Ecosystem ecosystem;
+    Network network;
+    Enterprise enterprise;
+    Organization organization;
+    Role role;
+    UserAccount account;
 
     /**
      * Creates new form ManageOrganizationAdminsJPanel
@@ -30,7 +44,6 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = system;
         populateNetworks();
-
     }
 
     /**
@@ -53,13 +66,12 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(253, 252, 249));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Table.setModel(new javax.swing.table.DefaultTableModel(
@@ -87,7 +99,7 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(Table);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 756, 260));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 756, 260));
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-back-50.png"))); // NOI18N
         btnBack.setText("Back");
@@ -96,28 +108,28 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 70));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 70));
 
         comboNetwork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboNetworkActionPerformed(evt);
             }
         });
-        add(comboNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 150, -1));
+        add(comboNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 540, 150, -1));
 
         comboEnteprise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEntepriseActionPerformed(evt);
             }
         });
-        add(comboEnteprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, 150, -1));
+        add(comboEnteprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 590, 150, -1));
 
-        add(comboOrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 590, 150, -1));
-        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 490, 150, -1));
+        add(comboOrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 640, 150, -1));
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 540, 150, -1));
 
-        add(comboRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 640, 150, -1));
-        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 540, 150, -1));
-        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 590, 150, -1));
+        add(comboRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 690, 150, -1));
+        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 590, 150, -1));
+        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 640, 150, -1));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-organization-50.png"))); // NOI18N
         jButton1.setText("ADD");
@@ -126,39 +138,22 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 720, 160, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 750, 160, -1));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Name");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 550, 50, -1));
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Username");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 590, -1, -1));
+
+        jLabel7.setText("Password");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 640, 60, -1));
+
+        jLabel1.setBackground(new java.awt.Color(253, 252, 249));
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Manage Organizations");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50))
-        );
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 1000, -1));
-
-        jLabel2.setText("Name");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 494, 50, -1));
-
-        jLabel4.setText("Location");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, -1, -1));
-
-        jLabel7.setText("City");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 590, 60, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 1100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -181,6 +176,39 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+
+        Network network = (Network) comboNetwork.getSelectedItem();
+        Enterprise.EnterpriseType type = (Enterprise.EnterpriseType) comboEnteprise.getSelectedItem();
+
+        Organization.Type orgtype = (Organization.Type) comboOrg.getSelectedItem();
+        Role.RoleType roletype = (Role.RoleType) comboRole.getSelectedItem();
+
+        if (network == null || type == null || orgtype == null || roletype == null) {
+            JOptionPane.showMessageDialog(null, "Invalid Input!");
+            return;
+        }
+
+        if (txtName.getText().isEmpty() || txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty!");
+        }
+
+        String name = txtName.getText();
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+
+        ValidationClass v = new ValidationClass();
+        v.validateName(name);
+        v.validateUsername(username);
+        v.validatePassword(String.valueOf(password));
+
+        boolean flag = ecosystem.getUserAccountDirectory().checkIfUsernameIsUnique(username);
+        if (flag == false) {
+            JOptionPane.showMessageDialog(null, "User name already exists");
+        }else{
+            Employee employee = new Employee();
+            
+            ecosystem.getUserAccountDirectory().createUserAccount(username, password, employee, role);
+        }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -221,7 +249,6 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPassword;
@@ -234,7 +261,7 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
             for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
                 comboOrg.addItem(o);
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
 
         }
 

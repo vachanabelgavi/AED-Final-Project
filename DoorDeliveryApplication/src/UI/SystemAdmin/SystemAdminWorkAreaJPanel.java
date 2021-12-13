@@ -65,8 +65,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(253, 252, 249));
 
+        jTreeValues.setBackground(new java.awt.Color(253, 252, 249));
         jTreeValues.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 jTreeValuesValueChanged(evt);
@@ -74,7 +75,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(jTreeValues);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(253, 252, 249));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
@@ -89,14 +90,14 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(50, 50, 50))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(253, 252, 249));
 
+        btnCustomer.setBackground(new java.awt.Color(255, 255, 255));
         btnCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-users-50.png"))); // NOI18N
         btnCustomer.setText("Manage Customers");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +106,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnEnterpriseAdmin.setBackground(new java.awt.Color(255, 255, 255));
         btnEnterpriseAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/enterprise (1).png"))); // NOI18N
         btnEnterpriseAdmin.setText("Manage Enterprise Admin");
         btnEnterpriseAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +115,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnNetwork.setBackground(new java.awt.Color(255, 255, 255));
         btnNetwork.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-thin-client-50.png"))); // NOI18N
         btnNetwork.setText("Manage Networks");
         btnNetwork.addActionListener(new java.awt.event.ActionListener() {
@@ -129,16 +132,18 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         lblSelectedNode.setForeground(new java.awt.Color(102, 102, 255));
         lblSelectedNode.setText("<View_selected_node>");
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-combo-chart-50.png"))); // NOI18N
-        jButton1.setText("STATISTICS");
+        jButton1.setText("Statistics");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-organization-50.png"))); // NOI18N
-        jButton2.setText("Manage Organizations");
+        jButton2.setText("Manage Organization Admins");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -196,7 +201,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

@@ -86,5 +86,8 @@ public class Product {
         this.productImage = productImage;
     }
     
-    
+    @Override
+    public String toString(){
+        return String.valueOf(productId);
+    }
 }

@@ -216,10 +216,10 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
         String name = txtTest.getText();
         double price = Double.parseDouble(txtPrice.getText());
         
-        Product p = new Product();
+        //Product p = new Product();
         
-        p.setName(name);
-        p.setPrice(price);
+        product.setName(name);
+        product.setPrice(price);
 
         JOptionPane.showMessageDialog(null, "Lab Test Updated");
         

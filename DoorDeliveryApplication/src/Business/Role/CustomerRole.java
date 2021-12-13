@@ -20,7 +20,7 @@ import UI.Customer.CustomerWorkAreaJPanel;
  */
 public class CustomerRole {
     public JPanel createWorkArea(JPanel userProcessContainer, Ecosystem system, Network network, Customer customer) {
-        return new CustomerWorkAreaJPanel(userProcessContainer, system, network, customer); 
+        return new CustomerWorkAreaJPanel(userProcessContainer, system, network, customer);
     }
 
 }
