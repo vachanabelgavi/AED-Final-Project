@@ -455,8 +455,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                                 System.out.println("CAME TO DOCTOR PANEL  ---------- " + this.toPharmacist.getUsername());
                                 PrescriptionUploadWorkRequest pq = new PrescriptionUploadWorkRequest();
                                 pq.setSender(user);
-                                user.setUsername(username);
-                                user.setPassword(password);
+        
                                 pq.setCustomer(newCustoemr);
                                 pq.setReceiver(this.toPharmacist);
                                 pq.setPresecription(chosenFile);
@@ -680,14 +679,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 //                    Registering the customer's network, pharmacy organization
                     this.customerNetwork = network;
                     this.customerOrganization = network.getEnterpriseDirectory().getEnterprise("Pharmaceutical").getOrganizationDirectory().getOrganizationByName("Pharmacy");
-                    if (network.getNetworkName().equals("California")) {
-                        System.out.println("ADDED PANNAGA ----------------");
-                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
-                    } else {
-                        System.out.println("ADDED BOSTON PHARMACIST --------------------- ");
-                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
-                    }
 
+                    try {
+                        this.toPharmacist = this.customerOrganization.getUserAccountDirectory().getUserAccountList().get(0);
+                    } catch (Exception es) {
+                        JOptionPane.showMessageDialog(null, "There is not pharmacist in the available customer network");
+                    }
                     JOptionPane.showMessageDialog(null, "Done!");
                     break;
                 } else {

@@ -90,7 +90,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(340, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 847, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(313, 313, 313))
         );
@@ -114,7 +114,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                 btndeliveryagentsActionPerformed(evt);
             }
         });
-        jPanel2.add(btndeliveryagents, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 100, 200, -1));
+        jPanel2.add(btndeliveryagents, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 200, 40));
 
         btnmanageorders.setBackground(new java.awt.Color(0, 102, 102));
         btnmanageorders.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,10 +124,10 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                 btnmanageordersActionPerformed(evt);
             }
         });
-        jPanel2.add(btnmanageorders, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 200, -1));
+        jPanel2.add(btnmanageorders, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 200, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/vaccine8.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 120, 640, 500));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/vaccine-rollout-independent.jpeg"))); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 60, 1060, 810));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -137,7 +137,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1491, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -146,7 +146,7 @@ public class VaccinationEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 870, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

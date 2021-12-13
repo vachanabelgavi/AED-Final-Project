@@ -134,7 +134,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(VaccineOrderTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 690, 803, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 803, 120));
 
         btnBack.setBackground(new java.awt.Color(0, 102, 102));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,12 +152,12 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                 deliverycmbActionPerformed(evt);
             }
         });
-        jPanel1.add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 830, 148, 20));
+        jPanel1.add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 650, 148, 20));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Assign Delivery agent");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 830, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 650, -1, -1));
 
         assignbtn.setBackground(new java.awt.Color(0, 102, 102));
         assignbtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -167,7 +167,7 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
                 assignbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 860, 105, -1));
+        jPanel1.add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 680, 105, -1));
 
         btnshoworders.setBackground(new java.awt.Color(0, 102, 102));
         btnshoworders.setForeground(new java.awt.Color(255, 255, 255));
@@ -187,8 +187,8 @@ public class ManageVaccinationOrdersJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(orderscmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 110, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/orders11_trial.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 1350, 660));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/order_management_gif.gif"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 1200, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

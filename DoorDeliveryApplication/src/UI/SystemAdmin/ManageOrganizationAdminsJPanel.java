@@ -6,11 +6,22 @@
 package UI.SystemAdmin;
 
 import Business.Ecosystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Role.DoctorRole;
+import Business.Role.EquipmentProviderRole;
+import Business.Role.LabAssistantRole;
+import Business.Role.LabTesterRole;
+import Business.Role.MarketManagerRole;
+import Business.Role.PharmacistRole;
+import Business.Role.VaccinatorRole;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +31,7 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
 
     private final JPanel userProcessContainer;
     private final Ecosystem ecosystem;
+    DefaultTableModel tablemodel;
 
     /**
      * Creates new form ManageOrganizationAdminsJPanel
@@ -29,6 +41,8 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
 
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = system;
+        this.tablemodel = (DefaultTableModel) Table.getModel();
+        populateNetworks();
         populateNetworks();
 
     }
@@ -49,7 +63,6 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         comboEnteprise = new javax.swing.JComboBox();
         comboOrg = new javax.swing.JComboBox();
         fieldname = new javax.swing.JTextField();
-        comboRole = new javax.swing.JComboBox();
         fieldusername = new javax.swing.JTextField();
         fieldpassword = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -105,14 +118,22 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         });
         add(comboEnteprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 150, -1));
 
+        comboOrg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboOrgActionPerformed(evt);
+            }
+        });
         add(comboOrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 150, -1));
-        add(fieldname, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 150, -1));
-
-        add(comboRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, 150, -1));
-        add(fieldusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, 150, -1));
-        add(fieldpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, 150, -1));
+        add(fieldname, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 240, -1));
+        add(fieldusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, 240, -1));
+        add(fieldpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, 240, -1));
 
         jButton1.setText("ADD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 580, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,8 +155,86 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         populateOrgs((Enterprise) comboEnteprise.getSelectedItem());
     }//GEN-LAST:event_comboEntepriseActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        // ADD ORG
+        try {
+
+            Network n = (Network) comboNetwork.getSelectedItem();
+
+            Enterprise e = (Enterprise) comboEnteprise.getSelectedItem();
+
+            Organization o = (Organization) comboOrg.getSelectedItem();
+            Employee emp = new Employee();
+            emp.setName(fieldname.getText());
+
+            switch (o.getName()) {
+                case "Doctor Associate":
+                    UserAccount user = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new DoctorRole());
+                    break;
+                case "Pharmacy":
+                    UserAccount user1 = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new PharmacistRole());
+                    break;
+                case "Supermarket":
+                    UserAccount user2 = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new MarketManagerRole());
+                    break;
+                case "Equipments":
+                    UserAccount user3 = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new EquipmentProviderRole());
+                    break;
+                case "Immunization":
+                    UserAccount user4 = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new VaccinatorRole());
+                    break;
+                case "Lab Center":
+                    UserAccount user5 = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new LabAssistantRole());
+                    break;
+                case "Sample Collection Center":
+                    UserAccount user6 = o.getUserAccountDirectory().createUserAccount(fieldusername.getText(), fieldpassword.getText(), emp, new LabTesterRole());
+                    break;
+                default:
+                    break;
+            }
+
+            JOptionPane.showMessageDialog(null, "Created Organization Admins");
+            populateTable();
+        } catch (Exception e) {
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void comboOrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboOrgActionPerformed
+
+    public void populateTable() {
+        this.tablemodel.setRowCount(0);
+
+        try {
+            for (Network n : this.ecosystem.getNetworks()) {
+                for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
+                    for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
+                        if (o.getUserAccountDirectory().getUserAccountList().size() > 0) {
+                            tablemodel.insertRow(tablemodel.getRowCount(), new Object[]{
+                                n.getNetworkName(),
+                                e.getName(),
+                                o.getName(),
+                                o.getUserAccountDirectory().getUserAccountList().get(0).getUsername(),
+                                o.getUserAccountDirectory().getUserAccountList().get(0).getPassword(),
+                                o.getUserAccountDirectory().getUserAccountList().get(0).getEmployee().getName()
+                            });
+                        }
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex + " ----------------------- ");
+        }
+    }
+
     public void populateNetworks() {
         try {
+            comboNetwork.removeAllItems();
             for (Network n : this.ecosystem.getNetworks()) {
                 if (n != null) {
                     comboNetwork.addItem(n);
@@ -164,7 +263,6 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox comboEnteprise;
     private javax.swing.JComboBox comboNetwork;
     private javax.swing.JComboBox comboOrg;
-    private javax.swing.JComboBox comboRole;
     private javax.swing.JTextField fieldname;
     private javax.swing.JTextField fieldpassword;
     private javax.swing.JTextField fieldusername;
@@ -178,7 +276,7 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
             for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
                 comboOrg.addItem(o);
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
 
         }
 

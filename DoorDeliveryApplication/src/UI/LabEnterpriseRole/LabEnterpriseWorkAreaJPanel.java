@@ -173,7 +173,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
     private void btnLabcentersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLabcentersActionPerformed
         // TODO add your handling code here:
 
-        ManageLabCentersJPanel managelabs = new ManageLabCentersJPanel(userProcessContainer, account, organization, enterprise, ecosystem);
+        ManageLabCentersJPanel managelabs = new ManageLabCentersJPanel(userProcessContainer, account,network, organization, enterprise, ecosystem);
         userProcessContainer.add("manageLabOrdersJPanel",managelabs);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -158,10 +158,10 @@ public class PharmacyJPanel extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel2.setText("OUT OF STOCK :(");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 160, -1, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 160, -1, 20));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Users\\AED-D-Drive\\AED_PROJECT_LATEST\\AED-Final-Project\\DoorDeliveryApplication\\src\\UI\\resources\\pharmacy.png")); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 130, 510, 640));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pharmacy.png"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 100, 510, 640));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -290,8 +290,8 @@ public class PharmacyJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable prodTable;

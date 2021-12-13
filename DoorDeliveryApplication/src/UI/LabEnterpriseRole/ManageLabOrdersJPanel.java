@@ -148,7 +148,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(LabOrderTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 680, 803, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 803, 100));
 
         btnBack.setBackground(new java.awt.Color(0, 102, 102));
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,12 +165,12 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                 deliverycmbActionPerformed(evt);
             }
         });
-        jPanel1.add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 820, 148, -1));
+        jPanel1.add(deliverycmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 660, 148, -1));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Assign Delivery agent");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 820, -1, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 660, -1, 30));
 
         assignbtn.setBackground(new java.awt.Color(0, 102, 102));
         assignbtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -180,7 +180,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
                 assignbtnActionPerformed(evt);
             }
         });
-        jPanel1.add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 860, 105, -1));
+        jPanel1.add(assignbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 690, 105, -1));
 
         btnshoworders.setBackground(new java.awt.Color(0, 102, 102));
         btnshoworders.setForeground(new java.awt.Color(255, 255, 255));
@@ -201,7 +201,7 @@ public class ManageLabOrdersJPanel extends javax.swing.JPanel {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/orders11_trial.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 1170, 580));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 1170, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

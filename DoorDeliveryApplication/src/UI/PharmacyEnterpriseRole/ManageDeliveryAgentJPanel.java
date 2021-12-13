@@ -51,7 +51,8 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         this.userdir = userdir;
         this.enterprise = enterprise;
         this.network = network;
-        this.z = new ArrayList<>();
+        this.z = this.network.getZipcodes();
+        System.out.println("GOT ZIp " + z.size());
         System.out.println("CAME INTO DELIVERY AGENT PANEL");
         dtm = (DefaultTableModel) deliveryjTable.getModel();
 
@@ -104,7 +105,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jcheckyes = new javax.swing.JCheckBox();
         jcheckno = new javax.swing.JCheckBox();
-        cmbzipcode = new javax.swing.JComboBox<>();
+        cmbzipcode = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
@@ -162,7 +163,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(deliveryjTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 477, 323));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 110, 477, 323));
 
         jLabel3.setText("Active");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
@@ -183,11 +184,11 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         });
         add(jcheckno, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
 
-        cmbzipcode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cmbzipcode.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         add(cmbzipcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 200, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/delivery-man-parcel-handover-to-customer-online-delivery-service-smartphone-cartoon-art-illustration-vector.jpeg"))); // NOI18N
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-200, 90, 1730, 1090));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-200, 110, 1730, 1090));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
@@ -215,7 +216,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
         UserAccount u = d.getUseraccount();
 
         String name = txtName.getText();
-        int zip = Integer.parseInt((String) cmbzipcode.getSelectedItem());
+        int zip = (int) cmbzipcode.getSelectedItem();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         boolean available;
@@ -386,17 +387,10 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
 
          del = enterprise.getDeliveryAgentsInEnterpiselist();
 
+        for(int zip: z) {
+           cmbzipcode.addItem(zip);
+        }
 
-      
-         //   for(int j =0; j < dd.getZipcodes().get(j); j++ )
-           // z.add(dd.getZipcodes().get(j));
-                
-              z = network.getZipcodes();
-              for(int i =0; i< z.size(); i++){
-              cmbzipcode.addItem(z.get(i).toString());
-              }
-          
-//    }
     }
 
 
@@ -441,7 +435,7 @@ public class ManageDeliveryAgentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btndelete;
-    private javax.swing.JComboBox<String> cmbzipcode;
+    private javax.swing.JComboBox cmbzipcode;
     private javax.swing.JTable deliveryjTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

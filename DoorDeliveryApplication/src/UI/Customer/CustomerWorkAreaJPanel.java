@@ -62,7 +62,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         this.network = network;//To change body of generated methods, choose Tools | Templates.
         this.userProcessContainer = userProcessContainer;
         this.alert = new Alert();
-
+        netname.setText(network.getNetworkName());
         String[] columns = {"PRODUCT ID", "PRODUCT NAME", "PRODUCT  PRICE", "PRODUCT QTY", "PRODUCT", "ADD TO CART"};
 
         this.tableModel = new DefaultTableModel(null, columns) {
@@ -109,6 +109,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         paymentBTn1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        netname = new javax.swing.JLabel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -144,7 +145,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 prescriptionBtnActionPerformed(evt);
             }
         });
-        leftPane.add(prescriptionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 150, 40));
+        leftPane.add(prescriptionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 150, 40));
 
         browseBtn1.setBackground(new java.awt.Color(0, 153, 153));
         browseBtn1.setForeground(new java.awt.Color(255, 255, 255));
@@ -154,7 +155,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 browseBtn1ActionPerformed(evt);
             }
         });
-        leftPane.add(browseBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 150, 40));
+        leftPane.add(browseBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 150, 40));
 
         cartBtn1.setBackground(new java.awt.Color(0, 153, 153));
         cartBtn1.setForeground(new java.awt.Color(255, 255, 255));
@@ -164,7 +165,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 cartBtn1ActionPerformed(evt);
             }
         });
-        leftPane.add(cartBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 150, 40));
+        leftPane.add(cartBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 150, 40));
 
         orderBtn1.setBackground(new java.awt.Color(0, 153, 153));
         orderBtn1.setForeground(new java.awt.Color(255, 255, 255));
@@ -174,7 +175,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 orderBtn1ActionPerformed(evt);
             }
         });
-        leftPane.add(orderBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 150, 40));
+        leftPane.add(orderBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 150, 40));
 
         paymentBTn1.setBackground(new java.awt.Color(0, 153, 153));
         paymentBTn1.setForeground(new java.awt.Color(255, 255, 255));
@@ -184,7 +185,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 paymentBTn1ActionPerformed(evt);
             }
         });
-        leftPane.add(paymentBTn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 150, 40));
+        leftPane.add(paymentBTn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 150, 40));
 
         jButton2.setBackground(new java.awt.Color(0, 153, 153));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,10 +195,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        leftPane.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 150, 40));
+        leftPane.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 150, 40));
 
-        jLabel3.setText("jLabel3");
-        leftPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/location_icon.png"))); // NOI18N
+        leftPane.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 110, 120));
+
+        netname.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        netname.setForeground(new java.awt.Color(0, 102, 102));
+        leftPane.add(netname, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         pane.setLeftComponent(leftPane);
 
@@ -272,9 +277,9 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setText("OUT OF STOCK :(");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 90, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Users\\AED-D-Drive\\AED_PROJECT_LATEST\\AED-Final-Project\\DoorDeliveryApplication\\src\\UI\\resources\\supermarket.png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/supermarket.png"))); // NOI18N
         jLabel2.setToolTipText("");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 240, 590, 430));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, 600, 420));
 
         jTabbedPane2.addTab("SUPERMARKETS", jPanel1);
 
@@ -534,6 +539,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel leftPane;
+    private javax.swing.JLabel netname;
     private javax.swing.JButton orderBtn1;
     private javax.swing.JSplitPane pane;
     private javax.swing.JButton paymentBTn1;

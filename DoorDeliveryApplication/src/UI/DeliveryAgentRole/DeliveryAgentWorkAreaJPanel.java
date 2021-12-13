@@ -89,7 +89,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
             for (Order o : c.getOrderlist()) {
                 if (o.getDeliveryAgent().getUseraccount() != null) {
                     System.out.println("Inside if condition");
-                    if (o.getStatus().equalsIgnoreCase("accepted") || o.getStatus().equals("request collected")) {
+                    if (o.getStatus().equalsIgnoreCase("accepted") || o.getStatus().equalsIgnoreCase("request collection")) {
                         if (o.getDeliveryAgent().getUseraccount().getUsername().equals(this.account.getUsername())) {
                             this.orderlist.add(o);
                         }
@@ -134,6 +134,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
         jLabel_DelMan1 = new javax.swing.JLabel();
         orderscmb = new javax.swing.JComboBox();
         btnshoworders = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -154,9 +155,10 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(DeliveryOrderTable);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 550, 309));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 550, 220));
 
         orderPicked_btn.setBackground(new java.awt.Color(0, 102, 102));
+        orderPicked_btn.setForeground(new java.awt.Color(255, 255, 255));
         orderPicked_btn.setText("Order Picked");
         orderPicked_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -171,9 +173,10 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
                 orderPicked_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(orderPicked_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 470, 142, 44));
+        jPanel1.add(orderPicked_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 470, 190, 44));
 
         orderDelivered_btn.setBackground(new java.awt.Color(0, 102, 102));
+        orderDelivered_btn.setForeground(new java.awt.Color(255, 255, 255));
         orderDelivered_btn.setText("Order Delivered");
         orderDelivered_btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -188,49 +191,56 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
                 orderDelivered_btnActionPerformed(evt);
             }
         });
-        jPanel1.add(orderDelivered_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 150, 44));
+        jPanel1.add(orderDelivered_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, 190, 44));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon("/Users/pannaga/Desktop/AED/home-delivery-service-3897224-3243194.png")); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 110, 520, 700));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/home-delivery-service-3897224-3243194.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 520, 700));
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Welcome:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 70, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
 
         jLabel_DelMan1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel_DelMan1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel_DelMan1.setText("<name>");
-        jPanel1.add(jLabel_DelMan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, -1, -1));
+        jPanel1.add(jLabel_DelMan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 30, -1, -1));
 
         orderscmb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 orderscmbActionPerformed(evt);
             }
         });
-        jPanel1.add(orderscmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 110, -1));
+        jPanel1.add(orderscmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 110, -1));
 
+        btnshoworders.setBackground(new java.awt.Color(0, 102, 102));
+        btnshoworders.setForeground(new java.awt.Color(255, 255, 255));
         btnshoworders.setText("Show Orders");
         btnshoworders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnshowordersActionPerformed(evt);
             }
         });
-        jPanel1.add(btnshoworders, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 130, 30));
+        jPanel1.add(btnshoworders, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, 130, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/delivery_running_gif.gif"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 70, 720, 480));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 6277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4789, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 3296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2308, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -432,12 +442,12 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
 
     private void orderPicked_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderPicked_btnMouseEntered
         // TODO add your handling code here:
-        orderPicked_btn.setBackground(new Color(253, 252, 249));
+   //     orderPicked_btn.setBackground(new Color(253, 252, 249));
     }//GEN-LAST:event_orderPicked_btnMouseEntered
 
     private void orderDelivered_btnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderDelivered_btnMouseEntered
         // TODO add your handling code here:
-        orderDelivered_btn.setBackground(new Color(253, 252, 249));
+      //  orderDelivered_btn.setBackground(new Color(253, 252, 249));
     }//GEN-LAST:event_orderDelivered_btnMouseEntered
 
     private void orderDelivered_btnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderDelivered_btnMouseClicked
@@ -461,6 +471,7 @@ public class DeliveryAgentWorkAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DeliveryOrderTable;
     private javax.swing.JButton btnshoworders;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_DelMan1;

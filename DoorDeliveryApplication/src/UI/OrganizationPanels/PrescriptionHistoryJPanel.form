@@ -79,12 +79,12 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Users\AED-D-Drive\AED_PROJECT_LATEST\AED-Final-Project\DoorDeliveryApplication\src\UI\resources\presc.jpg"/>
+          <Image iconType="3" name="/UI/resources/presc.jpg"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="990" y="260" width="500" height="450"/>
+          <AbsoluteConstraints x="960" y="280" width="500" height="450"/>
         </Constraint>
       </Constraints>
     </Component>

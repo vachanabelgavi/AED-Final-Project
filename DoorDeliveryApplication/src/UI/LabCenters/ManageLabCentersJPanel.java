@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.LabAssistants.LabAssistants;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Products.Product;
 import Business.UserAccount.UserAccount;
 import UI.SystemAdmin.ManageCustomersJPanel;
 import java.awt.CardLayout;
@@ -31,17 +32,21 @@ public class ManageLabCentersJPanel extends javax.swing.JPanel {
     Organization organization;
     Enterprise enterprise;
     Ecosystem business;
-    
-    public ManageLabCentersJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem business) {
+    Network network;
+    DefaultTableModel tablemodel;
+
+    public ManageLabCentersJPanel(JPanel userProcessContainer, UserAccount account, Network network, Organization organization, Enterprise enterprise, Ecosystem business) {
         initComponents();
-        
+
         this.userProcessContainer = userProcessContainer;
         this.account = account;
-        this.organization = organization;
-        this.enterprise = enterprise;
+        this.network = network;
+        this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
+        this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection Center");
         this.business = business;
-        
+        this.tablemodel = (DefaultTableModel) labTable.getModel();
         populateTable();
+        System.out.println("CAME BROOOOO");
     }
 
     /**
@@ -53,55 +58,26 @@ public class ManageLabCentersJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        btnBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         labTable = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel1.setBackground(new java.awt.Color(63, 130, 117));
-
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("                            Manage Lab Centers");
-
-        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-back-50.png"))); // NOI18N
-        btnBack.setText("Back");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack))
-        );
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID", "Name", "Email Address", "Phone Number", "Address", "City", "Zipcode"
+                "PRODUCT ID", "PRODUCT NAME", "PRODUCT PRICE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -110,12 +86,15 @@ public class ManageLabCentersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(labTable);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 730, 200));
+
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(221, 448, 111, 46));
 
         btnView.setText("View");
         btnView.addActionListener(new java.awt.event.ActionListener() {
@@ -123,105 +102,102 @@ public class ManageLabCentersJPanel extends javax.swing.JPanel {
                 btnViewActionPerformed(evt);
             }
         });
+        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 448, 111, 46));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(btnView)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-back-50.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdd, btnView});
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnView))
-                .addGap(0, 106, Short.MAX_VALUE))
-        );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAdd, btnView});
-
+        jButton2.setText("REFRESH");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 450, -1, 50));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        
-        AddLabCentersJPanel manageCustomerJPanel = new AddLabCentersJPanel(userProcessContainer, business, account, enterprise);
-        userProcessContainer.add("manageCustomerJPanel",manageCustomerJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+
+        AddLabCentersJPanel manageCustomerJPanel = new AddLabCentersJPanel(userProcessContainer, business, account, network, enterprise, organization);
+        userProcessContainer.add("manageCustomerJPanel", manageCustomerJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-        
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRow = labTable.getSelectedRow();
-        if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
         //Customer customer = (Customer)customerJTable.getValueAt(selectedRow,0);
-        LabAssistants labs = (LabAssistants) labTable.getValueAt(selectedRow,0);
-        
-        ViewLabCentersJPanel manageCustomerJPanel = new ViewLabCentersJPanel(userProcessContainer, business, labs);
-        userProcessContainer.add("manageCustomerJPanel",manageCustomerJPanel);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-        
+        int prodId = (int) labTable.getValueAt(selectedRow, 0);
+
+        for (Product p : this.organization.getProductList()) {
+            if (p.getProductId() == prodId) {
+                ViewLabCentersJPanel manageCustomerJPanel = new ViewLabCentersJPanel(userProcessContainer, business, p);
+                userProcessContainer.add("manageCustomerJPanel", manageCustomerJPanel);
+                CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+                layout.next(userProcessContainer);
+
+                break;
+            }
+        }
+
+
     }//GEN-LAST:event_btnViewActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+        System.out.println("YO");
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        populateTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnView;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable labTable;
     // End of variables declaration//GEN-END:variables
 
-    public void populateTable(){
-        
+    public void populateTable() {
+
         DefaultTableModel model = (DefaultTableModel) labTable.getModel();
         model.setRowCount(0);
-        
-        for(Network n : business.getNetworks()){
-            for(int i=0; i < n.getCustomerDirectory().getCustomerList().size(); i++){
-                for(int j=0; j < n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().size(); j++){
-                    
-                    Object[] row = new Object[7];
-                    
-                    row[0] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getLabAssistant().getLabAssistantId();
-                    row[1] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getLabAssistant().getName();
-                    row[2] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getLabAssistant().getEmail();
-                    row[3] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getLabAssistant().getPhone();
-                    row[4] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getLabAssistant().getAddress();
-                    row[5] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getLabAssistant().getCity();
-                    row[6] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getLabAssistant().getZipcode();
-                    
-                    model.addRow(row);
-                }
+
+        try {
+            for (Product p : this.organization.getProductList()) {
+                Object[] row = new Object[3];
+                row[0] = p.getProductId();
+                row[1] = p.getName();
+                row[2] = p.getPrice();
+
+                model.addRow(row);
             }
+        } catch (Exception e) {
+
         }
     }
 }

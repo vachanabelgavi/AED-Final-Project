@@ -73,7 +73,7 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED)));
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 55, 460, 420));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 460, 600));
 
         dropdownOrders.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
         dropdownOrders.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +128,7 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
                 jFileActionPerformed(evt);
             }
         });
-        add(jFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 500, -1, -1));
+        add(jFile, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 520, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 102, 102));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
@@ -138,7 +138,7 @@ public class CustomerPrescriptionJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 540, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 570, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileActionPerformed

@@ -153,19 +153,19 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="980" y="160" width="-1" height="20"/>
+          <AbsoluteConstraints x="960" y="160" width="-1" height="20"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Users\AED-D-Drive\AED_PROJECT_LATEST\AED-Final-Project\DoorDeliveryApplication\src\UI\resources\pharmacy.png"/>
+          <Image iconType="3" name="/resources/pharmacy.png"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="920" y="130" width="510" height="640"/>
+          <AbsoluteConstraints x="900" y="100" width="510" height="640"/>
         </Constraint>
       </Constraints>
     </Component>

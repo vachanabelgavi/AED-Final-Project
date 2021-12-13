@@ -40,7 +40,6 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.business = business;
 
-        populateTree();
     }
 
     /**
@@ -52,27 +51,19 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTreeValues = new javax.swing.JTree();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnCustomer = new javax.swing.JButton();
         btnEnterpriseAdmin = new javax.swing.JButton();
         btnNetwork = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        lblSelectedNode = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jTreeValues.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
-                jTreeValuesValueChanged(evt);
-            }
-        });
-        jScrollPane3.setViewportView(jTreeValues);
+        setPreferredSize(new java.awt.Dimension(1500, 1000));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("System Admin Work Area");
 
@@ -90,12 +81,15 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(50, 50, 50))
         );
 
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         btnCustomer.setText("Manage Customers");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCustomerActionPerformed(evt);
             }
         });
+        jPanel2.add(btnCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 280, 200, 40));
 
         btnEnterpriseAdmin.setText("Manage Enterprise Admin");
         btnEnterpriseAdmin.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +97,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 btnEnterpriseAdminActionPerformed(evt);
             }
         });
+        jPanel2.add(btnEnterpriseAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 200, 40));
 
         btnNetwork.setText("Manage Networks");
         btnNetwork.addActionListener(new java.awt.event.ActionListener() {
@@ -110,21 +105,15 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 btnNetworkActionPerformed(evt);
             }
         });
+        jPanel2.add(btnNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 200, 40));
 
-        jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 255));
-        jLabel2.setText("Selected Node:");
-
-        lblSelectedNode.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        lblSelectedNode.setForeground(new java.awt.Color(102, 102, 255));
-        lblSelectedNode.setText("<View_selected_node>");
-
-        jButton1.setText("STATISTICS");
+        jButton1.setText("Statistics");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 200, 40));
 
         jButton2.setText("Manage Organizations");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -132,78 +121,26 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(19, 19, 19)
-                        .addComponent(lblSelectedNode)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 231, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNetwork, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEnterpriseAdmin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-                        .addGap(226, 226, 226))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(lblSelectedNode))
-                .addGap(71, 71, 71)
-                .addComponent(btnNetwork)
-                .addGap(28, 28, 28)
-                .addComponent(btnEnterpriseAdmin)
-                .addGap(14, 14, 14)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(btnCustomer)
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, 200, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1293, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTreeValuesValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValuesValueChanged
-
-        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) jTreeValues.getLastSelectedPathComponent();
-        if (selectedNode != null) {
-            lblSelectedNode.setText(selectedNode.toString());
-        }
-    }//GEN-LAST:event_jTreeValuesValueChanged
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         // TODO add your handling code here:
@@ -257,52 +194,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTree jTreeValues;
-    private javax.swing.JLabel lblSelectedNode;
     // End of variables declaration//GEN-END:variables
 
-    public void populateTree() {
-        DefaultTreeModel model = (DefaultTreeModel) jTreeValues.getModel();
-
-        ArrayList<Network> networkList = business.getNetworks();
-        ArrayList<Enterprise> enterpriseList;
-        ArrayList<Organization> organizationList;
-
-        Network network;
-        Enterprise enterprise;
-        Organization organization;
-
-        DefaultMutableTreeNode networks = new DefaultMutableTreeNode("Networks");
-        DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
-        root.removeAllChildren();
-        root.insert(networks, 0);
-
-        DefaultMutableTreeNode networkNode;
-        DefaultMutableTreeNode enterpriseNode;
-        DefaultMutableTreeNode organizationNode;
-
-        int i = 0;
-        for (Network n : business.getNetworks()) {
-            networkNode = new DefaultMutableTreeNode(n.getNetworkName());
-            networks.insert(networkNode, i);
-            i++;
-            int j = 0;
-            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()) {
-                enterpriseNode = new DefaultMutableTreeNode(e.getName());
-                networkNode.insert(enterpriseNode, j);
-                j++;
-                int k = 0;
-                for (Organization o : e.getOrganizationDirectory().getOrganizationList()) {
-                    organizationNode = new DefaultMutableTreeNode(o.getName());
-                    enterpriseNode.insert(organizationNode, k);
-                    k++;
-                }
-            }
-        }
-        model.reload();
-    }
+   
 }

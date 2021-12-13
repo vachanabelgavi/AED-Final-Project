@@ -190,7 +190,7 @@ public class MedicalEquipmentsJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(414, 614, 101, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 590, 101, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

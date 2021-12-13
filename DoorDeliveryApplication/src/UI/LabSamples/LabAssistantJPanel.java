@@ -9,6 +9,8 @@ import Business.Customer.Customer;
 import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Orders.Order;
+import Business.Orders.OrderItem;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.ReportUploadWorkRequest;
@@ -37,18 +39,22 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     private ReportUploadWorkRequest workrequest;
     File report;
     
-    public LabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Ecosystem business, Network network, Customer customer) {
+    public LabAssistantJPanel(JPanel userProcessContainer, UserAccount userAccount, Ecosystem business, Network network, Organization organization, Enterprise enterprise) {
+        System.out.println("Inside lab centre");
+        
         initComponents();
+        
         
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.network = network;
-        this.customer = customer;
+        //this.customer = customer;
         this.userAccount = userAccount;
         
         this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
-        this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Lab Center");
+        this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection Center");
         
+        System.out.println("Inside lab centre122222");
         populateTable();
     }
 
@@ -61,64 +67,14 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        labJTable = new javax.swing.JTable();
-        btnAssign = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
-        btnAssign1 = new javax.swing.JButton();
+        btnItems = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        labJTable1 = new javax.swing.JTable();
+        OrdersJTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        productsJTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel1.setBackground(new java.awt.Color(63, 130, 117));
-
-        jLabel1.setBackground(new java.awt.Color(63, 130, 117));
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Lab Assistant");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        labJTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Test ID", "Test", "Price"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(labJTable);
-        if (labJTable.getColumnModel().getColumnCount() > 0) {
-            labJTable.getColumnModel().getColumn(2).setHeaderValue("Total");
-        }
-
-        btnAssign.setText("Assign to me");
-        btnAssign.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignActionPerformed(evt);
-            }
-        });
 
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
@@ -127,14 +83,14 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnAssign1.setText("Order Items");
-        btnAssign1.addActionListener(new java.awt.event.ActionListener() {
+        btnItems.setText("Order Items");
+        btnItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssign1ActionPerformed(evt);
+                btnItemsActionPerformed(evt);
             }
         });
 
-        labJTable1.setModel(new javax.swing.table.DefaultTableModel(
+        OrdersJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -142,79 +98,77 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
                 "Order Number", "Customer", "Order Status"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(labJTable1);
+        jScrollPane2.setViewportView(OrdersJTable);
+
+        productsJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Test ID", "Test", "Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(productsJTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(170, 170, 170)
+                .addGap(87, 87, 87)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAssign1)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAssign)
+                        .addComponent(btnItems)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnProcess))
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(176, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAssign, btnProcess});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssign)
                     .addComponent(btnProcess)
-                    .addComponent(btnAssign1))
+                    .addComponent(btnItems))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAssign, btnProcess});
-
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
-        // TODO add your handling code here:
-        
-        int selectedRow = labJTable.getSelectedRow();
-
-        if (selectedRow >= 0) {
-            workrequest = (ReportUploadWorkRequest) labJTable.getValueAt(selectedRow, 0);
-            if (workrequest.getStatus().equalsIgnoreCase("Completed") || workrequest.getStatus().equalsIgnoreCase("Pending Sample Collection")) {
-                JOptionPane.showMessageDialog(null, "Request already processed.");
-                return;
-            } else {
-                workrequest.setReceiver(userAccount);
-                workrequest.setStatus("Samples Collected");
-                //workrequest.setReport(report);
-                populateTable();
-                JOptionPane.showMessageDialog(null, "Request has successfully assigned");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Choose a request to process.");
-            return;
-        }
-    }//GEN-LAST:event_btnAssignActionPerformed
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         // TODO add your handling code here:
@@ -234,6 +188,16 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
 */
+        int selectedRow = OrdersJTable.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int orderid = (int) OrdersJTable.getValueAt(selectedRow, 0);
+        
+        DefaultTableModel model = (DefaultTableModel) OrdersJTable.getModel();
+        model.setRowCount(0);
+
         ProcessLabWorkRequestJPanel workRequestPanel = new ProcessLabWorkRequestJPanel(userProcessContainer, business, network, customer);
         userProcessContainer.add("manageCustomerJPanel",workRequestPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
@@ -241,45 +205,70 @@ public class LabAssistantJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnProcessActionPerformed
 
-    private void btnAssign1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssign1ActionPerformed
+    private void btnItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItemsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAssign1ActionPerformed
+        
+        DefaultTableModel model = (DefaultTableModel) productsJTable.getModel();
+        model.setRowCount(0);
+        
+        int selectedRow = OrdersJTable.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int orderid = (int) OrdersJTable.getValueAt(selectedRow, 0);
+        
+        for(Customer c : network.getCustomerDirectory().getCustomerList()){
+            for(Order o : c.getOrderlist()){
+                for(OrderItem i : o.getItemsOrdered()){
+                    
+                    //Object[] ob = new Object[3];
+                    model.insertRow(model.getRowCount(), new Object[]{
+                                i.getProductId(),
+                                i.getProductName(),
+                                i.getProductPrice()
+                            });
+                }
+            }
+        }                                       
+
+    }//GEN-LAST:event_btnItemsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAssign;
-    private javax.swing.JButton btnAssign1;
+    private javax.swing.JTable OrdersJTable;
+    private javax.swing.JButton btnItems;
     private javax.swing.JButton btnProcess;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable labJTable;
-    private javax.swing.JTable labJTable1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable productsJTable;
     // End of variables declaration//GEN-END:variables
 
     public void populateTable(){
         
-        DefaultTableModel model = (DefaultTableModel) labJTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) OrdersJTable.getModel();
         model.setRowCount(0);
         
-        for(Network n : business.getNetworks()){
-            
-            Object[] obj = new Object[4];
-            
-            for(int i=0; i< n.getCustomerDirectory().getCustomerList().size(); i++){
-                
-                for(int j=0; j < n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().size(); j++){
-                    
-                    obj[0] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getOrderId();
-                    obj[1] = n.getCustomerDirectory().getCustomerList().get(i).getName();
-                    //obj[2] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getTotalPrice();
-                    obj[3] = n.getCustomerDirectory().getCustomerList().get(i).getOrderlist().get(j).getStatus();
-                    
-                    model.addRow(obj);
+        try {
+            for (Customer c : this.network.getCustomerDirectory().getCustomerList()) {
+                for (Order o : c.getOrderlist()) {
+                    for (OrderItem i : o.getItemsOrdered()) {
+                        if (o.getOrganizationname().equalsIgnoreCase(this.organization.getName())) {
+
+                            //Object[] list = new Object[4];\
+                            model.insertRow(model.getRowCount(), new Object[]{
+                                o.getOrderId(),
+                                c.getName(),
+                                i.getProductName(),
+                                o.getStatus()
+                            });
+                        }
+                    }
                 }
             }
-            
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }

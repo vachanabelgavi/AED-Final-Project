@@ -41,7 +41,6 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
     private Integer orderid;
     DefaultTableModel orderTableModel;
     DefaultTableModel itemTableModel;
-    
 
     public VaccinationAdminJPanel(JPanel userprocessContainer, Ecosystem system, UserAccount ua, Network network, Organization organization, Enterprise enterprise) {
         initComponents();
@@ -387,15 +386,15 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
     private void populateProducts() {
         tableModel.setRowCount(0);
         for (Product p : this.organization.getOrganizationProducts()) {
-            if (p.getStockunits() != 0) {
-                tableModel.insertRow(tableModel.getRowCount(), new Object[]{
-                    p.getProductId(),
-                    p.getName(),
-                    p.getPrice(),
-                    p.getStockunits(),
-                    1
-                });
-            }
+
+            tableModel.insertRow(tableModel.getRowCount(), new Object[]{
+                p.getProductId(),
+                p.getName(),
+                p.getPrice(),
+                p.getStockunits(),
+                1
+            });
+
         }
     }
 
@@ -426,7 +425,7 @@ public class VaccinationAdminJPanel extends javax.swing.JPanel {
     }
 
     private void populateItems() {
-       this.itemTableModel.setRowCount(0);
+        this.itemTableModel.setRowCount(0);
         try {
             for (OrderItem oi : this.currentOrder.getItemsOrdered()) {
                 this.itemTableModel.insertRow(this.itemTableModel.getRowCount(), new Object[]{

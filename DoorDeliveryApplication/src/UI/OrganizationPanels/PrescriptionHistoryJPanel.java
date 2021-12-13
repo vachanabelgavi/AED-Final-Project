@@ -77,8 +77,8 @@ public class PrescriptionHistoryJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 791, 349));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Users\\AED-D-Drive\\AED_PROJECT_LATEST\\AED-Final-Project\\DoorDeliveryApplication\\src\\UI\\resources\\presc.jpg")); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 260, 500, 450));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/resources/presc.jpg"))); // NOI18N
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 280, 500, 450));
     }// </editor-fold>//GEN-END:initComponents
 
     public void populateOrders() {
