@@ -59,6 +59,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         btnView = new javax.swing.JButton();
         btnSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(253, 252, 249));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -81,7 +82,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(customerJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 780, 270));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 780, 270));
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-add-user-group-man-man-64.png"))); // NOI18N
         btnAdd.setText("Add Customer");
@@ -90,7 +91,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 640, 220, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 220, -1));
 
         btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-user-50.png"))); // NOI18N
         btnView.setText("View Customer");
@@ -99,7 +100,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnViewActionPerformed(evt);
             }
         });
-        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 640, 230, 80));
+        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 540, 230, 80));
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-search-client-64.png"))); // NOI18N
         btnSearch.setText("Search Customer");
@@ -108,13 +109,17 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 650, 200, 70));
+        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 550, 200, 70));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("System Admin Work Area");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 770, 70));
+        jLabel1.setText("Manage Customers");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 770, 70));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-back-50.png"))); // NOI18N
+        jButton1.setText("Back");
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 120, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -158,6 +163,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnView;
     private javax.swing.JTable customerJTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
