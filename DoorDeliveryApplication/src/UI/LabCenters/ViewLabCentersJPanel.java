@@ -10,9 +10,12 @@ import Business.Ecosystem;
 import Business.Enterprise.Enterprise;
 import Business.LabAssistants.LabAssistants;
 import Business.Network.Network;
+import Business.Organization.Organization;
+import Business.Products.Product;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -28,35 +31,39 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
     Ecosystem business;
     UserAccount account;
     Enterprise enterprise;
-    LabAssistants labAssistants;
+    //LabAssistants labAssistants;
+    Organization organization;
+    ArrayList<Product> productslist;
     
-    public ViewLabCentersJPanel(JPanel userProcessContainer, Ecosystem business, LabAssistants labAssistants) {
+    Product product;
+    
+    public ViewLabCentersJPanel(JPanel userProcessContainer, Ecosystem business, Product product) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
         this.business = business;
         this.account = account;
-        this.labAssistants = labAssistants;
+        //this.labAssistants = labAssistants;
+        this.product = product;
+        
         
         for (Network n : business.getNetworks()){
             
             this.enterprise = n.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
+            this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection Center");
+            
         }
         
-        txtName.setText(labAssistants.getName());
-        txtEmail.setText(labAssistants.getEmail());
-        txtCity.setText(labAssistants.getCity());
-        txtAddress.setText(labAssistants.getAddress());
-        txtPhone.setText(String.valueOf(labAssistants.getPhone()));
-        txtZipcode.setText(String.valueOf(labAssistants.getZipcode()));
+        this.productslist = this.organization.getOrganizationProducts();
         
+        label.setText(String.valueOf(product.getProductId()));
+        txtTest.setText(product.getName());
+        txtPrice.setText(String.valueOf(product.getPrice()));
+        
+        //label.setEnabled(false);
         btnModify.setEnabled(true);
-        txtName.setEditable(false);
-        txtEmail.setEditable(false);
-        txtCity.setEditable(false);
-        txtAddress.setEditable(false);
-        txtPhone.setEditable(false);
-        txtZipcode.setEditable(false);
+        txtTest.setEditable(false);
+        txtPrice.setEditable(false);
         btnSave.setEnabled(false);
 
     }
@@ -73,20 +80,14 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtCity = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
-        txtZipcode = new javax.swing.JTextField();
-        txtPhone = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
-        txtName = new javax.swing.JTextField();
+        txtTest = new javax.swing.JTextField();
         btnModify = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -94,7 +95,7 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("                            View Lab Centers");
+        jLabel1.setText("                           View Lab Tests");
 
         btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-back-50.png"))); // NOI18N
         btnBack.setText("Back");
@@ -109,25 +110,20 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnBack)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(btnBack))
         );
 
-        jLabel5.setText("Phone Number");
-
-        jLabel6.setText("Zip Code");
-
-        jLabel7.setText("Email address");
-
-        jLabel2.setText("Name");
+        jLabel2.setText("Test Name");
 
         btnModify.setText("Modify");
         btnModify.addActionListener(new java.awt.event.ActionListener() {
@@ -136,9 +132,7 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel3.setText("City");
-
-        jLabel4.setText("Address");
+        jLabel3.setText("Price");
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -147,36 +141,38 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setText("Test ID");
+
+        label.setText("<value>");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(234, 234, 234)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(343, 343, 343))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
-                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtZipcode, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTest, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(255, 255, 255))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnModify, btnSave});
@@ -185,35 +181,23 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addGap(34, 34, 34)
+                .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(label))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtZipcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 40, Short.MAX_VALUE))
+                .addGap(0, 134, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnModify, btnSave});
@@ -223,47 +207,33 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         
-        if(txtName.getText().isEmpty() || txtPhone.getText().isEmpty() || txtAddress.getText().isEmpty() || 
-                txtEmail.getText().isEmpty() || txtCity.getText().isEmpty() || txtZipcode.getText().isEmpty()){
+        if(txtTest.getText().isEmpty() || txtPrice.getText().isEmpty()){
             
-            JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please fill the empty fields", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        String name = txtName.getText();
-        int phone = Integer.parseInt(txtPhone.getText());
-        int zipcode = Integer.parseInt(txtZipcode.getText());
-        String streetaddress = txtAddress.getText();
-        String emailaddress = txtEmail.getText();
-        String city = txtCity.getText();
+        String name = txtTest.getText();
+        double price = Double.parseDouble(txtPrice.getText());
         
-        labAssistants.setName(name);
-        labAssistants.setEmail(emailaddress);
-        labAssistants.setAddress(streetaddress);
-        labAssistants.setCity(city);
-        labAssistants.setZipcode(zipcode);
-        labAssistants.setPhone(phone);
+        Product p = new Product();
+        
+        p.setName(name);
+        p.setPrice(price);
 
-        JOptionPane.showMessageDialog(null, "Customer Profile Updated");
+        JOptionPane.showMessageDialog(null, "Lab Test Updated");
         
-        txtName.setText("");
-        txtPhone.setText("");
-        txtEmail.setText("");
-        txtCity.setText("");
-        txtAddress.setText("");
-        txtZipcode.setText("");
+        txtTest.setText("");
+        txtPrice.setText("");
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
         // TODO add your handling code here:
         
         btnModify.setEnabled(false);
-        txtName.setEditable(true);
-        txtEmail.setEditable(true);
-        txtCity.setEditable(true);
-        txtAddress.setEditable(true);
-        txtPhone.setEditable(true);
-        txtZipcode.setEditable(true);
+        txtTest.setEditable(true);
+        txtPrice.setEditable(true);
         btnSave.setEnabled(true);
     }//GEN-LAST:event_btnModifyActionPerformed
 
@@ -288,16 +258,10 @@ public class ViewLabCentersJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhone;
-    private javax.swing.JTextField txtZipcode;
+    private javax.swing.JLabel label;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtTest;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -10,6 +10,7 @@ import Business.Enterprise.Enterprise;
 import Business.LabAssistants.LabAssistants;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Products.Product;
 import Business.UserAccount.UserAccount;
 import UI.SystemAdmin.ManageCustomersJPanel;
 import java.awt.CardLayout;
@@ -31,14 +32,16 @@ public class ManageLabCentersJPanel extends javax.swing.JPanel {
     Organization organization;
     Enterprise enterprise;
     Ecosystem business;
+    Network network;
     
-    public ManageLabCentersJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, Ecosystem business) {
+    public ManageLabCentersJPanel(JPanel userProcessContainer, UserAccount account, Network network, Organization organization, Enterprise enterprise, Ecosystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
         this.account = account;
-        this.organization = organization;
-        this.enterprise = enterprise;
+        this.network = network;
+        this.enterprise = this.network.getEnterpriseDirectory().getEnterprise("Lab Center & Diagnostics");
+        this.organization = this.enterprise.getOrganizationDirectory().getOrganizationByName("Sample Collection Center");
         this.business = business;
         
         populateTable();
@@ -164,7 +167,7 @@ public class ManageLabCentersJPanel extends javax.swing.JPanel {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
-        AddLabCentersJPanel manageCustomerJPanel = new AddLabCentersJPanel(userProcessContainer, business, account, enterprise);
+        AddLabCentersJPanel manageCustomerJPanel = new AddLabCentersJPanel(userProcessContainer, business, account, network, enterprise, organization);
         userProcessContainer.add("manageCustomerJPanel",manageCustomerJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -180,9 +183,9 @@ public class ManageLabCentersJPanel extends javax.swing.JPanel {
             return;
         }
         //Customer customer = (Customer)customerJTable.getValueAt(selectedRow,0);
-        LabAssistants labs = (LabAssistants) labTable.getValueAt(selectedRow,0);
+        Product prods = (Product) labTable.getValueAt(selectedRow,0);
         
-        ViewLabCentersJPanel manageCustomerJPanel = new ViewLabCentersJPanel(userProcessContainer, business, labs);
+        ViewLabCentersJPanel manageCustomerJPanel = new ViewLabCentersJPanel(userProcessContainer, business, prods);
         userProcessContainer.add("manageCustomerJPanel",manageCustomerJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -65,8 +65,13 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         btnmanageorders = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblSelectedNode = new javax.swing.JLabel();
-        btnLabcenters = new javax.swing.JButton();
+        btnTests = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lab Enterprise Work Area");
@@ -84,6 +89,8 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(50, 50, 50))
         );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         btndeliveryagents.setText("Manage Delivery Agents");
         btndeliveryagents.addActionListener(new java.awt.event.ActionListener() {
@@ -107,10 +114,10 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
         lblSelectedNode.setForeground(new java.awt.Color(102, 102, 255));
         lblSelectedNode.setText("<View_selected_node>");
 
-        btnLabcenters.setText("Manage Lab Centers");
-        btnLabcenters.addActionListener(new java.awt.event.ActionListener() {
+        btnTests.setText("Manage Lab Tests");
+        btnTests.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLabcentersActionPerformed(evt);
+                btnTestsActionPerformed(evt);
             }
         });
 
@@ -129,7 +136,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btndeliveryagents, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(btnmanageorders, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(btnLabcenters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnTests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(106, 106, 106)))
                 .addGap(200, 200, 200))
         );
@@ -145,7 +152,7 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(btndeliveryagents)
                 .addGap(18, 18, 18)
-                .addComponent(btnLabcenters)
+                .addComponent(btnTests)
                 .addContainerGap(205, Short.MAX_VALUE))
         );
 
@@ -194,21 +201,21 @@ public class LabEnterpriseWorkAreaJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnmanageordersActionPerformed
 
-    private void btnLabcentersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLabcentersActionPerformed
+    private void btnTestsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestsActionPerformed
         // TODO add your handling code here:
 
-        ManageLabCentersJPanel managelabs = new ManageLabCentersJPanel(userProcessContainer, account, organization, enterprise, ecosystem);
+        ManageLabCentersJPanel managelabs = new ManageLabCentersJPanel(userProcessContainer, account, network, organization, enterprise, ecosystem);
         userProcessContainer.add("manageLabOrdersJPanel",managelabs);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnLabcentersActionPerformed
+    }//GEN-LAST:event_btnTestsActionPerformed
 
 
     // Variables declaration - do not modify
     //private javax.swing.JButton btndeliveryagents;
     //private javax.swing.JButton btnlabassistants;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLabcenters;
+    private javax.swing.JButton btnTests;
     private javax.swing.JButton btndeliveryagents;
     private javax.swing.JButton btnmanageorders;
     private javax.swing.JLabel jLabel1;
