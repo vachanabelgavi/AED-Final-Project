@@ -60,6 +60,7 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         networkJTable.setForeground(new java.awt.Color(0, 102, 204));
@@ -91,7 +92,7 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(networkJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 140, -1, 174));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 250, 560, 174));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -124,19 +125,20 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 798, -1));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, -1));
 
         jLabel2.setText("Network Name");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, -1));
-        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 150, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 500, -1, -1));
+        add(txtNetworkName, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 500, 160, -1));
 
+        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-thin-client-50.png"))); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(396, 415, 100, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 620, 140, -1));
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -144,17 +146,17 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
                 btnDeleteActionPerformed(evt);
             }
         });
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(527, 325, 100, -1));
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 430, 100, -1));
 
         jLabel3.setText("Zipcode");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 550, -1, -1));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, 160, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 550, 160, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed

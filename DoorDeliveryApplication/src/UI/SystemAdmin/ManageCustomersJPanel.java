@@ -81,7 +81,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(customerJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 780, 270));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 780, 270));
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-add-user-group-man-man-64.png"))); // NOI18N
         btnAdd.setText("Add Customer");
@@ -90,7 +90,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, 220, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 600, 220, -1));
 
         btnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-user-50.png"))); // NOI18N
         btnView.setText("View Customer");
@@ -99,7 +99,7 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnViewActionPerformed(evt);
             }
         });
-        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 470, 230, 80));
+        add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 600, 230, 80));
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-search-client-64.png"))); // NOI18N
         btnSearch.setText("Search Customer");
@@ -108,8 +108,8 @@ public class ManageCustomersJPanel extends javax.swing.JPanel {
                 btnSearchActionPerformed(evt);
             }
         });
-        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 470, 190, 70));
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 116, 1370, 880));
+        add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 610, 200, 70));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 116, 1420, 880));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed

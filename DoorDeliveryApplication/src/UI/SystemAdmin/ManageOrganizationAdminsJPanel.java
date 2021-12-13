@@ -48,12 +48,18 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         comboNetwork = new javax.swing.JComboBox();
         comboEnteprise = new javax.swing.JComboBox();
         comboOrg = new javax.swing.JComboBox();
-        fieldname = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         comboRole = new javax.swing.JComboBox();
-        fieldusername = new javax.swing.JTextField();
-        fieldpassword = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Table.setModel(new javax.swing.table.DefaultTableModel(
@@ -81,39 +87,78 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(Table);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 66, 756, 260));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 756, 260));
 
-        btnBack.setText("<< Back");
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-back-50.png"))); // NOI18N
+        btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 100, 70));
 
         comboNetwork.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboNetworkActionPerformed(evt);
             }
         });
-        add(comboNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 150, -1));
+        add(comboNetwork, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 490, 150, -1));
 
         comboEnteprise.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEntepriseActionPerformed(evt);
             }
         });
-        add(comboEnteprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 150, -1));
+        add(comboEnteprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 540, 150, -1));
 
-        add(comboOrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, 150, -1));
-        add(fieldname, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 150, -1));
+        add(comboOrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 590, 150, -1));
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 490, 150, -1));
 
-        add(comboRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 570, 150, -1));
-        add(fieldusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 430, 150, -1));
-        add(fieldpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, 150, -1));
+        add(comboRole, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 640, 150, -1));
+        add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 540, 150, -1));
+        add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 590, 150, -1));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Images/icons8-organization-50.png"))); // NOI18N
         jButton1.setText("ADD");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 580, -1, -1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 720, 160, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Manage Organizations");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(50, 50, 50))
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 1000, -1));
+
+        jLabel2.setText("Name");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 494, 50, -1));
+
+        jLabel4.setText("Location");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, -1, -1));
+
+        jLabel7.setText("City");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 590, 60, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -133,6 +178,12 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         populateOrgs((Enterprise) comboEnteprise.getSelectedItem());
     }//GEN-LAST:event_comboEntepriseActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void populateNetworks() {
         try {
@@ -165,11 +216,16 @@ public class ManageOrganizationAdminsJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox comboNetwork;
     private javax.swing.JComboBox comboOrg;
     private javax.swing.JComboBox comboRole;
-    private javax.swing.JTextField fieldname;
-    private javax.swing.JTextField fieldpassword;
-    private javax.swing.JTextField fieldusername;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
     private void populateOrgs(Enterprise e) {
